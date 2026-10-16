@@ -5,197 +5,197 @@
 
 # suppression domain models
 module OctridevResend
-# Internal model hydration metadata.
-class SdkInternalSuppressionAddedEventMetadata
-  FIELDS = {
-    type: "type",
-    created_at: "created_at",
-    data: "data",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-    created_at
-    data
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevResend::SuppressionAddedEventType.from_value(value)
-    end,
-    data: lambda do |value|
-      ::OctridevResend::SuppressionEventData.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for SuppressionAddedEvent.
-# Typed representation of the `SuppressionAddedEvent` API schema.
-class SuppressionAddedEvent
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSuppressionAddedEventMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSuppressionAddedEventMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSuppressionAddedEventMetadata::DECODERS
-
-  # @return [SuppressionAddedEventType] The event type.
-  attr_reader :type
-  # @return [String] Timestamp when the event was emitted.
-  attr_reader :created_at
-  # @return [SuppressionEventData] Required object value serialized in the `data` wire field.
-  attr_reader :data
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalSuppressionAddedEventMetadata
+    FIELDS = {
+      type: 'type',
+      created_at: 'created_at',
+      data: 'data'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+      created_at
+      data
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevResend::SuppressionAddedEventType.from_value(value)
+      end,
+      data: lambda do |value|
+        ::OctridevResend::SuppressionEventData.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for SuppressionAddedEvent.
+  # Typed representation of the `SuppressionAddedEvent` API schema.
+  class SuppressionAddedEvent
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSuppressionAddedEventMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSuppressionAddedEventMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSuppressionAddedEventMetadata::DECODERS
+
+    # @return [SuppressionAddedEventType] The event type.
+    attr_reader :type
+    # @return [String] Timestamp when the event was emitted.
+    attr_reader :created_at
+    # @return [SuppressionEventData] Required object value serialized in the `data` wire field.
+    attr_reader :data
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # Defines the SuppressionAddedEventType SDK namespace.
+  module SuppressionAddedEventType
+    SUPPRESSION_ADDED = 'suppression.added'
+    VALUES = ['suppression.added'].freeze
+    def self.from_value(value)
+      return value if VALUES.include?(value)
 
-# Defines the SuppressionAddedEventType SDK namespace.
-module SuppressionAddedEventType
-  SUPPRESSION_ADDED = 'suppression.added'
-  VALUES = ['suppression.added'].freeze
-  def self.from_value(value)
-    return value if VALUES.include?(value)
-
-    raise SdkValidationError.new('SuppressionAddedEventType', 'enum', "Unknown SuppressionAddedEventType: #{value}")
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalSuppressionEventDataMetadata
-  FIELDS = {
-    id: "id",
-    email: "email",
-    origin: "origin",
-    source_id: "source_id",
-    created_at: "created_at",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    id
-    email
-    origin
-    source_id
-    created_at
-  ].freeze
-  DECODERS = {
-    origin: lambda do |value|
-      ::OctridevResend::SuppressionEventDataOrigin.from_value(value)
-    end,
-  }.freeze
-  NULLABLE_FIELDS = %i[
-    source_id
-  ].freeze
-end
-
-# API model for SuppressionEventData.
-# Typed representation of the `SuppressionEventData` API schema.
-class SuppressionEventData
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSuppressionEventDataMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSuppressionEventDataMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSuppressionEventDataMetadata::DECODERS
-
-  # @return [String] Unique identifier for the suppression.
-  attr_reader :id
-  # @return [String] Email address that is suppressed.
-  attr_reader :email
-  # @return [SuppressionEventDataOrigin] Origin of the suppression.
-  attr_reader :origin
-  # @return [String] Identifier of the event that caused the suppression, such as the email that bounced or complained. Null for manually added suppressions.
-  attr_reader :source_id
-  # @return [String] Timestamp when the suppression was created.
-  attr_reader :created_at
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+      raise SdkValidationError.new('SuppressionAddedEventType', 'enum', "Unknown SuppressionAddedEventType: #{value}")
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalSuppressionEventDataMetadata::NULLABLE_FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalSuppressionEventDataMetadata
+    FIELDS = {
+      id: 'id',
+      email: 'email',
+      origin: 'origin',
+      source_id: 'source_id',
+      created_at: 'created_at'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      id
+      email
+      origin
+      source_id
+      created_at
+    ].freeze
+    DECODERS = {
+      origin: lambda do |value|
+        ::OctridevResend::SuppressionEventDataOrigin.from_value(value)
+      end
+    }.freeze
+    NULLABLE_FIELDS = %i[
+      source_id
+    ].freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for SuppressionEventData.
+  # Typed representation of the `SuppressionEventData` API schema.
+  class SuppressionEventData
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSuppressionEventDataMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSuppressionEventDataMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSuppressionEventDataMetadata::DECODERS
 
-# Defines the SuppressionEventDataOrigin SDK namespace.
-module SuppressionEventDataOrigin
-  BOUNCE = 'bounce'
-  COMPLAINT = 'complaint'
-  MANUAL = 'manual'
-  VALUES = ['bounce', 'complaint', 'manual'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [String] Unique identifier for the suppression.
+    attr_reader :id
+    # @return [String] Email address that is suppressed.
+    attr_reader :email
+    # @return [SuppressionEventDataOrigin] Origin of the suppression.
+    attr_reader :origin
+    # @return [String] Identifier of the event that caused the suppression, such as the email that bounced or complained. Null for manually added suppressions.
+    attr_reader :source_id
+    # @return [String] Timestamp when the suppression was created.
+    attr_reader :created_at
 
-# Internal model hydration metadata.
-class SdkInternalSuppressionRemovedEventMetadata
-  FIELDS = {
-    type: "type",
-    created_at: "created_at",
-    data: "data",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-    created_at
-    data
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevResend::SuppressionRemovedEventType.from_value(value)
-    end,
-    data: lambda do |value|
-      ::OctridevResend::SuppressionEventData.from_hash(value)
-    end,
-  }.freeze
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# API model for SuppressionRemovedEvent.
-# Typed representation of the `SuppressionRemovedEvent` API schema.
-class SuppressionRemovedEvent
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSuppressionRemovedEventMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSuppressionRemovedEventMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSuppressionRemovedEventMetadata::DECODERS
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalSuppressionEventDataMetadata::NULLABLE_FIELDS)
+    end
 
-  # @return [SuppressionRemovedEventType] The event type.
-  attr_reader :type
-  # @return [String] Timestamp when the event was emitted.
-  attr_reader :created_at
-  # @return [SuppressionEventData] Required object value serialized in the `data` wire field.
-  attr_reader :data
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the SuppressionEventDataOrigin SDK namespace.
+  module SuppressionEventDataOrigin
+    BOUNCE = 'bounce'
+    COMPLAINT = 'complaint'
+    MANUAL = 'manual'
+    VALUES = %w[bounce complaint manual].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalSuppressionRemovedEventMetadata
+    FIELDS = {
+      type: 'type',
+      created_at: 'created_at',
+      data: 'data'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+      created_at
+      data
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevResend::SuppressionRemovedEventType.from_value(value)
+      end,
+      data: lambda do |value|
+        ::OctridevResend::SuppressionEventData.from_hash(value)
+      end
+    }.freeze
   end
-end
 
-# Defines the SuppressionRemovedEventType SDK namespace.
-module SuppressionRemovedEventType
-  SUPPRESSION_REMOVED = 'suppression.removed'
-  VALUES = ['suppression.removed'].freeze
-  def self.from_value(value)
-    return value if VALUES.include?(value)
+  # API model for SuppressionRemovedEvent.
+  # Typed representation of the `SuppressionRemovedEvent` API schema.
+  class SuppressionRemovedEvent
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSuppressionRemovedEventMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSuppressionRemovedEventMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSuppressionRemovedEventMetadata::DECODERS
 
-    raise SdkValidationError.new('SuppressionRemovedEventType', 'enum', "Unknown SuppressionRemovedEventType: #{value}")
+    # @return [SuppressionRemovedEventType] The event type.
+    attr_reader :type
+    # @return [String] Timestamp when the event was emitted.
+    attr_reader :created_at
+    # @return [SuppressionEventData] Required object value serialized in the `data` wire field.
+    attr_reader :data
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
+
+  # Defines the SuppressionRemovedEventType SDK namespace.
+  module SuppressionRemovedEventType
+    SUPPRESSION_REMOVED = 'suppression.removed'
+    VALUES = ['suppression.removed'].freeze
+    def self.from_value(value)
+      return value if VALUES.include?(value)
+
+      raise SdkValidationError.new('SuppressionRemovedEventType', 'enum', "Unknown SuppressionRemovedEventType: #{value}")
+    end
+  end
 end

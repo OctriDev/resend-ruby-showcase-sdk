@@ -8,12 +8,15 @@ module OctridevResend
   # Defines the UpdateInboxAgentOptions SDK namespace.
   module UpdateInboxAgentOptions
   end
+
   # Defines the UpdateInboxDraftOptions SDK namespace.
   module UpdateInboxDraftOptions
   end
+
   # Defines the UpdateInboxOptions SDK namespace.
   module UpdateInboxOptions
   end
+
   # Defines the UpdateInboxThreadOptions SDK namespace.
   module UpdateInboxThreadOptions
   end

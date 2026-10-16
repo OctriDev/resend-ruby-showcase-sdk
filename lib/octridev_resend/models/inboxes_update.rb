@@ -5,253 +5,252 @@
 
 # inboxes_update domain models
 module OctridevResend
-# Defines the UpdateInboxAgentOptions SDK namespace.
-module UpdateInboxAgentOptions
-  def self.from_hash(hash)
-    return hash if hash.is_a?(::Object)
-    return hash if hash.is_a?(::Object)
-    return hash if hash.is_a?(::Object)
-    raise "Could not deserialize UpdateInboxAgentOptions from #{hash.inspect}"
-  end
-end
+  # Defines the UpdateInboxAgentOptions SDK namespace.
+  module UpdateInboxAgentOptions
+    def self.from_hash(hash)
+      return hash if hash.is_a?(::Object)
+      return hash if hash.is_a?(::Object)
+      return hash if hash.is_a?(::Object)
 
-# Defines the UpdateInboxAgentOptionsEnabledActionsItem SDK namespace.
-module UpdateInboxAgentOptionsEnabledActionsItem
-  DRAFT_REPLY = 'draft_reply'
-  FORWARD_THREAD = 'forward_thread'
-  ADD_LABELS = 'add_labels'
-  ASSIGN_THREAD = 'assign_thread'
-  MARK_AS_SPAM = 'mark_as_spam'
-  ARCHIVE_THREAD = 'archive_thread'
-  DELETE_THREAD = 'delete_thread'
-  VALUES = [
-    'draft_reply', 'forward_thread', 'add_labels', 'assign_thread', 'mark_as_spam', 'archive_thread',
-    'delete_thread'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the UpdateInboxAgentOptionsTone SDK namespace.
-module UpdateInboxAgentOptionsTone
-  CONCISE_PROFESSIONAL = 'concise_professional'
-  CONCISE_CASUAL = 'concise_casual'
-  EXPANDED_PROFESSIONAL = 'expanded_professional'
-  EXPANDED_CASUAL = 'expanded_casual'
-  VALUES = [
-    'concise_professional', 'concise_casual', 'expanded_professional', 'expanded_casual'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalUpdateInboxAgentResponseSuccessMetadata
-  FIELDS = {
-    object: "object",
-    id: "id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    object
-    id
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for UpdateInboxAgentResponseSuccess.
-# Typed representation of the `UpdateInboxAgentResponseSuccess` API schema.
-class UpdateInboxAgentResponseSuccess
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalUpdateInboxAgentResponseSuccessMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalUpdateInboxAgentResponseSuccessMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalUpdateInboxAgentResponseSuccessMetadata::DECODERS
-
-  # @return [String] The object type. Always `inbox_agent`.
-  attr_reader :object
-  # @return [String] The ID of the inbox agent.
-  attr_reader :id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+      raise "Could not deserialize UpdateInboxAgentOptions from #{hash.inspect}"
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the UpdateInboxAgentOptionsEnabledActionsItem SDK namespace.
+  module UpdateInboxAgentOptionsEnabledActionsItem
+    DRAFT_REPLY = 'draft_reply'
+    FORWARD_THREAD = 'forward_thread'
+    ADD_LABELS = 'add_labels'
+    ASSIGN_THREAD = 'assign_thread'
+    MARK_AS_SPAM = 'mark_as_spam'
+    ARCHIVE_THREAD = 'archive_thread'
+    DELETE_THREAD = 'delete_thread'
+    VALUES = %w[
+      draft_reply forward_thread add_labels assign_thread mark_as_spam archive_thread
+      delete_thread
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the UpdateInboxDraftOptions SDK namespace.
-module UpdateInboxDraftOptions
-  def self.from_hash(hash)
-    return hash if hash.is_a?(::Object)
-    return hash if hash.is_a?(::Object)
-    return hash if hash.is_a?(::Object)
-    return hash if hash.is_a?(::Object)
-    return hash if hash.is_a?(::Object)
-    return hash if hash.is_a?(::Object)
-    return hash if hash.is_a?(::Object)
-    raise "Could not deserialize UpdateInboxDraftOptions from #{hash.inspect}"
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalUpdateInboxLabelOptionsMetadata
-  FIELDS = {
-    name: "name",
-    color: "color",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for UpdateInboxLabelOptions.
-# Typed representation of the `UpdateInboxLabelOptions` API schema.
-class UpdateInboxLabelOptions
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalUpdateInboxLabelOptionsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalUpdateInboxLabelOptionsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalUpdateInboxLabelOptionsMetadata::DECODERS
-
-  # @return [String] A new name for the label. Max 64 characters. Leading and trailing whitespace is trimmed. Must not match another label on the inbox, compared without case.
-  attr_reader :name
-  # @return [String] A new color for the label, as a `#RRGGBB` hex color. It is stored in uppercase.
-  attr_reader :color
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the UpdateInboxAgentOptionsTone SDK namespace.
+  module UpdateInboxAgentOptionsTone
+    CONCISE_PROFESSIONAL = 'concise_professional'
+    CONCISE_CASUAL = 'concise_casual'
+    EXPANDED_PROFESSIONAL = 'expanded_professional'
+    EXPANDED_CASUAL = 'expanded_casual'
+    VALUES = %w[
+      concise_professional concise_casual expanded_professional expanded_casual
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalUpdateInboxAgentResponseSuccessMetadata
+    FIELDS = {
+      object: 'object',
+      id: 'id'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      object
+      id
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for UpdateInboxAgentResponseSuccess.
+  # Typed representation of the `UpdateInboxAgentResponseSuccess` API schema.
+  class UpdateInboxAgentResponseSuccess
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalUpdateInboxAgentResponseSuccessMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalUpdateInboxAgentResponseSuccessMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalUpdateInboxAgentResponseSuccessMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalUpdateInboxLabelResponseSuccessMetadata
-  FIELDS = {
-    object: "object",
-    id: "id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    object
-    id
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    # @return [String] The object type. Always `inbox_agent`.
+    attr_reader :object
+    # @return [String] The ID of the inbox agent.
+    attr_reader :id
 
-# API model for UpdateInboxLabelResponseSuccess.
-# Typed representation of the `UpdateInboxLabelResponseSuccess` API schema.
-class UpdateInboxLabelResponseSuccess
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalUpdateInboxLabelResponseSuccessMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalUpdateInboxLabelResponseSuccessMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalUpdateInboxLabelResponseSuccessMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] Type of the response object.
-  attr_reader :object
-  # @return [String] The ID of the updated label.
-  attr_reader :id
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the UpdateInboxDraftOptions SDK namespace.
+  module UpdateInboxDraftOptions
+    def self.from_hash(hash)
+      return hash if hash.is_a?(::Object)
+      return hash if hash.is_a?(::Object)
+      return hash if hash.is_a?(::Object)
+      return hash if hash.is_a?(::Object)
+      return hash if hash.is_a?(::Object)
+      return hash if hash.is_a?(::Object)
+      return hash if hash.is_a?(::Object)
+
+      raise "Could not deserialize UpdateInboxDraftOptions from #{hash.inspect}"
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the UpdateInboxOptions SDK namespace.
-module UpdateInboxOptions
-  def self.from_hash(hash)
-    return hash if hash.is_a?(::Object)
-    return hash if hash.is_a?(::Object)
-    raise "Could not deserialize UpdateInboxOptions from #{hash.inspect}"
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalUpdateInboxResponseSuccessMetadata
-  FIELDS = {
-    object: "object",
-    id: "id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    object
-    id
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for UpdateInboxResponseSuccess.
-# Typed representation of the `UpdateInboxResponseSuccess` API schema.
-class UpdateInboxResponseSuccess
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalUpdateInboxResponseSuccessMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalUpdateInboxResponseSuccessMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalUpdateInboxResponseSuccessMetadata::DECODERS
-
-  # @return [String] The object type.
-  attr_reader :object
-  # @return [String] The ID of the inbox.
-  attr_reader :id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalUpdateInboxLabelOptionsMetadata
+    FIELDS = {
+      name: 'name',
+      color: 'color'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for UpdateInboxLabelOptions.
+  # Typed representation of the `UpdateInboxLabelOptions` API schema.
+  class UpdateInboxLabelOptions
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalUpdateInboxLabelOptionsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalUpdateInboxLabelOptionsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalUpdateInboxLabelOptionsMetadata::DECODERS
+
+    # @return [String] A new name for the label. Max 64 characters. Leading and trailing whitespace is trimmed. Must not match another label on the inbox, compared without case.
+    attr_reader :name
+    # @return [String] A new color for the label, as a `#RRGGBB` hex color. It is stored in uppercase.
+    attr_reader :color
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalUpdateInboxLabelResponseSuccessMetadata
+    FIELDS = {
+      object: 'object',
+      id: 'id'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      object
+      id
+    ].freeze
+    DECODERS = {}.freeze
   end
-end
 
-# Defines the UpdateInboxThreadOptions SDK namespace.
-module UpdateInboxThreadOptions
-  def self.from_hash(hash)
-    return hash if hash.is_a?(::Object)
-    return hash if hash.is_a?(::Object)
-    return hash if hash.is_a?(::Object)
-    return hash if hash.is_a?(::Object)
-    raise "Could not deserialize UpdateInboxThreadOptions from #{hash.inspect}"
-  end
-end
+  # API model for UpdateInboxLabelResponseSuccess.
+  # Typed representation of the `UpdateInboxLabelResponseSuccess` API schema.
+  class UpdateInboxLabelResponseSuccess
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalUpdateInboxLabelResponseSuccessMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalUpdateInboxLabelResponseSuccessMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalUpdateInboxLabelResponseSuccessMetadata::DECODERS
 
-# Defines the UpdateInboxThreadOptionsFolder SDK namespace.
-module UpdateInboxThreadOptionsFolder
-  INBOX = 'inbox'
-  ARCHIVE = 'archive'
-  SPAM = 'spam'
-  TRASH = 'trash'
-  VALUES = ['inbox', 'archive', 'spam', 'trash'].freeze
-  def self.from_value(value)
-    value
+    # @return [String] Type of the response object.
+    attr_reader :object
+    # @return [String] The ID of the updated label.
+    attr_reader :id
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
+
+  # Defines the UpdateInboxOptions SDK namespace.
+  module UpdateInboxOptions
+    def self.from_hash(hash)
+      return hash if hash.is_a?(::Object)
+      return hash if hash.is_a?(::Object)
+
+      raise "Could not deserialize UpdateInboxOptions from #{hash.inspect}"
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalUpdateInboxResponseSuccessMetadata
+    FIELDS = {
+      object: 'object',
+      id: 'id'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      object
+      id
+    ].freeze
+    DECODERS = {}.freeze
+  end
+
+  # API model for UpdateInboxResponseSuccess.
+  # Typed representation of the `UpdateInboxResponseSuccess` API schema.
+  class UpdateInboxResponseSuccess
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalUpdateInboxResponseSuccessMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalUpdateInboxResponseSuccessMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalUpdateInboxResponseSuccessMetadata::DECODERS
+
+    # @return [String] The object type.
+    attr_reader :object
+    # @return [String] The ID of the inbox.
+    attr_reader :id
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Defines the UpdateInboxThreadOptions SDK namespace.
+  module UpdateInboxThreadOptions
+    def self.from_hash(hash)
+      return hash if hash.is_a?(::Object)
+      return hash if hash.is_a?(::Object)
+      return hash if hash.is_a?(::Object)
+      return hash if hash.is_a?(::Object)
+
+      raise "Could not deserialize UpdateInboxThreadOptions from #{hash.inspect}"
+    end
+  end
+
+  # Defines the UpdateInboxThreadOptionsFolder SDK namespace.
+  module UpdateInboxThreadOptionsFolder
+    INBOX = 'inbox'
+    ARCHIVE = 'archive'
+    SPAM = 'spam'
+    TRASH = 'trash'
+    VALUES = %w[inbox archive spam trash].freeze
+    def self.from_value(value)
+      value
+    end
+  end
 end

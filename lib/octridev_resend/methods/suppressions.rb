@@ -14,7 +14,7 @@ module OctridevResend
         BOUNCE = 'bounce'
         COMPLAINT = 'complaint'
         MANUAL = 'manual'
-        VALUES = ['bounce', 'complaint', 'manual'].freeze
+        VALUES = %w[bounce complaint manual].freeze
         def self.from_value(value)
           value
         end
@@ -28,18 +28,17 @@ module OctridevResend
         email:,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/suppressions",
+          '/suppressions',
           config: config,
           body: {
-            'email' => email,
+            'email' => email
           },
           return_type: ::OctridevResend::CreateSuppressionResponseSuccess,
           decoder: :json,
           operation_id: 'suppressions_add',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -57,23 +56,22 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(limit) { Validation.validate_range('limit', limit, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          "/suppressions",
+          '/suppressions',
           config: config,
           query: {
             'origin' => QueryValue.new(origin, style: 'form', explode: true),
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true),
+            'before' => QueryValue.new(before, style: 'form', explode: true)
           },
           return_type: ::OctridevResend::ListSuppressionsResponseSuccess,
           decoder: :json,
           operation_id: 'suppressions_list',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -85,20 +83,19 @@ module OctridevResend
         emails:,
         request_options: nil
       )
-
         Validation.validate_items('emails', emails, min: 1, max: 100)
 
         SdkClient.request(
           'POST',
-          "/suppressions/batch/add",
+          '/suppressions/batch/add',
           config: config,
           body: {
-            'emails' => emails,
+            'emails' => emails
           },
           return_type: ::OctridevResend::BatchAddSuppressionsResponseSuccess,
           decoder: :json,
           operation_id: 'suppressions_batch_add',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -114,23 +111,22 @@ module OctridevResend
         ids: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(emails) { Validation.validate_items('emails', emails, min: 1, max: 100) }
 
         Validation.if_given(ids) { Validation.validate_items('ids', ids, min: 1, max: 100) }
 
         SdkClient.request(
           'POST',
-          "/suppressions/batch/remove",
+          '/suppressions/batch/remove',
           config: config,
           body: {
             'emails' => emails,
-            'ids' => ids,
+            'ids' => ids
           },
           return_type: ::OctridevResend::BatchRemoveSuppressionsResponseSuccess,
           decoder: :json,
           operation_id: 'suppressions_batch_remove',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -142,18 +138,17 @@ module OctridevResend
         suppression:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/suppressions/",
+            '/suppressions/',
             SdkClient.encode_path_segment(suppression)
           ].join,
           config: config,
           return_type: ::OctridevResend::GetSuppressionResponseSuccess,
           decoder: :json,
           operation_id: 'suppressions_get',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -165,18 +160,17 @@ module OctridevResend
         suppression:,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/suppressions/",
+            '/suppressions/',
             SdkClient.encode_path_segment(suppression)
           ].join,
           config: config,
           return_type: ::OctridevResend::RemoveSuppressionResponseSuccess,
           decoder: :json,
           operation_id: 'suppressions_remove',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
     end

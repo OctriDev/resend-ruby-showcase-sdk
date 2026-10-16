@@ -48,7 +48,6 @@ module OctridevResend
     end
   end
 
-
   # Raised for any non-2xx HTTP response.
   class SdkHttpError < SdkError
     MAX_DETAIL_CODE_POINTS = 512
@@ -168,7 +167,7 @@ module OctridevResend
     404 => SdkNotFoundError,
     409 => SdkConflictError,
     422 => SdkUnprocessableEntityError,
-    429 => SdkRateLimitError,
+    429 => SdkRateLimitError
   }.freeze
 
   # Raised for connection / DNS / socket failures.
