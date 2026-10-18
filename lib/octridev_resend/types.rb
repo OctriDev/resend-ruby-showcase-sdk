@@ -5,20 +5,7 @@
 
 # Auto-generated model index
 module OctridevResend
-  # Defines the UpdateInboxAgentOptions SDK namespace.
-  module UpdateInboxAgentOptions
-  end
-  # Defines the UpdateInboxDraftOptions SDK namespace.
-  module UpdateInboxDraftOptions
-  end
-  # Defines the UpdateInboxOptions SDK namespace.
-  module UpdateInboxOptions
-  end
-  # Defines the UpdateInboxThreadOptions SDK namespace.
-  module UpdateInboxThreadOptions
-  end
 end
-
 require_relative 'models/api_keys'
 require_relative 'models/audiences'
 require_relative 'models/automations'

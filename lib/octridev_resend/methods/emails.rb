@@ -85,8 +85,8 @@ module OctridevResend
       #   multiple addresses, send as an array of strings.
       # @param html [String] The HTML version of the message.
       # @param text [String] The plain text version of the message.
-      # @param template [SendEmailRequestTemplate] Optional API value serialized in
-      #   the `template` wire field.
+      # @param template [EmailTemplateInput] Use a published template to send the
+      #   email. If provided, do not include html or text.
       # @param headers [SendEmailRequestHeaders] Custom headers to add to the email.
       # @param scheduled_at [String] Schedule email to be sent later. The date
       #   should be in ISO 8601 format.
