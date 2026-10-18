@@ -5,42 +5,6 @@
 
 # emails domain models (part 2)
 module OctridevResend
-  # API model for Tag.
-  # Typed representation of the `Tag` API schema.
-  class Tag
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalTagMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalTagMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalTagMetadata::DECODERS
-
-    # @return [String] The name of the email tag. It can only contain ASCII letters (a–z, A–Z), numbers (0–9), underscores (_), or dashes (-). It can contain no more than 256 characters.
-    attr_reader :name
-    # @return [String] The value of the email tag.It can only contain ASCII letters (a–z, A–Z), numbers (0–9), underscores (_), or dashes (-). It can contain no more than 256 characters.
-    attr_reader :value
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
-
-  # Internal model hydration metadata.
-  class SdkInternalUpdateEmailOptionsMetadata
-    FIELDS = {
-      scheduled_at: 'scheduled_at'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
-  end
-
   # API model for UpdateEmailOptions.
   # Typed representation of the `UpdateEmailOptions` API schema.
   class UpdateEmailOptions

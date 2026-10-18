@@ -398,45 +398,6 @@ module OctridevResend
   end
 
   # Internal model hydration metadata.
-  class SdkInternalSendEmailRequestTemplateMetadata
-    FIELDS = {
-      id: 'id',
-      variables: 'variables'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      id
-    ].freeze
-    DECODERS = {}.freeze
-  end
-
-  # API model for SendEmailRequestTemplate.
-  # Optional API value serialized in the `template` wire field.
-  class SendEmailRequestTemplate
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalSendEmailRequestTemplateMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalSendEmailRequestTemplateMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalSendEmailRequestTemplateMetadata::DECODERS
-
-    # @return [String] The id of the published email template.
-    attr_reader :id
-    # @return [Hash] Template variables object with key/value pairs.
-    attr_reader :variables
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
-
-  # Internal model hydration metadata.
   class SdkInternalSendEmailRequestMetadata
     FIELDS = {
       from: 'from',
@@ -461,7 +422,7 @@ module OctridevResend
     ].freeze
     DECODERS = {
       template: lambda do |value|
-        ::OctridevResend::SendEmailRequestTemplate.from_hash(value)
+        ::OctridevResend::EmailTemplateInput.from_hash(value)
       end,
       attachments: lambda do |value|
         value&.map { |item| ::OctridevResend::Attachment.from_hash(item) }
@@ -496,7 +457,7 @@ module OctridevResend
     attr_reader :html
     # @return [String] The plain text version of the message.
     attr_reader :text
-    # @return [SendEmailRequestTemplate] Optional API value serialized in the `template` wire field.
+    # @return [EmailTemplateInput] Use a published template to send the email. If provided, do not include html or text.
     attr_reader :template
     # @return [Hash] Custom headers to add to the email.
     attr_reader :headers
@@ -636,6 +597,42 @@ module OctridevResend
     FIELDS = {
       name: 'name',
       value: 'value'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
+  end
+
+  # API model for Tag.
+  # Typed representation of the `Tag` API schema.
+  class Tag
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalTagMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalTagMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalTagMetadata::DECODERS
+
+    # @return [String] The name of the email tag. It can only contain ASCII letters (a–z, A–Z), numbers (0–9), underscores (_), or dashes (-). It can contain no more than 256 characters.
+    attr_reader :name
+    # @return [String] The value of the email tag.It can only contain ASCII letters (a–z, A–Z), numbers (0–9), underscores (_), or dashes (-). It can contain no more than 256 characters.
+    attr_reader :value
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalUpdateEmailOptionsMetadata
+    FIELDS = {
+      scheduled_at: 'scheduled_at'
     }.freeze
     REQUIRED_FIELDS = %i[].freeze
     DECODERS = {}.freeze
