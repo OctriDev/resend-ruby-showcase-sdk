@@ -5,110 +5,110 @@
 
 # webhook_domain_record domain models
 module OctridevResend
-# Internal model hydration metadata.
-class SdkInternalWebhookDomainRecordMetadata
-  FIELDS = {
-    record: "record",
-    name: "name",
-    value: "value",
-    type: "type",
-    ttl: "ttl",
-    status: "status",
-    priority: "priority",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    record
-    name
-    value
-    type
-    ttl
-    status
-  ].freeze
-  DECODERS = {
-    record: lambda do |value|
-      ::OctridevResend::WebhookDomainRecordRecord.from_value(value)
-    end,
-    type: lambda do |value|
-      ::OctridevResend::WebhookDomainRecordType.from_value(value)
-    end,
-    status: lambda do |value|
-      ::OctridevResend::WebhookDomainRecordStatus.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for WebhookDomainRecord.
-# Typed representation of the `WebhookDomainRecord` API schema.
-class WebhookDomainRecord
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalWebhookDomainRecordMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalWebhookDomainRecordMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalWebhookDomainRecordMetadata::DECODERS
-
-  # @return [WebhookDomainRecordRecord] The purpose of the DNS record (SPF and DKIM for sending; Receiving MX for inbound emails; Tracking and TrackingCAA for click and open tracking).
-  attr_reader :record
-  # @return [String] DNS record name or subdomain.
-  attr_reader :name
-  # @return [String] DNS record value to be set.
-  attr_reader :value
-  # @return [WebhookDomainRecordType] DNS record type.
-  attr_reader :type
-  # @return [String] Time to live for the DNS record (e.g., `Auto`, `60`).
-  attr_reader :ttl
-  # @return [WebhookDomainRecordStatus] Verification status of this specific record.
-  attr_reader :status
-  # @return [Integer] Priority value (only applicable for MX records).
-  attr_reader :priority
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalWebhookDomainRecordMetadata
+    FIELDS = {
+      record: 'record',
+      name: 'name',
+      value: 'value',
+      type: 'type',
+      ttl: 'ttl',
+      status: 'status',
+      priority: 'priority'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      record
+      name
+      value
+      type
+      ttl
+      status
+    ].freeze
+    DECODERS = {
+      record: lambda do |value|
+        ::OctridevResend::WebhookDomainRecordRecord.from_value(value)
+      end,
+      type: lambda do |value|
+        ::OctridevResend::WebhookDomainRecordType.from_value(value)
+      end,
+      status: lambda do |value|
+        ::OctridevResend::WebhookDomainRecordStatus.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for WebhookDomainRecord.
+  # Typed representation of the `WebhookDomainRecord` API schema.
+  class WebhookDomainRecord
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalWebhookDomainRecordMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalWebhookDomainRecordMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalWebhookDomainRecordMetadata::DECODERS
+
+    # @return [WebhookDomainRecordRecord] The purpose of the DNS record (SPF and DKIM for sending; Receiving MX for inbound emails; Tracking and TrackingCAA for click and open tracking).
+    attr_reader :record
+    # @return [String] DNS record name or subdomain.
+    attr_reader :name
+    # @return [String] DNS record value to be set.
+    attr_reader :value
+    # @return [WebhookDomainRecordType] DNS record type.
+    attr_reader :type
+    # @return [String] Time to live for the DNS record (e.g., `Auto`, `60`).
+    attr_reader :ttl
+    # @return [WebhookDomainRecordStatus] Verification status of this specific record.
+    attr_reader :status
+    # @return [Integer] Priority value (only applicable for MX records).
+    attr_reader :priority
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Defines the WebhookDomainRecordRecord SDK namespace.
+  module WebhookDomainRecordRecord
+    SPF = 'SPF'
+    DKIM = 'DKIM'
+    RECEIVING_MX = 'Receiving MX'
+    TRACKING = 'Tracking'
+    TRACKING_CAA = 'TrackingCAA'
+    VALUES = ['SPF', 'DKIM', 'Receiving MX', 'Tracking', 'TrackingCAA'].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
 
-# Defines the WebhookDomainRecordRecord SDK namespace.
-module WebhookDomainRecordRecord
-  SPF = 'SPF'
-  DKIM = 'DKIM'
-  RECEIVING_MX = 'Receiving MX'
-  TRACKING = 'Tracking'
-  TRACKING_CAA = 'TrackingCAA'
-  VALUES = ['SPF', 'DKIM', 'Receiving MX', 'Tracking', 'TrackingCAA'].freeze
-  def self.from_value(value)
-    value
+  # Defines the WebhookDomainRecordStatus SDK namespace.
+  module WebhookDomainRecordStatus
+    PENDING = 'pending'
+    VERIFIED = 'verified'
+    FAILED = 'failed'
+    TEMPORARY_FAILURE = 'temporary_failure'
+    NOT_STARTED = 'not_started'
+    VALUES = %w[pending verified failed temporary_failure not_started].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
 
-# Defines the WebhookDomainRecordStatus SDK namespace.
-module WebhookDomainRecordStatus
-  PENDING = 'pending'
-  VERIFIED = 'verified'
-  FAILED = 'failed'
-  TEMPORARY_FAILURE = 'temporary_failure'
-  NOT_STARTED = 'not_started'
-  VALUES = ['pending', 'verified', 'failed', 'temporary_failure', 'not_started'].freeze
-  def self.from_value(value)
-    value
+  # Defines the WebhookDomainRecordType SDK namespace.
+  module WebhookDomainRecordType
+    MX = 'MX'
+    TXT = 'TXT'
+    CNAME = 'CNAME'
+    CAA = 'CAA'
+    VALUES = %w[MX TXT CNAME CAA].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
-
-# Defines the WebhookDomainRecordType SDK namespace.
-module WebhookDomainRecordType
-  MX = 'MX'
-  TXT = 'TXT'
-  CNAME = 'CNAME'
-  CAA = 'CAA'
-  VALUES = ['MX', 'TXT', 'CNAME', 'CAA'].freeze
-  def self.from_value(value)
-    value
-  end
-end
 end

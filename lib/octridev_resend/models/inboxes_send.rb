@@ -5,76 +5,73 @@
 
 # inboxes_send domain models
 module OctridevResend
-# Internal model hydration metadata.
-class SdkInternalSendInboxDraftOptionsMetadata
-  FIELDS = {
-    headers: "headers",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for SendInboxDraftOptions.
-# Typed representation of the `SendInboxDraftOptions` API schema.
-class SendInboxDraftOptions
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSendInboxDraftOptionsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSendInboxDraftOptionsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSendInboxDraftOptionsMetadata::DECODERS
-
-  # @return [Hash] Custom headers to add to the email. The `In-Reply-To`, `References` and `Reply-To` headers are set by Resend and cannot be set here. Sending one of them, in any letter case, returns a 422. Header names cannot be empty, and names and values cannot contain line breaks or null characters, or the request returns a 422. `null` means no custom headers.
-  attr_reader :headers
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalSendInboxDraftOptionsMetadata
+    FIELDS = {
+      headers: 'headers'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for SendInboxDraftOptions.
+  # Typed representation of the `SendInboxDraftOptions` API schema.
+  class SendInboxDraftOptions
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSendInboxDraftOptionsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSendInboxDraftOptionsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSendInboxDraftOptionsMetadata::DECODERS
+
+    # @return [Hash] Custom headers to add to the email. The `In-Reply-To`, `References` and `Reply-To` headers are set by Resend and cannot be set here. Sending one of them, in any letter case, returns a 422. Header names cannot be empty, and names and values cannot contain line breaks or null characters, or the request returns a 422. `null` means no custom headers.
+    attr_reader :headers
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalSendInboxDraftResponseSuccessMetadata
-  FIELDS = {
-    id: "id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    id
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for SendInboxDraftResponseSuccess.
-# Typed representation of the `SendInboxDraftResponseSuccess` API schema.
-class SendInboxDraftResponseSuccess
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSendInboxDraftResponseSuccessMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSendInboxDraftResponseSuccessMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSendInboxDraftResponseSuccessMetadata::DECODERS
-
-  # @return [String] The ID of the sent email. Use it with the emails endpoints.
-  attr_reader :id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalSendInboxDraftResponseSuccessMetadata
+    FIELDS = {
+      id: 'id'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      id
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for SendInboxDraftResponseSuccess.
+  # Typed representation of the `SendInboxDraftResponseSuccess` API schema.
+  class SendInboxDraftResponseSuccess
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSendInboxDraftResponseSuccessMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSendInboxDraftResponseSuccessMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSendInboxDraftResponseSuccessMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+    # @return [String] The ID of the sent email. Use it with the emails endpoints.
+    attr_reader :id
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

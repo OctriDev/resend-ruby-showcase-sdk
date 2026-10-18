@@ -26,25 +26,24 @@ module OctridevResend
         visibility: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_length('name', name, max: 50)
 
         Validation.if_given(description) { Validation.validate_length('description', description, max: 200) }
 
         SdkClient.request(
           'POST',
-          "/topics",
+          '/topics',
           config: config,
           body: {
             'name' => name,
             'default_subscription' => default_subscription,
             'description' => description,
-            'visibility' => visibility,
+            'visibility' => visibility
           },
           return_type: ::OctridevResend::CreateTopicResponseSuccess,
           decoder: :json,
           operation_id: 'topics_create',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -60,22 +59,21 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(limit) { Validation.validate_range('limit', limit, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          "/topics",
+          '/topics',
           config: config,
           query: {
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true),
+            'before' => QueryValue.new(before, style: 'form', explode: true)
           },
           return_type: ::OctridevResend::ListTopicsResponseSuccess,
           decoder: :json,
           operation_id: 'topics_list',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -87,18 +85,17 @@ module OctridevResend
         id:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/topics/",
+            '/topics/',
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           return_type: ::OctridevResend::GetTopicResponseSuccess,
           decoder: :json,
           operation_id: 'topics_get',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -117,7 +114,6 @@ module OctridevResend
         visibility: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(name) { Validation.validate_length('name', name, max: 50) }
 
         Validation.if_given(description) { Validation.validate_length('description', description, max: 200) }
@@ -125,19 +121,19 @@ module OctridevResend
         SdkClient.request(
           'PATCH',
           [
-            "/topics/",
+            '/topics/',
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           body: {
             'name' => name,
             'description' => description,
-            'visibility' => visibility,
+            'visibility' => visibility
           },
           return_type: ::OctridevResend::UpdateTopicResponseSuccess,
           decoder: :json,
           operation_id: 'topics_update',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -149,18 +145,17 @@ module OctridevResend
         id:,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/topics/",
+            '/topics/',
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           return_type: ::OctridevResend::RemoveTopicResponseSuccess,
           decoder: :json,
           operation_id: 'topics_remove',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
     end

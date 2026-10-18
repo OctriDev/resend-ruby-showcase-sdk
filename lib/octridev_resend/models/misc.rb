@@ -5,112 +5,111 @@
 
 # misc domain models
 module OctridevResend
-# Internal model hydration metadata.
-class SdkInternalOutboundEmailEventDataHeadersItemMetadata
-  FIELDS = {
-    name: "name",
-    value: "value",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    name
-    value
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for OutboundEmailEventDataHeadersItem.
-# Required object value serialized in the `headers[]` wire field.
-class OutboundEmailEventDataHeadersItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalOutboundEmailEventDataHeadersItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalOutboundEmailEventDataHeadersItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalOutboundEmailEventDataHeadersItemMetadata::DECODERS
-
-  # @return [String] Required `string` value serialized in the `name` wire field.
-  attr_reader :name
-  # @return [String] Required `string` value serialized in the `value` wire field.
-  attr_reader :value
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalOutboundEmailEventDataHeadersItemMetadata
+    FIELDS = {
+      name: 'name',
+      value: 'value'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      name
+      value
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for OutboundEmailEventDataHeadersItem.
+  # Required object value serialized in the `headers[]` wire field.
+  class OutboundEmailEventDataHeadersItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalOutboundEmailEventDataHeadersItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalOutboundEmailEventDataHeadersItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalOutboundEmailEventDataHeadersItemMetadata::DECODERS
+
+    # @return [String] Required `string` value serialized in the `name` wire field.
+    attr_reader :name
+    # @return [String] Required `string` value serialized in the `value` wire field.
+    attr_reader :value
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalOutboundEmailEventDataMetadata
-  FIELDS = {
-    email_id: "email_id",
-    created_at: "created_at",
-    from: "from",
-    to: "to",
-    subject: "subject",
-    broadcast_id: "broadcast_id",
-    template_id: "template_id",
-    tags: "tags",
-    headers: "headers",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    email_id
-    created_at
-    from
-    to
-    subject
-  ].freeze
-  DECODERS = {
-    headers: lambda do |value|
-      value&.map { |item| ::OctridevResend::OutboundEmailEventDataHeadersItem.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for OutboundEmailEventData.
-# Typed representation of the `OutboundEmailEventData` API schema.
-class OutboundEmailEventData
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalOutboundEmailEventDataMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalOutboundEmailEventDataMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalOutboundEmailEventDataMetadata::DECODERS
-
-  # @return [String] Unique identifier for the email.
-  attr_reader :email_id
-  # @return [String] Timestamp when the email was created.
-  attr_reader :created_at
-  # @return [String] Sender email address and name in the format `Name <email@domain.com>`.
-  attr_reader :from
-  # @return [Array_of_String] Array of impacted recipient email addresses.
-  attr_reader :to
-  # @return [String] Email subject line.
-  attr_reader :subject
-  # @return [String] Unique identifier for the broadcast campaign, if applicable.
-  attr_reader :broadcast_id
-  # @return [String] Unique identifier for the template used, if applicable.
-  attr_reader :template_id
-  # @return [Hash] Tag key-value pairs associated with the email.
-  attr_reader :tags
-  # @return [Array_of_OutboundEmailEventDataHeadersItem] Custom headers included with the email (omitted when no custom headers are set).
-  attr_reader :headers
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalOutboundEmailEventDataMetadata
+    FIELDS = {
+      email_id: 'email_id',
+      created_at: 'created_at',
+      from: 'from',
+      to: 'to',
+      subject: 'subject',
+      broadcast_id: 'broadcast_id',
+      template_id: 'template_id',
+      tags: 'tags',
+      headers: 'headers'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      email_id
+      created_at
+      from
+      to
+      subject
+    ].freeze
+    DECODERS = {
+      headers: lambda do |value|
+        value&.map { |item| ::OctridevResend::OutboundEmailEventDataHeadersItem.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for OutboundEmailEventData.
+  # Typed representation of the `OutboundEmailEventData` API schema.
+  class OutboundEmailEventData
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalOutboundEmailEventDataMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalOutboundEmailEventDataMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalOutboundEmailEventDataMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+    # @return [String] Unique identifier for the email.
+    attr_reader :email_id
+    # @return [String] Timestamp when the email was created.
+    attr_reader :created_at
+    # @return [String] Sender email address and name in the format `Name <email@domain.com>`.
+    attr_reader :from
+    # @return [Array_of_String] Array of impacted recipient email addresses.
+    attr_reader :to
+    # @return [String] Email subject line.
+    attr_reader :subject
+    # @return [String] Unique identifier for the broadcast campaign, if applicable.
+    attr_reader :broadcast_id
+    # @return [String] Unique identifier for the template used, if applicable.
+    attr_reader :template_id
+    # @return [Hash] Tag key-value pairs associated with the email.
+    attr_reader :tags
+    # @return [Array_of_OutboundEmailEventDataHeadersItem] Custom headers included with the email (omitted when no custom headers are set).
+    attr_reader :headers
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

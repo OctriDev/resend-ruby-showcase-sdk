@@ -5,670 +5,647 @@
 
 # broadcasts domain models
 module OctridevResend
-# Internal model hydration metadata.
-class SdkInternalCancelBroadcastResponseSuccessMetadata
-  FIELDS = {
-    id: "id",
-    object: "object",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for CancelBroadcastResponseSuccess.
-# Typed representation of the `CancelBroadcastResponseSuccess` API schema.
-class CancelBroadcastResponseSuccess
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCancelBroadcastResponseSuccessMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCancelBroadcastResponseSuccessMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCancelBroadcastResponseSuccessMetadata::DECODERS
-
-  # @return [String] The ID of the broadcast.
-  attr_reader :id
-  # @return [String] The object type of the response.
-  attr_reader :object
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalCancelBroadcastResponseSuccessMetadata
+    FIELDS = {
+      id: 'id',
+      object: 'object'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for CancelBroadcastResponseSuccess.
+  # Typed representation of the `CancelBroadcastResponseSuccess` API schema.
+  class CancelBroadcastResponseSuccess
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCancelBroadcastResponseSuccessMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCancelBroadcastResponseSuccessMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCancelBroadcastResponseSuccessMetadata::DECODERS
+
+    # @return [String] The ID of the broadcast.
+    attr_reader :id
+    # @return [String] The object type of the response.
+    attr_reader :object
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalCreateBroadcastOptionsMetadata
-  FIELDS = {
-    name: "name",
-    segment_id: "segment_id",
-    audience_id: "audience_id",
-    from: "from",
-    subject: "subject",
-    reply_to: "reply_to",
-    preview_text: "preview_text",
-    html: "html",
-    text: "text",
-    topic_id: "topic_id",
-    send: "send",
-    scheduled_at: "scheduled_at",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    segment_id
-    from
-    subject
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for CreateBroadcastOptions.
-# Typed representation of the `CreateBroadcastOptions` API schema.
-class CreateBroadcastOptions
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCreateBroadcastOptionsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCreateBroadcastOptionsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCreateBroadcastOptionsMetadata::DECODERS
-
-  # @return [String] Name of the broadcast.
-  attr_reader :name
-  # @return [String] Unique identifier of the segment this broadcast will be sent to.
-  attr_reader :segment_id
-  # @return [String] Use `segment_id` instead. Unique identifier of the segment this broadcast will be sent to.
-  attr_reader :audience_id
-  # @return [String] The email address of the sender.
-  attr_reader :from
-  # @return [String] The subject line of the email.
-  attr_reader :subject
-  # @return [Array_of_String] The email addresses to which replies should be sent.
-  attr_reader :reply_to
-  # @return [String] The preview text of the email.
-  attr_reader :preview_text
-  # @return [String] The HTML version of the message.
-  attr_reader :html
-  # @return [String] The plain text version of the message.
-  attr_reader :text
-  # @return [String] The topic ID that the broadcast will be scoped to.
-  attr_reader :topic_id
-  # @return [Boolean] Whether to send the broadcast immediately or keep it as a draft.
-  attr_reader :send
-  # @return [String] Schedule time to send the broadcast. Can only be used if `send` is true.
-  attr_reader :scheduled_at
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalCreateBroadcastOptionsMetadata
+    FIELDS = {
+      name: 'name',
+      segment_id: 'segment_id',
+      audience_id: 'audience_id',
+      from: 'from',
+      subject: 'subject',
+      reply_to: 'reply_to',
+      preview_text: 'preview_text',
+      html: 'html',
+      text: 'text',
+      topic_id: 'topic_id',
+      send: 'send',
+      scheduled_at: 'scheduled_at'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      segment_id
+      from
+      subject
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for CreateBroadcastOptions.
+  # Typed representation of the `CreateBroadcastOptions` API schema.
+  class CreateBroadcastOptions
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCreateBroadcastOptionsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCreateBroadcastOptionsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCreateBroadcastOptionsMetadata::DECODERS
+
+    # @return [String] Name of the broadcast.
+    attr_reader :name
+    # @return [String] Unique identifier of the segment this broadcast will be sent to.
+    attr_reader :segment_id
+    # @return [String] Use `segment_id` instead. Unique identifier of the segment this broadcast will be sent to.
+    attr_reader :audience_id
+    # @return [String] The email address of the sender.
+    attr_reader :from
+    # @return [String] The subject line of the email.
+    attr_reader :subject
+    # @return [Array_of_String] The email addresses to which replies should be sent.
+    attr_reader :reply_to
+    # @return [String] The preview text of the email.
+    attr_reader :preview_text
+    # @return [String] The HTML version of the message.
+    attr_reader :html
+    # @return [String] The plain text version of the message.
+    attr_reader :text
+    # @return [String] The topic ID that the broadcast will be scoped to.
+    attr_reader :topic_id
+    # @return [Boolean] Whether to send the broadcast immediately or keep it as a draft.
+    attr_reader :send
+    # @return [String] Schedule time to send the broadcast. Can only be used if `send` is true.
+    attr_reader :scheduled_at
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalCreateBroadcastResponseSuccessMetadata
-  FIELDS = {
-    id: "id",
-    object: "object",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for CreateBroadcastResponseSuccess.
-# Typed representation of the `CreateBroadcastResponseSuccess` API schema.
-class CreateBroadcastResponseSuccess
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCreateBroadcastResponseSuccessMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCreateBroadcastResponseSuccessMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCreateBroadcastResponseSuccessMetadata::DECODERS
-
-  # @return [String] The ID of the broadcast.
-  attr_reader :id
-  # @return [String] The object type of the response.
-  attr_reader :object
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalCreateBroadcastResponseSuccessMetadata
+    FIELDS = {
+      id: 'id',
+      object: 'object'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for CreateBroadcastResponseSuccess.
+  # Typed representation of the `CreateBroadcastResponseSuccess` API schema.
+  class CreateBroadcastResponseSuccess
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCreateBroadcastResponseSuccessMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCreateBroadcastResponseSuccessMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCreateBroadcastResponseSuccessMetadata::DECODERS
+
+    # @return [String] The ID of the broadcast.
+    attr_reader :id
+    # @return [String] The object type of the response.
+    attr_reader :object
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalDuplicateBroadcastResponseSuccessMetadata
-  FIELDS = {
-    id: "id",
-    object: "object",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for DuplicateBroadcastResponseSuccess.
-# Typed representation of the `DuplicateBroadcastResponseSuccess` API schema.
-class DuplicateBroadcastResponseSuccess
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDuplicateBroadcastResponseSuccessMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDuplicateBroadcastResponseSuccessMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDuplicateBroadcastResponseSuccessMetadata::DECODERS
-
-  # @return [String] The ID of the duplicated broadcast.
-  attr_reader :id
-  # @return [String] The object type of the response.
-  attr_reader :object
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalDuplicateBroadcastResponseSuccessMetadata
+    FIELDS = {
+      id: 'id',
+      object: 'object'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for DuplicateBroadcastResponseSuccess.
+  # Typed representation of the `DuplicateBroadcastResponseSuccess` API schema.
+  class DuplicateBroadcastResponseSuccess
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDuplicateBroadcastResponseSuccessMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDuplicateBroadcastResponseSuccessMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDuplicateBroadcastResponseSuccessMetadata::DECODERS
+
+    # @return [String] The ID of the duplicated broadcast.
+    attr_reader :id
+    # @return [String] The object type of the response.
+    attr_reader :object
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalGetBroadcastResponseSuccessMetadata
-  FIELDS = {
-    id: "id",
-    name: "name",
-    audience_id: "audience_id",
-    segment_id: "segment_id",
-    from: "from",
-    subject: "subject",
-    reply_to: "reply_to",
-    preview_text: "preview_text",
-    status: "status",
-    created_at: "created_at",
-    scheduled_at: "scheduled_at",
-    sent_at: "sent_at",
-    text: "text",
-    html: "html",
-    topic_id: "topic_id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for GetBroadcastResponseSuccess.
-# Typed representation of the `GetBroadcastResponseSuccess` API schema.
-class GetBroadcastResponseSuccess
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalGetBroadcastResponseSuccessMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalGetBroadcastResponseSuccessMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalGetBroadcastResponseSuccessMetadata::DECODERS
-
-  # @return [String] Unique identifier for the broadcast.
-  attr_reader :id
-  # @return [String] Name of the broadcast.
-  attr_reader :name
-  # @return [String] Deprecated: use `segment_id` instead. Unique identifier of the segment this broadcast will be sent to.
-  attr_reader :audience_id
-  # @return [String] Unique identifier of the segment this broadcast will be sent to.
-  attr_reader :segment_id
-  # @return [String] The email address of the sender.
-  attr_reader :from
-  # @return [String] The subject line of the email.
-  attr_reader :subject
-  # @return [Array_of_String] The email addresses to which replies should be sent.
-  attr_reader :reply_to
-  # @return [String] The preview text of the email.
-  attr_reader :preview_text
-  # @return [String] The status of the broadcast.
-  attr_reader :status
-  # @return [String] Timestamp indicating when the broadcast was created.
-  attr_reader :created_at
-  # @return [String] Timestamp indicating when the broadcast is scheduled to be sent.
-  attr_reader :scheduled_at
-  # @return [String] Timestamp indicating when the broadcast was sent.
-  attr_reader :sent_at
-  # @return [String] The plain text version of the broadcast content.
-  attr_reader :text
-  # @return [String] The HTML version of the broadcast content.
-  attr_reader :html
-  # @return [String] The topic ID that the broadcast is scoped to.
-  attr_reader :topic_id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalGetBroadcastResponseSuccessMetadata
+    FIELDS = {
+      id: 'id',
+      name: 'name',
+      audience_id: 'audience_id',
+      segment_id: 'segment_id',
+      from: 'from',
+      subject: 'subject',
+      reply_to: 'reply_to',
+      preview_text: 'preview_text',
+      status: 'status',
+      created_at: 'created_at',
+      scheduled_at: 'scheduled_at',
+      sent_at: 'sent_at',
+      text: 'text',
+      html: 'html',
+      topic_id: 'topic_id'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for GetBroadcastResponseSuccess.
+  # Typed representation of the `GetBroadcastResponseSuccess` API schema.
+  class GetBroadcastResponseSuccess
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalGetBroadcastResponseSuccessMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalGetBroadcastResponseSuccessMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalGetBroadcastResponseSuccessMetadata::DECODERS
+
+    # @return [String] Unique identifier for the broadcast.
+    attr_reader :id
+    # @return [String] Name of the broadcast.
+    attr_reader :name
+    # @return [String] Deprecated: use `segment_id` instead. Unique identifier of the segment this broadcast will be sent to.
+    attr_reader :audience_id
+    # @return [String] Unique identifier of the segment this broadcast will be sent to.
+    attr_reader :segment_id
+    # @return [String] The email address of the sender.
+    attr_reader :from
+    # @return [String] The subject line of the email.
+    attr_reader :subject
+    # @return [Array_of_String] The email addresses to which replies should be sent.
+    attr_reader :reply_to
+    # @return [String] The preview text of the email.
+    attr_reader :preview_text
+    # @return [String] The status of the broadcast.
+    attr_reader :status
+    # @return [String] Timestamp indicating when the broadcast was created.
+    attr_reader :created_at
+    # @return [String] Timestamp indicating when the broadcast is scheduled to be sent.
+    attr_reader :scheduled_at
+    # @return [String] Timestamp indicating when the broadcast was sent.
+    attr_reader :sent_at
+    # @return [String] The plain text version of the broadcast content.
+    attr_reader :text
+    # @return [String] The HTML version of the broadcast content.
+    attr_reader :html
+    # @return [String] The topic ID that the broadcast is scoped to.
+    attr_reader :topic_id
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalListBroadcastClickedLinksResponseSuccessDataItemMetadata
-  FIELDS = {
-    id: "id",
-    url: "url",
-    clicks: "clicks",
-    unique_clicks: "unique_clicks",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ListBroadcastClickedLinksResponseSuccessDataItem.
-# Required object value serialized in the `data[]` wire field.
-class ListBroadcastClickedLinksResponseSuccessDataItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListBroadcastClickedLinksResponseSuccessDataItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListBroadcastClickedLinksResponseSuccessDataItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListBroadcastClickedLinksResponseSuccessDataItemMetadata::DECODERS
-
-  # @return [String] An opaque cursor for this row, used only for pagination. It does not identify any entity in Resend.
-  attr_reader :id
-  # @return [String] The URL that was clicked.
-  attr_reader :url
-  # @return [Integer] Total number of clicks on this URL.
-  attr_reader :clicks
-  # @return [Integer] Number of unique clicks on this URL.
-  attr_reader :unique_clicks
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalListBroadcastClickedLinksResponseSuccessDataItemMetadata
+    FIELDS = {
+      id: 'id',
+      url: 'url',
+      clicks: 'clicks',
+      unique_clicks: 'unique_clicks'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ListBroadcastClickedLinksResponseSuccessDataItem.
+  # Required object value serialized in the `data[]` wire field.
+  class ListBroadcastClickedLinksResponseSuccessDataItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListBroadcastClickedLinksResponseSuccessDataItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListBroadcastClickedLinksResponseSuccessDataItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListBroadcastClickedLinksResponseSuccessDataItemMetadata::DECODERS
+
+    # @return [String] An opaque cursor for this row, used only for pagination. It does not identify any entity in Resend.
+    attr_reader :id
+    # @return [String] The URL that was clicked.
+    attr_reader :url
+    # @return [Integer] Total number of clicks on this URL.
+    attr_reader :clicks
+    # @return [Integer] Number of unique clicks on this URL.
+    attr_reader :unique_clicks
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalListBroadcastClickedLinksResponseSuccessMetadata
-  FIELDS = {
-    object: "object",
-    has_more: "has_more",
-    data: "data",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    data: lambda do |value|
-      value&.map { |item| ::OctridevResend::ListBroadcastClickedLinksResponseSuccessDataItem.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for ListBroadcastClickedLinksResponseSuccess.
-# Typed representation of the `ListBroadcastClickedLinksResponseSuccess` API schema.
-class ListBroadcastClickedLinksResponseSuccess
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListBroadcastClickedLinksResponseSuccessMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListBroadcastClickedLinksResponseSuccessMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListBroadcastClickedLinksResponseSuccessMetadata::DECODERS
-
-  # @return [String] Type of the response object.
-  attr_reader :object
-  # @return [Boolean] Indicates if there are more results available.
-  attr_reader :has_more
-  # @return [Array_of_ListBroadcastClickedLinksResponseSuccessDataItem] Array containing the broadcast's clicked links.
-  attr_reader :data
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalListBroadcastClickedLinksResponseSuccessMetadata
+    FIELDS = {
+      object: 'object',
+      has_more: 'has_more',
+      data: 'data'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      data: lambda do |value|
+        value&.map { |item| ::OctridevResend::ListBroadcastClickedLinksResponseSuccessDataItem.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ListBroadcastClickedLinksResponseSuccess.
+  # Typed representation of the `ListBroadcastClickedLinksResponseSuccess` API schema.
+  class ListBroadcastClickedLinksResponseSuccess
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListBroadcastClickedLinksResponseSuccessMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListBroadcastClickedLinksResponseSuccessMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListBroadcastClickedLinksResponseSuccessMetadata::DECODERS
+
+    # @return [String] Type of the response object.
+    attr_reader :object
+    # @return [Boolean] Indicates if there are more results available.
+    attr_reader :has_more
+    # @return [Array_of_ListBroadcastClickedLinksResponseSuccessDataItem] Array containing the broadcast's clicked links.
+    attr_reader :data
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalListBroadcastRecipientsResponseSuccessDataItemClickedLinksItemMetadata
-  FIELDS = {
-    url: "url",
-    clicks: "clicks",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ListBroadcastRecipientsResponseSuccessDataItemClickedLinksItem.
-# Required object value serialized in the `clicked_links[]` wire field.
-class ListBroadcastRecipientsResponseSuccessDataItemClickedLinksItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListBroadcastRecipientsResponseSuccessDataItemClickedLinksItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListBroadcastRecipientsResponseSuccessDataItemClickedLinksItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListBroadcastRecipientsResponseSuccessDataItemClickedLinksItemMetadata::DECODERS
-
-  # @return [String] The clicked URL.
-  attr_reader :url
-  # @return [Integer] The number of times this recipient clicked this URL.
-  attr_reader :clicks
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalListBroadcastRecipientsResponseSuccessDataItemClickedLinksItemMetadata
+    FIELDS = {
+      url: 'url',
+      clicks: 'clicks'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ListBroadcastRecipientsResponseSuccessDataItemClickedLinksItem.
+  # Required object value serialized in the `clicked_links[]` wire field.
+  class ListBroadcastRecipientsResponseSuccessDataItemClickedLinksItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListBroadcastRecipientsResponseSuccessDataItemClickedLinksItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListBroadcastRecipientsResponseSuccessDataItemClickedLinksItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListBroadcastRecipientsResponseSuccessDataItemClickedLinksItemMetadata::DECODERS
+
+    # @return [String] The clicked URL.
+    attr_reader :url
+    # @return [Integer] The number of times this recipient clicked this URL.
+    attr_reader :clicks
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalListBroadcastRecipientsResponseSuccessDataItemMetadata
-  FIELDS = {
-    id: "id",
-    contact_id: "contact_id",
-    email: "email",
-    count: "count",
-    bounce_type: "bounce_type",
-    clicked_links: "clicked_links",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    bounce_type: lambda do |value|
-      ::OctridevResend::ListBroadcastRecipientsResponseSuccessDataItemBounceType.from_value(value)
-    end,
-    clicked_links: lambda do |value|
-      value&.map { |item| ::OctridevResend::ListBroadcastRecipientsResponseSuccessDataItemClickedLinksItem.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for ListBroadcastRecipientsResponseSuccessDataItem.
-# Required object value serialized in the `data[]` wire field.
-class ListBroadcastRecipientsResponseSuccessDataItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListBroadcastRecipientsResponseSuccessDataItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListBroadcastRecipientsResponseSuccessDataItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListBroadcastRecipientsResponseSuccessDataItemMetadata::DECODERS
-
-  # @return [String] Opaque cursor identifying this row, used for pagination.
-  attr_reader :id
-  # @return [String] The ID of the contact associated with this recipient, if one exists.
-  attr_reader :contact_id
-  # @return [String] The recipient's email address.
-  attr_reader :email
-  # @return [Integer] The number of times this recipient triggered the event. Only present when `type` is `opened` or `clicked`.
-  attr_reader :count
-  # @return [ListBroadcastRecipientsResponseSuccessDataItemBounceType] The type of bounce. Only present when `type` is `bounced`.
-  attr_reader :bounce_type
-  # @return [Array_of_ListBroadcastRecipientsResponseSuccessDataItemClickedLinksItem] The links this recipient clicked. Only present when `type` is `clicked`.
-  attr_reader :clicked_links
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalListBroadcastRecipientsResponseSuccessDataItemMetadata
+    FIELDS = {
+      id: 'id',
+      contact_id: 'contact_id',
+      email: 'email',
+      count: 'count',
+      bounce_type: 'bounce_type',
+      clicked_links: 'clicked_links'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      bounce_type: lambda do |value|
+        ::OctridevResend::ListBroadcastRecipientsResponseSuccessDataItemBounceType.from_value(value)
+      end,
+      clicked_links: lambda do |value|
+        value&.map { |item| ::OctridevResend::ListBroadcastRecipientsResponseSuccessDataItemClickedLinksItem.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ListBroadcastRecipientsResponseSuccessDataItem.
+  # Required object value serialized in the `data[]` wire field.
+  class ListBroadcastRecipientsResponseSuccessDataItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListBroadcastRecipientsResponseSuccessDataItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListBroadcastRecipientsResponseSuccessDataItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListBroadcastRecipientsResponseSuccessDataItemMetadata::DECODERS
+
+    # @return [String] Opaque cursor identifying this row, used for pagination.
+    attr_reader :id
+    # @return [String] The ID of the contact associated with this recipient, if one exists.
+    attr_reader :contact_id
+    # @return [String] The recipient's email address.
+    attr_reader :email
+    # @return [Integer] The number of times this recipient triggered the event. Only present when `type` is `opened` or `clicked`.
+    attr_reader :count
+    # @return [ListBroadcastRecipientsResponseSuccessDataItemBounceType] The type of bounce. Only present when `type` is `bounced`.
+    attr_reader :bounce_type
+    # @return [Array_of_ListBroadcastRecipientsResponseSuccessDataItemClickedLinksItem] The links this recipient clicked. Only present when `type` is `clicked`.
+    attr_reader :clicked_links
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalListBroadcastRecipientsResponseSuccessMetadata
-  FIELDS = {
-    object: "object",
-    has_more: "has_more",
-    data: "data",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    data: lambda do |value|
-      value&.map { |item| ::OctridevResend::ListBroadcastRecipientsResponseSuccessDataItem.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for ListBroadcastRecipientsResponseSuccess.
-# Typed representation of the `ListBroadcastRecipientsResponseSuccess` API schema.
-class ListBroadcastRecipientsResponseSuccess
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListBroadcastRecipientsResponseSuccessMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListBroadcastRecipientsResponseSuccessMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListBroadcastRecipientsResponseSuccessMetadata::DECODERS
-
-  # @return [String] Type of the response object.
-  attr_reader :object
-  # @return [Boolean] Indicates if there are more results available.
-  attr_reader :has_more
-  # @return [Array_of_ListBroadcastRecipientsResponseSuccessDataItem] Array containing broadcast recipients.
-  attr_reader :data
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalListBroadcastRecipientsResponseSuccessMetadata
+    FIELDS = {
+      object: 'object',
+      has_more: 'has_more',
+      data: 'data'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      data: lambda do |value|
+        value&.map { |item| ::OctridevResend::ListBroadcastRecipientsResponseSuccessDataItem.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ListBroadcastRecipientsResponseSuccess.
+  # Typed representation of the `ListBroadcastRecipientsResponseSuccess` API schema.
+  class ListBroadcastRecipientsResponseSuccess
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListBroadcastRecipientsResponseSuccessMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListBroadcastRecipientsResponseSuccessMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListBroadcastRecipientsResponseSuccessMetadata::DECODERS
+
+    # @return [String] Type of the response object.
+    attr_reader :object
+    # @return [Boolean] Indicates if there are more results available.
+    attr_reader :has_more
+    # @return [Array_of_ListBroadcastRecipientsResponseSuccessDataItem] Array containing broadcast recipients.
+    attr_reader :data
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the ListBroadcastRecipientsResponseSuccessDataItemBounceType SDK namespace.
-module ListBroadcastRecipientsResponseSuccessDataItemBounceType
-  PERMANENT = 'permanent'
-  TRANSIENT = 'transient'
-  UNDETERMINED = 'undetermined'
-  VALUES = ['permanent', 'transient', 'undetermined'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalListBroadcastsResponseSuccessDataItemMetadata
-  FIELDS = {
-    id: "id",
-    name: "name",
-    audience_id: "audience_id",
-    segment_id: "segment_id",
-    status: "status",
-    created_at: "created_at",
-    scheduled_at: "scheduled_at",
-    sent_at: "sent_at",
-    topic_id: "topic_id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ListBroadcastsResponseSuccessDataItem.
-# Required object value serialized in the `data[]` wire field.
-class ListBroadcastsResponseSuccessDataItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListBroadcastsResponseSuccessDataItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListBroadcastsResponseSuccessDataItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListBroadcastsResponseSuccessDataItemMetadata::DECODERS
-
-  # @return [String] Unique identifier for the broadcast.
-  attr_reader :id
-  # @return [String] Name of the broadcast.
-  attr_reader :name
-  # @return [String] Deprecated. Use segment_id instead.
-  attr_reader :audience_id
-  # @return [String] Unique identifier of the segment this broadcast will be sent to.
-  attr_reader :segment_id
-  # @return [String] The status of the broadcast.
-  attr_reader :status
-  # @return [String] Timestamp indicating when the broadcast was created.
-  attr_reader :created_at
-  # @return [String] Timestamp indicating when the broadcast is scheduled to be sent.
-  attr_reader :scheduled_at
-  # @return [String] Timestamp indicating when the broadcast was sent.
-  attr_reader :sent_at
-  # @return [String] The topic ID that the broadcast is scoped to.
-  attr_reader :topic_id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the ListBroadcastRecipientsResponseSuccessDataItemBounceType SDK namespace.
+  module ListBroadcastRecipientsResponseSuccessDataItemBounceType
+    PERMANENT = 'permanent'
+    TRANSIENT = 'transient'
+    UNDETERMINED = 'undetermined'
+    VALUES = %w[permanent transient undetermined].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalListBroadcastsResponseSuccessDataItemMetadata
+    FIELDS = {
+      id: 'id',
+      name: 'name',
+      audience_id: 'audience_id',
+      segment_id: 'segment_id',
+      status: 'status',
+      created_at: 'created_at',
+      scheduled_at: 'scheduled_at',
+      sent_at: 'sent_at',
+      topic_id: 'topic_id'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ListBroadcastsResponseSuccessDataItem.
+  # Required object value serialized in the `data[]` wire field.
+  class ListBroadcastsResponseSuccessDataItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListBroadcastsResponseSuccessDataItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListBroadcastsResponseSuccessDataItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListBroadcastsResponseSuccessDataItemMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalListBroadcastsResponseSuccessMetadata
-  FIELDS = {
-    object: "object",
-    has_more: "has_more",
-    data: "data",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    data: lambda do |value|
-      value&.map { |item| ::OctridevResend::ListBroadcastsResponseSuccessDataItem.from_hash(item) }
-    end,
-  }.freeze
-end
+    # @return [String] Unique identifier for the broadcast.
+    attr_reader :id
+    # @return [String] Name of the broadcast.
+    attr_reader :name
+    # @return [String] Deprecated. Use segment_id instead.
+    attr_reader :audience_id
+    # @return [String] Unique identifier of the segment this broadcast will be sent to.
+    attr_reader :segment_id
+    # @return [String] The status of the broadcast.
+    attr_reader :status
+    # @return [String] Timestamp indicating when the broadcast was created.
+    attr_reader :created_at
+    # @return [String] Timestamp indicating when the broadcast is scheduled to be sent.
+    attr_reader :scheduled_at
+    # @return [String] Timestamp indicating when the broadcast was sent.
+    attr_reader :sent_at
+    # @return [String] The topic ID that the broadcast is scoped to.
+    attr_reader :topic_id
 
-# API model for ListBroadcastsResponseSuccess.
-# Typed representation of the `ListBroadcastsResponseSuccess` API schema.
-class ListBroadcastsResponseSuccess
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListBroadcastsResponseSuccessMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListBroadcastsResponseSuccessMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListBroadcastsResponseSuccessMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] Type of the response object.
-  attr_reader :object
-  # @return [Boolean] Indicates if there are more results available.
-  attr_reader :has_more
-  # @return [Array_of_ListBroadcastsResponseSuccessDataItem] Array containing broadcast information.
-  attr_reader :data
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalRemoveBroadcastResponseSuccessMetadata
-  FIELDS = {
-    id: "id",
-    object: "object",
-    deleted: "deleted",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for RemoveBroadcastResponseSuccess.
-# Typed representation of the `RemoveBroadcastResponseSuccess` API schema.
-class RemoveBroadcastResponseSuccess
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalRemoveBroadcastResponseSuccessMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalRemoveBroadcastResponseSuccessMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalRemoveBroadcastResponseSuccessMetadata::DECODERS
-
-  # @return [String] The ID of the broadcast.
-  attr_reader :id
-  # @return [String] Type of the response object.
-  attr_reader :object
-  # @return [Boolean] The deleted attribute indicates that the corresponding broadcast has been deleted.
-  attr_reader :deleted
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalListBroadcastsResponseSuccessMetadata
+    FIELDS = {
+      object: 'object',
+      has_more: 'has_more',
+      data: 'data'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      data: lambda do |value|
+        value&.map { |item| ::OctridevResend::ListBroadcastsResponseSuccessDataItem.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ListBroadcastsResponseSuccess.
+  # Typed representation of the `ListBroadcastsResponseSuccess` API schema.
+  class ListBroadcastsResponseSuccess
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListBroadcastsResponseSuccessMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListBroadcastsResponseSuccessMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListBroadcastsResponseSuccessMetadata::DECODERS
+
+    # @return [String] Type of the response object.
+    attr_reader :object
+    # @return [Boolean] Indicates if there are more results available.
+    attr_reader :has_more
+    # @return [Array_of_ListBroadcastsResponseSuccessDataItem] Array containing broadcast information.
+    attr_reader :data
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalRemoveBroadcastResponseSuccessMetadata
+    FIELDS = {
+      id: 'id',
+      object: 'object',
+      deleted: 'deleted'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
-end
 
-# Internal model hydration metadata.
-class SdkInternalSendBroadcastOptionsMetadata
-  FIELDS = {
-    scheduled_at: "scheduled_at",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+  # API model for RemoveBroadcastResponseSuccess.
+  # Typed representation of the `RemoveBroadcastResponseSuccess` API schema.
+  class RemoveBroadcastResponseSuccess
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalRemoveBroadcastResponseSuccessMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalRemoveBroadcastResponseSuccessMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalRemoveBroadcastResponseSuccessMetadata::DECODERS
+
+    # @return [String] The ID of the broadcast.
+    attr_reader :id
+    # @return [String] Type of the response object.
+    attr_reader :object
+    # @return [Boolean] The deleted attribute indicates that the corresponding broadcast has been deleted.
+    attr_reader :deleted
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalSendBroadcastOptionsMetadata
+    FIELDS = {
+      scheduled_at: 'scheduled_at'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
+  end
 end
