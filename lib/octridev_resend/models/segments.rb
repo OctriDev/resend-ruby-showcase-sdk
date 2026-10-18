@@ -5,331 +5,344 @@
 
 # segments domain models
 module OctridevResend
-  # Internal model hydration metadata.
-  class SdkInternalCreateSegmentOptionsMetadata
-    FIELDS = {
-      name: 'name',
-      audience_id: 'audience_id',
-      filter: 'filter'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      name
-    ].freeze
-    DECODERS = {}.freeze
+# Internal model hydration metadata.
+class SdkInternalCreateSegmentOptionsMetadata
+  FIELDS = {
+    name: "name",
+    audience_id: "audience_id",
+    filter: "filter",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    name
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for CreateSegmentOptions.
+# Typed representation of the `CreateSegmentOptions` API schema.
+class CreateSegmentOptions
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCreateSegmentOptionsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCreateSegmentOptionsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCreateSegmentOptionsMetadata::DECODERS
+
+  # @return [String] The name of the segment.
+  attr_reader :name
+  # @return [String] The ID of the audience this segment belongs to.
+  attr_reader :audience_id
+  # @return [Hash] Filter conditions for the segment.
+  attr_reader :filter
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for CreateSegmentOptions.
-  # Typed representation of the `CreateSegmentOptions` API schema.
-  class CreateSegmentOptions
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCreateSegmentOptionsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCreateSegmentOptionsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCreateSegmentOptionsMetadata::DECODERS
-
-    # @return [String] The name of the segment.
-    attr_reader :name
-    # @return [String] The ID of the audience this segment belongs to.
-    attr_reader :audience_id
-    # @return [Hash] Filter conditions for the segment.
-    attr_reader :filter
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalCreateSegmentResponseSuccessMetadata
-    FIELDS = {
-      id: 'id',
-      object: 'object'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalCreateSegmentResponseSuccessMetadata
+  FIELDS = {
+    id: "id",
+    object: "object",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for CreateSegmentResponseSuccess.
+# Typed representation of the `CreateSegmentResponseSuccess` API schema.
+class CreateSegmentResponseSuccess
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCreateSegmentResponseSuccessMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCreateSegmentResponseSuccessMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCreateSegmentResponseSuccessMetadata::DECODERS
+
+  # @return [String] The ID of the segment.
+  attr_reader :id
+  # @return [String] The object type of the response.
+  attr_reader :object
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for CreateSegmentResponseSuccess.
-  # Typed representation of the `CreateSegmentResponseSuccess` API schema.
-  class CreateSegmentResponseSuccess
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCreateSegmentResponseSuccessMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCreateSegmentResponseSuccessMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCreateSegmentResponseSuccessMetadata::DECODERS
-
-    # @return [String] The ID of the segment.
-    attr_reader :id
-    # @return [String] The object type of the response.
-    attr_reader :object
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalGetSegmentResponseSuccessMetadata
-    FIELDS = {
-      id: 'id',
-      object: 'object',
-      name: 'name',
-      audience_id: 'audience_id',
-      filter: 'filter',
-      created_at: 'created_at'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalGetSegmentResponseSuccessMetadata
+  FIELDS = {
+    id: "id",
+    object: "object",
+    name: "name",
+    audience_id: "audience_id",
+    filter: "filter",
+    created_at: "created_at",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for GetSegmentResponseSuccess.
+# Typed representation of the `GetSegmentResponseSuccess` API schema.
+class GetSegmentResponseSuccess
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalGetSegmentResponseSuccessMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalGetSegmentResponseSuccessMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalGetSegmentResponseSuccessMetadata::DECODERS
+
+  # @return [String] The ID of the segment.
+  attr_reader :id
+  # @return [String] The object type.
+  attr_reader :object
+  # @return [String] The name of the segment.
+  attr_reader :name
+  # @return [String] The ID of the audience this segment belongs to.
+  attr_reader :audience_id
+  # @return [Hash] Filter conditions for the segment.
+  attr_reader :filter
+  # @return [String] Timestamp indicating when the segment was created.
+  attr_reader :created_at
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for GetSegmentResponseSuccess.
-  # Typed representation of the `GetSegmentResponseSuccess` API schema.
-  class GetSegmentResponseSuccess
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalGetSegmentResponseSuccessMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalGetSegmentResponseSuccessMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalGetSegmentResponseSuccessMetadata::DECODERS
-
-    # @return [String] The ID of the segment.
-    attr_reader :id
-    # @return [String] The object type.
-    attr_reader :object
-    # @return [String] The name of the segment.
-    attr_reader :name
-    # @return [String] The ID of the audience this segment belongs to.
-    attr_reader :audience_id
-    # @return [Hash] Filter conditions for the segment.
-    attr_reader :filter
-    # @return [String] Timestamp indicating when the segment was created.
-    attr_reader :created_at
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListSegmentsResponseSuccessDataItemMetadata
-    FIELDS = {
-      id: 'id',
-      name: 'name',
-      audience_id: 'audience_id',
-      created_at: 'created_at'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalListSegmentsResponseSuccessDataItemMetadata
+  FIELDS = {
+    id: "id",
+    name: "name",
+    audience_id: "audience_id",
+    created_at: "created_at",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ListSegmentsResponseSuccessDataItem.
+# Required object value serialized in the `data[]` wire field.
+class ListSegmentsResponseSuccessDataItem
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListSegmentsResponseSuccessDataItemMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListSegmentsResponseSuccessDataItemMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListSegmentsResponseSuccessDataItemMetadata::DECODERS
+
+  # @return [String] Unique identifier for the segment.
+  attr_reader :id
+  # @return [String] Name of the segment.
+  attr_reader :name
+  # @return [String] The ID of the audience this segment belongs to.
+  attr_reader :audience_id
+  # @return [String] Timestamp indicating when the segment was created.
+  attr_reader :created_at
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ListSegmentsResponseSuccessDataItem.
-  # Required object value serialized in the `data[]` wire field.
-  class ListSegmentsResponseSuccessDataItem
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListSegmentsResponseSuccessDataItemMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListSegmentsResponseSuccessDataItemMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListSegmentsResponseSuccessDataItemMetadata::DECODERS
-
-    # @return [String] Unique identifier for the segment.
-    attr_reader :id
-    # @return [String] Name of the segment.
-    attr_reader :name
-    # @return [String] The ID of the audience this segment belongs to.
-    attr_reader :audience_id
-    # @return [String] Timestamp indicating when the segment was created.
-    attr_reader :created_at
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListSegmentsResponseSuccessMetadata
-    FIELDS = {
-      object: 'object',
-      has_more: 'has_more',
-      data: 'data'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      data: lambda do |value|
-        value&.map { |item| ::OctridevResend::ListSegmentsResponseSuccessDataItem.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalListSegmentsResponseSuccessMetadata
+  FIELDS = {
+    object: "object",
+    has_more: "has_more",
+    data: "data",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    data: lambda do |value|
+      value&.map { |item| ::OctridevResend::ListSegmentsResponseSuccessDataItem.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ListSegmentsResponseSuccess.
+# Typed representation of the `ListSegmentsResponseSuccess` API schema.
+class ListSegmentsResponseSuccess
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListSegmentsResponseSuccessMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListSegmentsResponseSuccessMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListSegmentsResponseSuccessMetadata::DECODERS
+
+  # @return [String] Type of the response object.
+  attr_reader :object
+  # @return [Boolean] Indicates if there are more results available.
+  attr_reader :has_more
+  # @return [Array_of_ListSegmentsResponseSuccessDataItem] Array containing segment information.
+  attr_reader :data
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ListSegmentsResponseSuccess.
-  # Typed representation of the `ListSegmentsResponseSuccess` API schema.
-  class ListSegmentsResponseSuccess
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListSegmentsResponseSuccessMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListSegmentsResponseSuccessMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListSegmentsResponseSuccessMetadata::DECODERS
-
-    # @return [String] Type of the response object.
-    attr_reader :object
-    # @return [Boolean] Indicates if there are more results available.
-    attr_reader :has_more
-    # @return [Array_of_ListSegmentsResponseSuccessDataItem] Array containing segment information.
-    attr_reader :data
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalRemoveSegmentResponseSuccessMetadata
-    FIELDS = {
-      id: 'id',
-      object: 'object',
-      deleted: 'deleted'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalRemoveSegmentResponseSuccessMetadata
+  FIELDS = {
+    id: "id",
+    object: "object",
+    deleted: "deleted",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for RemoveSegmentResponseSuccess.
+# Typed representation of the `RemoveSegmentResponseSuccess` API schema.
+class RemoveSegmentResponseSuccess
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalRemoveSegmentResponseSuccessMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalRemoveSegmentResponseSuccessMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalRemoveSegmentResponseSuccessMetadata::DECODERS
+
+  # @return [String] The ID of the segment.
+  attr_reader :id
+  # @return [String] The object type.
+  attr_reader :object
+  # @return [Boolean] Indicates whether the segment was successfully deleted.
+  attr_reader :deleted
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for RemoveSegmentResponseSuccess.
-  # Typed representation of the `RemoveSegmentResponseSuccess` API schema.
-  class RemoveSegmentResponseSuccess
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalRemoveSegmentResponseSuccessMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalRemoveSegmentResponseSuccessMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalRemoveSegmentResponseSuccessMetadata::DECODERS
-
-    # @return [String] The ID of the segment.
-    attr_reader :id
-    # @return [String] The object type.
-    attr_reader :object
-    # @return [Boolean] Indicates whether the segment was successfully deleted.
-    attr_reader :deleted
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalUpdateSegmentOptionsMetadata
-    FIELDS = {
-      name: 'name'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      name
-    ].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalUpdateSegmentOptionsMetadata
+  FIELDS = {
+    name: "name",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    name
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for UpdateSegmentOptions.
+# Typed representation of the `UpdateSegmentOptions` API schema.
+class UpdateSegmentOptions
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalUpdateSegmentOptionsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalUpdateSegmentOptionsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalUpdateSegmentOptionsMetadata::DECODERS
+
+  # @return [String] The name of the segment.
+  attr_reader :name
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for UpdateSegmentOptions.
-  # Typed representation of the `UpdateSegmentOptions` API schema.
-  class UpdateSegmentOptions
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalUpdateSegmentOptionsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalUpdateSegmentOptionsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalUpdateSegmentOptionsMetadata::DECODERS
-
-    # @return [String] The name of the segment.
-    attr_reader :name
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalUpdateSegmentResponseSuccessMetadata
-    FIELDS = {
-      id: 'id',
-      object: 'object'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalUpdateSegmentResponseSuccessMetadata
+  FIELDS = {
+    id: "id",
+    object: "object",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for UpdateSegmentResponseSuccess.
+# Typed representation of the `UpdateSegmentResponseSuccess` API schema.
+class UpdateSegmentResponseSuccess
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalUpdateSegmentResponseSuccessMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalUpdateSegmentResponseSuccessMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalUpdateSegmentResponseSuccessMetadata::DECODERS
+
+  # @return [String] The ID of the segment.
+  attr_reader :id
+  # @return [String] The object type.
+  attr_reader :object
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for UpdateSegmentResponseSuccess.
-  # Typed representation of the `UpdateSegmentResponseSuccess` API schema.
-  class UpdateSegmentResponseSuccess
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalUpdateSegmentResponseSuccessMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalUpdateSegmentResponseSuccessMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalUpdateSegmentResponseSuccessMetadata::DECODERS
-
-    # @return [String] The ID of the segment.
-    attr_reader :id
-    # @return [String] The object type.
-    attr_reader :object
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

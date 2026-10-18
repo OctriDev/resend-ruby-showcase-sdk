@@ -15,7 +15,7 @@ module OctridevResend
         IN_PROGRESS = 'in_progress'
         COMPLETED = 'completed'
         FAILED = 'failed'
-        VALUES = %w[queued in_progress completed failed].freeze
+        VALUES = ['queued', 'in_progress', 'completed', 'failed'].freeze
         def self.from_value(value)
           value
         end
@@ -46,9 +46,10 @@ module OctridevResend
         audience_id: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/contacts',
+          "/contacts",
           config: config,
           body: {
             'email' => email,
@@ -58,12 +59,12 @@ module OctridevResend
             'properties' => properties,
             'segments' => segments,
             'topics' => topics,
-            'audience_id' => audience_id
+            'audience_id' => audience_id,
           },
           return_type: ::OctridevResend::CreateContactResponseSuccess,
           decoder: :json,
           operation_id: 'contacts_create',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -79,21 +80,22 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(limit) { Validation.validate_range('limit', limit, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          '/contacts',
+          "/contacts",
           config: config,
           query: {
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true)
+            'before' => QueryValue.new(before, style: 'form', explode: true),
           },
           return_type: ::OctridevResend::ListContactsResponseSuccess,
           decoder: :json,
           operation_id: 'contacts_list',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -119,22 +121,23 @@ module OctridevResend
         topics: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/contacts/imports',
+          "/contacts/imports",
           config: config,
           body: {
             'file' => SdkClient.upload(file, 'file'),
             'column_map' => column_map,
             'on_conflict' => on_conflict,
             'segments' => segments,
-            'topics' => topics
+            'topics' => topics,
           },
           content_type: 'multipart/form-data',
           return_type: ::OctridevResend::CreateContactImportResponseSuccess,
           decoder: :json,
           operation_id: 'contacts_create_import',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -153,22 +156,23 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(limit) { Validation.validate_range('limit', limit, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          '/contacts/imports',
+          "/contacts/imports",
           config: config,
           query: {
             'status' => QueryValue.new(status, style: 'form', explode: true),
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true)
+            'before' => QueryValue.new(before, style: 'form', explode: true),
           },
           return_type: ::OctridevResend::ListContactImportsResponseSuccess,
           decoder: :json,
           operation_id: 'contacts_list_imports',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -180,19 +184,20 @@ module OctridevResend
         id:,
         request_options: nil
       )
+
         Validation.validate_uuid('id', id)
 
         SdkClient.request(
           'GET',
           [
-            '/contacts/imports/',
+            "/contacts/imports/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           return_type: ::OctridevResend::GetContactImportResponseSuccess,
           decoder: :json,
           operation_id: 'contacts_get_import',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -204,17 +209,18 @@ module OctridevResend
         id:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/contacts/',
+            "/contacts/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           return_type: ::OctridevResend::GetContactResponseSuccess,
           decoder: :json,
           operation_id: 'contacts_get',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -238,10 +244,11 @@ module OctridevResend
         properties: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'PATCH',
           [
-            '/contacts/',
+            "/contacts/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -250,12 +257,12 @@ module OctridevResend
             'first_name' => first_name,
             'last_name' => last_name,
             'unsubscribed' => unsubscribed,
-            'properties' => properties
+            'properties' => properties,
           },
           return_type: ::OctridevResend::UpdateContactResponseSuccess,
           decoder: :json,
           operation_id: 'contacts_update',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -267,17 +274,18 @@ module OctridevResend
         id:,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/contacts/',
+            "/contacts/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           return_type: ::OctridevResend::RemoveContactResponseSuccess,
           decoder: :json,
           operation_id: 'contacts_remove',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -295,25 +303,26 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(limit) { Validation.validate_range('limit', limit, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
           [
-            '/contacts/',
+            "/contacts/",
             SdkClient.encode_path_segment(contact_id),
-            '/segments'
+            "/segments"
           ].join,
           config: config,
           query: {
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true)
+            'before' => QueryValue.new(before, style: 'form', explode: true),
           },
           return_type: ::OctridevResend::ListContactSegmentsResponseSuccess,
           decoder: :json,
           operation_id: 'contacts_list_segments',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -327,19 +336,20 @@ module OctridevResend
         segment_id:,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
           [
-            '/contacts/',
+            "/contacts/",
             SdkClient.encode_path_segment(contact_id),
-            '/segments/',
+            "/segments/",
             SdkClient.encode_path_segment(segment_id)
           ].join,
           config: config,
           return_type: ::OctridevResend::AddContactToSegmentResponseSuccess,
           decoder: :json,
           operation_id: 'contacts_add_segment',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -353,19 +363,20 @@ module OctridevResend
         segment_id:,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/contacts/',
+            "/contacts/",
             SdkClient.encode_path_segment(contact_id),
-            '/segments/',
+            "/segments/",
             SdkClient.encode_path_segment(segment_id)
           ].join,
           config: config,
           return_type: ::OctridevResend::RemoveContactFromSegmentResponseSuccess,
           decoder: :json,
           operation_id: 'contacts_remove_segment',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -383,25 +394,26 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(limit) { Validation.validate_range('limit', limit, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
           [
-            '/contacts/',
+            "/contacts/",
             SdkClient.encode_path_segment(contact_id),
-            '/topics'
+            "/topics"
           ].join,
           config: config,
           query: {
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true)
+            'before' => QueryValue.new(before, style: 'form', explode: true),
           },
           return_type: ::OctridevResend::GetContactTopicsResponseSuccess,
           decoder: :json,
           operation_id: 'contacts_list_topics',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -416,21 +428,22 @@ module OctridevResend
         topics:,
         request_options: nil
       )
+
         SdkClient.request(
           'PATCH',
           [
-            '/contacts/',
+            "/contacts/",
             SdkClient.encode_path_segment(contact_id),
-            '/topics'
+            "/topics"
           ].join,
           config: config,
           body: {
-            'topics' => topics
+            'topics' => topics,
           },
           return_type: ::OctridevResend::UpdateContactTopicsResponseSuccess,
           decoder: :json,
           operation_id: 'contacts_update_topics',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
     end

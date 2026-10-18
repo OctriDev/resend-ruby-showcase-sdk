@@ -52,54 +52,52 @@ module OctridevResend
       n = value.length
       if min && n < min
         raise SdkValidationError.new(field, 'length',
-                                     "Validation failed for '#{field}': length must be >= #{min}")
+          "Validation failed for '#{field}': length must be >= #{min}")
       end
-      return unless max && n > max
-
-      raise SdkValidationError.new(field, 'length',
-                                   "Validation failed for '#{field}': length must be <= #{max}")
+      if max && n > max
+        raise SdkValidationError.new(field, 'length',
+          "Validation failed for '#{field}': length must be <= #{max}")
+      end
     end
 
     def self.validate_items(field, value, min: nil, max: nil)
       n = value.length
       if min && n < min
         raise SdkValidationError.new(field, 'items',
-                                     "Validation failed for '#{field}': must have at least #{min} items")
+          "Validation failed for '#{field}': must have at least #{min} items")
       end
-      return unless max && n > max
-
-      raise SdkValidationError.new(field, 'items',
-                                   "Validation failed for '#{field}': must have at most #{max} items")
+      if max && n > max
+        raise SdkValidationError.new(field, 'items',
+          "Validation failed for '#{field}': must have at most #{max} items")
+      end
     end
 
     def self.validate_pattern(field, value, pattern)
       return if value =~ Regexp.new(pattern)
-
       raise SdkValidationError.new(field, 'pattern',
-                                   "Validation failed for '#{field}': must match pattern #{pattern}")
+        "Validation failed for '#{field}': must match pattern #{pattern}")
     end
 
-    EMAIL_RE = /\A[^\s@]+@[^\s@]+\.[^\s@]+\z/
+    EMAIL_RE = /\A[^\s@]+@[^\s@]+\.[^\s@]+\z/.freeze
     def self.validate_email(field, value)
       return if value =~ EMAIL_RE
-
       raise SdkValidationError.new(field, 'format:email',
-                                   "Validation failed for '#{field}': must be a valid email address")
+        "Validation failed for '#{field}': must be a valid email address")
     end
 
-    UUID_RE = /\A[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\z/
+    UUID_RE = /\A[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\z/.freeze
     def self.validate_uuid(field, value)
       return if value =~ UUID_RE
-
       raise SdkValidationError.new(field, 'format:uuid',
-                                   "Validation failed for '#{field}': must be a valid UUID")
+        "Validation failed for '#{field}': must be a valid UUID")
     end
 
     def self.validate_date_time(field, value)
       Time.iso8601(value)
     rescue ArgumentError
       raise SdkValidationError.new(field, 'format:date-time',
-                                   "Validation failed for '#{field}': must be a valid ISO 8601 date-time")
+        "Validation failed for '#{field}': must be a valid ISO 8601 date-time")
     end
+
   end
 end

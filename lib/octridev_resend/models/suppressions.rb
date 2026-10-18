@@ -5,511 +5,528 @@
 
 # suppressions domain models
 module OctridevResend
-  # Internal model hydration metadata.
-  class SdkInternalBatchAddSuppressionsOptionsMetadata
-    FIELDS = {
-      emails: 'emails'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      emails
-    ].freeze
-    DECODERS = {}.freeze
+# Internal model hydration metadata.
+class SdkInternalBatchAddSuppressionsOptionsMetadata
+  FIELDS = {
+    emails: "emails",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    emails
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for BatchAddSuppressionsOptions.
+# Typed representation of the `BatchAddSuppressionsOptions` API schema.
+class BatchAddSuppressionsOptions
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBatchAddSuppressionsOptionsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBatchAddSuppressionsOptionsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBatchAddSuppressionsOptionsMetadata::DECODERS
+
+  # @return [Array_of_String] Email addresses to suppress.
+  attr_reader :emails
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for BatchAddSuppressionsOptions.
-  # Typed representation of the `BatchAddSuppressionsOptions` API schema.
-  class BatchAddSuppressionsOptions
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBatchAddSuppressionsOptionsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBatchAddSuppressionsOptionsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBatchAddSuppressionsOptionsMetadata::DECODERS
-
-    # @return [Array_of_String] Email addresses to suppress.
-    attr_reader :emails
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalBatchAddSuppressionsResponseSuccessDataItemMetadata
-    FIELDS = {
-      object: 'object',
-      id: 'id'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalBatchAddSuppressionsResponseSuccessDataItemMetadata
+  FIELDS = {
+    object: "object",
+    id: "id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for BatchAddSuppressionsResponseSuccessDataItem.
+# Required object value serialized in the `data[]` wire field.
+class BatchAddSuppressionsResponseSuccessDataItem
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBatchAddSuppressionsResponseSuccessDataItemMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBatchAddSuppressionsResponseSuccessDataItemMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBatchAddSuppressionsResponseSuccessDataItemMetadata::DECODERS
+
+  # @return [String] Type of the object.
+  attr_reader :object
+  # @return [String] Unique identifier for the suppression.
+  attr_reader :id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for BatchAddSuppressionsResponseSuccessDataItem.
-  # Required object value serialized in the `data[]` wire field.
-  class BatchAddSuppressionsResponseSuccessDataItem
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBatchAddSuppressionsResponseSuccessDataItemMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBatchAddSuppressionsResponseSuccessDataItemMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBatchAddSuppressionsResponseSuccessDataItemMetadata::DECODERS
-
-    # @return [String] Type of the object.
-    attr_reader :object
-    # @return [String] Unique identifier for the suppression.
-    attr_reader :id
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalBatchAddSuppressionsResponseSuccessMetadata
-    FIELDS = {
-      data: 'data'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      data: lambda do |value|
-        value&.map { |item| ::OctridevResend::BatchAddSuppressionsResponseSuccessDataItem.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalBatchAddSuppressionsResponseSuccessMetadata
+  FIELDS = {
+    data: "data",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    data: lambda do |value|
+      value&.map { |item| ::OctridevResend::BatchAddSuppressionsResponseSuccessDataItem.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for BatchAddSuppressionsResponseSuccess.
+# Typed representation of the `BatchAddSuppressionsResponseSuccess` API schema.
+class BatchAddSuppressionsResponseSuccess
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBatchAddSuppressionsResponseSuccessMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBatchAddSuppressionsResponseSuccessMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBatchAddSuppressionsResponseSuccessMetadata::DECODERS
+
+  # @return [Array_of_BatchAddSuppressionsResponseSuccessDataItem] Array containing the created suppressions.
+  attr_reader :data
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for BatchAddSuppressionsResponseSuccess.
-  # Typed representation of the `BatchAddSuppressionsResponseSuccess` API schema.
-  class BatchAddSuppressionsResponseSuccess
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBatchAddSuppressionsResponseSuccessMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBatchAddSuppressionsResponseSuccessMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBatchAddSuppressionsResponseSuccessMetadata::DECODERS
-
-    # @return [Array_of_BatchAddSuppressionsResponseSuccessDataItem] Array containing the created suppressions.
-    attr_reader :data
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalBatchRemoveSuppressionsOptionsMetadata
-    FIELDS = {
-      emails: 'emails',
-      ids: 'ids'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalBatchRemoveSuppressionsOptionsMetadata
+  FIELDS = {
+    emails: "emails",
+    ids: "ids",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for BatchRemoveSuppressionsOptions.
+# Provide either `emails` or `ids`, but not both.
+class BatchRemoveSuppressionsOptions
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBatchRemoveSuppressionsOptionsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBatchRemoveSuppressionsOptionsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBatchRemoveSuppressionsOptionsMetadata::DECODERS
+
+  # @return [Array_of_String] Email addresses to remove from the suppression list.
+  attr_reader :emails
+  # @return [Array_of_String] Suppression IDs to remove from the suppression list.
+  attr_reader :ids
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for BatchRemoveSuppressionsOptions.
-  # Provide either `emails` or `ids`, but not both.
-  class BatchRemoveSuppressionsOptions
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBatchRemoveSuppressionsOptionsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBatchRemoveSuppressionsOptionsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBatchRemoveSuppressionsOptionsMetadata::DECODERS
-
-    # @return [Array_of_String] Email addresses to remove from the suppression list.
-    attr_reader :emails
-    # @return [Array_of_String] Suppression IDs to remove from the suppression list.
-    attr_reader :ids
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalBatchRemoveSuppressionsResponseSuccessDataItemMetadata
-    FIELDS = {
-      object: 'object',
-      id: 'id',
-      deleted: 'deleted'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalBatchRemoveSuppressionsResponseSuccessDataItemMetadata
+  FIELDS = {
+    object: "object",
+    id: "id",
+    deleted: "deleted",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for BatchRemoveSuppressionsResponseSuccessDataItem.
+# Required object value serialized in the `data[]` wire field.
+class BatchRemoveSuppressionsResponseSuccessDataItem
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBatchRemoveSuppressionsResponseSuccessDataItemMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBatchRemoveSuppressionsResponseSuccessDataItemMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBatchRemoveSuppressionsResponseSuccessDataItemMetadata::DECODERS
+
+  # @return [String] Type of the object.
+  attr_reader :object
+  # @return [String] Unique identifier for the suppression.
+  attr_reader :id
+  # @return [Boolean] Indicates whether the suppression was successfully deleted.
+  attr_reader :deleted
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for BatchRemoveSuppressionsResponseSuccessDataItem.
-  # Required object value serialized in the `data[]` wire field.
-  class BatchRemoveSuppressionsResponseSuccessDataItem
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBatchRemoveSuppressionsResponseSuccessDataItemMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBatchRemoveSuppressionsResponseSuccessDataItemMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBatchRemoveSuppressionsResponseSuccessDataItemMetadata::DECODERS
-
-    # @return [String] Type of the object.
-    attr_reader :object
-    # @return [String] Unique identifier for the suppression.
-    attr_reader :id
-    # @return [Boolean] Indicates whether the suppression was successfully deleted.
-    attr_reader :deleted
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalBatchRemoveSuppressionsResponseSuccessMetadata
-    FIELDS = {
-      data: 'data'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      data: lambda do |value|
-        value&.map { |item| ::OctridevResend::BatchRemoveSuppressionsResponseSuccessDataItem.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalBatchRemoveSuppressionsResponseSuccessMetadata
+  FIELDS = {
+    data: "data",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    data: lambda do |value|
+      value&.map { |item| ::OctridevResend::BatchRemoveSuppressionsResponseSuccessDataItem.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for BatchRemoveSuppressionsResponseSuccess.
+# Typed representation of the `BatchRemoveSuppressionsResponseSuccess` API schema.
+class BatchRemoveSuppressionsResponseSuccess
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBatchRemoveSuppressionsResponseSuccessMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBatchRemoveSuppressionsResponseSuccessMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBatchRemoveSuppressionsResponseSuccessMetadata::DECODERS
+
+  # @return [Array_of_BatchRemoveSuppressionsResponseSuccessDataItem] Array containing the removed suppressions.
+  attr_reader :data
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for BatchRemoveSuppressionsResponseSuccess.
-  # Typed representation of the `BatchRemoveSuppressionsResponseSuccess` API schema.
-  class BatchRemoveSuppressionsResponseSuccess
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBatchRemoveSuppressionsResponseSuccessMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBatchRemoveSuppressionsResponseSuccessMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBatchRemoveSuppressionsResponseSuccessMetadata::DECODERS
-
-    # @return [Array_of_BatchRemoveSuppressionsResponseSuccessDataItem] Array containing the removed suppressions.
-    attr_reader :data
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalCreateSuppressionOptionsMetadata
-    FIELDS = {
-      email: 'email'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      email
-    ].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalCreateSuppressionOptionsMetadata
+  FIELDS = {
+    email: "email",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    email
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for CreateSuppressionOptions.
+# Typed representation of the `CreateSuppressionOptions` API schema.
+class CreateSuppressionOptions
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCreateSuppressionOptionsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCreateSuppressionOptionsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCreateSuppressionOptionsMetadata::DECODERS
+
+  # @return [String] Email address to suppress.
+  attr_reader :email
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for CreateSuppressionOptions.
-  # Typed representation of the `CreateSuppressionOptions` API schema.
-  class CreateSuppressionOptions
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCreateSuppressionOptionsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCreateSuppressionOptionsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCreateSuppressionOptionsMetadata::DECODERS
-
-    # @return [String] Email address to suppress.
-    attr_reader :email
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalCreateSuppressionResponseSuccessMetadata
-    FIELDS = {
-      object: 'object',
-      id: 'id'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalCreateSuppressionResponseSuccessMetadata
+  FIELDS = {
+    object: "object",
+    id: "id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for CreateSuppressionResponseSuccess.
+# Typed representation of the `CreateSuppressionResponseSuccess` API schema.
+class CreateSuppressionResponseSuccess
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCreateSuppressionResponseSuccessMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCreateSuppressionResponseSuccessMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCreateSuppressionResponseSuccessMetadata::DECODERS
+
+  # @return [String] Type of the response object.
+  attr_reader :object
+  # @return [String] Unique identifier for the created suppression.
+  attr_reader :id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for CreateSuppressionResponseSuccess.
-  # Typed representation of the `CreateSuppressionResponseSuccess` API schema.
-  class CreateSuppressionResponseSuccess
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCreateSuppressionResponseSuccessMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCreateSuppressionResponseSuccessMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCreateSuppressionResponseSuccessMetadata::DECODERS
-
-    # @return [String] Type of the response object.
-    attr_reader :object
-    # @return [String] Unique identifier for the created suppression.
-    attr_reader :id
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalGetSuppressionResponseSuccessMetadata
-    FIELDS = {
-      object: 'object',
-      id: 'id',
-      email: 'email',
-      origin: 'origin',
-      source_id: 'source_id',
-      created_at: 'created_at'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      origin: lambda do |value|
-        ::OctridevResend::GetSuppressionResponseSuccessOrigin.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalGetSuppressionResponseSuccessMetadata
+  FIELDS = {
+    object: "object",
+    id: "id",
+    email: "email",
+    origin: "origin",
+    source_id: "source_id",
+    created_at: "created_at",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    origin: lambda do |value|
+      ::OctridevResend::GetSuppressionResponseSuccessOrigin.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for GetSuppressionResponseSuccess.
+# Typed representation of the `GetSuppressionResponseSuccess` API schema.
+class GetSuppressionResponseSuccess
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalGetSuppressionResponseSuccessMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalGetSuppressionResponseSuccessMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalGetSuppressionResponseSuccessMetadata::DECODERS
+
+  # @return [String] Type of the response object.
+  attr_reader :object
+  # @return [String] Unique identifier for the suppression.
+  attr_reader :id
+  # @return [String] Email address that is suppressed.
+  attr_reader :email
+  # @return [GetSuppressionResponseSuccessOrigin] Origin of the suppression.
+  attr_reader :origin
+  # @return [String] Identifier of the event that caused the suppression, such as the email that bounced or complained.
+  attr_reader :source_id
+  # @return [String] Timestamp indicating when the suppression was created.
+  attr_reader :created_at
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for GetSuppressionResponseSuccess.
-  # Typed representation of the `GetSuppressionResponseSuccess` API schema.
-  class GetSuppressionResponseSuccess
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalGetSuppressionResponseSuccessMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalGetSuppressionResponseSuccessMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalGetSuppressionResponseSuccessMetadata::DECODERS
-
-    # @return [String] Type of the response object.
-    attr_reader :object
-    # @return [String] Unique identifier for the suppression.
-    attr_reader :id
-    # @return [String] Email address that is suppressed.
-    attr_reader :email
-    # @return [GetSuppressionResponseSuccessOrigin] Origin of the suppression.
-    attr_reader :origin
-    # @return [String] Identifier of the event that caused the suppression, such as the email that bounced or complained.
-    attr_reader :source_id
-    # @return [String] Timestamp indicating when the suppression was created.
-    attr_reader :created_at
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the GetSuppressionResponseSuccessOrigin SDK namespace.
-  module GetSuppressionResponseSuccessOrigin
-    BOUNCE = 'bounce'
-    COMPLAINT = 'complaint'
-    MANUAL = 'manual'
-    VALUES = %w[bounce complaint manual].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the GetSuppressionResponseSuccessOrigin SDK namespace.
+module GetSuppressionResponseSuccessOrigin
+  BOUNCE = 'bounce'
+  COMPLAINT = 'complaint'
+  MANUAL = 'manual'
+  VALUES = ['bounce', 'complaint', 'manual'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalListSuppressionsResponseSuccessDataItemMetadata
+  FIELDS = {
+    id: "id",
+    email: "email",
+    origin: "origin",
+    source_id: "source_id",
+    created_at: "created_at",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    origin: lambda do |value|
+      ::OctridevResend::ListSuppressionsResponseSuccessDataItemOrigin.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for ListSuppressionsResponseSuccessDataItem.
+# Required object value serialized in the `data[]` wire field.
+class ListSuppressionsResponseSuccessDataItem
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListSuppressionsResponseSuccessDataItemMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListSuppressionsResponseSuccessDataItemMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListSuppressionsResponseSuccessDataItemMetadata::DECODERS
+
+  # @return [String] Unique identifier for the suppression.
+  attr_reader :id
+  # @return [String] Email address that is suppressed.
+  attr_reader :email
+  # @return [ListSuppressionsResponseSuccessDataItemOrigin] Origin of the suppression.
+  attr_reader :origin
+  # @return [String] Identifier of the event that caused the suppression, such as the email that bounced or complained.
+  attr_reader :source_id
+  # @return [String] Timestamp indicating when the suppression was created.
+  attr_reader :created_at
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListSuppressionsResponseSuccessDataItemMetadata
-    FIELDS = {
-      id: 'id',
-      email: 'email',
-      origin: 'origin',
-      source_id: 'source_id',
-      created_at: 'created_at'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      origin: lambda do |value|
-        ::OctridevResend::ListSuppressionsResponseSuccessDataItemOrigin.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ListSuppressionsResponseSuccessDataItem.
-  # Required object value serialized in the `data[]` wire field.
-  class ListSuppressionsResponseSuccessDataItem
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListSuppressionsResponseSuccessDataItemMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListSuppressionsResponseSuccessDataItemMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListSuppressionsResponseSuccessDataItemMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] Unique identifier for the suppression.
-    attr_reader :id
-    # @return [String] Email address that is suppressed.
-    attr_reader :email
-    # @return [ListSuppressionsResponseSuccessDataItemOrigin] Origin of the suppression.
-    attr_reader :origin
-    # @return [String] Identifier of the event that caused the suppression, such as the email that bounced or complained.
-    attr_reader :source_id
-    # @return [String] Timestamp indicating when the suppression was created.
-    attr_reader :created_at
+# Internal model hydration metadata.
+class SdkInternalListSuppressionsResponseSuccessMetadata
+  FIELDS = {
+    object: "object",
+    has_more: "has_more",
+    data: "data",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    data: lambda do |value|
+      value&.map { |item| ::OctridevResend::ListSuppressionsResponseSuccessDataItem.from_hash(item) }
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ListSuppressionsResponseSuccess.
+# Typed representation of the `ListSuppressionsResponseSuccess` API schema.
+class ListSuppressionsResponseSuccess
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListSuppressionsResponseSuccessMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListSuppressionsResponseSuccessMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListSuppressionsResponseSuccessMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] Type of the response object.
+  attr_reader :object
+  # @return [Boolean] Indicates if there are more results available.
+  attr_reader :has_more
+  # @return [Array_of_ListSuppressionsResponseSuccessDataItem] Array containing suppression information.
+  attr_reader :data
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListSuppressionsResponseSuccessMetadata
-    FIELDS = {
-      object: 'object',
-      has_more: 'has_more',
-      data: 'data'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      data: lambda do |value|
-        value&.map { |item| ::OctridevResend::ListSuppressionsResponseSuccessDataItem.from_hash(item) }
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ListSuppressionsResponseSuccess.
-  # Typed representation of the `ListSuppressionsResponseSuccess` API schema.
-  class ListSuppressionsResponseSuccess
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListSuppressionsResponseSuccessMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListSuppressionsResponseSuccessMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListSuppressionsResponseSuccessMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] Type of the response object.
-    attr_reader :object
-    # @return [Boolean] Indicates if there are more results available.
-    attr_reader :has_more
-    # @return [Array_of_ListSuppressionsResponseSuccessDataItem] Array containing suppression information.
-    attr_reader :data
+# Defines the ListSuppressionsResponseSuccessDataItemOrigin SDK namespace.
+module ListSuppressionsResponseSuccessDataItemOrigin
+  BOUNCE = 'bounce'
+  COMPLAINT = 'complaint'
+  MANUAL = 'manual'
+  VALUES = ['bounce', 'complaint', 'manual'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# Internal model hydration metadata.
+class SdkInternalRemoveSuppressionResponseSuccessMetadata
+  FIELDS = {
+    object: "object",
+    id: "id",
+    deleted: "deleted",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+# API model for RemoveSuppressionResponseSuccess.
+# Typed representation of the `RemoveSuppressionResponseSuccess` API schema.
+class RemoveSuppressionResponseSuccess
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalRemoveSuppressionResponseSuccessMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalRemoveSuppressionResponseSuccessMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalRemoveSuppressionResponseSuccessMetadata::DECODERS
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  # @return [String] Type of the response object.
+  attr_reader :object
+  # @return [String] Unique identifier for the removed suppression.
+  attr_reader :id
+  # @return [Boolean] Indicates whether the suppression was successfully deleted.
+  attr_reader :deleted
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the ListSuppressionsResponseSuccessDataItemOrigin SDK namespace.
-  module ListSuppressionsResponseSuccessDataItemOrigin
-    BOUNCE = 'bounce'
-    COMPLAINT = 'complaint'
-    MANUAL = 'manual'
-    VALUES = %w[bounce complaint manual].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalRemoveSuppressionResponseSuccessMetadata
-    FIELDS = {
-      object: 'object',
-      id: 'id',
-      deleted: 'deleted'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
-
-  # API model for RemoveSuppressionResponseSuccess.
-  # Typed representation of the `RemoveSuppressionResponseSuccess` API schema.
-  class RemoveSuppressionResponseSuccess
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalRemoveSuppressionResponseSuccessMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalRemoveSuppressionResponseSuccessMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalRemoveSuppressionResponseSuccessMetadata::DECODERS
-
-    # @return [String] Type of the response object.
-    attr_reader :object
-    # @return [String] Unique identifier for the removed suppression.
-    attr_reader :id
-    # @return [Boolean] Indicates whether the suppression was successfully deleted.
-    attr_reader :deleted
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
+end
 end

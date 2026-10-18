@@ -5,127 +5,127 @@
 
 # inbox_email domain models
 module OctridevResend
-  # Internal model hydration metadata.
-  class SdkInternalInboxEmailReceivedEventMetadata
-    FIELDS = {
-      type: 'type',
-      created_at: 'created_at',
-      data: 'data'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      type
-      created_at
-      data
-    ].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevResend::InboxEmailReceivedEventType.from_value(value)
-      end,
-      data: lambda do |value|
-        ::OctridevResend::InboxThreadEmailEventData.from_hash(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalInboxEmailReceivedEventMetadata
+  FIELDS = {
+    type: "type",
+    created_at: "created_at",
+    data: "data",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    type
+    created_at
+    data
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevResend::InboxEmailReceivedEventType.from_value(value)
+    end,
+    data: lambda do |value|
+      ::OctridevResend::InboxThreadEmailEventData.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for InboxEmailReceivedEvent.
+# Typed representation of the `InboxEmailReceivedEvent` API schema.
+class InboxEmailReceivedEvent
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalInboxEmailReceivedEventMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalInboxEmailReceivedEventMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalInboxEmailReceivedEventMetadata::DECODERS
+
+  # @return [InboxEmailReceivedEventType] The event type.
+  attr_reader :type
+  # @return [String] Timestamp when the event was emitted.
+  attr_reader :created_at
+  # @return [InboxThreadEmailEventData] The data of an `inbox.thread.created`, `inbox.email.received` or `inbox.email.sent` event.
+  attr_reader :data
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for InboxEmailReceivedEvent.
-  # Typed representation of the `InboxEmailReceivedEvent` API schema.
-  class InboxEmailReceivedEvent
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalInboxEmailReceivedEventMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalInboxEmailReceivedEventMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalInboxEmailReceivedEventMetadata::DECODERS
-
-    # @return [InboxEmailReceivedEventType] The event type.
-    attr_reader :type
-    # @return [String] Timestamp when the event was emitted.
-    attr_reader :created_at
-    # @return [InboxThreadEmailEventData] The data of an `inbox.thread.created`, `inbox.email.received` or `inbox.email.sent` event.
-    attr_reader :data
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the InboxEmailReceivedEventType SDK namespace.
-  module InboxEmailReceivedEventType
-    INBOX_EMAIL_RECEIVED = 'inbox.email.received'
-    VALUES = ['inbox.email.received'].freeze
-    def self.from_value(value)
-      return value if VALUES.include?(value)
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-      raise SdkValidationError.new('InboxEmailReceivedEventType', 'enum', "Unknown InboxEmailReceivedEventType: #{value}")
-    end
+# Defines the InboxEmailReceivedEventType SDK namespace.
+module InboxEmailReceivedEventType
+  INBOX_EMAIL_RECEIVED = 'inbox.email.received'
+  VALUES = ['inbox.email.received'].freeze
+  def self.from_value(value)
+    return value if VALUES.include?(value)
+
+    raise SdkValidationError.new('InboxEmailReceivedEventType', 'enum', "Unknown InboxEmailReceivedEventType: #{value}")
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalInboxEmailSentEventMetadata
+  FIELDS = {
+    type: "type",
+    created_at: "created_at",
+    data: "data",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    type
+    created_at
+    data
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevResend::InboxEmailSentEventType.from_value(value)
+    end,
+    data: lambda do |value|
+      ::OctridevResend::InboxThreadEmailEventData.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for InboxEmailSentEvent.
+# Typed representation of the `InboxEmailSentEvent` API schema.
+class InboxEmailSentEvent
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalInboxEmailSentEventMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalInboxEmailSentEventMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalInboxEmailSentEventMetadata::DECODERS
+
+  # @return [InboxEmailSentEventType] The event type.
+  attr_reader :type
+  # @return [String] Timestamp when the event was emitted.
+  attr_reader :created_at
+  # @return [InboxThreadEmailEventData] The data of an `inbox.thread.created`, `inbox.email.received` or `inbox.email.sent` event.
+  attr_reader :data
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalInboxEmailSentEventMetadata
-    FIELDS = {
-      type: 'type',
-      created_at: 'created_at',
-      data: 'data'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      type
-      created_at
-      data
-    ].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevResend::InboxEmailSentEventType.from_value(value)
-      end,
-      data: lambda do |value|
-        ::OctridevResend::InboxThreadEmailEventData.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for InboxEmailSentEvent.
-  # Typed representation of the `InboxEmailSentEvent` API schema.
-  class InboxEmailSentEvent
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalInboxEmailSentEventMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalInboxEmailSentEventMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalInboxEmailSentEventMetadata::DECODERS
-
-    # @return [InboxEmailSentEventType] The event type.
-    attr_reader :type
-    # @return [String] Timestamp when the event was emitted.
-    attr_reader :created_at
-    # @return [InboxThreadEmailEventData] The data of an `inbox.thread.created`, `inbox.email.received` or `inbox.email.sent` event.
-    attr_reader :data
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 
-  # Defines the InboxEmailSentEventType SDK namespace.
-  module InboxEmailSentEventType
-    INBOX_EMAIL_SENT = 'inbox.email.sent'
-    VALUES = ['inbox.email.sent'].freeze
-    def self.from_value(value)
-      return value if VALUES.include?(value)
+# Defines the InboxEmailSentEventType SDK namespace.
+module InboxEmailSentEventType
+  INBOX_EMAIL_SENT = 'inbox.email.sent'
+  VALUES = ['inbox.email.sent'].freeze
+  def self.from_value(value)
+    return value if VALUES.include?(value)
 
-      raise SdkValidationError.new('InboxEmailSentEventType', 'enum', "Unknown InboxEmailSentEventType: #{value}")
-    end
+    raise SdkValidationError.new('InboxEmailSentEventType', 'enum', "Unknown InboxEmailSentEventType: #{value}")
   end
+end
 end

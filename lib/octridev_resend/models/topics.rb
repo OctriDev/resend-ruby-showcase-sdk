@@ -5,443 +5,453 @@
 
 # topics domain models
 module OctridevResend
-  # Internal model hydration metadata.
-  class SdkInternalCreateTopicOptionsMetadata
-    FIELDS = {
-      name: 'name',
-      default_subscription: 'default_subscription',
-      description: 'description',
-      visibility: 'visibility'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      name
-      default_subscription
-    ].freeze
-    DECODERS = {
-      default_subscription: lambda do |value|
-        ::OctridevResend::CreateTopicOptionsDefaultSubscription.from_value(value)
-      end,
-      visibility: lambda do |value|
-        ::OctridevResend::CreateTopicOptionsVisibility.from_value(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalCreateTopicOptionsMetadata
+  FIELDS = {
+    name: "name",
+    default_subscription: "default_subscription",
+    description: "description",
+    visibility: "visibility",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    name
+    default_subscription
+  ].freeze
+  DECODERS = {
+    default_subscription: lambda do |value|
+      ::OctridevResend::CreateTopicOptionsDefaultSubscription.from_value(value)
+    end,
+    visibility: lambda do |value|
+      ::OctridevResend::CreateTopicOptionsVisibility.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for CreateTopicOptions.
+# Typed representation of the `CreateTopicOptions` API schema.
+class CreateTopicOptions
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCreateTopicOptionsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCreateTopicOptionsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCreateTopicOptionsMetadata::DECODERS
+
+  # @return [String] The name of the topic. Max 50 characters.
+  attr_reader :name
+  # @return [CreateTopicOptionsDefaultSubscription] The default subscription status for the topic. Cannot be changed after creation.
+  attr_reader :default_subscription
+  # @return [String] A description of the topic. Max 200 characters.
+  attr_reader :description
+  # @return [CreateTopicOptionsVisibility] The visibility of the topic. Public topics are visible to all contacts on the unsubscribe page. Private topics are only visible to opted-in contacts.
+  attr_reader :visibility
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for CreateTopicOptions.
-  # Typed representation of the `CreateTopicOptions` API schema.
-  class CreateTopicOptions
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCreateTopicOptionsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCreateTopicOptionsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCreateTopicOptionsMetadata::DECODERS
-
-    # @return [String] The name of the topic. Max 50 characters.
-    attr_reader :name
-    # @return [CreateTopicOptionsDefaultSubscription] The default subscription status for the topic. Cannot be changed after creation.
-    attr_reader :default_subscription
-    # @return [String] A description of the topic. Max 200 characters.
-    attr_reader :description
-    # @return [CreateTopicOptionsVisibility] The visibility of the topic. Public topics are visible to all contacts on the unsubscribe page. Private topics are only visible to opted-in contacts.
-    attr_reader :visibility
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the CreateTopicOptionsDefaultSubscription SDK namespace.
-  module CreateTopicOptionsDefaultSubscription
-    OPT_IN = 'opt_in'
-    OPT_OUT = 'opt_out'
-    VALUES = %w[opt_in opt_out].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the CreateTopicOptionsDefaultSubscription SDK namespace.
+module CreateTopicOptionsDefaultSubscription
+  OPT_IN = 'opt_in'
+  OPT_OUT = 'opt_out'
+  VALUES = ['opt_in', 'opt_out'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Defines the CreateTopicOptionsVisibility SDK namespace.
+module CreateTopicOptionsVisibility
+  PUBLIC = 'public'
+  PRIVATE = 'private'
+  VALUES = ['public', 'private'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalCreateTopicResponseSuccessMetadata
+  FIELDS = {
+    id: "id",
+    object: "object",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for CreateTopicResponseSuccess.
+# Typed representation of the `CreateTopicResponseSuccess` API schema.
+class CreateTopicResponseSuccess
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCreateTopicResponseSuccessMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCreateTopicResponseSuccessMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCreateTopicResponseSuccessMetadata::DECODERS
+
+  # @return [String] The ID of the topic.
+  attr_reader :id
+  # @return [String] The object type of the response.
+  attr_reader :object
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the CreateTopicOptionsVisibility SDK namespace.
-  module CreateTopicOptionsVisibility
-    PUBLIC = 'public'
-    PRIVATE = 'private'
-    VALUES = %w[public private].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalCreateTopicResponseSuccessMetadata
-    FIELDS = {
-      id: 'id',
-      object: 'object'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalGetTopicResponseSuccessMetadata
+  FIELDS = {
+    id: "id",
+    object: "object",
+    name: "name",
+    description: "description",
+    default_subscription: "default_subscription",
+    visibility: "visibility",
+    created_at: "created_at",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    default_subscription: lambda do |value|
+      ::OctridevResend::GetTopicResponseSuccessDefaultSubscription.from_value(value)
+    end,
+    visibility: lambda do |value|
+      ::OctridevResend::GetTopicResponseSuccessVisibility.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for GetTopicResponseSuccess.
+# Typed representation of the `GetTopicResponseSuccess` API schema.
+class GetTopicResponseSuccess
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalGetTopicResponseSuccessMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalGetTopicResponseSuccessMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalGetTopicResponseSuccessMetadata::DECODERS
+
+  # @return [String] The ID of the topic.
+  attr_reader :id
+  # @return [String] The object type.
+  attr_reader :object
+  # @return [String] The name of the topic.
+  attr_reader :name
+  # @return [String] A description of the topic.
+  attr_reader :description
+  # @return [GetTopicResponseSuccessDefaultSubscription] The default subscription status for the topic.
+  attr_reader :default_subscription
+  # @return [GetTopicResponseSuccessVisibility] The visibility of the topic.
+  attr_reader :visibility
+  # @return [String] Timestamp indicating when the topic was created.
+  attr_reader :created_at
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for CreateTopicResponseSuccess.
-  # Typed representation of the `CreateTopicResponseSuccess` API schema.
-  class CreateTopicResponseSuccess
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCreateTopicResponseSuccessMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCreateTopicResponseSuccessMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCreateTopicResponseSuccessMetadata::DECODERS
-
-    # @return [String] The ID of the topic.
-    attr_reader :id
-    # @return [String] The object type of the response.
-    attr_reader :object
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalGetTopicResponseSuccessMetadata
-    FIELDS = {
-      id: 'id',
-      object: 'object',
-      name: 'name',
-      description: 'description',
-      default_subscription: 'default_subscription',
-      visibility: 'visibility',
-      created_at: 'created_at'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      default_subscription: lambda do |value|
-        ::OctridevResend::GetTopicResponseSuccessDefaultSubscription.from_value(value)
-      end,
-      visibility: lambda do |value|
-        ::OctridevResend::GetTopicResponseSuccessVisibility.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the GetTopicResponseSuccessDefaultSubscription SDK namespace.
+module GetTopicResponseSuccessDefaultSubscription
+  OPT_IN = 'opt_in'
+  OPT_OUT = 'opt_out'
+  VALUES = ['opt_in', 'opt_out'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Defines the GetTopicResponseSuccessVisibility SDK namespace.
+module GetTopicResponseSuccessVisibility
+  PUBLIC = 'public'
+  PRIVATE = 'private'
+  VALUES = ['public', 'private'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalListTopicsResponseSuccessDataItemMetadata
+  FIELDS = {
+    id: "id",
+    name: "name",
+    description: "description",
+    default_subscription: "default_subscription",
+    visibility: "visibility",
+    created_at: "created_at",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    default_subscription: lambda do |value|
+      ::OctridevResend::ListTopicsResponseSuccessDataItemDefaultSubscription.from_value(value)
+    end,
+    visibility: lambda do |value|
+      ::OctridevResend::ListTopicsResponseSuccessDataItemVisibility.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for ListTopicsResponseSuccessDataItem.
+# Required object value serialized in the `data[]` wire field.
+class ListTopicsResponseSuccessDataItem
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListTopicsResponseSuccessDataItemMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListTopicsResponseSuccessDataItemMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListTopicsResponseSuccessDataItemMetadata::DECODERS
+
+  # @return [String] Unique identifier for the topic.
+  attr_reader :id
+  # @return [String] Name of the topic.
+  attr_reader :name
+  # @return [String] A description of the topic.
+  attr_reader :description
+  # @return [ListTopicsResponseSuccessDataItemDefaultSubscription] The default subscription status for the topic.
+  attr_reader :default_subscription
+  # @return [ListTopicsResponseSuccessDataItemVisibility] The visibility of the topic.
+  attr_reader :visibility
+  # @return [String] Timestamp indicating when the topic was created.
+  attr_reader :created_at
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for GetTopicResponseSuccess.
-  # Typed representation of the `GetTopicResponseSuccess` API schema.
-  class GetTopicResponseSuccess
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalGetTopicResponseSuccessMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalGetTopicResponseSuccessMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalGetTopicResponseSuccessMetadata::DECODERS
-
-    # @return [String] The ID of the topic.
-    attr_reader :id
-    # @return [String] The object type.
-    attr_reader :object
-    # @return [String] The name of the topic.
-    attr_reader :name
-    # @return [String] A description of the topic.
-    attr_reader :description
-    # @return [GetTopicResponseSuccessDefaultSubscription] The default subscription status for the topic.
-    attr_reader :default_subscription
-    # @return [GetTopicResponseSuccessVisibility] The visibility of the topic.
-    attr_reader :visibility
-    # @return [String] Timestamp indicating when the topic was created.
-    attr_reader :created_at
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the GetTopicResponseSuccessDefaultSubscription SDK namespace.
-  module GetTopicResponseSuccessDefaultSubscription
-    OPT_IN = 'opt_in'
-    OPT_OUT = 'opt_out'
-    VALUES = %w[opt_in opt_out].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalListTopicsResponseSuccessMetadata
+  FIELDS = {
+    object: "object",
+    has_more: "has_more",
+    data: "data",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    data: lambda do |value|
+      value&.map { |item| ::OctridevResend::ListTopicsResponseSuccessDataItem.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ListTopicsResponseSuccess.
+# Typed representation of the `ListTopicsResponseSuccess` API schema.
+class ListTopicsResponseSuccess
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListTopicsResponseSuccessMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListTopicsResponseSuccessMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListTopicsResponseSuccessMetadata::DECODERS
+
+  # @return [String] Type of the response object.
+  attr_reader :object
+  # @return [Boolean] Indicates if there are more results available.
+  attr_reader :has_more
+  # @return [Array_of_ListTopicsResponseSuccessDataItem] Array containing topic information.
+  attr_reader :data
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the GetTopicResponseSuccessVisibility SDK namespace.
-  module GetTopicResponseSuccessVisibility
-    PUBLIC = 'public'
-    PRIVATE = 'private'
-    VALUES = %w[public private].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListTopicsResponseSuccessDataItemMetadata
-    FIELDS = {
-      id: 'id',
-      name: 'name',
-      description: 'description',
-      default_subscription: 'default_subscription',
-      visibility: 'visibility',
-      created_at: 'created_at'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      default_subscription: lambda do |value|
-        ::OctridevResend::ListTopicsResponseSuccessDataItemDefaultSubscription.from_value(value)
-      end,
-      visibility: lambda do |value|
-        ::OctridevResend::ListTopicsResponseSuccessDataItemVisibility.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the ListTopicsResponseSuccessDataItemDefaultSubscription SDK namespace.
+module ListTopicsResponseSuccessDataItemDefaultSubscription
+  OPT_IN = 'opt_in'
+  OPT_OUT = 'opt_out'
+  VALUES = ['opt_in', 'opt_out'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Defines the ListTopicsResponseSuccessDataItemVisibility SDK namespace.
+module ListTopicsResponseSuccessDataItemVisibility
+  PUBLIC = 'public'
+  PRIVATE = 'private'
+  VALUES = ['public', 'private'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalRemoveTopicResponseSuccessMetadata
+  FIELDS = {
+    id: "id",
+    object: "object",
+    deleted: "deleted",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for RemoveTopicResponseSuccess.
+# Typed representation of the `RemoveTopicResponseSuccess` API schema.
+class RemoveTopicResponseSuccess
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalRemoveTopicResponseSuccessMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalRemoveTopicResponseSuccessMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalRemoveTopicResponseSuccessMetadata::DECODERS
+
+  # @return [String] The ID of the topic.
+  attr_reader :id
+  # @return [String] The object type.
+  attr_reader :object
+  # @return [Boolean] Indicates whether the topic was successfully deleted.
+  attr_reader :deleted
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ListTopicsResponseSuccessDataItem.
-  # Required object value serialized in the `data[]` wire field.
-  class ListTopicsResponseSuccessDataItem
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListTopicsResponseSuccessDataItemMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListTopicsResponseSuccessDataItemMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListTopicsResponseSuccessDataItemMetadata::DECODERS
-
-    # @return [String] Unique identifier for the topic.
-    attr_reader :id
-    # @return [String] Name of the topic.
-    attr_reader :name
-    # @return [String] A description of the topic.
-    attr_reader :description
-    # @return [ListTopicsResponseSuccessDataItemDefaultSubscription] The default subscription status for the topic.
-    attr_reader :default_subscription
-    # @return [ListTopicsResponseSuccessDataItemVisibility] The visibility of the topic.
-    attr_reader :visibility
-    # @return [String] Timestamp indicating when the topic was created.
-    attr_reader :created_at
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListTopicsResponseSuccessMetadata
-    FIELDS = {
-      object: 'object',
-      has_more: 'has_more',
-      data: 'data'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      data: lambda do |value|
-        value&.map { |item| ::OctridevResend::ListTopicsResponseSuccessDataItem.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalUpdateTopicOptionsMetadata
+  FIELDS = {
+    name: "name",
+    description: "description",
+    visibility: "visibility",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    visibility: lambda do |value|
+      ::OctridevResend::UpdateTopicOptionsVisibility.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for UpdateTopicOptions.
+# Typed representation of the `UpdateTopicOptions` API schema.
+class UpdateTopicOptions
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalUpdateTopicOptionsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalUpdateTopicOptionsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalUpdateTopicOptionsMetadata::DECODERS
+
+  # @return [String] The name of the topic. Max 50 characters.
+  attr_reader :name
+  # @return [String] A description of the topic. Max 200 characters.
+  attr_reader :description
+  # @return [UpdateTopicOptionsVisibility] The visibility of the topic.
+  attr_reader :visibility
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ListTopicsResponseSuccess.
-  # Typed representation of the `ListTopicsResponseSuccess` API schema.
-  class ListTopicsResponseSuccess
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListTopicsResponseSuccessMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListTopicsResponseSuccessMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListTopicsResponseSuccessMetadata::DECODERS
-
-    # @return [String] Type of the response object.
-    attr_reader :object
-    # @return [Boolean] Indicates if there are more results available.
-    attr_reader :has_more
-    # @return [Array_of_ListTopicsResponseSuccessDataItem] Array containing topic information.
-    attr_reader :data
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the ListTopicsResponseSuccessDataItemDefaultSubscription SDK namespace.
-  module ListTopicsResponseSuccessDataItemDefaultSubscription
-    OPT_IN = 'opt_in'
-    OPT_OUT = 'opt_out'
-    VALUES = %w[opt_in opt_out].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the UpdateTopicOptionsVisibility SDK namespace.
+module UpdateTopicOptionsVisibility
+  PUBLIC = 'public'
+  PRIVATE = 'private'
+  VALUES = ['public', 'private'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalUpdateTopicResponseSuccessMetadata
+  FIELDS = {
+    id: "id",
+    object: "object",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for UpdateTopicResponseSuccess.
+# Typed representation of the `UpdateTopicResponseSuccess` API schema.
+class UpdateTopicResponseSuccess
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalUpdateTopicResponseSuccessMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalUpdateTopicResponseSuccessMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalUpdateTopicResponseSuccessMetadata::DECODERS
+
+  # @return [String] The ID of the topic.
+  attr_reader :id
+  # @return [String] The object type.
+  attr_reader :object
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the ListTopicsResponseSuccessDataItemVisibility SDK namespace.
-  module ListTopicsResponseSuccessDataItemVisibility
-    PUBLIC = 'public'
-    PRIVATE = 'private'
-    VALUES = %w[public private].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalRemoveTopicResponseSuccessMetadata
-    FIELDS = {
-      id: 'id',
-      object: 'object',
-      deleted: 'deleted'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
-
-  # API model for RemoveTopicResponseSuccess.
-  # Typed representation of the `RemoveTopicResponseSuccess` API schema.
-  class RemoveTopicResponseSuccess
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalRemoveTopicResponseSuccessMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalRemoveTopicResponseSuccessMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalRemoveTopicResponseSuccessMetadata::DECODERS
-
-    # @return [String] The ID of the topic.
-    attr_reader :id
-    # @return [String] The object type.
-    attr_reader :object
-    # @return [Boolean] Indicates whether the topic was successfully deleted.
-    attr_reader :deleted
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
-
-  # Internal model hydration metadata.
-  class SdkInternalUpdateTopicOptionsMetadata
-    FIELDS = {
-      name: 'name',
-      description: 'description',
-      visibility: 'visibility'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      visibility: lambda do |value|
-        ::OctridevResend::UpdateTopicOptionsVisibility.from_value(value)
-      end
-    }.freeze
-  end
-
-  # API model for UpdateTopicOptions.
-  # Typed representation of the `UpdateTopicOptions` API schema.
-  class UpdateTopicOptions
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalUpdateTopicOptionsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalUpdateTopicOptionsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalUpdateTopicOptionsMetadata::DECODERS
-
-    # @return [String] The name of the topic. Max 50 characters.
-    attr_reader :name
-    # @return [String] A description of the topic. Max 200 characters.
-    attr_reader :description
-    # @return [UpdateTopicOptionsVisibility] The visibility of the topic.
-    attr_reader :visibility
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
-
-  # Defines the UpdateTopicOptionsVisibility SDK namespace.
-  module UpdateTopicOptionsVisibility
-    PUBLIC = 'public'
-    PRIVATE = 'private'
-    VALUES = %w[public private].freeze
-    def self.from_value(value)
-      value
-    end
-  end
-
-  # Internal model hydration metadata.
-  class SdkInternalUpdateTopicResponseSuccessMetadata
-    FIELDS = {
-      id: 'id',
-      object: 'object'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
-  end
-
-  # API model for UpdateTopicResponseSuccess.
-  # Typed representation of the `UpdateTopicResponseSuccess` API schema.
-  class UpdateTopicResponseSuccess
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalUpdateTopicResponseSuccessMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalUpdateTopicResponseSuccessMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalUpdateTopicResponseSuccessMetadata::DECODERS
-
-    # @return [String] The ID of the topic.
-    attr_reader :id
-    # @return [String] The object type.
-    attr_reader :object
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
+end
 end

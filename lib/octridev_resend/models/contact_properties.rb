@@ -5,347 +5,360 @@
 
 # contact_properties domain models
 module OctridevResend
-  # Internal model hydration metadata.
-  class SdkInternalCreateContactPropertyOptionsMetadata
-    FIELDS = {
-      key: 'key',
-      type: 'type',
-      fallback_value: 'fallback_value'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      key
-      type
-    ].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevResend::CreateContactPropertyOptionsType.from_value(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalCreateContactPropertyOptionsMetadata
+  FIELDS = {
+    key: "key",
+    type: "type",
+    fallback_value: "fallback_value",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    key
+    type
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevResend::CreateContactPropertyOptionsType.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for CreateContactPropertyOptions.
+# Typed representation of the `CreateContactPropertyOptions` API schema.
+class CreateContactPropertyOptions
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCreateContactPropertyOptionsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCreateContactPropertyOptionsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCreateContactPropertyOptionsMetadata::DECODERS
+
+  # @return [String] The property key. Max length is 50 characters. Only alphanumeric characters and underscores are allowed.
+  attr_reader :key
+  # @return [CreateContactPropertyOptionsType] The property type.
+  attr_reader :type
+  # @return [Object] The default value to use when the property is not set for a contact. Must match the type specified in the type field.
+  attr_reader :fallback_value
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for CreateContactPropertyOptions.
-  # Typed representation of the `CreateContactPropertyOptions` API schema.
-  class CreateContactPropertyOptions
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCreateContactPropertyOptionsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCreateContactPropertyOptionsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCreateContactPropertyOptionsMetadata::DECODERS
-
-    # @return [String] The property key. Max length is 50 characters. Only alphanumeric characters and underscores are allowed.
-    attr_reader :key
-    # @return [CreateContactPropertyOptionsType] The property type.
-    attr_reader :type
-    # @return [Object] The default value to use when the property is not set for a contact. Must match the type specified in the type field.
-    attr_reader :fallback_value
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the CreateContactPropertyOptionsType SDK namespace.
-  module CreateContactPropertyOptionsType
-    STRING = 'string'
-    NUMBER = 'number'
-    VALUES = %w[string number].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the CreateContactPropertyOptionsType SDK namespace.
+module CreateContactPropertyOptionsType
+  STRING = 'string'
+  NUMBER = 'number'
+  VALUES = ['string', 'number'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalCreateContactPropertyResponseSuccessMetadata
+  FIELDS = {
+    id: "id",
+    object: "object",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for CreateContactPropertyResponseSuccess.
+# Typed representation of the `CreateContactPropertyResponseSuccess` API schema.
+class CreateContactPropertyResponseSuccess
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCreateContactPropertyResponseSuccessMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCreateContactPropertyResponseSuccessMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCreateContactPropertyResponseSuccessMetadata::DECODERS
+
+  # @return [String] The ID of the contact property.
+  attr_reader :id
+  # @return [String] The object type of the response.
+  attr_reader :object
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalCreateContactPropertyResponseSuccessMetadata
-    FIELDS = {
-      id: 'id',
-      object: 'object'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for CreateContactPropertyResponseSuccess.
-  # Typed representation of the `CreateContactPropertyResponseSuccess` API schema.
-  class CreateContactPropertyResponseSuccess
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCreateContactPropertyResponseSuccessMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCreateContactPropertyResponseSuccessMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCreateContactPropertyResponseSuccessMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] The ID of the contact property.
-    attr_reader :id
-    # @return [String] The object type of the response.
-    attr_reader :object
+# Internal model hydration metadata.
+class SdkInternalGetContactPropertyResponseSuccessMetadata
+  FIELDS = {
+    object: "object",
+    id: "id",
+    key: "key",
+    type: "type",
+    fallback_value: "fallback_value",
+    created_at: "created_at",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for GetContactPropertyResponseSuccess.
+# Typed representation of the `GetContactPropertyResponseSuccess` API schema.
+class GetContactPropertyResponseSuccess
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalGetContactPropertyResponseSuccessMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalGetContactPropertyResponseSuccessMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalGetContactPropertyResponseSuccessMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] The object type.
+  attr_reader :object
+  # @return [String] The ID of the contact property.
+  attr_reader :id
+  # @return [String] The property key.
+  attr_reader :key
+  # @return [String] The property type.
+  attr_reader :type
+  # @return [Object] The default value when the property is not set for a contact.
+  attr_reader :fallback_value
+  # @return [String] Timestamp indicating when the contact property was created.
+  attr_reader :created_at
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalGetContactPropertyResponseSuccessMetadata
-    FIELDS = {
-      object: 'object',
-      id: 'id',
-      key: 'key',
-      type: 'type',
-      fallback_value: 'fallback_value',
-      created_at: 'created_at'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for GetContactPropertyResponseSuccess.
-  # Typed representation of the `GetContactPropertyResponseSuccess` API schema.
-  class GetContactPropertyResponseSuccess
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalGetContactPropertyResponseSuccessMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalGetContactPropertyResponseSuccessMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalGetContactPropertyResponseSuccessMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] The object type.
-    attr_reader :object
-    # @return [String] The ID of the contact property.
-    attr_reader :id
-    # @return [String] The property key.
-    attr_reader :key
-    # @return [String] The property type.
-    attr_reader :type
-    # @return [Object] The default value when the property is not set for a contact.
-    attr_reader :fallback_value
-    # @return [String] Timestamp indicating when the contact property was created.
-    attr_reader :created_at
+# Internal model hydration metadata.
+class SdkInternalListContactPropertiesResponseSuccessDataItemMetadata
+  FIELDS = {
+    id: "id",
+    key: "key",
+    type: "type",
+    fallback_value: "fallback_value",
+    created_at: "created_at",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ListContactPropertiesResponseSuccessDataItem.
+# Required object value serialized in the `data[]` wire field.
+class ListContactPropertiesResponseSuccessDataItem
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListContactPropertiesResponseSuccessDataItemMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListContactPropertiesResponseSuccessDataItemMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListContactPropertiesResponseSuccessDataItemMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] Unique identifier for the contact property.
+  attr_reader :id
+  # @return [String] The property key.
+  attr_reader :key
+  # @return [String] The property type.
+  attr_reader :type
+  # @return [Object] The default value when the property is not set for a contact.
+  attr_reader :fallback_value
+  # @return [String] Timestamp indicating when the contact property was created.
+  attr_reader :created_at
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListContactPropertiesResponseSuccessDataItemMetadata
-    FIELDS = {
-      id: 'id',
-      key: 'key',
-      type: 'type',
-      fallback_value: 'fallback_value',
-      created_at: 'created_at'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ListContactPropertiesResponseSuccessDataItem.
-  # Required object value serialized in the `data[]` wire field.
-  class ListContactPropertiesResponseSuccessDataItem
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListContactPropertiesResponseSuccessDataItemMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListContactPropertiesResponseSuccessDataItemMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListContactPropertiesResponseSuccessDataItemMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] Unique identifier for the contact property.
-    attr_reader :id
-    # @return [String] The property key.
-    attr_reader :key
-    # @return [String] The property type.
-    attr_reader :type
-    # @return [Object] The default value when the property is not set for a contact.
-    attr_reader :fallback_value
-    # @return [String] Timestamp indicating when the contact property was created.
-    attr_reader :created_at
+# Internal model hydration metadata.
+class SdkInternalListContactPropertiesResponseSuccessMetadata
+  FIELDS = {
+    object: "object",
+    has_more: "has_more",
+    data: "data",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    data: lambda do |value|
+      value&.map { |item| ::OctridevResend::ListContactPropertiesResponseSuccessDataItem.from_hash(item) }
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ListContactPropertiesResponseSuccess.
+# Typed representation of the `ListContactPropertiesResponseSuccess` API schema.
+class ListContactPropertiesResponseSuccess
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListContactPropertiesResponseSuccessMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListContactPropertiesResponseSuccessMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListContactPropertiesResponseSuccessMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] Type of the response object.
+  attr_reader :object
+  # @return [Boolean] Indicates if there are more results available.
+  attr_reader :has_more
+  # @return [Array_of_ListContactPropertiesResponseSuccessDataItem] Array containing contact property information.
+  attr_reader :data
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListContactPropertiesResponseSuccessMetadata
-    FIELDS = {
-      object: 'object',
-      has_more: 'has_more',
-      data: 'data'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      data: lambda do |value|
-        value&.map { |item| ::OctridevResend::ListContactPropertiesResponseSuccessDataItem.from_hash(item) }
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ListContactPropertiesResponseSuccess.
-  # Typed representation of the `ListContactPropertiesResponseSuccess` API schema.
-  class ListContactPropertiesResponseSuccess
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListContactPropertiesResponseSuccessMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListContactPropertiesResponseSuccessMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListContactPropertiesResponseSuccessMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] Type of the response object.
-    attr_reader :object
-    # @return [Boolean] Indicates if there are more results available.
-    attr_reader :has_more
-    # @return [Array_of_ListContactPropertiesResponseSuccessDataItem] Array containing contact property information.
-    attr_reader :data
+# Internal model hydration metadata.
+class SdkInternalRemoveContactPropertyResponseSuccessMetadata
+  FIELDS = {
+    id: "id",
+    object: "object",
+    deleted: "deleted",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for RemoveContactPropertyResponseSuccess.
+# Typed representation of the `RemoveContactPropertyResponseSuccess` API schema.
+class RemoveContactPropertyResponseSuccess
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalRemoveContactPropertyResponseSuccessMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalRemoveContactPropertyResponseSuccessMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalRemoveContactPropertyResponseSuccessMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] The ID of the contact property.
+  attr_reader :id
+  # @return [String] The object type.
+  attr_reader :object
+  # @return [Boolean] Indicates whether the contact property was successfully deleted.
+  attr_reader :deleted
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalRemoveContactPropertyResponseSuccessMetadata
-    FIELDS = {
-      id: 'id',
-      object: 'object',
-      deleted: 'deleted'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for RemoveContactPropertyResponseSuccess.
-  # Typed representation of the `RemoveContactPropertyResponseSuccess` API schema.
-  class RemoveContactPropertyResponseSuccess
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalRemoveContactPropertyResponseSuccessMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalRemoveContactPropertyResponseSuccessMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalRemoveContactPropertyResponseSuccessMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] The ID of the contact property.
-    attr_reader :id
-    # @return [String] The object type.
-    attr_reader :object
-    # @return [Boolean] Indicates whether the contact property was successfully deleted.
-    attr_reader :deleted
+# Internal model hydration metadata.
+class SdkInternalUpdateContactPropertyOptionsMetadata
+  FIELDS = {
+    fallback_value: "fallback_value",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for UpdateContactPropertyOptions.
+# Typed representation of the `UpdateContactPropertyOptions` API schema.
+class UpdateContactPropertyOptions
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalUpdateContactPropertyOptionsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalUpdateContactPropertyOptionsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalUpdateContactPropertyOptionsMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [Object] The default value to use when the property is not set for a contact. Must match the type of the property.
+  attr_reader :fallback_value
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalUpdateContactPropertyOptionsMetadata
-    FIELDS = {
-      fallback_value: 'fallback_value'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for UpdateContactPropertyOptions.
-  # Typed representation of the `UpdateContactPropertyOptions` API schema.
-  class UpdateContactPropertyOptions
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalUpdateContactPropertyOptionsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalUpdateContactPropertyOptionsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalUpdateContactPropertyOptionsMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [Object] The default value to use when the property is not set for a contact. Must match the type of the property.
-    attr_reader :fallback_value
+# Internal model hydration metadata.
+class SdkInternalUpdateContactPropertyResponseSuccessMetadata
+  FIELDS = {
+    id: "id",
+    object: "object",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for UpdateContactPropertyResponseSuccess.
+# Typed representation of the `UpdateContactPropertyResponseSuccess` API schema.
+class UpdateContactPropertyResponseSuccess
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalUpdateContactPropertyResponseSuccessMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalUpdateContactPropertyResponseSuccessMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalUpdateContactPropertyResponseSuccessMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] The ID of the contact property.
+  attr_reader :id
+  # @return [String] The object type.
+  attr_reader :object
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalUpdateContactPropertyResponseSuccessMetadata
-    FIELDS = {
-      id: 'id',
-      object: 'object'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for UpdateContactPropertyResponseSuccess.
-  # Typed representation of the `UpdateContactPropertyResponseSuccess` API schema.
-  class UpdateContactPropertyResponseSuccess
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalUpdateContactPropertyResponseSuccessMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalUpdateContactPropertyResponseSuccessMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalUpdateContactPropertyResponseSuccessMetadata::DECODERS
-
-    # @return [String] The ID of the contact property.
-    attr_reader :id
-    # @return [String] The object type.
-    attr_reader :object
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 end
