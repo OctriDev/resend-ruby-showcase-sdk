@@ -22,19 +22,18 @@ module OctridevResend
         schema: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/events",
+          '/events',
           config: config,
           body: {
             'name' => name,
-            'schema' => schema,
+            'schema' => schema
           },
           return_type: ::OctridevResend::CreateEventResponse,
           decoder: :json,
           operation_id: 'events_create',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -50,22 +49,21 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(limit) { Validation.validate_range('limit', limit, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          "/events",
+          '/events',
           config: config,
           query: {
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true),
+            'before' => QueryValue.new(before, style: 'form', explode: true)
           },
           return_type: ::OctridevResend::ListEventsResponse,
           decoder: :json,
           operation_id: 'events_list',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -86,25 +84,24 @@ module OctridevResend
         payload: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(contact_id) { Validation.validate_uuid('contact_id', contact_id) }
 
         Validation.if_given(email) { Validation.validate_email('email', email) }
 
         SdkClient.request(
           'POST',
-          "/events/send",
+          '/events/send',
           config: config,
           body: {
             'event' => event,
             'contact_id' => contact_id,
             'email' => email,
-            'payload' => payload,
+            'payload' => payload
           },
           return_type: ::OctridevResend::SendEventResponse,
           decoder: :json,
           operation_id: 'events_send',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -116,18 +113,17 @@ module OctridevResend
         identifier:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/events/",
+            '/events/',
             SdkClient.encode_path_segment(identifier)
           ].join,
           config: config,
           return_type: ::OctridevResend::Event,
           decoder: :json,
           operation_id: 'events_get',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -143,21 +139,20 @@ module OctridevResend
         schema:,
         request_options: nil
       )
-
         SdkClient.request(
           'PATCH',
           [
-            "/events/",
+            '/events/',
             SdkClient.encode_path_segment(identifier)
           ].join,
           config: config,
           body: {
-            'schema' => schema,
+            'schema' => schema
           },
           return_type: ::OctridevResend::UpdateEventResponse,
           decoder: :json,
           operation_id: 'events_update',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -169,18 +164,17 @@ module OctridevResend
         identifier:,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/events/",
+            '/events/',
             SdkClient.encode_path_segment(identifier)
           ].join,
           config: config,
           return_type: ::OctridevResend::RemoveEventResponse,
           decoder: :json,
           operation_id: 'events_remove',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
     end
