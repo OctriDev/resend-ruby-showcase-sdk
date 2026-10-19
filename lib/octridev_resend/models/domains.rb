@@ -5,684 +5,676 @@
 
 # domains domain models
 module OctridevResend
-# Internal model hydration metadata.
-class SdkInternalCreateDomainClaimRequestMetadata
-  FIELDS = {
-    name: "name",
-    region: "region",
-    custom_return_path: "custom_return_path",
-    open_tracking: "open_tracking",
-    click_tracking: "click_tracking",
-    tracking_subdomain: "tracking_subdomain",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    name
-  ].freeze
-  DECODERS = {
-    region: lambda do |value|
-      ::OctridevResend::CreateDomainClaimRequestRegion.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for CreateDomainClaimRequest.
-# Typed representation of the `CreateDomainClaimRequest` API schema.
-class CreateDomainClaimRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCreateDomainClaimRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCreateDomainClaimRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCreateDomainClaimRequestMetadata::DECODERS
-
-  # @return [String] The name of the domain you want to claim.
-  attr_reader :name
-  # @return [CreateDomainClaimRequestRegion] The region where emails will be sent from. Possible values are us-east-1 | eu-west-1 | sa-east-1 | ap-northeast-1
-  attr_reader :region
-  # @return [String] For advanced use cases, choose a subdomain for the Return-Path address. Defaults to 'send' (i.e., send.yourdomain.tld).
-  attr_reader :custom_return_path
-  # @return [Boolean] Track the open rate of each email.
-  attr_reader :open_tracking
-  # @return [Boolean] Track clicks within the body of each HTML email.
-  attr_reader :click_tracking
-  # @return [String] The subdomain to use for click and open tracking.
-  attr_reader :tracking_subdomain
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalCreateDomainClaimRequestMetadata
+    FIELDS = {
+      name: 'name',
+      region: 'region',
+      custom_return_path: 'custom_return_path',
+      open_tracking: 'open_tracking',
+      click_tracking: 'click_tracking',
+      tracking_subdomain: 'tracking_subdomain'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      name
+    ].freeze
+    DECODERS = {
+      region: lambda do |value|
+        ::OctridevResend::CreateDomainClaimRequestRegion.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for CreateDomainClaimRequest.
+  # Typed representation of the `CreateDomainClaimRequest` API schema.
+  class CreateDomainClaimRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCreateDomainClaimRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCreateDomainClaimRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCreateDomainClaimRequestMetadata::DECODERS
+
+    # @return [String] The name of the domain you want to claim.
+    attr_reader :name
+    # @return [CreateDomainClaimRequestRegion] The region where emails will be sent from. Possible values are us-east-1 | eu-west-1 | sa-east-1 | ap-northeast-1
+    attr_reader :region
+    # @return [String] For advanced use cases, choose a subdomain for the Return-Path address. Defaults to 'send' (i.e., send.yourdomain.tld).
+    attr_reader :custom_return_path
+    # @return [Boolean] Track the open rate of each email.
+    attr_reader :open_tracking
+    # @return [Boolean] Track clicks within the body of each HTML email.
+    attr_reader :click_tracking
+    # @return [String] The subdomain to use for click and open tracking.
+    attr_reader :tracking_subdomain
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the CreateDomainClaimRequestRegion SDK namespace.
-module CreateDomainClaimRequestRegion
-  US_EAST_1 = 'us-east-1'
-  EU_WEST_1 = 'eu-west-1'
-  SA_EAST_1 = 'sa-east-1'
-  AP_NORTHEAST_1 = 'ap-northeast-1'
-  VALUES = ['us-east-1', 'eu-west-1', 'sa-east-1', 'ap-northeast-1'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalCreateDomainRequestMetadata
-  FIELDS = {
-    name: "name",
-    region: "region",
-    custom_return_path: "custom_return_path",
-    open_tracking: "open_tracking",
-    click_tracking: "click_tracking",
-    tls: "tls",
-    capabilities: "capabilities",
-    tracking_subdomain: "tracking_subdomain",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    name
-  ].freeze
-  DECODERS = {
-    region: lambda do |value|
-      ::OctridevResend::CreateDomainRequestRegion.from_value(value)
-    end,
-    tls: lambda do |value|
-      ::OctridevResend::CreateDomainRequestTls.from_value(value)
-    end,
-    capabilities: lambda do |value|
-      ::OctridevResend::DomainCapabilities.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for CreateDomainRequest.
-# Typed representation of the `CreateDomainRequest` API schema.
-class CreateDomainRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCreateDomainRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCreateDomainRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCreateDomainRequestMetadata::DECODERS
-
-  # @return [String] The name of the domain you want to create.
-  attr_reader :name
-  # @return [CreateDomainRequestRegion] The region where emails will be sent from. Possible values are us-east-1 | eu-west-1 | sa-east-1 | ap-northeast-1
-  attr_reader :region
-  # @return [String] For advanced use cases, choose a subdomain for the Return-Path address. Defaults to 'send' (i.e., send.yourdomain.tld).
-  attr_reader :custom_return_path
-  # @return [Boolean] Track the open rate of each email.
-  attr_reader :open_tracking
-  # @return [Boolean] Track clicks within the body of each HTML email.
-  attr_reader :click_tracking
-  # @return [CreateDomainRequestTls] TLS mode. Opportunistic attempts secure connection but falls back to unencrypted. Enforced requires TLS or email won't be sent.
-  attr_reader :tls
-  # @return [DomainCapabilities] Configure the domain capabilities for sending and receiving emails. At least one capability must be enabled.
-  attr_reader :capabilities
-  # @return [String] The subdomain to use for click and open tracking.
-  attr_reader :tracking_subdomain
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the CreateDomainClaimRequestRegion SDK namespace.
+  module CreateDomainClaimRequestRegion
+    US_EAST_1 = 'us-east-1'
+    EU_WEST_1 = 'eu-west-1'
+    SA_EAST_1 = 'sa-east-1'
+    AP_NORTHEAST_1 = 'ap-northeast-1'
+    VALUES = %w[us-east-1 eu-west-1 sa-east-1 ap-northeast-1].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalCreateDomainRequestMetadata
+    FIELDS = {
+      name: 'name',
+      region: 'region',
+      custom_return_path: 'custom_return_path',
+      open_tracking: 'open_tracking',
+      click_tracking: 'click_tracking',
+      tls: 'tls',
+      capabilities: 'capabilities',
+      tracking_subdomain: 'tracking_subdomain'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      name
+    ].freeze
+    DECODERS = {
+      region: lambda do |value|
+        ::OctridevResend::CreateDomainRequestRegion.from_value(value)
+      end,
+      tls: lambda do |value|
+        ::OctridevResend::CreateDomainRequestTls.from_value(value)
+      end,
+      capabilities: lambda do |value|
+        ::OctridevResend::DomainCapabilities.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for CreateDomainRequest.
+  # Typed representation of the `CreateDomainRequest` API schema.
+  class CreateDomainRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCreateDomainRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCreateDomainRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCreateDomainRequestMetadata::DECODERS
 
-# Defines the CreateDomainRequestRegion SDK namespace.
-module CreateDomainRequestRegion
-  US_EAST_1 = 'us-east-1'
-  EU_WEST_1 = 'eu-west-1'
-  SA_EAST_1 = 'sa-east-1'
-  AP_NORTHEAST_1 = 'ap-northeast-1'
-  VALUES = ['us-east-1', 'eu-west-1', 'sa-east-1', 'ap-northeast-1'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [String] The name of the domain you want to create.
+    attr_reader :name
+    # @return [CreateDomainRequestRegion] The region where emails will be sent from. Possible values are us-east-1 | eu-west-1 | sa-east-1 | ap-northeast-1
+    attr_reader :region
+    # @return [String] For advanced use cases, choose a subdomain for the Return-Path address. Defaults to 'send' (i.e., send.yourdomain.tld).
+    attr_reader :custom_return_path
+    # @return [Boolean] Track the open rate of each email.
+    attr_reader :open_tracking
+    # @return [Boolean] Track clicks within the body of each HTML email.
+    attr_reader :click_tracking
+    # @return [CreateDomainRequestTls] TLS mode. Opportunistic attempts secure connection but falls back to unencrypted. Enforced requires TLS or email won't be sent.
+    attr_reader :tls
+    # @return [DomainCapabilities] Configure the domain capabilities for sending and receiving emails. At least one capability must be enabled.
+    attr_reader :capabilities
+    # @return [String] The subdomain to use for click and open tracking.
+    attr_reader :tracking_subdomain
 
-# Defines the CreateDomainRequestTls SDK namespace.
-module CreateDomainRequestTls
-  OPPORTUNISTIC = 'opportunistic'
-  ENFORCED = 'enforced'
-  VALUES = ['opportunistic', 'enforced'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# Internal model hydration metadata.
-class SdkInternalCreateDomainResponseMetadata
-  FIELDS = {
-    id: "id",
-    name: "name",
-    created_at: "created_at",
-    status: "status",
-    capabilities: "capabilities",
-    records: "records",
-    region: "region",
-    open_tracking: "open_tracking",
-    click_tracking: "click_tracking",
-    tracking_subdomain: "tracking_subdomain",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    status: lambda do |value|
-      ::OctridevResend::CreateDomainResponseStatus.from_value(value)
-    end,
-    capabilities: lambda do |value|
-      ::OctridevResend::DomainCapabilities.from_hash(value)
-    end,
-    records: lambda do |value|
-      value&.map { |item| ::OctridevResend::DomainRecord.from_hash(item) }
-    end,
-  }.freeze
-end
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-# API model for CreateDomainResponse.
-# Typed representation of the `CreateDomainResponse` API schema.
-class CreateDomainResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCreateDomainResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCreateDomainResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCreateDomainResponseMetadata::DECODERS
-
-  # @return [String] The ID of the domain.
-  attr_reader :id
-  # @return [String] The name of the domain.
-  attr_reader :name
-  # @return [String] The date and time the domain was created.
-  attr_reader :created_at
-  # @return [CreateDomainResponseStatus] The status of the domain.
-  attr_reader :status
-  # @return [DomainCapabilities] Configure the domain capabilities for sending and receiving emails. At least one capability must be enabled.
-  attr_reader :capabilities
-  # @return [Array_of_DomainRecord] Optional array value serialized in the `records` wire field.
-  attr_reader :records
-  # @return [String] The region where the domain is hosted.
-  attr_reader :region
-  # @return [Boolean] Whether open tracking is enabled for this domain.
-  attr_reader :open_tracking
-  # @return [Boolean] Whether click tracking is enabled for this domain.
-  attr_reader :click_tracking
-  # @return [String] The subdomain used for click and open tracking.
-  attr_reader :tracking_subdomain
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the CreateDomainRequestRegion SDK namespace.
+  module CreateDomainRequestRegion
+    US_EAST_1 = 'us-east-1'
+    EU_WEST_1 = 'eu-west-1'
+    SA_EAST_1 = 'sa-east-1'
+    AP_NORTHEAST_1 = 'ap-northeast-1'
+    VALUES = %w[us-east-1 eu-west-1 sa-east-1 ap-northeast-1].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the CreateDomainResponseStatus SDK namespace.
-module CreateDomainResponseStatus
-  PENDING = 'pending'
-  VERIFIED = 'verified'
-  FAILED = 'failed'
-  NOT_STARTED = 'not_started'
-  PARTIALLY_VERIFIED = 'partially_verified'
-  PARTIALLY_FAILED = 'partially_failed'
-  VALUES = [
-    'pending', 'verified', 'failed', 'not_started', 'partially_verified', 'partially_failed'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalDeleteDomainResponseMetadata
-  FIELDS = {
-    object: "object",
-    id: "id",
-    deleted: "deleted",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for DeleteDomainResponse.
-# Typed representation of the `DeleteDomainResponse` API schema.
-class DeleteDomainResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDeleteDomainResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDeleteDomainResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDeleteDomainResponseMetadata::DECODERS
-
-  # @return [String] The type of object.
-  attr_reader :object
-  # @return [String] The ID of the domain.
-  attr_reader :id
-  # @return [Boolean] Indicates whether the domain was deleted successfully.
-  attr_reader :deleted
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the CreateDomainRequestTls SDK namespace.
+  module CreateDomainRequestTls
+    OPPORTUNISTIC = 'opportunistic'
+    ENFORCED = 'enforced'
+    VALUES = %w[opportunistic enforced].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalCreateDomainResponseMetadata
+    FIELDS = {
+      id: 'id',
+      name: 'name',
+      created_at: 'created_at',
+      status: 'status',
+      capabilities: 'capabilities',
+      records: 'records',
+      region: 'region',
+      open_tracking: 'open_tracking',
+      click_tracking: 'click_tracking',
+      tracking_subdomain: 'tracking_subdomain'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      status: lambda do |value|
+        ::OctridevResend::CreateDomainResponseStatus.from_value(value)
+      end,
+      capabilities: lambda do |value|
+        ::OctridevResend::DomainCapabilities.from_hash(value)
+      end,
+      records: lambda do |value|
+        value&.map { |item| ::OctridevResend::DomainRecord.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for CreateDomainResponse.
+  # Typed representation of the `CreateDomainResponse` API schema.
+  class CreateDomainResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCreateDomainResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCreateDomainResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCreateDomainResponseMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalDomainMetadata
-  FIELDS = {
-    object: "object",
-    id: "id",
-    name: "name",
-    status: "status",
-    created_at: "created_at",
-    region: "region",
-    open_tracking: "open_tracking",
-    click_tracking: "click_tracking",
-    tracking_subdomain: "tracking_subdomain",
-    capabilities: "capabilities",
-    records: "records",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    status: lambda do |value|
-      ::OctridevResend::DomainStatus.from_value(value)
-    end,
-    capabilities: lambda do |value|
-      ::OctridevResend::DomainCapabilities.from_hash(value)
-    end,
-    records: lambda do |value|
-      value&.map { |item| ::OctridevResend::DomainRecord.from_hash(item) }
-    end,
-  }.freeze
-end
+    # @return [String] The ID of the domain.
+    attr_reader :id
+    # @return [String] The name of the domain.
+    attr_reader :name
+    # @return [String] The date and time the domain was created.
+    attr_reader :created_at
+    # @return [CreateDomainResponseStatus] The status of the domain.
+    attr_reader :status
+    # @return [DomainCapabilities] Configure the domain capabilities for sending and receiving emails. At least one capability must be enabled.
+    attr_reader :capabilities
+    # @return [Array_of_DomainRecord] Optional array value serialized in the `records` wire field.
+    attr_reader :records
+    # @return [String] The region where the domain is hosted.
+    attr_reader :region
+    # @return [Boolean] Whether open tracking is enabled for this domain.
+    attr_reader :open_tracking
+    # @return [Boolean] Whether click tracking is enabled for this domain.
+    attr_reader :click_tracking
+    # @return [String] The subdomain used for click and open tracking.
+    attr_reader :tracking_subdomain
 
-# API model for Domain.
-# Typed representation of the `Domain` API schema.
-class Domain
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDomainMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDomainMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDomainMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] The type of object.
-  attr_reader :object
-  # @return [String] The ID of the domain.
-  attr_reader :id
-  # @return [String] The name of the domain.
-  attr_reader :name
-  # @return [DomainStatus] The status of the domain.
-  attr_reader :status
-  # @return [String] The date and time the domain was created.
-  attr_reader :created_at
-  # @return [String] The region where the domain is hosted.
-  attr_reader :region
-  # @return [Boolean] Whether open tracking is enabled for this domain.
-  attr_reader :open_tracking
-  # @return [Boolean] Whether click tracking is enabled for this domain.
-  attr_reader :click_tracking
-  # @return [String] The subdomain used for click and open tracking.
-  attr_reader :tracking_subdomain
-  # @return [DomainCapabilities] Configure the domain capabilities for sending and receiving emails. At least one capability must be enabled.
-  attr_reader :capabilities
-  # @return [Array_of_DomainRecord] Optional array value serialized in the `records` wire field.
-  attr_reader :records
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the CreateDomainResponseStatus SDK namespace.
+  module CreateDomainResponseStatus
+    PENDING = 'pending'
+    VERIFIED = 'verified'
+    FAILED = 'failed'
+    NOT_STARTED = 'not_started'
+    PARTIALLY_VERIFIED = 'partially_verified'
+    PARTIALLY_FAILED = 'partially_failed'
+    VALUES = %w[
+      pending verified failed not_started partially_verified partially_failed
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the DomainStatus SDK namespace.
-module DomainStatus
-  PENDING = 'pending'
-  VERIFIED = 'verified'
-  FAILED = 'failed'
-  NOT_STARTED = 'not_started'
-  PARTIALLY_VERIFIED = 'partially_verified'
-  PARTIALLY_FAILED = 'partially_failed'
-  VALUES = [
-    'pending', 'verified', 'failed', 'not_started', 'partially_verified', 'partially_failed'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalDomainCapabilitiesMetadata
-  FIELDS = {
-    sending: "sending",
-    receiving: "receiving",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    sending: lambda do |value|
-      ::OctridevResend::DomainCapabilitiesSending.from_value(value)
-    end,
-    receiving: lambda do |value|
-      ::OctridevResend::DomainCapabilitiesReceiving.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for DomainCapabilities.
-# Configure the domain capabilities for sending and receiving emails. At least one capability must be enabled.
-class DomainCapabilities
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDomainCapabilitiesMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDomainCapabilitiesMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDomainCapabilitiesMetadata::DECODERS
-
-  # @return [DomainCapabilitiesSending] Enable or disable sending emails from this domain.
-  attr_reader :sending
-  # @return [DomainCapabilitiesReceiving] Enable or disable receiving emails to this domain.
-  attr_reader :receiving
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalDeleteDomainResponseMetadata
+    FIELDS = {
+      object: 'object',
+      id: 'id',
+      deleted: 'deleted'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for DeleteDomainResponse.
+  # Typed representation of the `DeleteDomainResponse` API schema.
+  class DeleteDomainResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDeleteDomainResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDeleteDomainResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDeleteDomainResponseMetadata::DECODERS
+
+    # @return [String] The type of object.
+    attr_reader :object
+    # @return [String] The ID of the domain.
+    attr_reader :id
+    # @return [Boolean] Indicates whether the domain was deleted successfully.
+    attr_reader :deleted
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the DomainCapabilitiesReceiving SDK namespace.
-module DomainCapabilitiesReceiving
-  ENABLED = 'enabled'
-  DISABLED = 'disabled'
-  VALUES = ['enabled', 'disabled'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the DomainCapabilitiesSending SDK namespace.
-module DomainCapabilitiesSending
-  ENABLED = 'enabled'
-  DISABLED = 'disabled'
-  VALUES = ['enabled', 'disabled'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalDomainClaimMetadata
-  FIELDS = {
-    object: "object",
-    id: "id",
-    name: "name",
-    status: "status",
-    domain_id: "domain_id",
-    region: "region",
-    record: "record",
-    blocked_reason: "blocked_reason",
-    failure_reason: "failure_reason",
-    created_at: "created_at",
-    expires_at: "expires_at",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    status: lambda do |value|
-      ::OctridevResend::DomainClaimStatus.from_value(value)
-    end,
-    region: lambda do |value|
-      ::OctridevResend::DomainClaimRegion.from_value(value)
-    end,
-    record: lambda do |value|
-      ::OctridevResend::DomainClaimRecord.from_hash(value)
-    end,
-    blocked_reason: lambda do |value|
-      ::OctridevResend::DomainClaimBlockedReason.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for DomainClaim.
-# Typed representation of the `DomainClaim` API schema.
-class DomainClaim
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDomainClaimMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDomainClaimMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDomainClaimMetadata::DECODERS
-
-  # @return [String] The type of object.
-  attr_reader :object
-  # @return [String] The ID of the claim.
-  attr_reader :id
-  # @return [String] The name of the domain being claimed.
-  attr_reader :name
-  # @return [DomainClaimStatus] The status of the claim.
-  attr_reader :status
-  # @return [String] The ID of the placeholder domain created for the claim.
-  attr_reader :domain_id
-  # @return [DomainClaimRegion] The region where the claimed domain will send from.
-  attr_reader :region
-  # @return [DomainClaimRecord] The TXT record to add to your DNS to prove ownership of the claimed domain.
-  attr_reader :record
-  # @return [DomainClaimBlockedReason] Why the claim is currently blocked, if applicable.
-  attr_reader :blocked_reason
-  # @return [String] Why the claim failed, if applicable.
-  attr_reader :failure_reason
-  # @return [String] The date and time the claim was created.
-  attr_reader :created_at
-  # @return [String] The date and time the claim expires if not verified.
-  attr_reader :expires_at
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalDomainMetadata
+    FIELDS = {
+      object: 'object',
+      id: 'id',
+      name: 'name',
+      status: 'status',
+      created_at: 'created_at',
+      region: 'region',
+      open_tracking: 'open_tracking',
+      click_tracking: 'click_tracking',
+      tracking_subdomain: 'tracking_subdomain',
+      capabilities: 'capabilities',
+      records: 'records'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      status: lambda do |value|
+        ::OctridevResend::DomainStatus.from_value(value)
+      end,
+      capabilities: lambda do |value|
+        ::OctridevResend::DomainCapabilities.from_hash(value)
+      end,
+      records: lambda do |value|
+        value&.map { |item| ::OctridevResend::DomainRecord.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for Domain.
+  # Typed representation of the `Domain` API schema.
+  class Domain
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDomainMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDomainMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDomainMetadata::DECODERS
+
+    # @return [String] The type of object.
+    attr_reader :object
+    # @return [String] The ID of the domain.
+    attr_reader :id
+    # @return [String] The name of the domain.
+    attr_reader :name
+    # @return [DomainStatus] The status of the domain.
+    attr_reader :status
+    # @return [String] The date and time the domain was created.
+    attr_reader :created_at
+    # @return [String] The region where the domain is hosted.
+    attr_reader :region
+    # @return [Boolean] Whether open tracking is enabled for this domain.
+    attr_reader :open_tracking
+    # @return [Boolean] Whether click tracking is enabled for this domain.
+    attr_reader :click_tracking
+    # @return [String] The subdomain used for click and open tracking.
+    attr_reader :tracking_subdomain
+    # @return [DomainCapabilities] Configure the domain capabilities for sending and receiving emails. At least one capability must be enabled.
+    attr_reader :capabilities
+    # @return [Array_of_DomainRecord] Optional array value serialized in the `records` wire field.
+    attr_reader :records
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the DomainClaimBlockedReason SDK namespace.
-module DomainClaimBlockedReason
-  GRACE_PERIOD = 'grace_period'
-  RECENT_OWNER_ACTIVITY = 'recent_owner_activity'
-  PENDING_SCHEDULED_EMAILS = 'pending_scheduled_emails'
-  VALUES = ['grace_period', 'recent_owner_activity', 'pending_scheduled_emails'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the DomainClaimRegion SDK namespace.
-module DomainClaimRegion
-  US_EAST_1 = 'us-east-1'
-  EU_WEST_1 = 'eu-west-1'
-  SA_EAST_1 = 'sa-east-1'
-  AP_NORTHEAST_1 = 'ap-northeast-1'
-  VALUES = ['us-east-1', 'eu-west-1', 'sa-east-1', 'ap-northeast-1'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the DomainClaimStatus SDK namespace.
-module DomainClaimStatus
-  PENDING = 'pending'
-  VERIFIED = 'verified'
-  COMPLETED = 'completed'
-  BLOCKED = 'blocked'
-  EXPIRED = 'expired'
-  SUPERSEDED = 'superseded'
-  CANCELED = 'canceled'
-  FAILED = 'failed'
-  VALUES = [
-    'pending', 'verified', 'completed', 'blocked', 'expired', 'superseded', 'canceled', 'failed'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalDomainClaimRecordMetadata
-  FIELDS = {
-    type: "type",
-    name: "name",
-    value: "value",
-    ttl: "ttl",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevResend::DomainClaimRecordType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for DomainClaimRecord.
-# The TXT record to add to your DNS to prove ownership of the claimed domain.
-class DomainClaimRecord
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDomainClaimRecordMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDomainClaimRecordMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDomainClaimRecordMetadata::DECODERS
-
-  # @return [DomainClaimRecordType] The DNS record type. Always TXT for domain claims.
-  attr_reader :type
-  # @return [String] The name of the DNS record (the domain being claimed).
-  attr_reader :name
-  # @return [String] The value of the TXT record.
-  attr_reader :value
-  # @return [String] The time to live for the record.
-  attr_reader :ttl
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the DomainStatus SDK namespace.
+  module DomainStatus
+    PENDING = 'pending'
+    VERIFIED = 'verified'
+    FAILED = 'failed'
+    NOT_STARTED = 'not_started'
+    PARTIALLY_VERIFIED = 'partially_verified'
+    PARTIALLY_FAILED = 'partially_failed'
+    VALUES = %w[
+      pending verified failed not_started partially_verified partially_failed
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalDomainCapabilitiesMetadata
+    FIELDS = {
+      sending: 'sending',
+      receiving: 'receiving'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      sending: lambda do |value|
+        ::OctridevResend::DomainCapabilitiesSending.from_value(value)
+      end,
+      receiving: lambda do |value|
+        ::OctridevResend::DomainCapabilitiesReceiving.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for DomainCapabilities.
+  # Configure the domain capabilities for sending and receiving emails. At least one capability must be enabled.
+  class DomainCapabilities
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDomainCapabilitiesMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDomainCapabilitiesMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDomainCapabilitiesMetadata::DECODERS
 
-# Defines the DomainClaimRecordType SDK namespace.
-module DomainClaimRecordType
-  TXT = 'TXT'
-  VALUES = ['TXT'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [DomainCapabilitiesSending] Enable or disable sending emails from this domain.
+    attr_reader :sending
+    # @return [DomainCapabilitiesReceiving] Enable or disable receiving emails to this domain.
+    attr_reader :receiving
 
-# Internal model hydration metadata.
-class SdkInternalDomainRecordMetadata
-  FIELDS = {
-    record: "record",
-    name: "name",
-    type: "type",
-    ttl: "ttl",
-    status: "status",
-    value: "value",
-    priority: "priority",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    record: lambda do |value|
-      ::OctridevResend::DomainRecordRecord.from_value(value)
-    end,
-    type: lambda do |value|
-      ::OctridevResend::DomainRecordType.from_value(value)
-    end,
-    status: lambda do |value|
-      ::OctridevResend::DomainRecordStatus.from_value(value)
-    end,
-  }.freeze
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# API model for DomainRecord.
-# Typed representation of the `DomainRecord` API schema.
-class DomainRecord
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDomainRecordMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDomainRecordMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDomainRecordMetadata::DECODERS
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  # @return [DomainRecordRecord] The type of record (SPF for sending, DKIM for sending, Receiving for inbound emails, Tracking & TrackingCAA for click and open tracking).
-  attr_reader :record
-  # @return [String] The name of the DNS record.
-  attr_reader :name
-  # @return [DomainRecordType] The DNS record type.
-  attr_reader :type
-  # @return [String] The time to live for the record.
-  attr_reader :ttl
-  # @return [DomainRecordStatus] The status of the record.
-  attr_reader :status
-  # @return [String] The value of the record.
-  attr_reader :value
-  # @return [Integer] The priority of the record (only applicable for MX records).
-  attr_reader :priority
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the DomainCapabilitiesReceiving SDK namespace.
+  module DomainCapabilitiesReceiving
+    ENABLED = 'enabled'
+    DISABLED = 'disabled'
+    VALUES = %w[enabled disabled].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Defines the DomainCapabilitiesSending SDK namespace.
+  module DomainCapabilitiesSending
+    ENABLED = 'enabled'
+    DISABLED = 'disabled'
+    VALUES = %w[enabled disabled].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
+
+  # Internal model hydration metadata.
+  class SdkInternalDomainClaimMetadata
+    FIELDS = {
+      object: 'object',
+      id: 'id',
+      name: 'name',
+      status: 'status',
+      domain_id: 'domain_id',
+      region: 'region',
+      record: 'record',
+      blocked_reason: 'blocked_reason',
+      failure_reason: 'failure_reason',
+      created_at: 'created_at',
+      expires_at: 'expires_at'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      status: lambda do |value|
+        ::OctridevResend::DomainClaimStatus.from_value(value)
+      end,
+      region: lambda do |value|
+        ::OctridevResend::DomainClaimRegion.from_value(value)
+      end,
+      record: lambda do |value|
+        ::OctridevResend::DomainClaimRecord.from_hash(value)
+      end,
+      blocked_reason: lambda do |value|
+        ::OctridevResend::DomainClaimBlockedReason.from_value(value)
+      end
+    }.freeze
+  end
+
+  # API model for DomainClaim.
+  # Typed representation of the `DomainClaim` API schema.
+  class DomainClaim
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDomainClaimMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDomainClaimMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDomainClaimMetadata::DECODERS
+
+    # @return [String] The type of object.
+    attr_reader :object
+    # @return [String] The ID of the claim.
+    attr_reader :id
+    # @return [String] The name of the domain being claimed.
+    attr_reader :name
+    # @return [DomainClaimStatus] The status of the claim.
+    attr_reader :status
+    # @return [String] The ID of the placeholder domain created for the claim.
+    attr_reader :domain_id
+    # @return [DomainClaimRegion] The region where the claimed domain will send from.
+    attr_reader :region
+    # @return [DomainClaimRecord] The TXT record to add to your DNS to prove ownership of the claimed domain.
+    attr_reader :record
+    # @return [DomainClaimBlockedReason] Why the claim is currently blocked, if applicable.
+    attr_reader :blocked_reason
+    # @return [String] Why the claim failed, if applicable.
+    attr_reader :failure_reason
+    # @return [String] The date and time the claim was created.
+    attr_reader :created_at
+    # @return [String] The date and time the claim expires if not verified.
+    attr_reader :expires_at
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Defines the DomainClaimBlockedReason SDK namespace.
+  module DomainClaimBlockedReason
+    GRACE_PERIOD = 'grace_period'
+    RECENT_OWNER_ACTIVITY = 'recent_owner_activity'
+    PENDING_SCHEDULED_EMAILS = 'pending_scheduled_emails'
+    VALUES = %w[grace_period recent_owner_activity pending_scheduled_emails].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Defines the DomainClaimRegion SDK namespace.
+  module DomainClaimRegion
+    US_EAST_1 = 'us-east-1'
+    EU_WEST_1 = 'eu-west-1'
+    SA_EAST_1 = 'sa-east-1'
+    AP_NORTHEAST_1 = 'ap-northeast-1'
+    VALUES = %w[us-east-1 eu-west-1 sa-east-1 ap-northeast-1].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Defines the DomainClaimStatus SDK namespace.
+  module DomainClaimStatus
+    PENDING = 'pending'
+    VERIFIED = 'verified'
+    COMPLETED = 'completed'
+    BLOCKED = 'blocked'
+    EXPIRED = 'expired'
+    SUPERSEDED = 'superseded'
+    CANCELED = 'canceled'
+    FAILED = 'failed'
+    VALUES = %w[
+      pending verified completed blocked expired superseded canceled failed
+    ].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalDomainClaimRecordMetadata
+    FIELDS = {
+      type: 'type',
+      name: 'name',
+      value: 'value',
+      ttl: 'ttl'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevResend::DomainClaimRecordType.from_value(value)
+      end
+    }.freeze
+  end
+
+  # API model for DomainClaimRecord.
+  # The TXT record to add to your DNS to prove ownership of the claimed domain.
+  class DomainClaimRecord
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDomainClaimRecordMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDomainClaimRecordMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDomainClaimRecordMetadata::DECODERS
+
+    # @return [DomainClaimRecordType] The DNS record type. Always TXT for domain claims.
+    attr_reader :type
+    # @return [String] The name of the DNS record (the domain being claimed).
+    attr_reader :name
+    # @return [String] The value of the TXT record.
+    attr_reader :value
+    # @return [String] The time to live for the record.
+    attr_reader :ttl
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Defines the DomainClaimRecordType SDK namespace.
+  module DomainClaimRecordType
+    TXT = 'TXT'
+    VALUES = ['TXT'].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalDomainRecordMetadata
+    FIELDS = {
+      record: 'record',
+      name: 'name',
+      type: 'type',
+      ttl: 'ttl',
+      status: 'status',
+      value: 'value',
+      priority: 'priority'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      record: lambda do |value|
+        ::OctridevResend::DomainRecordRecord.from_value(value)
+      end,
+      type: lambda do |value|
+        ::OctridevResend::DomainRecordType.from_value(value)
+      end,
+      status: lambda do |value|
+        ::OctridevResend::DomainRecordStatus.from_value(value)
+      end
+    }.freeze
+  end
+
+  # API model for DomainRecord.
+  # Typed representation of the `DomainRecord` API schema.
+  class DomainRecord
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDomainRecordMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDomainRecordMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDomainRecordMetadata::DECODERS
+
+    # @return [DomainRecordRecord] The type of record (SPF for sending, DKIM for sending, Receiving for inbound emails, Tracking & TrackingCAA for click and open tracking).
+    attr_reader :record
+    # @return [String] The name of the DNS record.
+    attr_reader :name
+    # @return [DomainRecordType] The DNS record type.
+    attr_reader :type
+    # @return [String] The time to live for the record.
+    attr_reader :ttl
+    # @return [DomainRecordStatus] The status of the record.
+    attr_reader :status
+    # @return [String] The value of the record.
+    attr_reader :value
+    # @return [Integer] The priority of the record (only applicable for MX records).
+    attr_reader :priority
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
 end

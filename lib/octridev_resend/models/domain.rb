@@ -5,283 +5,283 @@
 
 # domain domain models
 module OctridevResend
-# Internal model hydration metadata.
-class SdkInternalDomainCreatedEventMetadata
-  FIELDS = {
-    type: "type",
-    created_at: "created_at",
-    data: "data",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-    created_at
-    data
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevResend::DomainCreatedEventType.from_value(value)
-    end,
-    data: lambda do |value|
-      ::OctridevResend::DomainEventData.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for DomainCreatedEvent.
-# Typed representation of the `DomainCreatedEvent` API schema.
-class DomainCreatedEvent
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDomainCreatedEventMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDomainCreatedEventMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDomainCreatedEventMetadata::DECODERS
-
-  # @return [DomainCreatedEventType] The event type.
-  attr_reader :type
-  # @return [String] Timestamp when the event was emitted.
-  attr_reader :created_at
-  # @return [DomainEventData] Required object value serialized in the `data` wire field.
-  attr_reader :data
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalDomainCreatedEventMetadata
+    FIELDS = {
+      type: 'type',
+      created_at: 'created_at',
+      data: 'data'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+      created_at
+      data
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevResend::DomainCreatedEventType.from_value(value)
+      end,
+      data: lambda do |value|
+        ::OctridevResend::DomainEventData.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for DomainCreatedEvent.
+  # Typed representation of the `DomainCreatedEvent` API schema.
+  class DomainCreatedEvent
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDomainCreatedEventMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDomainCreatedEventMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDomainCreatedEventMetadata::DECODERS
+
+    # @return [DomainCreatedEventType] The event type.
+    attr_reader :type
+    # @return [String] Timestamp when the event was emitted.
+    attr_reader :created_at
+    # @return [DomainEventData] Required object value serialized in the `data` wire field.
+    attr_reader :data
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # Defines the DomainCreatedEventType SDK namespace.
+  module DomainCreatedEventType
+    DOMAIN_CREATED = 'domain.created'
+    VALUES = ['domain.created'].freeze
+    def self.from_value(value)
+      return value if VALUES.include?(value)
 
-# Defines the DomainCreatedEventType SDK namespace.
-module DomainCreatedEventType
-  DOMAIN_CREATED = 'domain.created'
-  VALUES = ['domain.created'].freeze
-  def self.from_value(value)
-    return value if VALUES.include?(value)
-
-    raise SdkValidationError.new('DomainCreatedEventType', 'enum', "Unknown DomainCreatedEventType: #{value}")
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalDomainDeletedEventMetadata
-  FIELDS = {
-    type: "type",
-    created_at: "created_at",
-    data: "data",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-    created_at
-    data
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevResend::DomainDeletedEventType.from_value(value)
-    end,
-    data: lambda do |value|
-      ::OctridevResend::DomainEventData.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for DomainDeletedEvent.
-# Typed representation of the `DomainDeletedEvent` API schema.
-class DomainDeletedEvent
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDomainDeletedEventMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDomainDeletedEventMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDomainDeletedEventMetadata::DECODERS
-
-  # @return [DomainDeletedEventType] The event type.
-  attr_reader :type
-  # @return [String] Timestamp when the event was emitted.
-  attr_reader :created_at
-  # @return [DomainEventData] Required object value serialized in the `data` wire field.
-  attr_reader :data
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+      raise SdkValidationError.new('DomainCreatedEventType', 'enum', "Unknown DomainCreatedEventType: #{value}")
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalDomainDeletedEventMetadata
+    FIELDS = {
+      type: 'type',
+      created_at: 'created_at',
+      data: 'data'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+      created_at
+      data
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevResend::DomainDeletedEventType.from_value(value)
+      end,
+      data: lambda do |value|
+        ::OctridevResend::DomainEventData.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for DomainDeletedEvent.
+  # Typed representation of the `DomainDeletedEvent` API schema.
+  class DomainDeletedEvent
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDomainDeletedEventMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDomainDeletedEventMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDomainDeletedEventMetadata::DECODERS
 
-# Defines the DomainDeletedEventType SDK namespace.
-module DomainDeletedEventType
-  DOMAIN_DELETED = 'domain.deleted'
-  VALUES = ['domain.deleted'].freeze
-  def self.from_value(value)
-    return value if VALUES.include?(value)
+    # @return [DomainDeletedEventType] The event type.
+    attr_reader :type
+    # @return [String] Timestamp when the event was emitted.
+    attr_reader :created_at
+    # @return [DomainEventData] Required object value serialized in the `data` wire field.
+    attr_reader :data
 
-    raise SdkValidationError.new('DomainDeletedEventType', 'enum', "Unknown DomainDeletedEventType: #{value}")
-  end
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# Internal model hydration metadata.
-class SdkInternalDomainEventDataMetadata
-  FIELDS = {
-    id: "id",
-    name: "name",
-    status: "status",
-    created_at: "created_at",
-    region: "region",
-    records: "records",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    id
-    name
-    status
-    created_at
-    region
-    records
-  ].freeze
-  DECODERS = {
-    status: lambda do |value|
-      ::OctridevResend::DomainEventDataStatus.from_value(value)
-    end,
-    region: lambda do |value|
-      ::OctridevResend::DomainEventDataRegion.from_value(value)
-    end,
-    records: lambda do |value|
-      value&.map { |item| ::OctridevResend::WebhookDomainRecord.from_hash(item) }
-    end,
-  }.freeze
-end
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-# API model for DomainEventData.
-# Typed representation of the `DomainEventData` API schema.
-class DomainEventData
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDomainEventDataMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDomainEventDataMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDomainEventDataMetadata::DECODERS
-
-  # @return [String] Unique identifier for the domain.
-  attr_reader :id
-  # @return [String] The domain name (e.g., `example.com`).
-  attr_reader :name
-  # @return [DomainEventDataStatus] Aggregated verification status of the domain.
-  attr_reader :status
-  # @return [String] Timestamp when the domain was created.
-  attr_reader :created_at
-  # @return [DomainEventDataRegion] AWS region where the domain is configured.
-  attr_reader :region
-  # @return [Array_of_WebhookDomainRecord] DNS records required for domain verification.
-  attr_reader :records
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the DomainDeletedEventType SDK namespace.
+  module DomainDeletedEventType
+    DOMAIN_DELETED = 'domain.deleted'
+    VALUES = ['domain.deleted'].freeze
+    def self.from_value(value)
+      return value if VALUES.include?(value)
+
+      raise SdkValidationError.new('DomainDeletedEventType', 'enum', "Unknown DomainDeletedEventType: #{value}")
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the DomainEventDataRegion SDK namespace.
-module DomainEventDataRegion
-  US_EAST_1 = 'us-east-1'
-  EU_WEST_1 = 'eu-west-1'
-  SA_EAST_1 = 'sa-east-1'
-  AP_NORTHEAST_1 = 'ap-northeast-1'
-  VALUES = ['us-east-1', 'eu-west-1', 'sa-east-1', 'ap-northeast-1'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the DomainEventDataStatus SDK namespace.
-module DomainEventDataStatus
-  VERIFIED = 'verified'
-  PARTIALLY_VERIFIED = 'partially_verified'
-  PARTIALLY_FAILED = 'partially_failed'
-  FAILED = 'failed'
-  PENDING = 'pending'
-  NOT_STARTED = 'not_started'
-  VALUES = [
-    'verified', 'partially_verified', 'partially_failed', 'failed', 'pending', 'not_started'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalDomainUpdatedEventMetadata
-  FIELDS = {
-    type: "type",
-    created_at: "created_at",
-    data: "data",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-    created_at
-    data
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevResend::DomainUpdatedEventType.from_value(value)
-    end,
-    data: lambda do |value|
-      ::OctridevResend::DomainEventData.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for DomainUpdatedEvent.
-# Typed representation of the `DomainUpdatedEvent` API schema.
-class DomainUpdatedEvent
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDomainUpdatedEventMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDomainUpdatedEventMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDomainUpdatedEventMetadata::DECODERS
-
-  # @return [DomainUpdatedEventType] The event type.
-  attr_reader :type
-  # @return [String] Timestamp when the event was emitted.
-  attr_reader :created_at
-  # @return [DomainEventData] Required object value serialized in the `data` wire field.
-  attr_reader :data
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalDomainEventDataMetadata
+    FIELDS = {
+      id: 'id',
+      name: 'name',
+      status: 'status',
+      created_at: 'created_at',
+      region: 'region',
+      records: 'records'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      id
+      name
+      status
+      created_at
+      region
+      records
+    ].freeze
+    DECODERS = {
+      status: lambda do |value|
+        ::OctridevResend::DomainEventDataStatus.from_value(value)
+      end,
+      region: lambda do |value|
+        ::OctridevResend::DomainEventDataRegion.from_value(value)
+      end,
+      records: lambda do |value|
+        value&.map { |item| ::OctridevResend::WebhookDomainRecord.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for DomainEventData.
+  # Typed representation of the `DomainEventData` API schema.
+  class DomainEventData
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDomainEventDataMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDomainEventDataMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDomainEventDataMetadata::DECODERS
+
+    # @return [String] Unique identifier for the domain.
+    attr_reader :id
+    # @return [String] The domain name (e.g., `example.com`).
+    attr_reader :name
+    # @return [DomainEventDataStatus] Aggregated verification status of the domain.
+    attr_reader :status
+    # @return [String] Timestamp when the domain was created.
+    attr_reader :created_at
+    # @return [DomainEventDataRegion] AWS region where the domain is configured.
+    attr_reader :region
+    # @return [Array_of_WebhookDomainRecord] DNS records required for domain verification.
+    attr_reader :records
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Defines the DomainEventDataRegion SDK namespace.
+  module DomainEventDataRegion
+    US_EAST_1 = 'us-east-1'
+    EU_WEST_1 = 'eu-west-1'
+    SA_EAST_1 = 'sa-east-1'
+    AP_NORTHEAST_1 = 'ap-northeast-1'
+    VALUES = %w[us-east-1 eu-west-1 sa-east-1 ap-northeast-1].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
 
-# Defines the DomainUpdatedEventType SDK namespace.
-module DomainUpdatedEventType
-  DOMAIN_UPDATED = 'domain.updated'
-  VALUES = ['domain.updated'].freeze
-  def self.from_value(value)
-    return value if VALUES.include?(value)
-
-    raise SdkValidationError.new('DomainUpdatedEventType', 'enum', "Unknown DomainUpdatedEventType: #{value}")
+  # Defines the DomainEventDataStatus SDK namespace.
+  module DomainEventDataStatus
+    VERIFIED = 'verified'
+    PARTIALLY_VERIFIED = 'partially_verified'
+    PARTIALLY_FAILED = 'partially_failed'
+    FAILED = 'failed'
+    PENDING = 'pending'
+    NOT_STARTED = 'not_started'
+    VALUES = %w[
+      verified partially_verified partially_failed failed pending not_started
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
+
+  # Internal model hydration metadata.
+  class SdkInternalDomainUpdatedEventMetadata
+    FIELDS = {
+      type: 'type',
+      created_at: 'created_at',
+      data: 'data'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+      created_at
+      data
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevResend::DomainUpdatedEventType.from_value(value)
+      end,
+      data: lambda do |value|
+        ::OctridevResend::DomainEventData.from_hash(value)
+      end
+    }.freeze
+  end
+
+  # API model for DomainUpdatedEvent.
+  # Typed representation of the `DomainUpdatedEvent` API schema.
+  class DomainUpdatedEvent
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDomainUpdatedEventMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDomainUpdatedEventMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDomainUpdatedEventMetadata::DECODERS
+
+    # @return [DomainUpdatedEventType] The event type.
+    attr_reader :type
+    # @return [String] Timestamp when the event was emitted.
+    attr_reader :created_at
+    # @return [DomainEventData] Required object value serialized in the `data` wire field.
+    attr_reader :data
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Defines the DomainUpdatedEventType SDK namespace.
+  module DomainUpdatedEventType
+    DOMAIN_UPDATED = 'domain.updated'
+    VALUES = ['domain.updated'].freeze
+    def self.from_value(value)
+      return value if VALUES.include?(value)
+
+      raise SdkValidationError.new('DomainUpdatedEventType', 'enum', "Unknown DomainUpdatedEventType: #{value}")
+    end
+  end
 end

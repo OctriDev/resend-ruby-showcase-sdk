@@ -5,140 +5,140 @@
 
 # email_suppressed_event domain models
 module OctridevResend
-# Internal model hydration metadata.
-class SdkInternalEmailSuppressedEventMetadata
-  FIELDS = {
-    type: "type",
-    created_at: "created_at",
-    data: "data",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-    created_at
-    data
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevResend::EmailSuppressedEventType.from_value(value)
-    end,
-    data: lambda do |value|
-      ::OctridevResend::EmailSuppressedEventData.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for EmailSuppressedEvent.
-# Typed representation of the `EmailSuppressedEvent` API schema.
-class EmailSuppressedEvent
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalEmailSuppressedEventMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalEmailSuppressedEventMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalEmailSuppressedEventMetadata::DECODERS
-
-  # @return [EmailSuppressedEventType] The event type.
-  attr_reader :type
-  # @return [String] Timestamp when the event was emitted.
-  attr_reader :created_at
-  # @return [EmailSuppressedEventData] Required API value serialized in the `data` wire field.
-  attr_reader :data
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalEmailSuppressedEventMetadata
+    FIELDS = {
+      type: 'type',
+      created_at: 'created_at',
+      data: 'data'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+      created_at
+      data
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevResend::EmailSuppressedEventType.from_value(value)
+      end,
+      data: lambda do |value|
+        ::OctridevResend::EmailSuppressedEventData.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for EmailSuppressedEvent.
+  # Typed representation of the `EmailSuppressedEvent` API schema.
+  class EmailSuppressedEvent
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalEmailSuppressedEventMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalEmailSuppressedEventMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalEmailSuppressedEventMetadata::DECODERS
+
+    # @return [EmailSuppressedEventType] The event type.
+    attr_reader :type
+    # @return [String] Timestamp when the event was emitted.
+    attr_reader :created_at
+    # @return [EmailSuppressedEventData] Required API value serialized in the `data` wire field.
+    attr_reader :data
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # Defines the EmailSuppressedEventType SDK namespace.
+  module EmailSuppressedEventType
+    EMAIL_SUPPRESSED = 'email.suppressed'
+    VALUES = ['email.suppressed'].freeze
+    def self.from_value(value)
+      return value if VALUES.include?(value)
 
-# Defines the EmailSuppressedEventType SDK namespace.
-module EmailSuppressedEventType
-  EMAIL_SUPPRESSED = 'email.suppressed'
-  VALUES = ['email.suppressed'].freeze
-  def self.from_value(value)
-    return value if VALUES.include?(value)
-
-    raise SdkValidationError.new('EmailSuppressedEventType', 'enum', "Unknown EmailSuppressedEventType: #{value}")
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalEmailSuppressedEventDataMetadata
-  FIELDS = {
-    email_id: "email_id",
-    created_at: "created_at",
-    from: "from",
-    to: "to",
-    subject: "subject",
-    broadcast_id: "broadcast_id",
-    template_id: "template_id",
-    tags: "tags",
-    headers: "headers",
-    suppressed: "suppressed",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    email_id
-    created_at
-    from
-    to
-    subject
-    suppressed
-  ].freeze
-  DECODERS = {
-    headers: lambda do |value|
-      value&.map { |item| ::OctridevResend::OutboundEmailEventDataHeadersItem.from_hash(item) }
-    end,
-    suppressed: lambda do |value|
-      ::OctridevResend::WebhookEventSuppressed.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for EmailSuppressedEventData.
-# Typed representation of the `EmailSuppressedEventData` API schema.
-class EmailSuppressedEventData
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalEmailSuppressedEventDataMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalEmailSuppressedEventDataMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalEmailSuppressedEventDataMetadata::DECODERS
-
-  # @return [String] Unique identifier for the email.
-  attr_reader :email_id
-  # @return [String] Timestamp when the email was created.
-  attr_reader :created_at
-  # @return [String] Sender email address and name in the format `Name <email@domain.com>`.
-  attr_reader :from
-  # @return [Array_of_String] Array of impacted recipient email addresses.
-  attr_reader :to
-  # @return [String] Email subject line.
-  attr_reader :subject
-  # @return [String] Unique identifier for the broadcast campaign, if applicable.
-  attr_reader :broadcast_id
-  # @return [String] Unique identifier for the template used, if applicable.
-  attr_reader :template_id
-  # @return [Hash] Tag key-value pairs associated with the email.
-  attr_reader :tags
-  # @return [Array_of_OutboundEmailEventDataHeadersItem] Custom headers included with the email (omitted when no custom headers are set).
-  attr_reader :headers
-  # @return [WebhookEventSuppressed] Required object value serialized in the `suppressed` wire field.
-  attr_reader :suppressed
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+      raise SdkValidationError.new('EmailSuppressedEventType', 'enum', "Unknown EmailSuppressedEventType: #{value}")
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalEmailSuppressedEventDataMetadata
+    FIELDS = {
+      email_id: 'email_id',
+      created_at: 'created_at',
+      from: 'from',
+      to: 'to',
+      subject: 'subject',
+      broadcast_id: 'broadcast_id',
+      template_id: 'template_id',
+      tags: 'tags',
+      headers: 'headers',
+      suppressed: 'suppressed'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      email_id
+      created_at
+      from
+      to
+      subject
+      suppressed
+    ].freeze
+    DECODERS = {
+      headers: lambda do |value|
+        value&.map { |item| ::OctridevResend::OutboundEmailEventDataHeadersItem.from_hash(item) }
+      end,
+      suppressed: lambda do |value|
+        ::OctridevResend::WebhookEventSuppressed.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for EmailSuppressedEventData.
+  # Typed representation of the `EmailSuppressedEventData` API schema.
+  class EmailSuppressedEventData
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalEmailSuppressedEventDataMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalEmailSuppressedEventDataMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalEmailSuppressedEventDataMetadata::DECODERS
+
+    # @return [String] Unique identifier for the email.
+    attr_reader :email_id
+    # @return [String] Timestamp when the email was created.
+    attr_reader :created_at
+    # @return [String] Sender email address and name in the format `Name <email@domain.com>`.
+    attr_reader :from
+    # @return [Array_of_String] Array of impacted recipient email addresses.
+    attr_reader :to
+    # @return [String] Email subject line.
+    attr_reader :subject
+    # @return [String] Unique identifier for the broadcast campaign, if applicable.
+    attr_reader :broadcast_id
+    # @return [String] Unique identifier for the template used, if applicable.
+    attr_reader :template_id
+    # @return [Hash] Tag key-value pairs associated with the email.
+    attr_reader :tags
+    # @return [Array_of_OutboundEmailEventDataHeadersItem] Custom headers included with the email (omitted when no custom headers are set).
+    attr_reader :headers
+    # @return [WebhookEventSuppressed] Required object value serialized in the `suppressed` wire field.
+    attr_reader :suppressed
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

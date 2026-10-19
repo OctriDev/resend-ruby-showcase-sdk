@@ -25,7 +25,6 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('inbox_id', inbox_id)
 
         Validation.if_given(limit) { Validation.validate_range('limit', limit, min: 1, max: 100) }
@@ -33,20 +32,20 @@ module OctridevResend
         SdkClient.request(
           'GET',
           [
-            "/inboxes/",
+            '/inboxes/',
             SdkClient.encode_path_segment(inbox_id),
-            "/drafts"
+            '/drafts'
           ].join,
           config: config,
           query: {
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true),
+            'before' => QueryValue.new(before, style: 'form', explode: true)
           },
           return_type: ::OctridevResend::ListInboxDraftsResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_list_drafts',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -102,7 +101,6 @@ module OctridevResend
         reply_to_email_id: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('inbox_id', inbox_id)
 
         Validation.if_given(idempotency_key) do
@@ -120,9 +118,9 @@ module OctridevResend
         SdkClient.request(
           'POST',
           [
-            "/inboxes/",
+            '/inboxes/',
             SdkClient.encode_path_segment(inbox_id),
-            "/drafts"
+            '/drafts'
           ].join,
           config: config,
           body: {
@@ -134,15 +132,15 @@ module OctridevResend
             'text' => text,
             'attachments' => attachments,
             'thread_id' => thread_id,
-            'reply_to_email_id' => reply_to_email_id,
+            'reply_to_email_id' => reply_to_email_id
           },
           return_type: ::OctridevResend::CreateInboxDraftResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_create_draft',
           extra_headers: SdkClient.serialize_headers({
-            'Idempotency-Key' => SdkClient.header_value(idempotency_key),
-          }),
-          request_options: request_options,
+                                                       'Idempotency-Key' => SdkClient.header_value(idempotency_key)
+                                                     }),
+          request_options: request_options
         ).data
       end
 
@@ -156,7 +154,6 @@ module OctridevResend
         draft_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('inbox_id', inbox_id)
 
         Validation.validate_uuid('draft_id', draft_id)
@@ -164,16 +161,16 @@ module OctridevResend
         SdkClient.request(
           'GET',
           [
-            "/inboxes/",
+            '/inboxes/',
             SdkClient.encode_path_segment(inbox_id),
-            "/drafts/",
+            '/drafts/',
             SdkClient.encode_path_segment(draft_id)
           ].join,
           config: config,
           return_type: ::OctridevResend::InboxDraft,
           decoder: :json,
           operation_id: 'inboxes_get_draft',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -217,7 +214,6 @@ module OctridevResend
         attachments: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('inbox_id', inbox_id)
 
         Validation.validate_uuid('draft_id', draft_id)
@@ -227,9 +223,9 @@ module OctridevResend
         SdkClient.request(
           'PATCH',
           [
-            "/inboxes/",
+            '/inboxes/',
             SdkClient.encode_path_segment(inbox_id),
-            "/drafts/",
+            '/drafts/',
             SdkClient.encode_path_segment(draft_id)
           ].join,
           config: config,
@@ -240,12 +236,12 @@ module OctridevResend
             'subject' => subject,
             'html' => html,
             'text' => text,
-            'attachments' => attachments,
+            'attachments' => attachments
           },
           return_type: ::OctridevResend::InboxDraft,
           decoder: :json,
           operation_id: 'inboxes_update_draft',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -261,7 +257,6 @@ module OctridevResend
         draft_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('inbox_id', inbox_id)
 
         Validation.validate_uuid('draft_id', draft_id)
@@ -269,16 +264,16 @@ module OctridevResend
         SdkClient.request(
           'DELETE',
           [
-            "/inboxes/",
+            '/inboxes/',
             SdkClient.encode_path_segment(inbox_id),
-            "/drafts/",
+            '/drafts/',
             SdkClient.encode_path_segment(draft_id)
           ].join,
           config: config,
           return_type: ::OctridevResend::RemoveInboxDraftResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_remove_draft',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -308,7 +303,6 @@ module OctridevResend
         headers: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('inbox_id', inbox_id)
 
         Validation.validate_uuid('draft_id', draft_id)
@@ -320,23 +314,23 @@ module OctridevResend
         SdkClient.request(
           'POST',
           [
-            "/inboxes/",
+            '/inboxes/',
             SdkClient.encode_path_segment(inbox_id),
-            "/drafts/",
+            '/drafts/',
             SdkClient.encode_path_segment(draft_id),
-            "/send"
+            '/send'
           ].join,
           config: config,
           body: {
-            'headers' => headers,
+            'headers' => headers
           },
           return_type: ::OctridevResend::SendInboxDraftResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_send_draft',
           extra_headers: SdkClient.serialize_headers({
-            'Idempotency-Key' => SdkClient.header_value(idempotency_key),
-          }),
-          request_options: request_options,
+                                                       'Idempotency-Key' => SdkClient.header_value(idempotency_key)
+                                                     }),
+          request_options: request_options
         ).data
       end
     end
