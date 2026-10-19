@@ -5,661 +5,647 @@
 
 # templates domain models
 module OctridevResend
-# Internal model hydration metadata.
-class SdkInternalCreateTemplateRequestMetadata
-  FIELDS = {
-    name: "name",
-    alias_: "alias",
-    from: "from",
-    subject: "subject",
-    reply_to: "reply_to",
-    html: "html",
-    text: "text",
-    variables: "variables",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    name
-    html
-  ].freeze
-  DECODERS = {
-    variables: lambda do |value|
-      value&.map { |item| ::OctridevResend::TemplateVariableInput.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for CreateTemplateRequest.
-# Typed representation of the `CreateTemplateRequest` API schema.
-class CreateTemplateRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCreateTemplateRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCreateTemplateRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCreateTemplateRequestMetadata::DECODERS
-
-  # @return [String] The name of the template.
-  attr_reader :name
-  # @return [String] The alias of the template.
-  attr_reader :alias_
-  # @return [String] Sender email address. To include a friendly name, use the format "Your Name <sender@domain.com>".
-  attr_reader :from
-  # @return [String] Email subject.
-  attr_reader :subject
-  # @return [Array_of_String] Reply-to email addresses.
-  attr_reader :reply_to
-  # @return [String] The HTML version of the template.
-  attr_reader :html
-  # @return [String] The plain text version of the template.
-  attr_reader :text
-  # @return [Array_of_TemplateVariableInput] Optional array value serialized in the `variables` wire field.
-  attr_reader :variables
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalCreateTemplateRequestMetadata
+    FIELDS = {
+      name: 'name',
+      alias_: 'alias',
+      from: 'from',
+      subject: 'subject',
+      reply_to: 'reply_to',
+      html: 'html',
+      text: 'text',
+      variables: 'variables'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      name
+      html
+    ].freeze
+    DECODERS = {
+      variables: lambda do |value|
+        value&.map { |item| ::OctridevResend::TemplateVariableInput.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for CreateTemplateRequest.
+  # Typed representation of the `CreateTemplateRequest` API schema.
+  class CreateTemplateRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCreateTemplateRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCreateTemplateRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCreateTemplateRequestMetadata::DECODERS
+
+    # @return [String] The name of the template.
+    attr_reader :name
+    # @return [String] The alias of the template.
+    attr_reader :alias_
+    # @return [String] Sender email address. To include a friendly name, use the format "Your Name <sender@domain.com>".
+    attr_reader :from
+    # @return [String] Email subject.
+    attr_reader :subject
+    # @return [Array_of_String] Reply-to email addresses.
+    attr_reader :reply_to
+    # @return [String] The HTML version of the template.
+    attr_reader :html
+    # @return [String] The plain text version of the template.
+    attr_reader :text
+    # @return [Array_of_TemplateVariableInput] Optional array value serialized in the `variables` wire field.
+    attr_reader :variables
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalCreateTemplateResponseSuccessMetadata
-  FIELDS = {
-    id: "id",
-    object: "object",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for CreateTemplateResponseSuccess.
-# Typed representation of the `CreateTemplateResponseSuccess` API schema.
-class CreateTemplateResponseSuccess
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCreateTemplateResponseSuccessMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCreateTemplateResponseSuccessMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCreateTemplateResponseSuccessMetadata::DECODERS
-
-  # @return [String] The ID of the template.
-  attr_reader :id
-  # @return [String] The object type of the response.
-  attr_reader :object
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalCreateTemplateResponseSuccessMetadata
+    FIELDS = {
+      id: 'id',
+      object: 'object'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for CreateTemplateResponseSuccess.
+  # Typed representation of the `CreateTemplateResponseSuccess` API schema.
+  class CreateTemplateResponseSuccess
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCreateTemplateResponseSuccessMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCreateTemplateResponseSuccessMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCreateTemplateResponseSuccessMetadata::DECODERS
+
+    # @return [String] The ID of the template.
+    attr_reader :id
+    # @return [String] The object type of the response.
+    attr_reader :object
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalDuplicateTemplateResponseSuccessMetadata
-  FIELDS = {
-    id: "id",
-    object: "object",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for DuplicateTemplateResponseSuccess.
-# Typed representation of the `DuplicateTemplateResponseSuccess` API schema.
-class DuplicateTemplateResponseSuccess
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDuplicateTemplateResponseSuccessMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDuplicateTemplateResponseSuccessMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDuplicateTemplateResponseSuccessMetadata::DECODERS
-
-  # @return [String] The ID of the duplicated template.
-  attr_reader :id
-  # @return [String] The object type of the response.
-  attr_reader :object
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalDuplicateTemplateResponseSuccessMetadata
+    FIELDS = {
+      id: 'id',
+      object: 'object'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for DuplicateTemplateResponseSuccess.
+  # Typed representation of the `DuplicateTemplateResponseSuccess` API schema.
+  class DuplicateTemplateResponseSuccess
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDuplicateTemplateResponseSuccessMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDuplicateTemplateResponseSuccessMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDuplicateTemplateResponseSuccessMetadata::DECODERS
+
+    # @return [String] The ID of the duplicated template.
+    attr_reader :id
+    # @return [String] The object type of the response.
+    attr_reader :object
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalListTemplatesResponseSuccessMetadata
-  FIELDS = {
-    object: "object",
-    data: "data",
-    has_more: "has_more",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    data: lambda do |value|
-      value&.map { |item| ::OctridevResend::TemplateListItem.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for ListTemplatesResponseSuccess.
-# Typed representation of the `ListTemplatesResponseSuccess` API schema.
-class ListTemplatesResponseSuccess
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListTemplatesResponseSuccessMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListTemplatesResponseSuccessMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListTemplatesResponseSuccessMetadata::DECODERS
-
-  # @return [String] Type of the response object.
-  attr_reader :object
-  # @return [Array_of_TemplateListItem] Array containing templates information.
-  attr_reader :data
-  # @return [Boolean] Indicates if there are more templates to retrieve.
-  attr_reader :has_more
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalListTemplatesResponseSuccessMetadata
+    FIELDS = {
+      object: 'object',
+      data: 'data',
+      has_more: 'has_more'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      data: lambda do |value|
+        value&.map { |item| ::OctridevResend::TemplateListItem.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ListTemplatesResponseSuccess.
+  # Typed representation of the `ListTemplatesResponseSuccess` API schema.
+  class ListTemplatesResponseSuccess
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListTemplatesResponseSuccessMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListTemplatesResponseSuccessMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListTemplatesResponseSuccessMetadata::DECODERS
+
+    # @return [String] Type of the response object.
+    attr_reader :object
+    # @return [Array_of_TemplateListItem] Array containing templates information.
+    attr_reader :data
+    # @return [Boolean] Indicates if there are more templates to retrieve.
+    attr_reader :has_more
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalPublishTemplateResponseSuccessMetadata
-  FIELDS = {
-    id: "id",
-    object: "object",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for PublishTemplateResponseSuccess.
-# Typed representation of the `PublishTemplateResponseSuccess` API schema.
-class PublishTemplateResponseSuccess
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalPublishTemplateResponseSuccessMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalPublishTemplateResponseSuccessMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalPublishTemplateResponseSuccessMetadata::DECODERS
-
-  # @return [String] The ID of the template.
-  attr_reader :id
-  # @return [String] The object type of the response.
-  attr_reader :object
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalPublishTemplateResponseSuccessMetadata
+    FIELDS = {
+      id: 'id',
+      object: 'object'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for PublishTemplateResponseSuccess.
+  # Typed representation of the `PublishTemplateResponseSuccess` API schema.
+  class PublishTemplateResponseSuccess
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalPublishTemplateResponseSuccessMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalPublishTemplateResponseSuccessMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalPublishTemplateResponseSuccessMetadata::DECODERS
+
+    # @return [String] The ID of the template.
+    attr_reader :id
+    # @return [String] The object type of the response.
+    attr_reader :object
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalRemoveTemplateResponseSuccessMetadata
-  FIELDS = {
-    object: "object",
-    id: "id",
-    deleted: "deleted",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for RemoveTemplateResponseSuccess.
-# Typed representation of the `RemoveTemplateResponseSuccess` API schema.
-class RemoveTemplateResponseSuccess
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalRemoveTemplateResponseSuccessMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalRemoveTemplateResponseSuccessMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalRemoveTemplateResponseSuccessMetadata::DECODERS
-
-  # @return [String] Type of the response object.
-  attr_reader :object
-  # @return [String] The ID of the template.
-  attr_reader :id
-  # @return [Boolean] Indicates whether the template was successfully deleted.
-  attr_reader :deleted
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalRemoveTemplateResponseSuccessMetadata
+    FIELDS = {
+      object: 'object',
+      id: 'id',
+      deleted: 'deleted'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for RemoveTemplateResponseSuccess.
+  # Typed representation of the `RemoveTemplateResponseSuccess` API schema.
+  class RemoveTemplateResponseSuccess
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalRemoveTemplateResponseSuccessMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalRemoveTemplateResponseSuccessMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalRemoveTemplateResponseSuccessMetadata::DECODERS
+
+    # @return [String] Type of the response object.
+    attr_reader :object
+    # @return [String] The ID of the template.
+    attr_reader :id
+    # @return [Boolean] Indicates whether the template was successfully deleted.
+    attr_reader :deleted
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalTemplateMetadata
-  FIELDS = {
-    object: "object",
-    id: "id",
-    current_version_id: "current_version_id",
-    name: "name",
-    alias_: "alias",
-    from: "from",
-    subject: "subject",
-    reply_to: "reply_to",
-    html: "html",
-    text: "text",
-    variables: "variables",
-    created_at: "created_at",
-    updated_at: "updated_at",
-    status: "status",
-    published_at: "published_at",
-    has_unpublished_versions: "has_unpublished_versions",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    variables: lambda do |value|
-      value&.map { |item| ::OctridevResend::TemplateVariable.from_hash(item) }
-    end,
-    status: lambda do |value|
-      ::OctridevResend::TemplateStatus.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for Template.
-# Typed representation of the `Template` API schema.
-class Template
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalTemplateMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalTemplateMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalTemplateMetadata::DECODERS
-
-  # @return [String] The type of object.
-  attr_reader :object
-  # @return [String] The ID of the template.
-  attr_reader :id
-  # @return [String] The ID of the current version of the template.
-  attr_reader :current_version_id
-  # @return [String] The name of the template.
-  attr_reader :name
-  # @return [String] The alias of the template.
-  attr_reader :alias_
-  # @return [String] Sender email address. To include a friendly name, use the format "Your Name <sender@domain.com>".
-  attr_reader :from
-  # @return [String] Email subject.
-  attr_reader :subject
-  # @return [Array_of_String] Reply-to email addresses.
-  attr_reader :reply_to
-  # @return [String] The HTML version of the template.
-  attr_reader :html
-  # @return [String] The plain text version of the template.
-  attr_reader :text
-  # @return [Array_of_TemplateVariable] Optional array value serialized in the `variables` wire field.
-  attr_reader :variables
-  # @return [String] Timestamp indicating when the template was created.
-  attr_reader :created_at
-  # @return [String] Timestamp indicating when the template was last updated.
-  attr_reader :updated_at
-  # @return [TemplateStatus] The publication status of the template.
-  attr_reader :status
-  # @return [String] Timestamp indicating when the template was published.
-  attr_reader :published_at
-  # @return [Boolean] Indicates whether the template has unpublished versions.
-  attr_reader :has_unpublished_versions
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalTemplateMetadata
+    FIELDS = {
+      object: 'object',
+      id: 'id',
+      current_version_id: 'current_version_id',
+      name: 'name',
+      alias_: 'alias',
+      from: 'from',
+      subject: 'subject',
+      reply_to: 'reply_to',
+      html: 'html',
+      text: 'text',
+      variables: 'variables',
+      created_at: 'created_at',
+      updated_at: 'updated_at',
+      status: 'status',
+      published_at: 'published_at',
+      has_unpublished_versions: 'has_unpublished_versions'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      variables: lambda do |value|
+        value&.map { |item| ::OctridevResend::TemplateVariable.from_hash(item) }
+      end,
+      status: lambda do |value|
+        ::OctridevResend::TemplateStatus.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for Template.
+  # Typed representation of the `Template` API schema.
+  class Template
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalTemplateMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalTemplateMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalTemplateMetadata::DECODERS
+
+    # @return [String] The type of object.
+    attr_reader :object
+    # @return [String] The ID of the template.
+    attr_reader :id
+    # @return [String] The ID of the current version of the template.
+    attr_reader :current_version_id
+    # @return [String] The name of the template.
+    attr_reader :name
+    # @return [String] The alias of the template.
+    attr_reader :alias_
+    # @return [String] Sender email address. To include a friendly name, use the format "Your Name <sender@domain.com>".
+    attr_reader :from
+    # @return [String] Email subject.
+    attr_reader :subject
+    # @return [Array_of_String] Reply-to email addresses.
+    attr_reader :reply_to
+    # @return [String] The HTML version of the template.
+    attr_reader :html
+    # @return [String] The plain text version of the template.
+    attr_reader :text
+    # @return [Array_of_TemplateVariable] Optional array value serialized in the `variables` wire field.
+    attr_reader :variables
+    # @return [String] Timestamp indicating when the template was created.
+    attr_reader :created_at
+    # @return [String] Timestamp indicating when the template was last updated.
+    attr_reader :updated_at
+    # @return [TemplateStatus] The publication status of the template.
+    attr_reader :status
+    # @return [String] Timestamp indicating when the template was published.
+    attr_reader :published_at
+    # @return [Boolean] Indicates whether the template has unpublished versions.
+    attr_reader :has_unpublished_versions
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the TemplateStatus SDK namespace.
-module TemplateStatus
-  DRAFT = 'draft'
-  PUBLISHED = 'published'
-  VALUES = ['draft', 'published'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalTemplateListItemMetadata
-  FIELDS = {
-    id: "id",
-    name: "name",
-    status: "status",
-    published_at: "published_at",
-    created_at: "created_at",
-    updated_at: "updated_at",
-    alias_: "alias",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    status: lambda do |value|
-      ::OctridevResend::TemplateListItemStatus.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for TemplateListItem.
-# Typed representation of the `TemplateListItem` API schema.
-class TemplateListItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalTemplateListItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalTemplateListItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalTemplateListItemMetadata::DECODERS
-
-  # @return [String] The ID of the template.
-  attr_reader :id
-  # @return [String] The name of the template.
-  attr_reader :name
-  # @return [TemplateListItemStatus] The publication status of the template.
-  attr_reader :status
-  # @return [String] Timestamp indicating when the template was published.
-  attr_reader :published_at
-  # @return [String] Timestamp indicating when the template was created.
-  attr_reader :created_at
-  # @return [String] Timestamp indicating when the template was last updated.
-  attr_reader :updated_at
-  # @return [String] The alias of the template.
-  attr_reader :alias_
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the TemplateStatus SDK namespace.
+  module TemplateStatus
+    DRAFT = 'draft'
+    PUBLISHED = 'published'
+    VALUES = %w[draft published].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalTemplateListItemMetadata
+    FIELDS = {
+      id: 'id',
+      name: 'name',
+      status: 'status',
+      published_at: 'published_at',
+      created_at: 'created_at',
+      updated_at: 'updated_at',
+      alias_: 'alias'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      status: lambda do |value|
+        ::OctridevResend::TemplateListItemStatus.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for TemplateListItem.
+  # Typed representation of the `TemplateListItem` API schema.
+  class TemplateListItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalTemplateListItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalTemplateListItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalTemplateListItemMetadata::DECODERS
 
-# Defines the TemplateListItemStatus SDK namespace.
-module TemplateListItemStatus
-  DRAFT = 'draft'
-  PUBLISHED = 'published'
-  VALUES = ['draft', 'published'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [String] The ID of the template.
+    attr_reader :id
+    # @return [String] The name of the template.
+    attr_reader :name
+    # @return [TemplateListItemStatus] The publication status of the template.
+    attr_reader :status
+    # @return [String] Timestamp indicating when the template was published.
+    attr_reader :published_at
+    # @return [String] Timestamp indicating when the template was created.
+    attr_reader :created_at
+    # @return [String] Timestamp indicating when the template was last updated.
+    attr_reader :updated_at
+    # @return [String] The alias of the template.
+    attr_reader :alias_
 
-# Internal model hydration metadata.
-class SdkInternalTemplateVariableMetadata
-  FIELDS = {
-    id: "id",
-    key: "key",
-    type: "type",
-    fallback_value: "fallback_value",
-    created_at: "created_at",
-    updated_at: "updated_at",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    key
-    type
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevResend::TemplateVariableType.from_value(value)
-    end,
-  }.freeze
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# API model for TemplateVariable.
-# Typed representation of the `TemplateVariable` API schema.
-class TemplateVariable
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalTemplateVariableMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalTemplateVariableMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalTemplateVariableMetadata::DECODERS
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  # @return [String] The ID of the template variable.
-  attr_reader :id
-  # @return [String] The key of the variable.
-  attr_reader :key
-  # @return [TemplateVariableType] The type of the variable.
-  attr_reader :type
-  # @return [Object] The fallback value of the variable.
-  attr_reader :fallback_value
-  # @return [String] Timestamp indicating when the variable was created.
-  attr_reader :created_at
-  # @return [String] Timestamp indicating when the variable was last updated.
-  attr_reader :updated_at
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the TemplateListItemStatus SDK namespace.
+  module TemplateListItemStatus
+    DRAFT = 'draft'
+    PUBLISHED = 'published'
+    VALUES = %w[draft published].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the TemplateVariableType SDK namespace.
-module TemplateVariableType
-  STRING = 'string'
-  NUMBER = 'number'
-  BOOLEAN = 'boolean'
-  OBJECT = 'object'
-  LIST = 'list'
-  VALUES = ['string', 'number', 'boolean', 'object', 'list'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalTemplateVariableInputMetadata
-  FIELDS = {
-    key: "key",
-    type: "type",
-    fallback_value: "fallback_value",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    key
-    type
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevResend::TemplateVariableInputType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for TemplateVariableInput.
-# Typed representation of the `TemplateVariableInput` API schema.
-class TemplateVariableInput
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalTemplateVariableInputMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalTemplateVariableInputMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalTemplateVariableInputMetadata::DECODERS
-
-  # @return [String] The key of the variable.
-  attr_reader :key
-  # @return [TemplateVariableInputType] The type of the variable.
-  attr_reader :type
-  # @return [Object] The fallback value of the variable.
-  attr_reader :fallback_value
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalTemplateVariableMetadata
+    FIELDS = {
+      id: 'id',
+      key: 'key',
+      type: 'type',
+      fallback_value: 'fallback_value',
+      created_at: 'created_at',
+      updated_at: 'updated_at'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      key
+      type
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevResend::TemplateVariableType.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for TemplateVariable.
+  # Typed representation of the `TemplateVariable` API schema.
+  class TemplateVariable
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalTemplateVariableMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalTemplateVariableMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalTemplateVariableMetadata::DECODERS
+
+    # @return [String] The ID of the template variable.
+    attr_reader :id
+    # @return [String] The key of the variable.
+    attr_reader :key
+    # @return [TemplateVariableType] The type of the variable.
+    attr_reader :type
+    # @return [Object] The fallback value of the variable.
+    attr_reader :fallback_value
+    # @return [String] Timestamp indicating when the variable was created.
+    attr_reader :created_at
+    # @return [String] Timestamp indicating when the variable was last updated.
+    attr_reader :updated_at
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the TemplateVariableInputType SDK namespace.
-module TemplateVariableInputType
-  STRING = 'string'
-  NUMBER = 'number'
-  BOOLEAN = 'boolean'
-  OBJECT = 'object'
-  LIST = 'list'
-  VALUES = ['string', 'number', 'boolean', 'object', 'list'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalUpdateTemplateOptionsMetadata
-  FIELDS = {
-    name: "name",
-    alias_: "alias",
-    from: "from",
-    subject: "subject",
-    reply_to: "reply_to",
-    html: "html",
-    text: "text",
-    variables: "variables",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    variables: lambda do |value|
-      value&.map { |item| ::OctridevResend::TemplateVariableInput.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for UpdateTemplateOptions.
-# Typed representation of the `UpdateTemplateOptions` API schema.
-class UpdateTemplateOptions
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalUpdateTemplateOptionsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalUpdateTemplateOptionsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalUpdateTemplateOptionsMetadata::DECODERS
-
-  # @return [String] The name of the template.
-  attr_reader :name
-  # @return [String] The alias of the template.
-  attr_reader :alias_
-  # @return [String] Sender email address. To include a friendly name, use the format "Your Name <sender@domain.com>".
-  attr_reader :from
-  # @return [String] Email subject.
-  attr_reader :subject
-  # @return [Array_of_String] Reply-to email addresses.
-  attr_reader :reply_to
-  # @return [String] The HTML version of the template.
-  attr_reader :html
-  # @return [String] The plain text version of the template.
-  attr_reader :text
-  # @return [Array_of_TemplateVariableInput] Optional array value serialized in the `variables` wire field.
-  attr_reader :variables
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the TemplateVariableType SDK namespace.
+  module TemplateVariableType
+    STRING = 'string'
+    NUMBER = 'number'
+    BOOLEAN = 'boolean'
+    OBJECT = 'object'
+    LIST = 'list'
+    VALUES = %w[string number boolean object list].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalTemplateVariableInputMetadata
+    FIELDS = {
+      key: 'key',
+      type: 'type',
+      fallback_value: 'fallback_value'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      key
+      type
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevResend::TemplateVariableInputType.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for TemplateVariableInput.
+  # Typed representation of the `TemplateVariableInput` API schema.
+  class TemplateVariableInput
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalTemplateVariableInputMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalTemplateVariableInputMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalTemplateVariableInputMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalUpdateTemplateResponseSuccessMetadata
-  FIELDS = {
-    id: "id",
-    object: "object",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    # @return [String] The key of the variable.
+    attr_reader :key
+    # @return [TemplateVariableInputType] The type of the variable.
+    attr_reader :type
+    # @return [Object] The fallback value of the variable.
+    attr_reader :fallback_value
 
-# API model for UpdateTemplateResponseSuccess.
-# Typed representation of the `UpdateTemplateResponseSuccess` API schema.
-class UpdateTemplateResponseSuccess
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalUpdateTemplateResponseSuccessMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalUpdateTemplateResponseSuccessMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalUpdateTemplateResponseSuccessMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] The ID of the template.
-  attr_reader :id
-  # @return [String] The object type of the response.
-  attr_reader :object
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the TemplateVariableInputType SDK namespace.
+  module TemplateVariableInputType
+    STRING = 'string'
+    NUMBER = 'number'
+    BOOLEAN = 'boolean'
+    OBJECT = 'object'
+    LIST = 'list'
+    VALUES = %w[string number boolean object list].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalUpdateTemplateOptionsMetadata
+    FIELDS = {
+      name: 'name',
+      alias_: 'alias',
+      from: 'from',
+      subject: 'subject',
+      reply_to: 'reply_to',
+      html: 'html',
+      text: 'text',
+      variables: 'variables'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      variables: lambda do |value|
+        value&.map { |item| ::OctridevResend::TemplateVariableInput.from_hash(item) }
+      end
+    }.freeze
   end
-end
+
+  # API model for UpdateTemplateOptions.
+  # Typed representation of the `UpdateTemplateOptions` API schema.
+  class UpdateTemplateOptions
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalUpdateTemplateOptionsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalUpdateTemplateOptionsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalUpdateTemplateOptionsMetadata::DECODERS
+
+    # @return [String] The name of the template.
+    attr_reader :name
+    # @return [String] The alias of the template.
+    attr_reader :alias_
+    # @return [String] Sender email address. To include a friendly name, use the format "Your Name <sender@domain.com>".
+    attr_reader :from
+    # @return [String] Email subject.
+    attr_reader :subject
+    # @return [Array_of_String] Reply-to email addresses.
+    attr_reader :reply_to
+    # @return [String] The HTML version of the template.
+    attr_reader :html
+    # @return [String] The plain text version of the template.
+    attr_reader :text
+    # @return [Array_of_TemplateVariableInput] Optional array value serialized in the `variables` wire field.
+    attr_reader :variables
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalUpdateTemplateResponseSuccessMetadata
+    FIELDS = {
+      id: 'id',
+      object: 'object'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
+  end
+
+  # API model for UpdateTemplateResponseSuccess.
+  # Typed representation of the `UpdateTemplateResponseSuccess` API schema.
+  class UpdateTemplateResponseSuccess
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalUpdateTemplateResponseSuccessMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalUpdateTemplateResponseSuccessMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalUpdateTemplateResponseSuccessMetadata::DECODERS
+
+    # @return [String] The ID of the template.
+    attr_reader :id
+    # @return [String] The object type of the response.
+    attr_reader :object
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
 end

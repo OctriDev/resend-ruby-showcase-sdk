@@ -5,664 +5,654 @@
 
 # automations domain models
 module OctridevResend
-# Internal model hydration metadata.
-class SdkInternalAutomationMetadata
-  FIELDS = {
-    object: "object",
-    id: "id",
-    name: "name",
-    status: "status",
-    created_at: "created_at",
-    updated_at: "updated_at",
-    steps: "steps",
-    connections: "connections",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    status: lambda do |value|
-      ::OctridevResend::AutomationStatus.from_value(value)
-    end,
-    steps: lambda do |value|
-      value&.map { |item| ::OctridevResend::AutomationStepResponse.from_hash(item) }
-    end,
-    connections: lambda do |value|
-      value&.map { |item| ::OctridevResend::AutomationConnection.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for Automation.
-# Typed representation of the `Automation` API schema.
-class Automation
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAutomationMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAutomationMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAutomationMetadata::DECODERS
-
-  # @return [String] Type of the response object.
-  attr_reader :object
-  # @return [String] The ID of the automation.
-  attr_reader :id
-  # @return [String] The name of the automation.
-  attr_reader :name
-  # @return [AutomationStatus] The current status of the automation.
-  attr_reader :status
-  # @return [String] The date and time the automation was created.
-  attr_reader :created_at
-  # @return [String] The date and time the automation was last updated.
-  attr_reader :updated_at
-  # @return [Array_of_AutomationStepResponse] The steps in the active version of the automation.
-  attr_reader :steps
-  # @return [Array_of_AutomationConnection] The connections between steps in the active version of the automation.
-  attr_reader :connections
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAutomationMetadata
+    FIELDS = {
+      object: 'object',
+      id: 'id',
+      name: 'name',
+      status: 'status',
+      created_at: 'created_at',
+      updated_at: 'updated_at',
+      steps: 'steps',
+      connections: 'connections'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      status: lambda do |value|
+        ::OctridevResend::AutomationStatus.from_value(value)
+      end,
+      steps: lambda do |value|
+        value&.map { |item| ::OctridevResend::AutomationStepResponse.from_hash(item) }
+      end,
+      connections: lambda do |value|
+        value&.map { |item| ::OctridevResend::AutomationConnection.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for Automation.
+  # Typed representation of the `Automation` API schema.
+  class Automation
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAutomationMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAutomationMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAutomationMetadata::DECODERS
+
+    # @return [String] Type of the response object.
+    attr_reader :object
+    # @return [String] The ID of the automation.
+    attr_reader :id
+    # @return [String] The name of the automation.
+    attr_reader :name
+    # @return [AutomationStatus] The current status of the automation.
+    attr_reader :status
+    # @return [String] The date and time the automation was created.
+    attr_reader :created_at
+    # @return [String] The date and time the automation was last updated.
+    attr_reader :updated_at
+    # @return [Array_of_AutomationStepResponse] The steps in the active version of the automation.
+    attr_reader :steps
+    # @return [Array_of_AutomationConnection] The connections between steps in the active version of the automation.
+    attr_reader :connections
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the AutomationStatus SDK namespace.
-module AutomationStatus
-  ENABLED = 'enabled'
-  DISABLED = 'disabled'
-  VALUES = ['enabled', 'disabled'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAutomationConnectionMetadata
-  FIELDS = {
-    from: "from",
-    to: "to",
-    type: "type",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    from
-    to
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevResend::AutomationConnectionType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for AutomationConnection.
-# A connection between two steps in the automation graph.
-class AutomationConnection
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAutomationConnectionMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAutomationConnectionMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAutomationConnectionMetadata::DECODERS
-
-  # @return [String] The `key` of the source step.
-  attr_reader :from
-  # @return [String] The `key` of the target step.
-  attr_reader :to
-  # @return [AutomationConnectionType] The type of connection. Defaults to `default`.
-  attr_reader :type
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the AutomationStatus SDK namespace.
+  module AutomationStatus
+    ENABLED = 'enabled'
+    DISABLED = 'disabled'
+    VALUES = %w[enabled disabled].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalAutomationConnectionMetadata
+    FIELDS = {
+      from: 'from',
+      to: 'to',
+      type: 'type'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      from
+      to
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevResend::AutomationConnectionType.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for AutomationConnection.
+  # A connection between two steps in the automation graph.
+  class AutomationConnection
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAutomationConnectionMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAutomationConnectionMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAutomationConnectionMetadata::DECODERS
 
-# Defines the AutomationConnectionType SDK namespace.
-module AutomationConnectionType
-  DEFAULT = 'default'
-  CONDITION_MET = 'condition_met'
-  CONDITION_NOT_MET = 'condition_not_met'
-  TIMEOUT = 'timeout'
-  EVENT_RECEIVED = 'event_received'
-  VALUES = ['default', 'condition_met', 'condition_not_met', 'timeout', 'event_received'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [String] The `key` of the source step.
+    attr_reader :from
+    # @return [String] The `key` of the target step.
+    attr_reader :to
+    # @return [AutomationConnectionType] The type of connection. Defaults to `default`.
+    attr_reader :type
 
-# Internal model hydration metadata.
-class SdkInternalAutomationListItemMetadata
-  FIELDS = {
-    id: "id",
-    name: "name",
-    status: "status",
-    created_at: "created_at",
-    updated_at: "updated_at",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    status: lambda do |value|
-      ::OctridevResend::AutomationListItemStatus.from_value(value)
-    end,
-  }.freeze
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# API model for AutomationListItem.
-# Typed representation of the `AutomationListItem` API schema.
-class AutomationListItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAutomationListItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAutomationListItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAutomationListItemMetadata::DECODERS
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  # @return [String] The ID of the automation.
-  attr_reader :id
-  # @return [String] The name of the automation.
-  attr_reader :name
-  # @return [AutomationListItemStatus] The current status of the automation.
-  attr_reader :status
-  # @return [String] The date and time the automation was created.
-  attr_reader :created_at
-  # @return [String] The date and time the automation was last updated.
-  attr_reader :updated_at
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the AutomationConnectionType SDK namespace.
+  module AutomationConnectionType
+    DEFAULT = 'default'
+    CONDITION_MET = 'condition_met'
+    CONDITION_NOT_MET = 'condition_not_met'
+    TIMEOUT = 'timeout'
+    EVENT_RECEIVED = 'event_received'
+    VALUES = %w[default condition_met condition_not_met timeout event_received].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the AutomationListItemStatus SDK namespace.
-module AutomationListItemStatus
-  ENABLED = 'enabled'
-  DISABLED = 'disabled'
-  VALUES = ['enabled', 'disabled'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAutomationRunMetadata
-  FIELDS = {
-    object: "object",
-    id: "id",
-    status: "status",
-    started_at: "started_at",
-    completed_at: "completed_at",
-    created_at: "created_at",
-    steps: "steps",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    status: lambda do |value|
-      ::OctridevResend::AutomationRunStatus.from_value(value)
-    end,
-    steps: lambda do |value|
-      value&.map { |item| ::OctridevResend::AutomationRunStep.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for AutomationRun.
-# Typed representation of the `AutomationRun` API schema.
-class AutomationRun
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAutomationRunMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAutomationRunMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAutomationRunMetadata::DECODERS
-
-  # @return [String] Type of the response object.
-  attr_reader :object
-  # @return [String] The ID of the automation run.
-  attr_reader :id
-  # @return [AutomationRunStatus] The current status of the automation run.
-  attr_reader :status
-  # @return [String] The date and time the run started.
-  attr_reader :started_at
-  # @return [String] The date and time the run completed.
-  attr_reader :completed_at
-  # @return [String] The date and time the run was created.
-  attr_reader :created_at
-  # @return [Array_of_AutomationRunStep] The steps executed in this run, sorted in graph order.
-  attr_reader :steps
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAutomationListItemMetadata
+    FIELDS = {
+      id: 'id',
+      name: 'name',
+      status: 'status',
+      created_at: 'created_at',
+      updated_at: 'updated_at'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      status: lambda do |value|
+        ::OctridevResend::AutomationListItemStatus.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AutomationListItem.
+  # Typed representation of the `AutomationListItem` API schema.
+  class AutomationListItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAutomationListItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAutomationListItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAutomationListItemMetadata::DECODERS
+
+    # @return [String] The ID of the automation.
+    attr_reader :id
+    # @return [String] The name of the automation.
+    attr_reader :name
+    # @return [AutomationListItemStatus] The current status of the automation.
+    attr_reader :status
+    # @return [String] The date and time the automation was created.
+    attr_reader :created_at
+    # @return [String] The date and time the automation was last updated.
+    attr_reader :updated_at
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the AutomationRunStatus SDK namespace.
-module AutomationRunStatus
-  RUNNING = 'running'
-  COMPLETED = 'completed'
-  FAILED = 'failed'
-  CANCELLED = 'cancelled'
-  VALUES = ['running', 'completed', 'failed', 'cancelled'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAutomationRunListItemMetadata
-  FIELDS = {
-    id: "id",
-    status: "status",
-    started_at: "started_at",
-    completed_at: "completed_at",
-    created_at: "created_at",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    status: lambda do |value|
-      ::OctridevResend::AutomationRunListItemStatus.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for AutomationRunListItem.
-# Typed representation of the `AutomationRunListItem` API schema.
-class AutomationRunListItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAutomationRunListItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAutomationRunListItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAutomationRunListItemMetadata::DECODERS
-
-  # @return [String] The ID of the automation run.
-  attr_reader :id
-  # @return [AutomationRunListItemStatus] The current status of the automation run.
-  attr_reader :status
-  # @return [String] The date and time the run started.
-  attr_reader :started_at
-  # @return [String] The date and time the run completed.
-  attr_reader :completed_at
-  # @return [String] The date and time the run was created.
-  attr_reader :created_at
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the AutomationListItemStatus SDK namespace.
+  module AutomationListItemStatus
+    ENABLED = 'enabled'
+    DISABLED = 'disabled'
+    VALUES = %w[enabled disabled].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalAutomationRunMetadata
+    FIELDS = {
+      object: 'object',
+      id: 'id',
+      status: 'status',
+      started_at: 'started_at',
+      completed_at: 'completed_at',
+      created_at: 'created_at',
+      steps: 'steps'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      status: lambda do |value|
+        ::OctridevResend::AutomationRunStatus.from_value(value)
+      end,
+      steps: lambda do |value|
+        value&.map { |item| ::OctridevResend::AutomationRunStep.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for AutomationRun.
+  # Typed representation of the `AutomationRun` API schema.
+  class AutomationRun
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAutomationRunMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAutomationRunMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAutomationRunMetadata::DECODERS
 
-# Defines the AutomationRunListItemStatus SDK namespace.
-module AutomationRunListItemStatus
-  RUNNING = 'running'
-  COMPLETED = 'completed'
-  FAILED = 'failed'
-  CANCELLED = 'cancelled'
-  VALUES = ['running', 'completed', 'failed', 'cancelled'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [String] Type of the response object.
+    attr_reader :object
+    # @return [String] The ID of the automation run.
+    attr_reader :id
+    # @return [AutomationRunStatus] The current status of the automation run.
+    attr_reader :status
+    # @return [String] The date and time the run started.
+    attr_reader :started_at
+    # @return [String] The date and time the run completed.
+    attr_reader :completed_at
+    # @return [String] The date and time the run was created.
+    attr_reader :created_at
+    # @return [Array_of_AutomationRunStep] The steps executed in this run, sorted in graph order.
+    attr_reader :steps
 
-# Internal model hydration metadata.
-class SdkInternalAutomationRunStepMetadata
-  FIELDS = {
-    key: "key",
-    type: "type",
-    status: "status",
-    started_at: "started_at",
-    completed_at: "completed_at",
-    output: "output",
-    error: "error",
-    created_at: "created_at",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevResend::AutomationRunStepType.from_value(value)
-    end,
-  }.freeze
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# API model for AutomationRunStep.
-# A step execution within an automation run.
-class AutomationRunStep
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAutomationRunStepMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAutomationRunStepMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAutomationRunStepMetadata::DECODERS
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  # @return [String] The key of the automation step.
-  attr_reader :key
-  # @return [AutomationRunStepType] The type of automation step.
-  attr_reader :type
-  # @return [String] The execution status of this step.
-  attr_reader :status
-  # @return [String] The date and time the step started executing.
-  attr_reader :started_at
-  # @return [String] The date and time the step completed executing.
-  attr_reader :completed_at
-  # @return [Hash] The output produced by the step, if any.
-  attr_reader :output
-  # @return [Hash] The error produced by the step, if any.
-  attr_reader :error
-  # @return [String] The date and time the step record was created.
-  attr_reader :created_at
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the AutomationRunStatus SDK namespace.
+  module AutomationRunStatus
+    RUNNING = 'running'
+    COMPLETED = 'completed'
+    FAILED = 'failed'
+    CANCELLED = 'cancelled'
+    VALUES = %w[running completed failed cancelled].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the AutomationRunStepType SDK namespace.
-module AutomationRunStepType
-  TRIGGER = 'trigger'
-  SEND_EMAIL = 'send_email'
-  DELAY = 'delay'
-  WAIT_FOR_EVENT = 'wait_for_event'
-  CONDITION = 'condition'
-  CONTACT_UPDATE = 'contact_update'
-  CONTACT_DELETE = 'contact_delete'
-  ADD_TO_SEGMENT = 'add_to_segment'
-  VALUES = [
-    'trigger', 'send_email', 'delay', 'wait_for_event', 'condition', 'contact_update',
-    'contact_delete', 'add_to_segment'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAutomationStepMetadata
-  FIELDS = {
-    key: "key",
-    type: "type",
-    config: "config",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    key
-    type
-    config
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevResend::AutomationStepType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for AutomationStep.
-# A step in an automation workflow. The `config` object varies based on the step `type`.
-class AutomationStep
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAutomationStepMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAutomationStepMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAutomationStepMetadata::DECODERS
-
-  # @return [String] A unique key for this step within the automation graph.
-  attr_reader :key
-  # @return [AutomationStepType] The type of automation step.
-  attr_reader :type
-  # @return [Hash] Configuration for the step. Shape depends on `type`: - **trigger**: `{ event_name: string }` - **send_email**: `{ template: { id: string, variables?: object }, subject?: string, from?: string, reply_to?: string }` - **delay**: `{ duration: string }` — a human-readable duration (e.g. `"30 minutes"`) - **wait_for_event**: `{ event_name: string, timeout?: string, filter_rule?: object }` — `timeout` is a human-readable duration (e.g. `"1 hour"`) - **condition**: A rule tree with…
-  attr_reader :config
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAutomationRunListItemMetadata
+    FIELDS = {
+      id: 'id',
+      status: 'status',
+      started_at: 'started_at',
+      completed_at: 'completed_at',
+      created_at: 'created_at'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      status: lambda do |value|
+        ::OctridevResend::AutomationRunListItemStatus.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AutomationRunListItem.
+  # Typed representation of the `AutomationRunListItem` API schema.
+  class AutomationRunListItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAutomationRunListItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAutomationRunListItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAutomationRunListItemMetadata::DECODERS
+
+    # @return [String] The ID of the automation run.
+    attr_reader :id
+    # @return [AutomationRunListItemStatus] The current status of the automation run.
+    attr_reader :status
+    # @return [String] The date and time the run started.
+    attr_reader :started_at
+    # @return [String] The date and time the run completed.
+    attr_reader :completed_at
+    # @return [String] The date and time the run was created.
+    attr_reader :created_at
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the AutomationStepType SDK namespace.
-module AutomationStepType
-  TRIGGER = 'trigger'
-  SEND_EMAIL = 'send_email'
-  DELAY = 'delay'
-  WAIT_FOR_EVENT = 'wait_for_event'
-  CONDITION = 'condition'
-  CONTACT_UPDATE = 'contact_update'
-  CONTACT_DELETE = 'contact_delete'
-  ADD_TO_SEGMENT = 'add_to_segment'
-  VALUES = [
-    'trigger', 'send_email', 'delay', 'wait_for_event', 'condition', 'contact_update',
-    'contact_delete', 'add_to_segment'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAutomationStepResponseMetadata
-  FIELDS = {
-    key: "key",
-    type: "type",
-    config: "config",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevResend::AutomationStepResponseType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for AutomationStepResponse.
-# A step as returned when retrieving an automation.
-class AutomationStepResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAutomationStepResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAutomationStepResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAutomationStepResponseMetadata::DECODERS
-
-  # @return [String] The unique key of this step within the automation graph.
-  attr_reader :key
-  # @return [AutomationStepResponseType] The type of automation step.
-  attr_reader :type
-  # @return [Hash] Configuration for the step. Shape depends on `type`. For `delay` steps, config contains `{ duration: string }` with a human-readable duration (e.g. `"30 minutes"`). For `wait_for_event` steps, config contains `{ event_name: string, timeout?: string, filter_rule?: object }` where `timeout` is a human-readable duration.
-  attr_reader :config
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the AutomationRunListItemStatus SDK namespace.
+  module AutomationRunListItemStatus
+    RUNNING = 'running'
+    COMPLETED = 'completed'
+    FAILED = 'failed'
+    CANCELLED = 'cancelled'
+    VALUES = %w[running completed failed cancelled].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalAutomationRunStepMetadata
+    FIELDS = {
+      key: 'key',
+      type: 'type',
+      status: 'status',
+      started_at: 'started_at',
+      completed_at: 'completed_at',
+      output: 'output',
+      error: 'error',
+      created_at: 'created_at'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevResend::AutomationRunStepType.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for AutomationRunStep.
+  # A step execution within an automation run.
+  class AutomationRunStep
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAutomationRunStepMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAutomationRunStepMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAutomationRunStepMetadata::DECODERS
 
-# Defines the AutomationStepResponseType SDK namespace.
-module AutomationStepResponseType
-  TRIGGER = 'trigger'
-  SEND_EMAIL = 'send_email'
-  DELAY = 'delay'
-  WAIT_FOR_EVENT = 'wait_for_event'
-  CONDITION = 'condition'
-  CONTACT_UPDATE = 'contact_update'
-  CONTACT_DELETE = 'contact_delete'
-  ADD_TO_SEGMENT = 'add_to_segment'
-  VALUES = [
-    'trigger', 'send_email', 'delay', 'wait_for_event', 'condition', 'contact_update',
-    'contact_delete', 'add_to_segment'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [String] The key of the automation step.
+    attr_reader :key
+    # @return [AutomationRunStepType] The type of automation step.
+    attr_reader :type
+    # @return [String] The execution status of this step.
+    attr_reader :status
+    # @return [String] The date and time the step started executing.
+    attr_reader :started_at
+    # @return [String] The date and time the step completed executing.
+    attr_reader :completed_at
+    # @return [Hash] The output produced by the step, if any.
+    attr_reader :output
+    # @return [Hash] The error produced by the step, if any.
+    attr_reader :error
+    # @return [String] The date and time the step record was created.
+    attr_reader :created_at
 
-# Internal model hydration metadata.
-class SdkInternalCreateAutomationRequestMetadata
-  FIELDS = {
-    name: "name",
-    status: "status",
-    steps: "steps",
-    connections: "connections",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    name
-    steps
-    connections
-  ].freeze
-  DECODERS = {
-    status: lambda do |value|
-      ::OctridevResend::CreateAutomationRequestStatus.from_value(value)
-    end,
-    steps: lambda do |value|
-      value&.map { |item| ::OctridevResend::AutomationStep.from_hash(item) }
-    end,
-    connections: lambda do |value|
-      value&.map { |item| ::OctridevResend::AutomationConnection.from_hash(item) }
-    end,
-  }.freeze
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# API model for CreateAutomationRequest.
-# Typed representation of the `CreateAutomationRequest` API schema.
-class CreateAutomationRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCreateAutomationRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCreateAutomationRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCreateAutomationRequestMetadata::DECODERS
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  # @return [String] The name of the automation.
-  attr_reader :name
-  # @return [CreateAutomationRequestStatus] The initial status of the automation. Defaults to `disabled`.
-  attr_reader :status
-  # @return [Array_of_AutomationStep] The steps that compose the automation workflow. Must include at least one `trigger` step.
-  attr_reader :steps
-  # @return [Array_of_AutomationConnection] The connections between steps in the automation graph.
-  attr_reader :connections
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the AutomationRunStepType SDK namespace.
+  module AutomationRunStepType
+    TRIGGER = 'trigger'
+    SEND_EMAIL = 'send_email'
+    DELAY = 'delay'
+    WAIT_FOR_EVENT = 'wait_for_event'
+    CONDITION = 'condition'
+    CONTACT_UPDATE = 'contact_update'
+    CONTACT_DELETE = 'contact_delete'
+    ADD_TO_SEGMENT = 'add_to_segment'
+    VALUES = %w[
+      trigger send_email delay wait_for_event condition contact_update
+      contact_delete add_to_segment
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the CreateAutomationRequestStatus SDK namespace.
-module CreateAutomationRequestStatus
-  ENABLED = 'enabled'
-  DISABLED = 'disabled'
-  VALUES = ['enabled', 'disabled'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalCreateAutomationResponseMetadata
-  FIELDS = {
-    object: "object",
-    id: "id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for CreateAutomationResponse.
-# Typed representation of the `CreateAutomationResponse` API schema.
-class CreateAutomationResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCreateAutomationResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCreateAutomationResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCreateAutomationResponseMetadata::DECODERS
-
-  # @return [String] Type of the response object.
-  attr_reader :object
-  # @return [String] The ID of the created automation.
-  attr_reader :id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAutomationStepMetadata
+    FIELDS = {
+      key: 'key',
+      type: 'type',
+      config: 'config'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      key
+      type
+      config
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevResend::AutomationStepType.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AutomationStep.
+  # A step in an automation workflow. The `config` object varies based on the step `type`.
+  class AutomationStep
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAutomationStepMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAutomationStepMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAutomationStepMetadata::DECODERS
+
+    # @return [String] A unique key for this step within the automation graph.
+    attr_reader :key
+    # @return [AutomationStepType] The type of automation step.
+    attr_reader :type
+    # @return [Hash] Configuration for the step. Shape depends on `type`: - **trigger**: `{ event_name: string }` - **send_email**: `{ template: { id: string, variables?: object }, subject?: string, from?: string, reply_to?: string }` - **delay**: `{ duration: string }` — a human-readable duration (e.g. `"30 minutes"`) - **wait_for_event**: `{ event_name: string, timeout?: string, filter_rule?: object }` — `timeout` is a human-readable duration (e.g. `"1 hour"`) - **condition**: A rule tree with…
+    attr_reader :config
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Defines the AutomationStepType SDK namespace.
+  module AutomationStepType
+    TRIGGER = 'trigger'
+    SEND_EMAIL = 'send_email'
+    DELAY = 'delay'
+    WAIT_FOR_EVENT = 'wait_for_event'
+    CONDITION = 'condition'
+    CONTACT_UPDATE = 'contact_update'
+    CONTACT_DELETE = 'contact_delete'
+    ADD_TO_SEGMENT = 'add_to_segment'
+    VALUES = %w[
+      trigger send_email delay wait_for_event condition contact_update
+      contact_delete add_to_segment
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
 
-# Internal model hydration metadata.
-class SdkInternalDeleteAutomationResponseMetadata
-  FIELDS = {
-    object: "object",
-    id: "id",
-    deleted: "deleted",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+  # Internal model hydration metadata.
+  class SdkInternalAutomationStepResponseMetadata
+    FIELDS = {
+      key: 'key',
+      type: 'type',
+      config: 'config'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevResend::AutomationStepResponseType.from_value(value)
+      end
+    }.freeze
+  end
+
+  # API model for AutomationStepResponse.
+  # A step as returned when retrieving an automation.
+  class AutomationStepResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAutomationStepResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAutomationStepResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAutomationStepResponseMetadata::DECODERS
+
+    # @return [String] The unique key of this step within the automation graph.
+    attr_reader :key
+    # @return [AutomationStepResponseType] The type of automation step.
+    attr_reader :type
+    # @return [Hash] Configuration for the step. Shape depends on `type`. For `delay` steps, config contains `{ duration: string }` with a human-readable duration (e.g. `"30 minutes"`). For `wait_for_event` steps, config contains `{ event_name: string, timeout?: string, filter_rule?: object }` where `timeout` is a human-readable duration.
+    attr_reader :config
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Defines the AutomationStepResponseType SDK namespace.
+  module AutomationStepResponseType
+    TRIGGER = 'trigger'
+    SEND_EMAIL = 'send_email'
+    DELAY = 'delay'
+    WAIT_FOR_EVENT = 'wait_for_event'
+    CONDITION = 'condition'
+    CONTACT_UPDATE = 'contact_update'
+    CONTACT_DELETE = 'contact_delete'
+    ADD_TO_SEGMENT = 'add_to_segment'
+    VALUES = %w[
+      trigger send_email delay wait_for_event condition contact_update
+      contact_delete add_to_segment
+    ].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalCreateAutomationRequestMetadata
+    FIELDS = {
+      name: 'name',
+      status: 'status',
+      steps: 'steps',
+      connections: 'connections'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      name
+      steps
+      connections
+    ].freeze
+    DECODERS = {
+      status: lambda do |value|
+        ::OctridevResend::CreateAutomationRequestStatus.from_value(value)
+      end,
+      steps: lambda do |value|
+        value&.map { |item| ::OctridevResend::AutomationStep.from_hash(item) }
+      end,
+      connections: lambda do |value|
+        value&.map { |item| ::OctridevResend::AutomationConnection.from_hash(item) }
+      end
+    }.freeze
+  end
+
+  # API model for CreateAutomationRequest.
+  # Typed representation of the `CreateAutomationRequest` API schema.
+  class CreateAutomationRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCreateAutomationRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCreateAutomationRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCreateAutomationRequestMetadata::DECODERS
+
+    # @return [String] The name of the automation.
+    attr_reader :name
+    # @return [CreateAutomationRequestStatus] The initial status of the automation. Defaults to `disabled`.
+    attr_reader :status
+    # @return [Array_of_AutomationStep] The steps that compose the automation workflow. Must include at least one `trigger` step.
+    attr_reader :steps
+    # @return [Array_of_AutomationConnection] The connections between steps in the automation graph.
+    attr_reader :connections
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Defines the CreateAutomationRequestStatus SDK namespace.
+  module CreateAutomationRequestStatus
+    ENABLED = 'enabled'
+    DISABLED = 'disabled'
+    VALUES = %w[enabled disabled].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalCreateAutomationResponseMetadata
+    FIELDS = {
+      object: 'object',
+      id: 'id'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
+  end
+
+  # API model for CreateAutomationResponse.
+  # Typed representation of the `CreateAutomationResponse` API schema.
+  class CreateAutomationResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCreateAutomationResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCreateAutomationResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCreateAutomationResponseMetadata::DECODERS
+
+    # @return [String] Type of the response object.
+    attr_reader :object
+    # @return [String] The ID of the created automation.
+    attr_reader :id
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalDeleteAutomationResponseMetadata
+    FIELDS = {
+      object: 'object',
+      id: 'id',
+      deleted: 'deleted'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
+  end
 end

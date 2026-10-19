@@ -33,11 +33,11 @@ module OctridevResend
         BOUNCE_RATE = 'bounce_rate'
         COMPLAINT_RATE = 'complaint_rate'
         UNSUBSCRIBE_RATE = 'unsubscribe_rate'
-        VALUES = [
-          'received', 'delivered', 'complained', 'suppressed', 'bounced', 'bounced_transient',
-          'bounced_permanent', 'bounced_undetermined', 'opened', 'clicked', 'unsubscribed',
-          'delivery_delayed', 'failed', 'sent', 'unique_opened', 'unique_clicked', 'delivery_rate',
-          'open_rate', 'click_rate', 'bounce_rate', 'complaint_rate', 'unsubscribe_rate'
+        VALUES = %w[
+          received delivered complained suppressed bounced bounced_transient
+          bounced_permanent bounced_undetermined opened clicked unsubscribed
+          delivery_delayed failed sent unique_opened unique_clicked delivery_rate
+          open_rate click_rate bounce_rate complaint_rate unsubscribe_rate
         ].freeze
         def self.from_value(value)
           value
@@ -50,7 +50,7 @@ module OctridevResend
         DOMAIN = 'domain'
         EMAIL = 'email'
         BROADCAST = 'broadcast'
-        VALUES = ['period', 'domain', 'email', 'broadcast'].freeze
+        VALUES = %w[period domain email broadcast].freeze
         def self.from_value(value)
           value
         end
@@ -62,7 +62,7 @@ module OctridevResend
         DAILY = 'daily'
         WEEKLY = 'weekly'
         MONTHLY = 'monthly'
-        VALUES = ['hourly', 'daily', 'weekly', 'monthly'].freeze
+        VALUES = %w[hourly daily weekly monthly].freeze
         def self.from_value(value)
           value
         end
@@ -117,14 +117,13 @@ module OctridevResend
         topic_id: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(idempotency_key) do
           Validation.validate_length('Idempotency-Key', idempotency_key, max: 256)
         end
 
         SdkClient.request(
           'POST',
-          "/emails",
+          '/emails',
           config: config,
           body: {
             'from' => from,
@@ -140,15 +139,15 @@ module OctridevResend
             'scheduled_at' => scheduled_at,
             'attachments' => attachments,
             'tags' => tags,
-            'topic_id' => topic_id,
+            'topic_id' => topic_id
           },
           return_type: ::OctridevResend::SendEmailResponse,
           decoder: :json,
           operation_id: 'emails_send',
           extra_headers: SdkClient.serialize_headers({
-            'Idempotency-Key' => SdkClient.header_value(idempotency_key),
-          }),
-          request_options: request_options,
+                                                       'Idempotency-Key' => SdkClient.header_value(idempotency_key)
+                                                     }),
+          request_options: request_options
         ).data
       end
 
@@ -164,22 +163,21 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(limit) { Validation.validate_range('limit', limit, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          "/emails",
+          '/emails',
           config: config,
           query: {
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true),
+            'before' => QueryValue.new(before, style: 'form', explode: true)
           },
           return_type: ::OctridevResend::ListEmailsResponse,
           decoder: :json,
           operation_id: 'emails_list',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -191,18 +189,17 @@ module OctridevResend
         email_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/emails/",
+            '/emails/',
             SdkClient.encode_path_segment(email_id)
           ].join,
           config: config,
           return_type: ::OctridevResend::Email,
           decoder: :json,
           operation_id: 'emails_get',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -214,18 +211,17 @@ module OctridevResend
         email_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'PATCH',
           [
-            "/emails/",
+            '/emails/',
             SdkClient.encode_path_segment(email_id)
           ].join,
           config: config,
           return_type: ::OctridevResend::UpdateEmailOptions,
           decoder: :json,
           operation_id: 'emails_update',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -237,19 +233,18 @@ module OctridevResend
         email_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/emails/",
+            '/emails/',
             SdkClient.encode_path_segment(email_id),
-            "/cancel"
+            '/cancel'
           ].join,
           config: config,
           return_type: ::OctridevResend::Email,
           decoder: :json,
           operation_id: 'emails_cancel',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -265,22 +260,21 @@ module OctridevResend
         expires_in: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/emails/",
+            '/emails/',
             SdkClient.encode_path_segment(email_id),
-            "/share"
+            '/share'
           ].join,
           config: config,
           body: {
-            'expires_in' => expires_in,
+            'expires_in' => expires_in
           },
           return_type: ::OctridevResend::ShareEmailResponse,
           decoder: :json,
           operation_id: 'emails_share',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -294,23 +288,22 @@ module OctridevResend
         body: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(idempotency_key) do
           Validation.validate_length('Idempotency-Key', idempotency_key, max: 256)
         end
 
         SdkClient.request(
           'POST',
-          "/emails/batch",
+          '/emails/batch',
           config: config,
           body: body,
           return_type: ::OctridevResend::CreateBatchEmailsResponse,
           decoder: :json,
           operation_id: 'emails_send_batch',
           extra_headers: SdkClient.serialize_headers({
-            'Idempotency-Key' => SdkClient.header_value(idempotency_key),
-          }),
-          request_options: request_options,
+                                                       'Idempotency-Key' => SdkClient.header_value(idempotency_key)
+                                                     }),
+          request_options: request_options
         ).data
       end
 
@@ -330,7 +323,6 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('email_id', email_id)
 
         Validation.if_given(after) { Validation.validate_uuid('after', after) }
@@ -340,20 +332,20 @@ module OctridevResend
         SdkClient.request(
           'GET',
           [
-            "/emails/",
+            '/emails/',
             SdkClient.encode_path_segment(email_id),
-            "/attachments"
+            '/attachments'
           ].join,
           config: config,
           query: {
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true),
+            'before' => QueryValue.new(before, style: 'form', explode: true)
           },
           return_type: ::OctridevResend::ListAttachmentsResponse,
           decoder: :json,
           operation_id: 'emails_list_attachments',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -367,7 +359,6 @@ module OctridevResend
         attachment_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('email_id', email_id)
 
         Validation.validate_uuid('attachment_id', attachment_id)
@@ -375,16 +366,16 @@ module OctridevResend
         SdkClient.request(
           'GET',
           [
-            "/emails/",
+            '/emails/',
             SdkClient.encode_path_segment(email_id),
-            "/attachments/",
+            '/attachments/',
             SdkClient.encode_path_segment(attachment_id)
           ].join,
           config: config,
           return_type: ::OctridevResend::RetrievedAttachment,
           decoder: :json,
           operation_id: 'emails_get_attachment',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -420,23 +411,10 @@ module OctridevResend
       #   response to, up to 100. Cannot be combined with the `email` dimension or
       #   `email_id`. Accepts a comma-separated value, the parameter repeated, or a
       #   mix of both.
-      singleton_class.define_method(:get_metrics) do |
-        config:,
-        start_date: NOT_GIVEN,
-        end_date: NOT_GIVEN,
-        timezone: NOT_GIVEN,
-        granularity: NOT_GIVEN,
-        metrics: NOT_GIVEN,
-        dimensions: NOT_GIVEN,
-        domain_id: NOT_GIVEN,
-        email_id: NOT_GIVEN,
-        broadcast_id: NOT_GIVEN,
-        request_options: nil
-      |
-
+      singleton_class.define_method(:get_metrics) do |config:, start_date: NOT_GIVEN, end_date: NOT_GIVEN, timezone: NOT_GIVEN, granularity: NOT_GIVEN, metrics: NOT_GIVEN, dimensions: NOT_GIVEN, domain_id: NOT_GIVEN, email_id: NOT_GIVEN, broadcast_id: NOT_GIVEN, request_options: nil|
         SdkClient.request(
           'GET',
-          "/emails/metrics",
+          '/emails/metrics',
           config: config,
           query: {
             'start_date' => QueryValue.new(start_date, style: 'form', explode: true),
@@ -447,12 +425,12 @@ module OctridevResend
             'dimensions' => QueryValue.new(dimensions, style: 'form', explode: false),
             'domain_id' => QueryValue.new(domain_id, style: 'form', explode: false),
             'email_id' => QueryValue.new(email_id, style: 'form', explode: false),
-            'broadcast_id' => QueryValue.new(broadcast_id, style: 'form', explode: false),
+            'broadcast_id' => QueryValue.new(broadcast_id, style: 'form', explode: false)
           },
           return_type: ::OctridevResend::GetEmailsMetricsResponse,
           decoder: :json,
           operation_id: 'get_metrics',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
     end

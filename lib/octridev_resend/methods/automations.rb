@@ -13,7 +13,7 @@ module OctridevResend
       module AutomationsListParameter
         ENABLED = 'enabled'
         DISABLED = 'disabled'
-        VALUES = ['enabled', 'disabled'].freeze
+        VALUES = %w[enabled disabled].freeze
         def self.from_value(value)
           value
         end
@@ -36,25 +36,24 @@ module OctridevResend
         status: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_length('name', name, min: 1)
 
         Validation.validate_items('steps', steps, min: 1, max: 150)
 
         SdkClient.request(
           'POST',
-          "/automations",
+          '/automations',
           config: config,
           body: {
             'name' => name,
             'steps' => steps,
             'connections' => connections,
-            'status' => status,
+            'status' => status
           },
           return_type: ::OctridevResend::CreateAutomationResponse,
           decoder: :json,
           operation_id: 'automations_create',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -72,23 +71,22 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(limit) { Validation.validate_range('limit', limit, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          "/automations",
+          '/automations',
           config: config,
           query: {
             'status' => QueryValue.new(status, style: 'form', explode: true),
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true),
+            'before' => QueryValue.new(before, style: 'form', explode: true)
           },
           return_type: ::OctridevResend::ListAutomationsResponse,
           decoder: :json,
           operation_id: 'automations_list',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -100,20 +98,19 @@ module OctridevResend
         automation_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('automation_id', automation_id)
 
         SdkClient.request(
           'GET',
           [
-            "/automations/",
+            '/automations/',
             SdkClient.encode_path_segment(automation_id)
           ].join,
           config: config,
           return_type: ::OctridevResend::Automation,
           decoder: :json,
           operation_id: 'automations_get',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -135,7 +132,6 @@ module OctridevResend
         connections: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('automation_id', automation_id)
 
         Validation.if_given(name) { Validation.validate_length('name', name, min: 1) }
@@ -145,7 +141,7 @@ module OctridevResend
         SdkClient.request(
           'PATCH',
           [
-            "/automations/",
+            '/automations/',
             SdkClient.encode_path_segment(automation_id)
           ].join,
           config: config,
@@ -153,12 +149,12 @@ module OctridevResend
             'name' => name,
             'status' => status,
             'steps' => steps,
-            'connections' => connections,
+            'connections' => connections
           },
           return_type: ::OctridevResend::PatchAutomationResponse,
           decoder: :json,
           operation_id: 'automations_update',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -170,20 +166,19 @@ module OctridevResend
         automation_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('automation_id', automation_id)
 
         SdkClient.request(
           'DELETE',
           [
-            "/automations/",
+            '/automations/',
             SdkClient.encode_path_segment(automation_id)
           ].join,
           config: config,
           return_type: ::OctridevResend::DeleteAutomationResponse,
           decoder: :json,
           operation_id: 'automations_remove',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -195,21 +190,20 @@ module OctridevResend
         automation_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('automation_id', automation_id)
 
         SdkClient.request(
           'POST',
           [
-            "/automations/",
+            '/automations/',
             SdkClient.encode_path_segment(automation_id),
-            "/duplicate"
+            '/duplicate'
           ].join,
           config: config,
           return_type: ::OctridevResend::DuplicateAutomationResponse,
           decoder: :json,
           operation_id: 'automations_duplicate',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -221,21 +215,20 @@ module OctridevResend
         automation_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('automation_id', automation_id)
 
         SdkClient.request(
           'POST',
           [
-            "/automations/",
+            '/automations/',
             SdkClient.encode_path_segment(automation_id),
-            "/stop"
+            '/stop'
           ].join,
           config: config,
           return_type: ::OctridevResend::StopAutomationResponse,
           decoder: :json,
           operation_id: 'automations_stop',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -256,7 +249,6 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('automation_id', automation_id)
 
         Validation.if_given(limit) { Validation.validate_range('limit', limit, min: 1, max: 100) }
@@ -264,21 +256,21 @@ module OctridevResend
         SdkClient.request(
           'GET',
           [
-            "/automations/",
+            '/automations/',
             SdkClient.encode_path_segment(automation_id),
-            "/runs"
+            '/runs'
           ].join,
           config: config,
           query: {
             'status' => QueryValue.new(status, style: 'form', explode: true),
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true),
+            'before' => QueryValue.new(before, style: 'form', explode: true)
           },
           return_type: ::OctridevResend::ListAutomationRunsResponse,
           decoder: :json,
           operation_id: 'automations_list_runs',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -292,7 +284,6 @@ module OctridevResend
         run_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('automation_id', automation_id)
 
         Validation.validate_uuid('run_id', run_id)
@@ -300,16 +291,16 @@ module OctridevResend
         SdkClient.request(
           'GET',
           [
-            "/automations/",
+            '/automations/',
             SdkClient.encode_path_segment(automation_id),
-            "/runs/",
+            '/runs/',
             SdkClient.encode_path_segment(run_id)
           ].join,
           config: config,
           return_type: ::OctridevResend::AutomationRun,
           decoder: :json,
           operation_id: 'automations_get_run',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
     end

@@ -16,7 +16,7 @@ module OctridevResend
         SPAM = 'spam'
         SENT = 'sent'
         TRASH = 'trash'
-        VALUES = ['inbox', 'archive', 'spam', 'sent', 'trash'].freeze
+        VALUES = %w[inbox archive spam sent trash].freeze
         def self.from_value(value)
           value
         end
@@ -29,7 +29,7 @@ module OctridevResend
         SPAM = 'spam'
         SENT = 'sent'
         TRASH = 'trash'
-        VALUES = ['inbox', 'archive', 'spam', 'sent', 'trash'].freeze
+        VALUES = %w[inbox archive spam sent trash].freeze
         def self.from_value(value)
           value
         end
@@ -61,25 +61,24 @@ module OctridevResend
         forwarding: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(name) { Validation.validate_length('name', name, max: 64) }
 
         Validation.if_given(from_name) { Validation.validate_length('from_name', from_name, max: 78) }
 
         SdkClient.request(
           'POST',
-          "/inboxes",
+          '/inboxes',
           config: config,
           body: {
             'email_address' => email_address,
             'name' => name,
             'from_name' => from_name,
-            'forwarding' => forwarding,
+            'forwarding' => forwarding
           },
           return_type: ::OctridevResend::CreateInboxResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_create',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -97,22 +96,21 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(limit) { Validation.validate_range('limit', limit, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          "/inboxes",
+          '/inboxes',
           config: config,
           query: {
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true),
+            'before' => QueryValue.new(before, style: 'form', explode: true)
           },
           return_type: ::OctridevResend::ListInboxesResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_list',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -126,18 +124,17 @@ module OctridevResend
         inbox_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/inboxes/",
+            '/inboxes/',
             SdkClient.encode_path_segment(inbox_id)
           ].join,
           config: config,
           return_type: ::OctridevResend::Inbox,
           decoder: :json,
           operation_id: 'inboxes_get',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -160,7 +157,6 @@ module OctridevResend
         from_name: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('inbox_id', inbox_id)
 
         Validation.if_given(name) { Validation.validate_length('name', name, min: 1, max: 64) }
@@ -170,18 +166,18 @@ module OctridevResend
         SdkClient.request(
           'PATCH',
           [
-            "/inboxes/",
+            '/inboxes/',
             SdkClient.encode_path_segment(inbox_id)
           ].join,
           config: config,
           body: {
             'name' => name,
-            'from_name' => from_name,
+            'from_name' => from_name
           },
           return_type: ::OctridevResend::UpdateInboxResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_update',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -195,20 +191,19 @@ module OctridevResend
         inbox_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('inbox_id', inbox_id)
 
         SdkClient.request(
           'DELETE',
           [
-            "/inboxes/",
+            '/inboxes/',
             SdkClient.encode_path_segment(inbox_id)
           ].join,
           config: config,
           return_type: ::OctridevResend::RemoveInboxResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_remove',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -222,21 +217,20 @@ module OctridevResend
         inbox_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('inbox_id', inbox_id)
 
         SdkClient.request(
           'GET',
           [
-            "/inboxes/",
+            '/inboxes/',
             SdkClient.encode_path_segment(inbox_id),
-            "/agent"
+            '/agent'
           ].join,
           config: config,
           return_type: ::OctridevResend::InboxAgent,
           decoder: :json,
           operation_id: 'inboxes_get_agent',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -262,7 +256,6 @@ module OctridevResend
         enabled_actions: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('inbox_id', inbox_id)
 
         Validation.if_given(instructions) do
@@ -272,20 +265,20 @@ module OctridevResend
         SdkClient.request(
           'PATCH',
           [
-            "/inboxes/",
+            '/inboxes/',
             SdkClient.encode_path_segment(inbox_id),
-            "/agent"
+            '/agent'
           ].join,
           config: config,
           body: {
             'instructions' => instructions,
             'tone' => tone,
-            'enabled_actions' => enabled_actions,
+            'enabled_actions' => enabled_actions
           },
           return_type: ::OctridevResend::UpdateInboxAgentResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_update_agent',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -299,21 +292,20 @@ module OctridevResend
         inbox_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('inbox_id', inbox_id)
 
         SdkClient.request(
           'GET',
           [
-            "/inboxes/",
+            '/inboxes/',
             SdkClient.encode_path_segment(inbox_id),
-            "/labels"
+            '/labels'
           ].join,
           config: config,
           return_type: ::OctridevResend::ListInboxLabelsResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_list_labels',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -335,7 +327,6 @@ module OctridevResend
         color: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('inbox_id', inbox_id)
 
         Validation.validate_length('name', name, min: 1, max: 64)
@@ -345,19 +336,19 @@ module OctridevResend
         SdkClient.request(
           'POST',
           [
-            "/inboxes/",
+            '/inboxes/',
             SdkClient.encode_path_segment(inbox_id),
-            "/labels"
+            '/labels'
           ].join,
           config: config,
           body: {
             'name' => name,
-            'color' => color,
+            'color' => color
           },
           return_type: ::OctridevResend::CreateInboxLabelResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_create_label',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -380,7 +371,6 @@ module OctridevResend
         color: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('inbox_id', inbox_id)
 
         Validation.validate_uuid('label_id', label_id)
@@ -392,20 +382,20 @@ module OctridevResend
         SdkClient.request(
           'PATCH',
           [
-            "/inboxes/",
+            '/inboxes/',
             SdkClient.encode_path_segment(inbox_id),
-            "/labels/",
+            '/labels/',
             SdkClient.encode_path_segment(label_id)
           ].join,
           config: config,
           body: {
             'name' => name,
-            'color' => color,
+            'color' => color
           },
           return_type: ::OctridevResend::UpdateInboxLabelResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_update_label',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -421,7 +411,6 @@ module OctridevResend
         label_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('inbox_id', inbox_id)
 
         Validation.validate_uuid('label_id', label_id)
@@ -429,16 +418,16 @@ module OctridevResend
         SdkClient.request(
           'DELETE',
           [
-            "/inboxes/",
+            '/inboxes/',
             SdkClient.encode_path_segment(inbox_id),
-            "/labels/",
+            '/labels/',
             SdkClient.encode_path_segment(label_id)
           ].join,
           config: config,
           return_type: ::OctridevResend::RemoveInboxLabelResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_remove_label',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -473,7 +462,6 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('inbox_id', inbox_id)
 
         Validation.if_given(labels) { Validation.validate_items('labels', labels, max: 50) }
@@ -483,9 +471,9 @@ module OctridevResend
         SdkClient.request(
           'GET',
           [
-            "/inboxes/",
+            '/inboxes/',
             SdkClient.encode_path_segment(inbox_id),
-            "/threads"
+            '/threads'
           ].join,
           config: config,
           query: {
@@ -494,12 +482,12 @@ module OctridevResend
             'read' => QueryValue.new(read, style: 'form', explode: true),
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true),
+            'before' => QueryValue.new(before, style: 'form', explode: true)
           },
           return_type: ::OctridevResend::ListInboxThreadsResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_list_threads',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
     end
