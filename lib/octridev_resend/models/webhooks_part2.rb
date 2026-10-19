@@ -5,40 +5,42 @@
 
 # webhooks domain models (part 2)
 module OctridevResend
-  # Internal model hydration metadata.
-  class SdkInternalUpdateWebhookResponseMetadata
-    FIELDS = {
-      object: 'object',
-      id: 'id'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+# Internal model hydration metadata.
+class SdkInternalUpdateWebhookResponseMetadata
+  FIELDS = {
+    object: "object",
+    id: "id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for UpdateWebhookResponse.
+# Typed representation of the `UpdateWebhookResponse` API schema.
+class UpdateWebhookResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalUpdateWebhookResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalUpdateWebhookResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalUpdateWebhookResponseMetadata::DECODERS
+
+  # @return [String] The type of object.
+  attr_reader :object
+  # @return [String] The ID of the updated webhook.
+  attr_reader :id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for UpdateWebhookResponse.
-  # Typed representation of the `UpdateWebhookResponse` API schema.
-  class UpdateWebhookResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalUpdateWebhookResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalUpdateWebhookResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalUpdateWebhookResponseMetadata::DECODERS
-
-    # @return [String] The type of object.
-    attr_reader :object
-    # @return [String] The ID of the updated webhook.
-    attr_reader :id
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

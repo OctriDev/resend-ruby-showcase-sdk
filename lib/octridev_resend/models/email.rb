@@ -5,375 +5,375 @@
 
 # email domain models
 module OctridevResend
-  # Internal model hydration metadata.
-  class SdkInternalEmailComplainedEventMetadata
-    FIELDS = {
-      type: 'type',
-      created_at: 'created_at',
-      data: 'data'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      type
-      created_at
-      data
-    ].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevResend::EmailComplainedEventType.from_value(value)
-      end,
-      data: lambda do |value|
-        ::OctridevResend::OutboundEmailEventData.from_hash(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalEmailComplainedEventMetadata
+  FIELDS = {
+    type: "type",
+    created_at: "created_at",
+    data: "data",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    type
+    created_at
+    data
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevResend::EmailComplainedEventType.from_value(value)
+    end,
+    data: lambda do |value|
+      ::OctridevResend::OutboundEmailEventData.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for EmailComplainedEvent.
+# Typed representation of the `EmailComplainedEvent` API schema.
+class EmailComplainedEvent
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalEmailComplainedEventMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalEmailComplainedEventMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalEmailComplainedEventMetadata::DECODERS
+
+  # @return [EmailComplainedEventType] The event type.
+  attr_reader :type
+  # @return [String] Timestamp when the event was emitted.
+  attr_reader :created_at
+  # @return [OutboundEmailEventData] Required object value serialized in the `data` wire field.
+  attr_reader :data
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for EmailComplainedEvent.
-  # Typed representation of the `EmailComplainedEvent` API schema.
-  class EmailComplainedEvent
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalEmailComplainedEventMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalEmailComplainedEventMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalEmailComplainedEventMetadata::DECODERS
-
-    # @return [EmailComplainedEventType] The event type.
-    attr_reader :type
-    # @return [String] Timestamp when the event was emitted.
-    attr_reader :created_at
-    # @return [OutboundEmailEventData] Required object value serialized in the `data` wire field.
-    attr_reader :data
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the EmailComplainedEventType SDK namespace.
-  module EmailComplainedEventType
-    EMAIL_COMPLAINED = 'email.complained'
-    VALUES = ['email.complained'].freeze
-    def self.from_value(value)
-      return value if VALUES.include?(value)
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-      raise SdkValidationError.new('EmailComplainedEventType', 'enum', "Unknown EmailComplainedEventType: #{value}")
-    end
+# Defines the EmailComplainedEventType SDK namespace.
+module EmailComplainedEventType
+  EMAIL_COMPLAINED = 'email.complained'
+  VALUES = ['email.complained'].freeze
+  def self.from_value(value)
+    return value if VALUES.include?(value)
+
+    raise SdkValidationError.new('EmailComplainedEventType', 'enum', "Unknown EmailComplainedEventType: #{value}")
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalEmailDeliveredEventMetadata
+  FIELDS = {
+    type: "type",
+    created_at: "created_at",
+    data: "data",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    type
+    created_at
+    data
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevResend::EmailDeliveredEventType.from_value(value)
+    end,
+    data: lambda do |value|
+      ::OctridevResend::OutboundEmailEventData.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for EmailDeliveredEvent.
+# Typed representation of the `EmailDeliveredEvent` API schema.
+class EmailDeliveredEvent
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalEmailDeliveredEventMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalEmailDeliveredEventMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalEmailDeliveredEventMetadata::DECODERS
+
+  # @return [EmailDeliveredEventType] The event type.
+  attr_reader :type
+  # @return [String] Timestamp when the event was emitted.
+  attr_reader :created_at
+  # @return [OutboundEmailEventData] Required object value serialized in the `data` wire field.
+  attr_reader :data
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalEmailDeliveredEventMetadata
-    FIELDS = {
-      type: 'type',
-      created_at: 'created_at',
-      data: 'data'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      type
-      created_at
-      data
-    ].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevResend::EmailDeliveredEventType.from_value(value)
-      end,
-      data: lambda do |value|
-        ::OctridevResend::OutboundEmailEventData.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for EmailDeliveredEvent.
-  # Typed representation of the `EmailDeliveredEvent` API schema.
-  class EmailDeliveredEvent
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalEmailDeliveredEventMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalEmailDeliveredEventMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalEmailDeliveredEventMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [EmailDeliveredEventType] The event type.
-    attr_reader :type
-    # @return [String] Timestamp when the event was emitted.
-    attr_reader :created_at
-    # @return [OutboundEmailEventData] Required object value serialized in the `data` wire field.
-    attr_reader :data
+# Defines the EmailDeliveredEventType SDK namespace.
+module EmailDeliveredEventType
+  EMAIL_DELIVERED = 'email.delivered'
+  VALUES = ['email.delivered'].freeze
+  def self.from_value(value)
+    return value if VALUES.include?(value)
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+    raise SdkValidationError.new('EmailDeliveredEventType', 'enum', "Unknown EmailDeliveredEventType: #{value}")
+  end
+end
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+# Internal model hydration metadata.
+class SdkInternalEmailDeliveryDelayedEventMetadata
+  FIELDS = {
+    type: "type",
+    created_at: "created_at",
+    data: "data",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    type
+    created_at
+    data
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevResend::EmailDeliveryDelayedEventType.from_value(value)
+    end,
+    data: lambda do |value|
+      ::OctridevResend::OutboundEmailEventData.from_hash(value)
+    end,
+  }.freeze
+end
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+# API model for EmailDeliveryDelayedEvent.
+# Typed representation of the `EmailDeliveryDelayedEvent` API schema.
+class EmailDeliveryDelayedEvent
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalEmailDeliveryDelayedEventMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalEmailDeliveryDelayedEventMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalEmailDeliveryDelayedEventMetadata::DECODERS
+
+  # @return [EmailDeliveryDelayedEventType] The event type.
+  attr_reader :type
+  # @return [String] Timestamp when the event was emitted.
+  attr_reader :created_at
+  # @return [OutboundEmailEventData] Required object value serialized in the `data` wire field.
+  attr_reader :data
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the EmailDeliveredEventType SDK namespace.
-  module EmailDeliveredEventType
-    EMAIL_DELIVERED = 'email.delivered'
-    VALUES = ['email.delivered'].freeze
-    def self.from_value(value)
-      return value if VALUES.include?(value)
-
-      raise SdkValidationError.new('EmailDeliveredEventType', 'enum', "Unknown EmailDeliveredEventType: #{value}")
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalEmailDeliveryDelayedEventMetadata
-    FIELDS = {
-      type: 'type',
-      created_at: 'created_at',
-      data: 'data'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      type
-      created_at
-      data
-    ].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevResend::EmailDeliveryDelayedEventType.from_value(value)
-      end,
-      data: lambda do |value|
-        ::OctridevResend::OutboundEmailEventData.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the EmailDeliveryDelayedEventType SDK namespace.
+module EmailDeliveryDelayedEventType
+  EMAIL_DELIVERY_DELAYED = 'email.delivery_delayed'
+  VALUES = ['email.delivery_delayed'].freeze
+  def self.from_value(value)
+    return value if VALUES.include?(value)
+
+    raise SdkValidationError.new('EmailDeliveryDelayedEventType', 'enum', "Unknown EmailDeliveryDelayedEventType: #{value}")
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalEmailOpenedEventMetadata
+  FIELDS = {
+    type: "type",
+    created_at: "created_at",
+    data: "data",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    type
+    created_at
+    data
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevResend::EmailOpenedEventType.from_value(value)
+    end,
+    data: lambda do |value|
+      ::OctridevResend::OutboundEmailEventData.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for EmailOpenedEvent.
+# Typed representation of the `EmailOpenedEvent` API schema.
+class EmailOpenedEvent
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalEmailOpenedEventMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalEmailOpenedEventMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalEmailOpenedEventMetadata::DECODERS
+
+  # @return [EmailOpenedEventType] The event type.
+  attr_reader :type
+  # @return [String] Timestamp when the event was emitted.
+  attr_reader :created_at
+  # @return [OutboundEmailEventData] Required object value serialized in the `data` wire field.
+  attr_reader :data
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for EmailDeliveryDelayedEvent.
-  # Typed representation of the `EmailDeliveryDelayedEvent` API schema.
-  class EmailDeliveryDelayedEvent
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalEmailDeliveryDelayedEventMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalEmailDeliveryDelayedEventMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalEmailDeliveryDelayedEventMetadata::DECODERS
-
-    # @return [EmailDeliveryDelayedEventType] The event type.
-    attr_reader :type
-    # @return [String] Timestamp when the event was emitted.
-    attr_reader :created_at
-    # @return [OutboundEmailEventData] Required object value serialized in the `data` wire field.
-    attr_reader :data
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the EmailDeliveryDelayedEventType SDK namespace.
-  module EmailDeliveryDelayedEventType
-    EMAIL_DELIVERY_DELAYED = 'email.delivery_delayed'
-    VALUES = ['email.delivery_delayed'].freeze
-    def self.from_value(value)
-      return value if VALUES.include?(value)
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-      raise SdkValidationError.new('EmailDeliveryDelayedEventType', 'enum', "Unknown EmailDeliveryDelayedEventType: #{value}")
-    end
+# Defines the EmailOpenedEventType SDK namespace.
+module EmailOpenedEventType
+  EMAIL_OPENED = 'email.opened'
+  VALUES = ['email.opened'].freeze
+  def self.from_value(value)
+    return value if VALUES.include?(value)
+
+    raise SdkValidationError.new('EmailOpenedEventType', 'enum', "Unknown EmailOpenedEventType: #{value}")
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalEmailScheduledEventMetadata
+  FIELDS = {
+    type: "type",
+    created_at: "created_at",
+    data: "data",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    type
+    created_at
+    data
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevResend::EmailScheduledEventType.from_value(value)
+    end,
+    data: lambda do |value|
+      ::OctridevResend::OutboundEmailEventData.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for EmailScheduledEvent.
+# Typed representation of the `EmailScheduledEvent` API schema.
+class EmailScheduledEvent
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalEmailScheduledEventMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalEmailScheduledEventMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalEmailScheduledEventMetadata::DECODERS
+
+  # @return [EmailScheduledEventType] The event type.
+  attr_reader :type
+  # @return [String] Timestamp when the event was emitted.
+  attr_reader :created_at
+  # @return [OutboundEmailEventData] Required object value serialized in the `data` wire field.
+  attr_reader :data
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalEmailOpenedEventMetadata
-    FIELDS = {
-      type: 'type',
-      created_at: 'created_at',
-      data: 'data'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      type
-      created_at
-      data
-    ].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevResend::EmailOpenedEventType.from_value(value)
-      end,
-      data: lambda do |value|
-        ::OctridevResend::OutboundEmailEventData.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for EmailOpenedEvent.
-  # Typed representation of the `EmailOpenedEvent` API schema.
-  class EmailOpenedEvent
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalEmailOpenedEventMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalEmailOpenedEventMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalEmailOpenedEventMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [EmailOpenedEventType] The event type.
-    attr_reader :type
-    # @return [String] Timestamp when the event was emitted.
-    attr_reader :created_at
-    # @return [OutboundEmailEventData] Required object value serialized in the `data` wire field.
-    attr_reader :data
+# Defines the EmailScheduledEventType SDK namespace.
+module EmailScheduledEventType
+  EMAIL_SCHEDULED = 'email.scheduled'
+  VALUES = ['email.scheduled'].freeze
+  def self.from_value(value)
+    return value if VALUES.include?(value)
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+    raise SdkValidationError.new('EmailScheduledEventType', 'enum', "Unknown EmailScheduledEventType: #{value}")
+  end
+end
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+# Internal model hydration metadata.
+class SdkInternalEmailSentEventMetadata
+  FIELDS = {
+    type: "type",
+    created_at: "created_at",
+    data: "data",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    type
+    created_at
+    data
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevResend::EmailSentEventType.from_value(value)
+    end,
+    data: lambda do |value|
+      ::OctridevResend::OutboundEmailEventData.from_hash(value)
+    end,
+  }.freeze
+end
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+# API model for EmailSentEvent.
+# Typed representation of the `EmailSentEvent` API schema.
+class EmailSentEvent
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalEmailSentEventMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalEmailSentEventMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalEmailSentEventMetadata::DECODERS
+
+  # @return [EmailSentEventType] The event type.
+  attr_reader :type
+  # @return [String] Timestamp when the event was emitted.
+  attr_reader :created_at
+  # @return [OutboundEmailEventData] Required object value serialized in the `data` wire field.
+  attr_reader :data
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the EmailOpenedEventType SDK namespace.
-  module EmailOpenedEventType
-    EMAIL_OPENED = 'email.opened'
-    VALUES = ['email.opened'].freeze
-    def self.from_value(value)
-      return value if VALUES.include?(value)
-
-      raise SdkValidationError.new('EmailOpenedEventType', 'enum', "Unknown EmailOpenedEventType: #{value}")
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalEmailScheduledEventMetadata
-    FIELDS = {
-      type: 'type',
-      created_at: 'created_at',
-      data: 'data'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      type
-      created_at
-      data
-    ].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevResend::EmailScheduledEventType.from_value(value)
-      end,
-      data: lambda do |value|
-        ::OctridevResend::OutboundEmailEventData.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 
-  # API model for EmailScheduledEvent.
-  # Typed representation of the `EmailScheduledEvent` API schema.
-  class EmailScheduledEvent
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalEmailScheduledEventMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalEmailScheduledEventMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalEmailScheduledEventMetadata::DECODERS
+# Defines the EmailSentEventType SDK namespace.
+module EmailSentEventType
+  EMAIL_SENT = 'email.sent'
+  VALUES = ['email.sent'].freeze
+  def self.from_value(value)
+    return value if VALUES.include?(value)
 
-    # @return [EmailScheduledEventType] The event type.
-    attr_reader :type
-    # @return [String] Timestamp when the event was emitted.
-    attr_reader :created_at
-    # @return [OutboundEmailEventData] Required object value serialized in the `data` wire field.
-    attr_reader :data
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+    raise SdkValidationError.new('EmailSentEventType', 'enum', "Unknown EmailSentEventType: #{value}")
   end
-
-  # Defines the EmailScheduledEventType SDK namespace.
-  module EmailScheduledEventType
-    EMAIL_SCHEDULED = 'email.scheduled'
-    VALUES = ['email.scheduled'].freeze
-    def self.from_value(value)
-      return value if VALUES.include?(value)
-
-      raise SdkValidationError.new('EmailScheduledEventType', 'enum', "Unknown EmailScheduledEventType: #{value}")
-    end
-  end
-
-  # Internal model hydration metadata.
-  class SdkInternalEmailSentEventMetadata
-    FIELDS = {
-      type: 'type',
-      created_at: 'created_at',
-      data: 'data'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      type
-      created_at
-      data
-    ].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevResend::EmailSentEventType.from_value(value)
-      end,
-      data: lambda do |value|
-        ::OctridevResend::OutboundEmailEventData.from_hash(value)
-      end
-    }.freeze
-  end
-
-  # API model for EmailSentEvent.
-  # Typed representation of the `EmailSentEvent` API schema.
-  class EmailSentEvent
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalEmailSentEventMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalEmailSentEventMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalEmailSentEventMetadata::DECODERS
-
-    # @return [EmailSentEventType] The event type.
-    attr_reader :type
-    # @return [String] Timestamp when the event was emitted.
-    attr_reader :created_at
-    # @return [OutboundEmailEventData] Required object value serialized in the `data` wire field.
-    attr_reader :data
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
-
-  # Defines the EmailSentEventType SDK namespace.
-  module EmailSentEventType
-    EMAIL_SENT = 'email.sent'
-    VALUES = ['email.sent'].freeze
-    def self.from_value(value)
-      return value if VALUES.include?(value)
-
-      raise SdkValidationError.new('EmailSentEventType', 'enum', "Unknown EmailSentEventType: #{value}")
-    end
-  end
+end
 end

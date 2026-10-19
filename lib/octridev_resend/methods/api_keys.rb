@@ -25,19 +25,20 @@ module OctridevResend
         domain_id: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/api-keys',
+          "/api-keys",
           config: config,
           body: {
             'name' => name,
             'permission' => permission,
-            'domain_id' => domain_id
+            'domain_id' => domain_id,
           },
           return_type: ::OctridevResend::CreateApiKeyResponse,
           decoder: :json,
           operation_id: 'api_keys_create',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -53,21 +54,22 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(limit) { Validation.validate_range('limit', limit, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          '/api-keys',
+          "/api-keys",
           config: config,
           query: {
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true)
+            'before' => QueryValue.new(before, style: 'form', explode: true),
           },
           return_type: ::OctridevResend::ListApiKeysResponse,
           decoder: :json,
           operation_id: 'api_keys_list',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -81,20 +83,21 @@ module OctridevResend
         name:,
         request_options: nil
       )
+
         SdkClient.request(
           'PATCH',
           [
-            '/api-keys/',
+            "/api-keys/",
             SdkClient.encode_path_segment(api_key_id)
           ].join,
           config: config,
           body: {
-            'name' => name
+            'name' => name,
           },
           return_type: ::OctridevResend::UpdateApiKeyResponse,
           decoder: :json,
           operation_id: 'api_keys_update',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -106,17 +109,18 @@ module OctridevResend
         api_key_id:,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/api-keys/',
+            "/api-keys/",
             SdkClient.encode_path_segment(api_key_id)
           ].join,
           config: config,
           return_type: ::OctridevResend::DeleteApiKeyResponse,
           decoder: :json,
           operation_id: 'api_keys_remove',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
     end

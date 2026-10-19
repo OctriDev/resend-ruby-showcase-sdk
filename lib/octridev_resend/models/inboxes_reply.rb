@@ -5,98 +5,100 @@
 
 # inboxes_reply domain models
 module OctridevResend
-  # Internal model hydration metadata.
-  class SdkInternalReplyInboxThreadEmailOptionsMetadata
-    FIELDS = {
-      cc: 'cc',
-      bcc: 'bcc',
-      html: 'html',
-      text: 'text',
-      subject: 'subject',
-      reply_all: 'reply_all',
-      attachments: 'attachments',
-      headers: 'headers'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      attachments: lambda do |value|
-        value&.map { |item| ::OctridevResend::Attachment.from_hash(item) }
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalReplyInboxThreadEmailOptionsMetadata
+  FIELDS = {
+    cc: "cc",
+    bcc: "bcc",
+    html: "html",
+    text: "text",
+    subject: "subject",
+    reply_all: "reply_all",
+    attachments: "attachments",
+    headers: "headers",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    attachments: lambda do |value|
+      value&.map { |item| ::OctridevResend::Attachment.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ReplyInboxThreadEmailOptions.
+# At least one of `html` or `text` must contain more than whitespace.
+class ReplyInboxThreadEmailOptions
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalReplyInboxThreadEmailOptionsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalReplyInboxThreadEmailOptionsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalReplyInboxThreadEmailOptionsMetadata::DECODERS
+
+  # @return [Object] CC recipient email address. For multiple addresses, send as an array of strings. Without `reply_all`, the reply copies only these addresses. With `reply_all`, these addresses are merged with the copied recipients, without duplicates. `cc` and `bcc` combined must be fewer than 50 addresses. After the `to` recipients are added, the reply cannot exceed 50 recipients. Each address is `email@example.com` or `Name <email@example.com>`. An address that is not valid returns a 422.
+  attr_reader :cc
+  # @return [Object] BCC recipient email address. For multiple addresses, send as an array of strings. BCC recipients of the original message are never copied. Each address is `email@example.com` or `Name <email@example.com>`. An address that is not valid returns a 422.
+  attr_reader :bcc
+  # @return [String] The HTML body of the reply.
+  attr_reader :html
+  # @return [String] The plain-text body of the reply.
+  attr_reader :text
+  # @return [String] The subject of the reply. Cannot be only whitespace or contain a line break. When omitted, the thread subject is used, prefixed with `Re:` if it does not already start with it.
+  attr_reader :subject
+  # @return [Boolean] Reply to everyone on the original message. For a message the inbox received, the reply goes to its `Reply-To` addresses, or to its sender when it has none, and copies the other addresses of its `To` header and its `cc` recipients in `cc`. For a message the inbox sent, the reply goes to that message's `Reply-To` addresses when they are not the inbox address, otherwise to its `to` recipients, and copies its `cc` recipients. The inbox address is always excluded, and duplicates…
+  attr_reader :reply_all
+  # @return [Array_of_Attachment] Files to attach, as on `POST /emails`. Each one needs `content` or `path`. Up to 10 files. The `content` of all files can total at most 25 MB. A `path` file counts toward the 10 files only, because it is fetched when the email is sent. An empty file, a blocked file type, a `path` that is not an `http` or `https` URL or that points to `localhost`, `127.0.0.1` or `0.0.0.0`, or a `content_type` that is not a valid MIME type returns a 422.
+  attr_reader :attachments
+  # @return [Hash] Custom headers to add to the email. The `In-Reply-To`, `References` and `Reply-To` headers are set by Resend and cannot be set here. Sending one of them, in any letter case, returns a 422. Header names cannot be empty, and names and values cannot contain line breaks or null characters, or the request returns a 422. `null` means no custom headers.
+  attr_reader :headers
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ReplyInboxThreadEmailOptions.
-  # At least one of `html` or `text` must contain more than whitespace.
-  class ReplyInboxThreadEmailOptions
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalReplyInboxThreadEmailOptionsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalReplyInboxThreadEmailOptionsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalReplyInboxThreadEmailOptionsMetadata::DECODERS
-
-    # @return [Object] CC recipient email address. For multiple addresses, send as an array of strings. Without `reply_all`, the reply copies only these addresses. With `reply_all`, these addresses are merged with the copied recipients, without duplicates. `cc` and `bcc` combined must be fewer than 50 addresses. After the `to` recipients are added, the reply cannot exceed 50 recipients. Each address is `email@example.com` or `Name <email@example.com>`. An address that is not valid returns a 422.
-    attr_reader :cc
-    # @return [Object] BCC recipient email address. For multiple addresses, send as an array of strings. BCC recipients of the original message are never copied. Each address is `email@example.com` or `Name <email@example.com>`. An address that is not valid returns a 422.
-    attr_reader :bcc
-    # @return [String] The HTML body of the reply.
-    attr_reader :html
-    # @return [String] The plain-text body of the reply.
-    attr_reader :text
-    # @return [String] The subject of the reply. Cannot be only whitespace or contain a line break. When omitted, the thread subject is used, prefixed with `Re:` if it does not already start with it.
-    attr_reader :subject
-    # @return [Boolean] Reply to everyone on the original message. For a message the inbox received, the reply goes to its `Reply-To` addresses, or to its sender when it has none, and copies the other addresses of its `To` header and its `cc` recipients in `cc`. For a message the inbox sent, the reply goes to that message's `Reply-To` addresses when they are not the inbox address, otherwise to its `to` recipients, and copies its `cc` recipients. The inbox address is always excluded, and duplicates…
-    attr_reader :reply_all
-    # @return [Array_of_Attachment] Files to attach, as on `POST /emails`. Each one needs `content` or `path`. Up to 10 files. The `content` of all files can total at most 25 MB. A `path` file counts toward the 10 files only, because it is fetched when the email is sent. An empty file, a blocked file type, a `path` that is not an `http` or `https` URL or that points to `localhost`, `127.0.0.1` or `0.0.0.0`, or a `content_type` that is not a valid MIME type returns a 422.
-    attr_reader :attachments
-    # @return [Hash] Custom headers to add to the email. The `In-Reply-To`, `References` and `Reply-To` headers are set by Resend and cannot be set here. Sending one of them, in any letter case, returns a 422. Header names cannot be empty, and names and values cannot contain line breaks or null characters, or the request returns a 422. `null` means no custom headers.
-    attr_reader :headers
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalReplyInboxThreadEmailResponseSuccessMetadata
-    FIELDS = {
-      id: 'id'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      id
-    ].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalReplyInboxThreadEmailResponseSuccessMetadata
+  FIELDS = {
+    id: "id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    id
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ReplyInboxThreadEmailResponseSuccess.
+# Typed representation of the `ReplyInboxThreadEmailResponseSuccess` API schema.
+class ReplyInboxThreadEmailResponseSuccess
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalReplyInboxThreadEmailResponseSuccessMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalReplyInboxThreadEmailResponseSuccessMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalReplyInboxThreadEmailResponseSuccessMetadata::DECODERS
+
+  # @return [String] The ID of the sent email. Use it with the emails endpoints.
+  attr_reader :id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ReplyInboxThreadEmailResponseSuccess.
-  # Typed representation of the `ReplyInboxThreadEmailResponseSuccess` API schema.
-  class ReplyInboxThreadEmailResponseSuccess
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalReplyInboxThreadEmailResponseSuccessMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalReplyInboxThreadEmailResponseSuccessMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalReplyInboxThreadEmailResponseSuccessMetadata::DECODERS
-
-    # @return [String] The ID of the sent email. Use it with the emails endpoints.
-    attr_reader :id
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

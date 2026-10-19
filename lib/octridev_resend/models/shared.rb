@@ -5,327 +5,335 @@
 
 # shared domain models
 module OctridevResend
-  # Internal model hydration metadata.
-  class SdkInternalAttachmentMetadata
-    FIELDS = {
-      content: 'content',
-      filename: 'filename',
-      path: 'path',
-      content_type: 'content_type',
-      content_id: 'content_id'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+# Internal model hydration metadata.
+class SdkInternalAttachmentMetadata
+  FIELDS = {
+    content: "content",
+    filename: "filename",
+    path: "path",
+    content_type: "content_type",
+    content_id: "content_id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for Attachment.
+# Typed representation of the `Attachment` API schema.
+class Attachment
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAttachmentMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAttachmentMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAttachmentMetadata::DECODERS
+
+  # @return [String] Content of an attached file.
+  attr_reader :content
+  # @return [String] Name of attached file.
+  attr_reader :filename
+  # @return [String] Path where the attachment file is hosted
+  attr_reader :path
+  # @return [String] Optional content type for the attachment, if not set it will be derived from the filename property
+  attr_reader :content_type
+  # @return [String] Content ID for embedding inline images using cid references (e.g., cid:image001).
+  attr_reader :content_id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for Attachment.
-  # Typed representation of the `Attachment` API schema.
-  class Attachment
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAttachmentMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAttachmentMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAttachmentMetadata::DECODERS
-
-    # @return [String] Content of an attached file.
-    attr_reader :content
-    # @return [String] Name of attached file.
-    attr_reader :filename
-    # @return [String] Path where the attachment file is hosted
-    attr_reader :path
-    # @return [String] Optional content type for the attachment, if not set it will be derived from the filename property
-    attr_reader :content_type
-    # @return [String] Content ID for embedding inline images using cid references (e.g., cid:image001).
-    attr_reader :content_id
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListAttachmentsResponseDataItemMetadata
-    FIELDS = {
-      id: 'id',
-      filename: 'filename',
-      content_type: 'content_type',
-      content_id: 'content_id',
-      content_disposition: 'content_disposition',
-      download_url: 'download_url',
-      expires_at: 'expires_at',
-      size: 'size'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      content_disposition: lambda do |value|
-        ::OctridevResend::ListAttachmentsResponseDataItemContentDisposition.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalListAttachmentsResponseDataItemMetadata
+  FIELDS = {
+    id: "id",
+    filename: "filename",
+    content_type: "content_type",
+    content_id: "content_id",
+    content_disposition: "content_disposition",
+    download_url: "download_url",
+    expires_at: "expires_at",
+    size: "size",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    content_disposition: lambda do |value|
+      ::OctridevResend::ListAttachmentsResponseDataItemContentDisposition.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for ListAttachmentsResponseDataItem.
+# Required object value serialized in the `data[]` wire field.
+class ListAttachmentsResponseDataItem
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListAttachmentsResponseDataItemMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListAttachmentsResponseDataItemMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListAttachmentsResponseDataItemMetadata::DECODERS
+
+  # @return [String] The ID of the attachment.
+  attr_reader :id
+  # @return [String] The filename of the attachment.
+  attr_reader :filename
+  # @return [String] The MIME type of the attachment.
+  attr_reader :content_type
+  # @return [String] The content ID for inline attachments.
+  attr_reader :content_id
+  # @return [ListAttachmentsResponseDataItemContentDisposition] How the attachment should be displayed.
+  attr_reader :content_disposition
+  # @return [String] Signed URL to download the attachment content.
+  attr_reader :download_url
+  # @return [String] Timestamp when the download URL expires.
+  attr_reader :expires_at
+  # @return [Integer] Size of the attachment in bytes.
+  attr_reader :size
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ListAttachmentsResponseDataItem.
-  # Required object value serialized in the `data[]` wire field.
-  class ListAttachmentsResponseDataItem
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListAttachmentsResponseDataItemMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListAttachmentsResponseDataItemMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListAttachmentsResponseDataItemMetadata::DECODERS
-
-    # @return [String] The ID of the attachment.
-    attr_reader :id
-    # @return [String] The filename of the attachment.
-    attr_reader :filename
-    # @return [String] The MIME type of the attachment.
-    attr_reader :content_type
-    # @return [String] The content ID for inline attachments.
-    attr_reader :content_id
-    # @return [ListAttachmentsResponseDataItemContentDisposition] How the attachment should be displayed.
-    attr_reader :content_disposition
-    # @return [String] Signed URL to download the attachment content.
-    attr_reader :download_url
-    # @return [String] Timestamp when the download URL expires.
-    attr_reader :expires_at
-    # @return [Integer] Size of the attachment in bytes.
-    attr_reader :size
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListAttachmentsResponseMetadata
-    FIELDS = {
-      object: 'object',
-      has_more: 'has_more',
-      data: 'data'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      data: lambda do |value|
-        value&.map { |item| ::OctridevResend::ListAttachmentsResponseDataItem.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalListAttachmentsResponseMetadata
+  FIELDS = {
+    object: "object",
+    has_more: "has_more",
+    data: "data",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    data: lambda do |value|
+      value&.map { |item| ::OctridevResend::ListAttachmentsResponseDataItem.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ListAttachmentsResponse.
+# Typed representation of the `ListAttachmentsResponse` API schema.
+class ListAttachmentsResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListAttachmentsResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListAttachmentsResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListAttachmentsResponseMetadata::DECODERS
+
+  # @return [String] Type of the response object.
+  attr_reader :object
+  # @return [Boolean] Indicates if there are more results available.
+  attr_reader :has_more
+  # @return [Array_of_ListAttachmentsResponseDataItem] Array containing attachment information.
+  attr_reader :data
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ListAttachmentsResponse.
-  # Typed representation of the `ListAttachmentsResponse` API schema.
-  class ListAttachmentsResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListAttachmentsResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListAttachmentsResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListAttachmentsResponseMetadata::DECODERS
-
-    # @return [String] Type of the response object.
-    attr_reader :object
-    # @return [Boolean] Indicates if there are more results available.
-    attr_reader :has_more
-    # @return [Array_of_ListAttachmentsResponseDataItem] Array containing attachment information.
-    attr_reader :data
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the ListAttachmentsResponseDataItemContentDisposition SDK namespace.
-  module ListAttachmentsResponseDataItemContentDisposition
-    INLINE = 'inline'
-    ATTACHMENT = 'attachment'
-    VALUES = %w[inline attachment].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the ListAttachmentsResponseDataItemContentDisposition SDK namespace.
+module ListAttachmentsResponseDataItemContentDisposition
+  INLINE = 'inline'
+  ATTACHMENT = 'attachment'
+  VALUES = ['inline', 'attachment'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalListContactsResponseSuccessDataItemMetadata
+  FIELDS = {
+    id: "id",
+    email: "email",
+    first_name: "first_name",
+    last_name: "last_name",
+    created_at: "created_at",
+    unsubscribed: "unsubscribed",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ListContactsResponseSuccessDataItem.
+# Required object value serialized in the `data[]` wire field.
+class ListContactsResponseSuccessDataItem
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListContactsResponseSuccessDataItemMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListContactsResponseSuccessDataItemMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListContactsResponseSuccessDataItemMetadata::DECODERS
+
+  # @return [String] Unique identifier for the contact.
+  attr_reader :id
+  # @return [String] Email address of the contact.
+  attr_reader :email
+  # @return [String] First name of the contact.
+  attr_reader :first_name
+  # @return [String] Last name of the contact.
+  attr_reader :last_name
+  # @return [String] Timestamp indicating when the contact was created.
+  attr_reader :created_at
+  # @return [Boolean] Indicates if the contact is unsubscribed.
+  attr_reader :unsubscribed
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListContactsResponseSuccessDataItemMetadata
-    FIELDS = {
-      id: 'id',
-      email: 'email',
-      first_name: 'first_name',
-      last_name: 'last_name',
-      created_at: 'created_at',
-      unsubscribed: 'unsubscribed'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ListContactsResponseSuccessDataItem.
-  # Required object value serialized in the `data[]` wire field.
-  class ListContactsResponseSuccessDataItem
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListContactsResponseSuccessDataItemMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListContactsResponseSuccessDataItemMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListContactsResponseSuccessDataItemMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] Unique identifier for the contact.
-    attr_reader :id
-    # @return [String] Email address of the contact.
-    attr_reader :email
-    # @return [String] First name of the contact.
-    attr_reader :first_name
-    # @return [String] Last name of the contact.
-    attr_reader :last_name
-    # @return [String] Timestamp indicating when the contact was created.
-    attr_reader :created_at
-    # @return [Boolean] Indicates if the contact is unsubscribed.
-    attr_reader :unsubscribed
+# Internal model hydration metadata.
+class SdkInternalListContactsResponseSuccessMetadata
+  FIELDS = {
+    object: "object",
+    has_more: "has_more",
+    data: "data",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    data: lambda do |value|
+      value&.map { |item| ::OctridevResend::ListContactsResponseSuccessDataItem.from_hash(item) }
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ListContactsResponseSuccess.
+# Typed representation of the `ListContactsResponseSuccess` API schema.
+class ListContactsResponseSuccess
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListContactsResponseSuccessMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListContactsResponseSuccessMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListContactsResponseSuccessMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] Type of the response object.
+  attr_reader :object
+  # @return [Boolean] Indicates if there are more results available.
+  attr_reader :has_more
+  # @return [Array_of_ListContactsResponseSuccessDataItem] Array containing contact information.
+  attr_reader :data
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListContactsResponseSuccessMetadata
-    FIELDS = {
-      object: 'object',
-      has_more: 'has_more',
-      data: 'data'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      data: lambda do |value|
-        value&.map { |item| ::OctridevResend::ListContactsResponseSuccessDataItem.from_hash(item) }
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ListContactsResponseSuccess.
-  # Typed representation of the `ListContactsResponseSuccess` API schema.
-  class ListContactsResponseSuccess
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListContactsResponseSuccessMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListContactsResponseSuccessMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListContactsResponseSuccessMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] Type of the response object.
-    attr_reader :object
-    # @return [Boolean] Indicates if there are more results available.
-    attr_reader :has_more
-    # @return [Array_of_ListContactsResponseSuccessDataItem] Array containing contact information.
-    attr_reader :data
+# Internal model hydration metadata.
+class SdkInternalRetrievedAttachmentMetadata
+  FIELDS = {
+    object: "object",
+    id: "id",
+    filename: "filename",
+    content_type: "content_type",
+    content_id: "content_id",
+    content_disposition: "content_disposition",
+    download_url: "download_url",
+    expires_at: "expires_at",
+    size: "size",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    content_disposition: lambda do |value|
+      ::OctridevResend::RetrievedAttachmentContentDisposition.from_value(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for RetrievedAttachment.
+# Typed representation of the `RetrievedAttachment` API schema.
+class RetrievedAttachment
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalRetrievedAttachmentMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalRetrievedAttachmentMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalRetrievedAttachmentMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] The type of object.
+  attr_reader :object
+  # @return [String] The ID of the attachment.
+  attr_reader :id
+  # @return [String] The filename of the attachment.
+  attr_reader :filename
+  # @return [String] The MIME type of the attachment.
+  attr_reader :content_type
+  # @return [String] The content ID for inline attachments.
+  attr_reader :content_id
+  # @return [RetrievedAttachmentContentDisposition] How the attachment should be displayed.
+  attr_reader :content_disposition
+  # @return [String] Signed URL to download the attachment content.
+  attr_reader :download_url
+  # @return [String] Timestamp when the download URL expires.
+  attr_reader :expires_at
+  # @return [Integer] Size of the attachment in bytes.
+  attr_reader :size
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalRetrievedAttachmentMetadata
-    FIELDS = {
-      object: 'object',
-      id: 'id',
-      filename: 'filename',
-      content_type: 'content_type',
-      content_id: 'content_id',
-      content_disposition: 'content_disposition',
-      download_url: 'download_url',
-      expires_at: 'expires_at',
-      size: 'size'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      content_disposition: lambda do |value|
-        ::OctridevResend::RetrievedAttachmentContentDisposition.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for RetrievedAttachment.
-  # Typed representation of the `RetrievedAttachment` API schema.
-  class RetrievedAttachment
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalRetrievedAttachmentMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalRetrievedAttachmentMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalRetrievedAttachmentMetadata::DECODERS
-
-    # @return [String] The type of object.
-    attr_reader :object
-    # @return [String] The ID of the attachment.
-    attr_reader :id
-    # @return [String] The filename of the attachment.
-    attr_reader :filename
-    # @return [String] The MIME type of the attachment.
-    attr_reader :content_type
-    # @return [String] The content ID for inline attachments.
-    attr_reader :content_id
-    # @return [RetrievedAttachmentContentDisposition] How the attachment should be displayed.
-    attr_reader :content_disposition
-    # @return [String] Signed URL to download the attachment content.
-    attr_reader :download_url
-    # @return [String] Timestamp when the download URL expires.
-    attr_reader :expires_at
-    # @return [Integer] Size of the attachment in bytes.
-    attr_reader :size
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 
-  # Defines the RetrievedAttachmentContentDisposition SDK namespace.
-  module RetrievedAttachmentContentDisposition
-    INLINE = 'inline'
-    ATTACHMENT = 'attachment'
-    VALUES = %w[inline attachment].freeze
-    def self.from_value(value)
-      value
-    end
+# Defines the RetrievedAttachmentContentDisposition SDK namespace.
+module RetrievedAttachmentContentDisposition
+  INLINE = 'inline'
+  ATTACHMENT = 'attachment'
+  VALUES = ['inline', 'attachment'].freeze
+  def self.from_value(value)
+    value
   end
+end
 end

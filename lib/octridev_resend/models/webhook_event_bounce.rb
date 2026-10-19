@@ -5,87 +5,87 @@
 
 # webhook_event_bounce domain models
 module OctridevResend
-  # Internal model hydration metadata.
-  class SdkInternalWebhookEventBounceMetadata
-    FIELDS = {
-      diagnostic_code: 'diagnosticCode',
-      message: 'message',
-      sub_type: 'subType',
-      type: 'type'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      diagnostic_code
-      message
-      sub_type
-      type
-    ].freeze
-    DECODERS = {
-      sub_type: lambda do |value|
-        ::OctridevResend::WebhookEventBounceSubType.from_value(value)
-      end,
-      type: lambda do |value|
-        ::OctridevResend::WebhookEventBounceType.from_value(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalWebhookEventBounceMetadata
+  FIELDS = {
+    diagnostic_code: "diagnosticCode",
+    message: "message",
+    sub_type: "subType",
+    type: "type",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    diagnostic_code
+    message
+    sub_type
+    type
+  ].freeze
+  DECODERS = {
+    sub_type: lambda do |value|
+      ::OctridevResend::WebhookEventBounceSubType.from_value(value)
+    end,
+    type: lambda do |value|
+      ::OctridevResend::WebhookEventBounceType.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for WebhookEventBounce.
+# Typed representation of the `WebhookEventBounce` API schema.
+class WebhookEventBounce
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalWebhookEventBounceMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalWebhookEventBounceMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalWebhookEventBounceMetadata::DECODERS
+
+  # @return [Array_of_String] Array of SMTP diagnostic responses from the receiving server, one entry per recipient (e.g., `smtp; 550 5.1.1 user unknown`).
+  attr_reader :diagnostic_code
+  # @return [String] Detailed bounce message describing why the email bounced.
+  attr_reader :message
+  # @return [WebhookEventBounceSubType] Bounce sub-type.
+  attr_reader :sub_type
+  # @return [WebhookEventBounceType] Bounce type.
+  attr_reader :type
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for WebhookEventBounce.
-  # Typed representation of the `WebhookEventBounce` API schema.
-  class WebhookEventBounce
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalWebhookEventBounceMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalWebhookEventBounceMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalWebhookEventBounceMetadata::DECODERS
-
-    # @return [Array_of_String] Array of SMTP diagnostic responses from the receiving server, one entry per recipient (e.g., `smtp; 550 5.1.1 user unknown`).
-    attr_reader :diagnostic_code
-    # @return [String] Detailed bounce message describing why the email bounced.
-    attr_reader :message
-    # @return [WebhookEventBounceSubType] Bounce sub-type.
-    attr_reader :sub_type
-    # @return [WebhookEventBounceType] Bounce type.
-    attr_reader :type
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the WebhookEventBounceSubType SDK namespace.
-  module WebhookEventBounceSubType
-    UNDETERMINED = 'Undetermined'
-    GENERAL = 'General'
-    NO_EMAIL = 'NoEmail'
-    MAILBOX_FULL = 'MailboxFull'
-    MESSAGE_TOO_LARGE = 'MessageTooLarge'
-    CONTENT_REJECTED = 'ContentRejected'
-    ATTACHMENT_REJECTED = 'AttachmentRejected'
-    VALUES = %w[
-      Undetermined General NoEmail MailboxFull MessageTooLarge ContentRejected
-      AttachmentRejected
-    ].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 
-  # Defines the WebhookEventBounceType SDK namespace.
-  module WebhookEventBounceType
-    UNDETERMINED = 'Undetermined'
-    TRANSIENT = 'Transient'
-    PERMANENT = 'Permanent'
-    VALUES = %w[Undetermined Transient Permanent].freeze
-    def self.from_value(value)
-      value
-    end
+# Defines the WebhookEventBounceSubType SDK namespace.
+module WebhookEventBounceSubType
+  UNDETERMINED = 'Undetermined'
+  GENERAL = 'General'
+  NO_EMAIL = 'NoEmail'
+  MAILBOX_FULL = 'MailboxFull'
+  MESSAGE_TOO_LARGE = 'MessageTooLarge'
+  CONTENT_REJECTED = 'ContentRejected'
+  ATTACHMENT_REJECTED = 'AttachmentRejected'
+  VALUES = [
+    'Undetermined', 'General', 'NoEmail', 'MailboxFull', 'MessageTooLarge', 'ContentRejected',
+    'AttachmentRejected'
+  ].freeze
+  def self.from_value(value)
+    value
   end
+end
+
+# Defines the WebhookEventBounceType SDK namespace.
+module WebhookEventBounceType
+  UNDETERMINED = 'Undetermined'
+  TRANSIENT = 'Transient'
+  PERMANENT = 'Permanent'
+  VALUES = ['Undetermined', 'Transient', 'Permanent'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 end

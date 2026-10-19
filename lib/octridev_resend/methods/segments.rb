@@ -22,19 +22,20 @@ module OctridevResend
         filter: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/segments',
+          "/segments",
           config: config,
           body: {
             'name' => name,
             'audience_id' => audience_id,
-            'filter' => filter
+            'filter' => filter,
           },
           return_type: ::OctridevResend::CreateSegmentResponseSuccess,
           decoder: :json,
           operation_id: 'segments_create',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -50,21 +51,22 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(limit) { Validation.validate_range('limit', limit, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          '/segments',
+          "/segments",
           config: config,
           query: {
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true)
+            'before' => QueryValue.new(before, style: 'form', explode: true),
           },
           return_type: ::OctridevResend::ListSegmentsResponseSuccess,
           decoder: :json,
           operation_id: 'segments_list',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -76,17 +78,18 @@ module OctridevResend
         id:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/segments/',
+            "/segments/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           return_type: ::OctridevResend::GetSegmentResponseSuccess,
           decoder: :json,
           operation_id: 'segments_get',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -100,20 +103,21 @@ module OctridevResend
         name:,
         request_options: nil
       )
+
         SdkClient.request(
           'PATCH',
           [
-            '/segments/',
+            "/segments/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           body: {
-            'name' => name
+            'name' => name,
           },
           return_type: ::OctridevResend::UpdateSegmentResponseSuccess,
           decoder: :json,
           operation_id: 'segments_update',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -125,17 +129,18 @@ module OctridevResend
         id:,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/segments/',
+            "/segments/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           return_type: ::OctridevResend::RemoveSegmentResponseSuccess,
           decoder: :json,
           operation_id: 'segments_remove',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -153,6 +158,7 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('id', id)
 
         Validation.if_given(limit) { Validation.validate_range('limit', limit, min: 1, max: 100) }
@@ -160,20 +166,20 @@ module OctridevResend
         SdkClient.request(
           'GET',
           [
-            '/segments/',
+            "/segments/",
             SdkClient.encode_path_segment(id),
-            '/contacts'
+            "/contacts"
           ].join,
           config: config,
           query: {
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true)
+            'before' => QueryValue.new(before, style: 'form', explode: true),
           },
           return_type: ::OctridevResend::ListContactsResponseSuccess,
           decoder: :json,
           operation_id: 'segments_list_contacts',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
     end

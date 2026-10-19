@@ -75,6 +75,7 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('inbox_id', inbox_id)
 
         Validation.if_given(query) { Validation.validate_length('query', query, max: 256) }
@@ -94,9 +95,9 @@ module OctridevResend
         SdkClient.request(
           'GET',
           [
-            '/inboxes/',
+            "/inboxes/",
             SdkClient.encode_path_segment(inbox_id),
-            '/threads/search'
+            "/threads/search"
           ].join,
           config: config,
           query: {
@@ -113,12 +114,12 @@ module OctridevResend
             'read' => QueryValue.new(read, style: 'form', explode: true),
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true)
+            'before' => QueryValue.new(before, style: 'form', explode: true),
           },
           return_type: ::OctridevResend::SearchInboxThreadsResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_search_threads',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -134,6 +135,7 @@ module OctridevResend
         thread_id:,
         request_options: nil
       )
+
         Validation.validate_uuid('inbox_id', inbox_id)
 
         Validation.validate_uuid('thread_id', thread_id)
@@ -141,16 +143,16 @@ module OctridevResend
         SdkClient.request(
           'GET',
           [
-            '/inboxes/',
+            "/inboxes/",
             SdkClient.encode_path_segment(inbox_id),
-            '/threads/',
+            "/threads/",
             SdkClient.encode_path_segment(thread_id)
           ].join,
           config: config,
           return_type: ::OctridevResend::InboxThreadSummary,
           decoder: :json,
           operation_id: 'inboxes_get_thread',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -179,6 +181,7 @@ module OctridevResend
         remove_label_ids: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('inbox_id', inbox_id)
 
         Validation.validate_uuid('thread_id', thread_id)
@@ -194,9 +197,9 @@ module OctridevResend
         SdkClient.request(
           'PATCH',
           [
-            '/inboxes/',
+            "/inboxes/",
             SdkClient.encode_path_segment(inbox_id),
-            '/threads/',
+            "/threads/",
             SdkClient.encode_path_segment(thread_id)
           ].join,
           config: config,
@@ -204,12 +207,12 @@ module OctridevResend
             'read' => read,
             'folder' => folder,
             'add_label_ids' => add_label_ids,
-            'remove_label_ids' => remove_label_ids
+            'remove_label_ids' => remove_label_ids,
           },
           return_type: ::OctridevResend::InboxThreadSummary,
           decoder: :json,
           operation_id: 'inboxes_update_thread',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -225,6 +228,7 @@ module OctridevResend
         thread_id:,
         request_options: nil
       )
+
         Validation.validate_uuid('inbox_id', inbox_id)
 
         Validation.validate_uuid('thread_id', thread_id)
@@ -232,16 +236,16 @@ module OctridevResend
         SdkClient.request(
           'DELETE',
           [
-            '/inboxes/',
+            "/inboxes/",
             SdkClient.encode_path_segment(inbox_id),
-            '/threads/',
+            "/threads/",
             SdkClient.encode_path_segment(thread_id)
           ].join,
           config: config,
           return_type: ::OctridevResend::RemoveInboxThreadResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_remove_thread',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -263,6 +267,7 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('inbox_id', inbox_id)
 
         Validation.validate_uuid('thread_id', thread_id)
@@ -272,22 +277,22 @@ module OctridevResend
         SdkClient.request(
           'GET',
           [
-            '/inboxes/',
+            "/inboxes/",
             SdkClient.encode_path_segment(inbox_id),
-            '/threads/',
+            "/threads/",
             SdkClient.encode_path_segment(thread_id),
-            '/emails'
+            "/emails"
           ].join,
           config: config,
           query: {
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true)
+            'before' => QueryValue.new(before, style: 'form', explode: true),
           },
           return_type: ::OctridevResend::ListInboxThreadEmailsResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_list_thread_emails',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -304,6 +309,7 @@ module OctridevResend
         email_id:,
         request_options: nil
       )
+
         Validation.validate_uuid('inbox_id', inbox_id)
 
         Validation.validate_uuid('thread_id', thread_id)
@@ -313,18 +319,18 @@ module OctridevResend
         SdkClient.request(
           'GET',
           [
-            '/inboxes/',
+            "/inboxes/",
             SdkClient.encode_path_segment(inbox_id),
-            '/threads/',
+            "/threads/",
             SdkClient.encode_path_segment(thread_id),
-            '/emails/',
+            "/emails/",
             SdkClient.encode_path_segment(email_id)
           ].join,
           config: config,
           return_type: ::OctridevResend::InboxThreadEmail,
           decoder: :json,
           operation_id: 'inboxes_get_thread_email',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -395,6 +401,7 @@ module OctridevResend
         headers: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('inbox_id', inbox_id)
 
         Validation.validate_uuid('thread_id', thread_id)
@@ -410,13 +417,13 @@ module OctridevResend
         SdkClient.request(
           'POST',
           [
-            '/inboxes/',
+            "/inboxes/",
             SdkClient.encode_path_segment(inbox_id),
-            '/threads/',
+            "/threads/",
             SdkClient.encode_path_segment(thread_id),
-            '/emails/',
+            "/emails/",
             SdkClient.encode_path_segment(email_id),
-            '/reply'
+            "/reply"
           ].join,
           config: config,
           body: {
@@ -427,15 +434,15 @@ module OctridevResend
             'subject' => subject,
             'reply_all' => reply_all,
             'attachments' => attachments,
-            'headers' => headers
+            'headers' => headers,
           },
           return_type: ::OctridevResend::ReplyInboxThreadEmailResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_reply_thread_email',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Idempotency-Key' => SdkClient.header_value(idempotency_key)
-                                                     }),
-          request_options: request_options
+            'Idempotency-Key' => SdkClient.header_value(idempotency_key),
+          }),
+          request_options: request_options,
         ).data
       end
 
@@ -500,6 +507,7 @@ module OctridevResend
         headers: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('inbox_id', inbox_id)
 
         Validation.validate_uuid('thread_id', thread_id)
@@ -515,13 +523,13 @@ module OctridevResend
         SdkClient.request(
           'POST',
           [
-            '/inboxes/',
+            "/inboxes/",
             SdkClient.encode_path_segment(inbox_id),
-            '/threads/',
+            "/threads/",
             SdkClient.encode_path_segment(thread_id),
-            '/emails/',
+            "/emails/",
             SdkClient.encode_path_segment(email_id),
-            '/forward'
+            "/forward"
           ].join,
           config: config,
           body: {
@@ -532,15 +540,15 @@ module OctridevResend
             'text' => text,
             'subject' => subject,
             'attachments' => attachments,
-            'headers' => headers
+            'headers' => headers,
           },
           return_type: ::OctridevResend::ForwardInboxThreadEmailResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_forward_thread_email',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Idempotency-Key' => SdkClient.header_value(idempotency_key)
-                                                     }),
-          request_options: request_options
+            'Idempotency-Key' => SdkClient.header_value(idempotency_key),
+          }),
+          request_options: request_options,
         ).data
       end
     end

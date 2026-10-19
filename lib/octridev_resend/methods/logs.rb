@@ -21,21 +21,22 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(limit) { Validation.validate_range('limit', limit, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          '/logs',
+          "/logs",
           config: config,
           query: {
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true)
+            'before' => QueryValue.new(before, style: 'form', explode: true),
           },
           return_type: ::OctridevResend::ListLogsResponse,
           decoder: :json,
           operation_id: 'logs_list',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -47,19 +48,20 @@ module OctridevResend
         log_id:,
         request_options: nil
       )
+
         Validation.validate_uuid('log_id', log_id)
 
         SdkClient.request(
           'GET',
           [
-            '/logs/',
+            "/logs/",
             SdkClient.encode_path_segment(log_id)
           ].join,
           config: config,
           return_type: ::OctridevResend::Log,
           decoder: :json,
           operation_id: 'logs_get',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
     end

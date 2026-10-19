@@ -5,109 +5,109 @@
 
 # inbox_deleted_event domain models
 module OctridevResend
-  # Internal model hydration metadata.
-  class SdkInternalInboxDeletedEventMetadata
-    FIELDS = {
-      type: 'type',
-      created_at: 'created_at',
-      data: 'data'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      type
-      created_at
-      data
-    ].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevResend::InboxDeletedEventType.from_value(value)
-      end,
-      data: lambda do |value|
-        ::OctridevResend::InboxDeletedEventData.from_hash(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalInboxDeletedEventMetadata
+  FIELDS = {
+    type: "type",
+    created_at: "created_at",
+    data: "data",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    type
+    created_at
+    data
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevResend::InboxDeletedEventType.from_value(value)
+    end,
+    data: lambda do |value|
+      ::OctridevResend::InboxDeletedEventData.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for InboxDeletedEvent.
+# Typed representation of the `InboxDeletedEvent` API schema.
+class InboxDeletedEvent
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalInboxDeletedEventMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalInboxDeletedEventMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalInboxDeletedEventMetadata::DECODERS
+
+  # @return [InboxDeletedEventType] The event type.
+  attr_reader :type
+  # @return [String] Timestamp when the event was emitted.
+  attr_reader :created_at
+  # @return [InboxDeletedEventData] The data of an `inbox.deleted` event.
+  attr_reader :data
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for InboxDeletedEvent.
-  # Typed representation of the `InboxDeletedEvent` API schema.
-  class InboxDeletedEvent
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalInboxDeletedEventMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalInboxDeletedEventMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalInboxDeletedEventMetadata::DECODERS
-
-    # @return [InboxDeletedEventType] The event type.
-    attr_reader :type
-    # @return [String] Timestamp when the event was emitted.
-    attr_reader :created_at
-    # @return [InboxDeletedEventData] The data of an `inbox.deleted` event.
-    attr_reader :data
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the InboxDeletedEventType SDK namespace.
-  module InboxDeletedEventType
-    INBOX_DELETED = 'inbox.deleted'
-    VALUES = ['inbox.deleted'].freeze
-    def self.from_value(value)
-      return value if VALUES.include?(value)
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-      raise SdkValidationError.new('InboxDeletedEventType', 'enum', "Unknown InboxDeletedEventType: #{value}")
-    end
+# Defines the InboxDeletedEventType SDK namespace.
+module InboxDeletedEventType
+  INBOX_DELETED = 'inbox.deleted'
+  VALUES = ['inbox.deleted'].freeze
+  def self.from_value(value)
+    return value if VALUES.include?(value)
+
+    raise SdkValidationError.new('InboxDeletedEventType', 'enum', "Unknown InboxDeletedEventType: #{value}")
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalInboxDeletedEventDataMetadata
+  FIELDS = {
+    source: "source",
+    inbox_id: "inbox_id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    source
+    inbox_id
+  ].freeze
+  DECODERS = {
+    source: lambda do |value|
+      ::OctridevResend::InboxEventSource.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for InboxDeletedEventData.
+# The data of an `inbox.deleted` event.
+class InboxDeletedEventData
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalInboxDeletedEventDataMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalInboxDeletedEventDataMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalInboxDeletedEventDataMetadata::DECODERS
+
+  # @return [InboxEventSource] What made the change.
+  attr_reader :source
+  # @return [String] The ID of the inbox.
+  attr_reader :inbox_id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalInboxDeletedEventDataMetadata
-    FIELDS = {
-      source: 'source',
-      inbox_id: 'inbox_id'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      source
-      inbox_id
-    ].freeze
-    DECODERS = {
-      source: lambda do |value|
-        ::OctridevResend::InboxEventSource.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for InboxDeletedEventData.
-  # The data of an `inbox.deleted` event.
-  class InboxDeletedEventData
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalInboxDeletedEventDataMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalInboxDeletedEventDataMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalInboxDeletedEventDataMetadata::DECODERS
-
-    # @return [InboxEventSource] What made the change.
-    attr_reader :source
-    # @return [String] The ID of the inbox.
-    attr_reader :inbox_id
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 end

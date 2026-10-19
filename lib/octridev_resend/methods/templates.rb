@@ -33,9 +33,10 @@ module OctridevResend
         variables: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/templates',
+          "/templates",
           config: config,
           body: {
             'name' => name,
@@ -45,12 +46,12 @@ module OctridevResend
             'subject' => subject,
             'reply_to' => reply_to,
             'text' => text,
-            'variables' => variables
+            'variables' => variables,
           },
           return_type: ::OctridevResend::CreateTemplateResponseSuccess,
           decoder: :json,
           operation_id: 'templates_create',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -66,21 +67,22 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(limit) { Validation.validate_range('limit', limit, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          '/templates',
+          "/templates",
           config: config,
           query: {
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true)
+            'before' => QueryValue.new(before, style: 'form', explode: true),
           },
           return_type: ::OctridevResend::ListTemplatesResponseSuccess,
           decoder: :json,
           operation_id: 'templates_list',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -92,17 +94,18 @@ module OctridevResend
         id:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/templates/',
+            "/templates/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           return_type: ::OctridevResend::Template,
           decoder: :json,
           operation_id: 'templates_get',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -132,10 +135,11 @@ module OctridevResend
         variables: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'PATCH',
           [
-            '/templates/',
+            "/templates/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -147,12 +151,12 @@ module OctridevResend
             'reply_to' => reply_to,
             'html' => html,
             'text' => text,
-            'variables' => variables
+            'variables' => variables,
           },
           return_type: ::OctridevResend::UpdateTemplateResponseSuccess,
           decoder: :json,
           operation_id: 'templates_update',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -164,17 +168,18 @@ module OctridevResend
         id:,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/templates/',
+            "/templates/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           return_type: ::OctridevResend::RemoveTemplateResponseSuccess,
           decoder: :json,
           operation_id: 'templates_remove',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -186,18 +191,19 @@ module OctridevResend
         id:,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
           [
-            '/templates/',
+            "/templates/",
             SdkClient.encode_path_segment(id),
-            '/publish'
+            "/publish"
           ].join,
           config: config,
           return_type: ::OctridevResend::PublishTemplateResponseSuccess,
           decoder: :json,
           operation_id: 'templates_publish',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -209,18 +215,19 @@ module OctridevResend
         id:,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
           [
-            '/templates/',
+            "/templates/",
             SdkClient.encode_path_segment(id),
-            '/duplicate'
+            "/duplicate"
           ].join,
           config: config,
           return_type: ::OctridevResend::DuplicateTemplateResponseSuccess,
           decoder: :json,
           operation_id: 'templates_duplicate',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
     end

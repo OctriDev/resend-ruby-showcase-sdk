@@ -5,183 +5,189 @@
 
 # oauth domain models
 module OctridevResend
-  # Internal model hydration metadata.
-  class SdkInternalListOAuthGrantsResponseMetadata
-    FIELDS = {
-      object: 'object',
-      has_more: 'has_more',
-      data: 'data'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      data: lambda do |value|
-        value&.map { |item| ::OctridevResend::OAuthGrant.from_hash(item) }
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalListOAuthGrantsResponseMetadata
+  FIELDS = {
+    object: "object",
+    has_more: "has_more",
+    data: "data",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    data: lambda do |value|
+      value&.map { |item| ::OctridevResend::OAuthGrant.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ListOAuthGrantsResponse.
+# Typed representation of the `ListOAuthGrantsResponse` API schema.
+class ListOAuthGrantsResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListOAuthGrantsResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListOAuthGrantsResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListOAuthGrantsResponseMetadata::DECODERS
+
+  # @return [String] Type of the response object.
+  attr_reader :object
+  # @return [Boolean] Indicates if there are more results available.
+  attr_reader :has_more
+  # @return [Array_of_OAuthGrant] Optional array value serialized in the `data` wire field.
+  attr_reader :data
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ListOAuthGrantsResponse.
-  # Typed representation of the `ListOAuthGrantsResponse` API schema.
-  class ListOAuthGrantsResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListOAuthGrantsResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListOAuthGrantsResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListOAuthGrantsResponseMetadata::DECODERS
-
-    # @return [String] Type of the response object.
-    attr_reader :object
-    # @return [Boolean] Indicates if there are more results available.
-    attr_reader :has_more
-    # @return [Array_of_OAuthGrant] Optional array value serialized in the `data` wire field.
-    attr_reader :data
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalOAuthGrantClientMetadata
-    FIELDS = {
-      name: 'name',
-      logo_uri: 'logo_uri'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalOAuthGrantClientMetadata
+  FIELDS = {
+    name: "name",
+    logo_uri: "logo_uri",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for OAuthGrantClient.
+# The OAuth client the grant was issued to.
+class OAuthGrantClient
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalOAuthGrantClientMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalOAuthGrantClientMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalOAuthGrantClientMetadata::DECODERS
+
+  # @return [String] The name of the OAuth client.
+  attr_reader :name
+  # @return [String] The URL of the OAuth client's logo.
+  attr_reader :logo_uri
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for OAuthGrantClient.
-  # The OAuth client the grant was issued to.
-  class OAuthGrantClient
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalOAuthGrantClientMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalOAuthGrantClientMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalOAuthGrantClientMetadata::DECODERS
-
-    # @return [String] The name of the OAuth client.
-    attr_reader :name
-    # @return [String] The URL of the OAuth client's logo.
-    attr_reader :logo_uri
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalOAuthGrantMetadata
-    FIELDS = {
-      id: 'id',
-      client_id: 'client_id',
-      scopes: 'scopes',
-      created_at: 'created_at',
-      revoked_at: 'revoked_at',
-      revoked_reason: 'revoked_reason',
-      client: 'client'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      client: lambda do |value|
-        ::OctridevResend::OAuthGrantClient.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalOAuthGrantMetadata
+  FIELDS = {
+    id: "id",
+    client_id: "client_id",
+    scopes: "scopes",
+    created_at: "created_at",
+    revoked_at: "revoked_at",
+    revoked_reason: "revoked_reason",
+    client: "client",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    client: lambda do |value|
+      ::OctridevResend::OAuthGrantClient.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for OAuthGrant.
+# Typed representation of the `OAuthGrant` API schema.
+class OAuthGrant
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalOAuthGrantMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalOAuthGrantMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalOAuthGrantMetadata::DECODERS
+
+  # @return [String] The ID of the OAuth grant.
+  attr_reader :id
+  # @return [String] The ID of the OAuth client the grant was issued to.
+  attr_reader :client_id
+  # @return [Array_of_String] The scopes granted to the OAuth client.
+  attr_reader :scopes
+  # @return [String] The date and time the OAuth grant was created.
+  attr_reader :created_at
+  # @return [String] The date and time the OAuth grant was revoked, or null if it is still active.
+  attr_reader :revoked_at
+  # @return [String] The reason the OAuth grant was revoked, or null if it is still active.
+  attr_reader :revoked_reason
+  # @return [OAuthGrantClient] The OAuth client the grant was issued to.
+  attr_reader :client
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for OAuthGrant.
-  # Typed representation of the `OAuthGrant` API schema.
-  class OAuthGrant
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalOAuthGrantMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalOAuthGrantMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalOAuthGrantMetadata::DECODERS
-
-    # @return [String] The ID of the OAuth grant.
-    attr_reader :id
-    # @return [String] The ID of the OAuth client the grant was issued to.
-    attr_reader :client_id
-    # @return [Array_of_String] The scopes granted to the OAuth client.
-    attr_reader :scopes
-    # @return [String] The date and time the OAuth grant was created.
-    attr_reader :created_at
-    # @return [String] The date and time the OAuth grant was revoked, or null if it is still active.
-    attr_reader :revoked_at
-    # @return [String] The reason the OAuth grant was revoked, or null if it is still active.
-    attr_reader :revoked_reason
-    # @return [OAuthGrantClient] The OAuth client the grant was issued to.
-    attr_reader :client
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalRevokeOAuthGrantResponseMetadata
-    FIELDS = {
-      object: 'object',
-      id: 'id',
-      revoked_at: 'revoked_at',
-      revoked_reason: 'revoked_reason'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalRevokeOAuthGrantResponseMetadata
+  FIELDS = {
+    object: "object",
+    id: "id",
+    revoked_at: "revoked_at",
+    revoked_reason: "revoked_reason",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for RevokeOAuthGrantResponse.
+# Typed representation of the `RevokeOAuthGrantResponse` API schema.
+class RevokeOAuthGrantResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalRevokeOAuthGrantResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalRevokeOAuthGrantResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalRevokeOAuthGrantResponseMetadata::DECODERS
+
+  # @return [String] The type of object.
+  attr_reader :object
+  # @return [String] The ID of the OAuth grant.
+  attr_reader :id
+  # @return [String] The date and time the OAuth grant was revoked.
+  attr_reader :revoked_at
+  # @return [String] The reason the OAuth grant was revoked.
+  attr_reader :revoked_reason
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for RevokeOAuthGrantResponse.
-  # Typed representation of the `RevokeOAuthGrantResponse` API schema.
-  class RevokeOAuthGrantResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalRevokeOAuthGrantResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalRevokeOAuthGrantResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalRevokeOAuthGrantResponseMetadata::DECODERS
-
-    # @return [String] The type of object.
-    attr_reader :object
-    # @return [String] The ID of the OAuth grant.
-    attr_reader :id
-    # @return [String] The date and time the OAuth grant was revoked.
-    attr_reader :revoked_at
-    # @return [String] The reason the OAuth grant was revoked.
-    attr_reader :revoked_reason
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end
