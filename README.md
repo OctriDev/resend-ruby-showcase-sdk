@@ -14,7 +14,7 @@ bundle add octridev_resend --git https://github.com/OctriDev/resend-ruby-showcas
 
 ## Quickstart
 
-The example calls `client.domains.get` (GET `/domains/{domain_id}`) with example values for its required arguments.
+The example calls `client.emails.send` (POST `/emails`) with example values for its required arguments.
 
 ```ruby
 require "octridev_resend"
@@ -26,7 +26,7 @@ auth = OctridevResend::ClientAuthConfig.new
 auth.bearer_auth = ENV.fetch("API_TOKEN")
 config.auth = auth
 client = OctridevResend::Resend.new(config)
-result = client.domains.get(domain_id: "domain-1")
+result = client.emails.send(from: "user@example.com", to: "user@example.com", subject: "subject")
 p result
 ```
 
