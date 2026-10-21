@@ -491,7 +491,7 @@ module OctridevResend
       oauth_grant_id:,
       request_options: nil
     )
-      ::OctridevResend::Methods::Oauth.revoke_grant(
+      ::OctridevResend::Methods::Oauth.revoke_oauth_grant(
         config: @config,
         oauth_grant_id: oauth_grant_id,
         request_options: request_options
