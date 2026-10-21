@@ -5,52 +5,51 @@
 
 # webhook_event_attachment domain models
 module OctridevResend
-# Internal model hydration metadata.
-class SdkInternalWebhookEventAttachmentMetadata
-  FIELDS = {
-    id: "id",
-    filename: "filename",
-    content_type: "content_type",
-    content_disposition: "content_disposition",
-    content_id: "content_id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    id
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for WebhookEventAttachment.
-# Typed representation of the `WebhookEventAttachment` API schema.
-class WebhookEventAttachment
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalWebhookEventAttachmentMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalWebhookEventAttachmentMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalWebhookEventAttachmentMetadata::DECODERS
-
-  # @return [String] Unique identifier for the attachment.
-  attr_reader :id
-  # @return [String] The filename of the attachment.
-  attr_reader :filename
-  # @return [String] The MIME type of the attachment.
-  attr_reader :content_type
-  # @return [String] The content disposition (e.g., `inline` or `attachment`).
-  attr_reader :content_disposition
-  # @return [String] Content-ID header used for referencing inline images.
-  attr_reader :content_id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalWebhookEventAttachmentMetadata
+    FIELDS = {
+      id: 'id',
+      filename: 'filename',
+      content_type: 'content_type',
+      content_disposition: 'content_disposition',
+      content_id: 'content_id'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      id
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for WebhookEventAttachment.
+  # Typed representation of the `WebhookEventAttachment` API schema.
+  class WebhookEventAttachment
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalWebhookEventAttachmentMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalWebhookEventAttachmentMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalWebhookEventAttachmentMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+    # @return [String] Unique identifier for the attachment.
+    attr_reader :id
+    # @return [String] The filename of the attachment.
+    attr_reader :filename
+    # @return [String] The MIME type of the attachment.
+    attr_reader :content_type
+    # @return [String] The content disposition (e.g., `inline` or `attachment`).
+    attr_reader :content_disposition
+    # @return [String] Content-ID header used for referencing inline images.
+    attr_reader :content_id
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

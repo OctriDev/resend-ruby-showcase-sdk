@@ -5,675 +5,654 @@
 
 # webhooks domain models
 module OctridevResend
-# Internal model hydration metadata.
-class SdkInternalCreateWebhookRequestMetadata
-  FIELDS = {
-    endpoint: "endpoint",
-    events: "events",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    endpoint
-    events
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for CreateWebhookRequest.
-# Typed representation of the `CreateWebhookRequest` API schema.
-class CreateWebhookRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCreateWebhookRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCreateWebhookRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCreateWebhookRequestMetadata::DECODERS
-
-  # @return [String] The URL where webhook events will be sent.
-  attr_reader :endpoint
-  # @return [Array_of_String] Array of event types to subscribe to.
-  attr_reader :events
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalCreateWebhookRequestMetadata
+    FIELDS = {
+      endpoint: 'endpoint',
+      events: 'events'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      endpoint
+      events
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for CreateWebhookRequest.
+  # Typed representation of the `CreateWebhookRequest` API schema.
+  class CreateWebhookRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCreateWebhookRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCreateWebhookRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCreateWebhookRequestMetadata::DECODERS
+
+    # @return [String] The URL where webhook events will be sent.
+    attr_reader :endpoint
+    # @return [Array_of_String] Array of event types to subscribe to.
+    attr_reader :events
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalCreateWebhookResponseMetadata
-  FIELDS = {
-    object: "object",
-    id: "id",
-    signing_secret: "signing_secret",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for CreateWebhookResponse.
-# Typed representation of the `CreateWebhookResponse` API schema.
-class CreateWebhookResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCreateWebhookResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCreateWebhookResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCreateWebhookResponseMetadata::DECODERS
-
-  # @return [String] The type of object.
-  attr_reader :object
-  # @return [String] The ID of the webhook.
-  attr_reader :id
-  # @return [String] The secret key used to verify webhook payloads.
-  attr_reader :signing_secret
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalCreateWebhookResponseMetadata
+    FIELDS = {
+      object: 'object',
+      id: 'id',
+      signing_secret: 'signing_secret'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for CreateWebhookResponse.
+  # Typed representation of the `CreateWebhookResponse` API schema.
+  class CreateWebhookResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCreateWebhookResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCreateWebhookResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCreateWebhookResponseMetadata::DECODERS
+
+    # @return [String] The type of object.
+    attr_reader :object
+    # @return [String] The ID of the webhook.
+    attr_reader :id
+    # @return [String] The secret key used to verify webhook payloads.
+    attr_reader :signing_secret
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalDeleteWebhookResponseMetadata
-  FIELDS = {
-    object: "object",
-    id: "id",
-    deleted: "deleted",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for DeleteWebhookResponse.
-# Typed representation of the `DeleteWebhookResponse` API schema.
-class DeleteWebhookResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDeleteWebhookResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDeleteWebhookResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDeleteWebhookResponseMetadata::DECODERS
-
-  # @return [String] The type of object.
-  attr_reader :object
-  # @return [String] The ID of the deleted webhook.
-  attr_reader :id
-  # @return [Boolean] Indicates whether the webhook was successfully deleted.
-  attr_reader :deleted
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalDeleteWebhookResponseMetadata
+    FIELDS = {
+      object: 'object',
+      id: 'id',
+      deleted: 'deleted'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for DeleteWebhookResponse.
+  # Typed representation of the `DeleteWebhookResponse` API schema.
+  class DeleteWebhookResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDeleteWebhookResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDeleteWebhookResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDeleteWebhookResponseMetadata::DECODERS
+
+    # @return [String] The type of object.
+    attr_reader :object
+    # @return [String] The ID of the deleted webhook.
+    attr_reader :id
+    # @return [Boolean] Indicates whether the webhook was successfully deleted.
+    attr_reader :deleted
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalGetWebhookEventResponseMetadata
-  FIELDS = {
-    object: "object",
-    id: "id",
-    type: "type",
-    created_at: "created_at",
-    status: "status",
-    next_attempt_at: "next_attempt_at",
-    payload: "payload",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    status: lambda do |value|
-      ::OctridevResend::GetWebhookEventResponseStatus.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for GetWebhookEventResponse.
-# Typed representation of the `GetWebhookEventResponse` API schema.
-class GetWebhookEventResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalGetWebhookEventResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalGetWebhookEventResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalGetWebhookEventResponseMetadata::DECODERS
-
-  # @return [String] The type of object.
-  attr_reader :object
-  # @return [String] The ID of the webhook event.
-  attr_reader :id
-  # @return [String] The type of the event.
-  attr_reader :type
-  # @return [String] Timestamp indicating when the event was created.
-  attr_reader :created_at
-  # @return [GetWebhookEventResponseStatus] The delivery status of the event for this webhook.
-  attr_reader :status
-  # @return [String] Timestamp of the next scheduled delivery attempt, or null when none is scheduled. Always null once the event has succeeded or permanently failed.
-  attr_reader :next_attempt_at
-  # @return [Hash] The event payload sent to the webhook endpoint.
-  attr_reader :payload
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalGetWebhookEventResponseMetadata
+    FIELDS = {
+      object: 'object',
+      id: 'id',
+      type: 'type',
+      created_at: 'created_at',
+      status: 'status',
+      next_attempt_at: 'next_attempt_at',
+      payload: 'payload'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      status: lambda do |value|
+        ::OctridevResend::GetWebhookEventResponseStatus.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for GetWebhookEventResponse.
+  # Typed representation of the `GetWebhookEventResponse` API schema.
+  class GetWebhookEventResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalGetWebhookEventResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalGetWebhookEventResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalGetWebhookEventResponseMetadata::DECODERS
+
+    # @return [String] The type of object.
+    attr_reader :object
+    # @return [String] The ID of the webhook event.
+    attr_reader :id
+    # @return [String] The type of the event.
+    attr_reader :type
+    # @return [String] Timestamp indicating when the event was created.
+    attr_reader :created_at
+    # @return [GetWebhookEventResponseStatus] The delivery status of the event for this webhook.
+    attr_reader :status
+    # @return [String] Timestamp of the next scheduled delivery attempt, or null when none is scheduled. Always null once the event has succeeded or permanently failed.
+    attr_reader :next_attempt_at
+    # @return [Hash] The event payload sent to the webhook endpoint.
+    attr_reader :payload
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the GetWebhookEventResponseStatus SDK namespace.
-module GetWebhookEventResponseStatus
-  PENDING = 'pending'
-  ATTEMPTING = 'attempting'
-  SUCCESS = 'success'
-  FAILED = 'failed'
-  VALUES = ['pending', 'attempting', 'success', 'failed'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalGetWebhookResponseMetadata
-  FIELDS = {
-    object: "object",
-    id: "id",
-    endpoint: "endpoint",
-    events: "events",
-    status: "status",
-    created_at: "created_at",
-    signing_secret: "signing_secret",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for GetWebhookResponse.
-# Typed representation of the `GetWebhookResponse` API schema.
-class GetWebhookResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalGetWebhookResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalGetWebhookResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalGetWebhookResponseMetadata::DECODERS
-
-  # @return [String] The type of object.
-  attr_reader :object
-  # @return [String] The ID of the webhook.
-  attr_reader :id
-  # @return [String] The URL where webhook events are sent.
-  attr_reader :endpoint
-  # @return [Array_of_String] Array of event types subscribed to.
-  attr_reader :events
-  # @return [String] The status of the webhook.
-  attr_reader :status
-  # @return [String] Timestamp indicating when the webhook was created.
-  attr_reader :created_at
-  # @return [String] The secret key used to verify webhook payloads.
-  attr_reader :signing_secret
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the GetWebhookEventResponseStatus SDK namespace.
+  module GetWebhookEventResponseStatus
+    PENDING = 'pending'
+    ATTEMPTING = 'attempting'
+    SUCCESS = 'success'
+    FAILED = 'failed'
+    VALUES = %w[pending attempting success failed].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalGetWebhookResponseMetadata
+    FIELDS = {
+      object: 'object',
+      id: 'id',
+      endpoint: 'endpoint',
+      events: 'events',
+      status: 'status',
+      created_at: 'created_at',
+      signing_secret: 'signing_secret'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for GetWebhookResponse.
+  # Typed representation of the `GetWebhookResponse` API schema.
+  class GetWebhookResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalGetWebhookResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalGetWebhookResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalGetWebhookResponseMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalListWebhookEventAttemptsResponseDataItemMetadata
-  FIELDS = {
-    id: "id",
-    http_status_code: "http_status_code",
-    response: "response",
-    sent_at: "sent_at",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    # @return [String] The type of object.
+    attr_reader :object
+    # @return [String] The ID of the webhook.
+    attr_reader :id
+    # @return [String] The URL where webhook events are sent.
+    attr_reader :endpoint
+    # @return [Array_of_String] Array of event types subscribed to.
+    attr_reader :events
+    # @return [String] The status of the webhook.
+    attr_reader :status
+    # @return [String] Timestamp indicating when the webhook was created.
+    attr_reader :created_at
+    # @return [String] The secret key used to verify webhook payloads.
+    attr_reader :signing_secret
 
-# API model for ListWebhookEventAttemptsResponseDataItem.
-# Required object value serialized in the `data[]` wire field.
-class ListWebhookEventAttemptsResponseDataItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListWebhookEventAttemptsResponseDataItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListWebhookEventAttemptsResponseDataItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListWebhookEventAttemptsResponseDataItemMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] The ID of the webhook event attempt.
-  attr_reader :id
-  # @return [Integer] The HTTP status code returned by the webhook endpoint.
-  attr_reader :http_status_code
-  # @return [String] The response body returned by the webhook endpoint.
-  attr_reader :response
-  # @return [String] Timestamp indicating when the attempt was sent.
-  attr_reader :sent_at
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalListWebhookEventAttemptsResponseDataItemMetadata
+    FIELDS = {
+      id: 'id',
+      http_status_code: 'http_status_code',
+      response: 'response',
+      sent_at: 'sent_at'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ListWebhookEventAttemptsResponseDataItem.
+  # Required object value serialized in the `data[]` wire field.
+  class ListWebhookEventAttemptsResponseDataItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListWebhookEventAttemptsResponseDataItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListWebhookEventAttemptsResponseDataItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListWebhookEventAttemptsResponseDataItemMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalListWebhookEventAttemptsResponseMetadata
-  FIELDS = {
-    object: "object",
-    has_more: "has_more",
-    data: "data",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    data: lambda do |value|
-      value&.map { |item| ::OctridevResend::ListWebhookEventAttemptsResponseDataItem.from_hash(item) }
-    end,
-  }.freeze
-end
+    # @return [String] The ID of the webhook event attempt.
+    attr_reader :id
+    # @return [Integer] The HTTP status code returned by the webhook endpoint.
+    attr_reader :http_status_code
+    # @return [String] The response body returned by the webhook endpoint.
+    attr_reader :response
+    # @return [String] Timestamp indicating when the attempt was sent.
+    attr_reader :sent_at
 
-# API model for ListWebhookEventAttemptsResponse.
-# Typed representation of the `ListWebhookEventAttemptsResponse` API schema.
-class ListWebhookEventAttemptsResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListWebhookEventAttemptsResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListWebhookEventAttemptsResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListWebhookEventAttemptsResponseMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] Type of the response object.
-  attr_reader :object
-  # @return [Boolean] Indicates if there are more results available.
-  attr_reader :has_more
-  # @return [Array_of_ListWebhookEventAttemptsResponseDataItem] Array containing webhook event attempt information.
-  attr_reader :data
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalListWebhookEventAttemptsResponseMetadata
+    FIELDS = {
+      object: 'object',
+      has_more: 'has_more',
+      data: 'data'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      data: lambda do |value|
+        value&.map { |item| ::OctridevResend::ListWebhookEventAttemptsResponseDataItem.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ListWebhookEventAttemptsResponse.
+  # Typed representation of the `ListWebhookEventAttemptsResponse` API schema.
+  class ListWebhookEventAttemptsResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListWebhookEventAttemptsResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListWebhookEventAttemptsResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListWebhookEventAttemptsResponseMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalListWebhookEventsResponseDataItemMetadata
-  FIELDS = {
-    id: "id",
-    type: "type",
-    created_at: "created_at",
-    status: "status",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    status: lambda do |value|
-      ::OctridevResend::ListWebhookEventsResponseDataItemStatus.from_value(value)
-    end,
-  }.freeze
-end
+    # @return [String] Type of the response object.
+    attr_reader :object
+    # @return [Boolean] Indicates if there are more results available.
+    attr_reader :has_more
+    # @return [Array_of_ListWebhookEventAttemptsResponseDataItem] Array containing webhook event attempt information.
+    attr_reader :data
 
-# API model for ListWebhookEventsResponseDataItem.
-# Required object value serialized in the `data[]` wire field.
-class ListWebhookEventsResponseDataItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListWebhookEventsResponseDataItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListWebhookEventsResponseDataItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListWebhookEventsResponseDataItemMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] The ID of the webhook event.
-  attr_reader :id
-  # @return [String] The type of the event.
-  attr_reader :type
-  # @return [String] Timestamp indicating when the event was created.
-  attr_reader :created_at
-  # @return [ListWebhookEventsResponseDataItemStatus] The delivery status of the event for this webhook.
-  attr_reader :status
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalListWebhookEventsResponseDataItemMetadata
+    FIELDS = {
+      id: 'id',
+      type: 'type',
+      created_at: 'created_at',
+      status: 'status'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      status: lambda do |value|
+        ::OctridevResend::ListWebhookEventsResponseDataItemStatus.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ListWebhookEventsResponseDataItem.
+  # Required object value serialized in the `data[]` wire field.
+  class ListWebhookEventsResponseDataItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListWebhookEventsResponseDataItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListWebhookEventsResponseDataItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListWebhookEventsResponseDataItemMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalListWebhookEventsResponseMetadata
-  FIELDS = {
-    object: "object",
-    has_more: "has_more",
-    data: "data",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    data: lambda do |value|
-      value&.map { |item| ::OctridevResend::ListWebhookEventsResponseDataItem.from_hash(item) }
-    end,
-  }.freeze
-end
+    # @return [String] The ID of the webhook event.
+    attr_reader :id
+    # @return [String] The type of the event.
+    attr_reader :type
+    # @return [String] Timestamp indicating when the event was created.
+    attr_reader :created_at
+    # @return [ListWebhookEventsResponseDataItemStatus] The delivery status of the event for this webhook.
+    attr_reader :status
 
-# API model for ListWebhookEventsResponse.
-# Typed representation of the `ListWebhookEventsResponse` API schema.
-class ListWebhookEventsResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListWebhookEventsResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListWebhookEventsResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListWebhookEventsResponseMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] Type of the response object.
-  attr_reader :object
-  # @return [Boolean] Indicates if there are more results available.
-  attr_reader :has_more
-  # @return [Array_of_ListWebhookEventsResponseDataItem] Array containing webhook event information.
-  attr_reader :data
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalListWebhookEventsResponseMetadata
+    FIELDS = {
+      object: 'object',
+      has_more: 'has_more',
+      data: 'data'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      data: lambda do |value|
+        value&.map { |item| ::OctridevResend::ListWebhookEventsResponseDataItem.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ListWebhookEventsResponse.
+  # Typed representation of the `ListWebhookEventsResponse` API schema.
+  class ListWebhookEventsResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListWebhookEventsResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListWebhookEventsResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListWebhookEventsResponseMetadata::DECODERS
 
-# Defines the ListWebhookEventsResponseDataItemStatus SDK namespace.
-module ListWebhookEventsResponseDataItemStatus
-  PENDING = 'pending'
-  ATTEMPTING = 'attempting'
-  SUCCESS = 'success'
-  FAILED = 'failed'
-  VALUES = ['pending', 'attempting', 'success', 'failed'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [String] Type of the response object.
+    attr_reader :object
+    # @return [Boolean] Indicates if there are more results available.
+    attr_reader :has_more
+    # @return [Array_of_ListWebhookEventsResponseDataItem] Array containing webhook event information.
+    attr_reader :data
 
-# Internal model hydration metadata.
-class SdkInternalListWebhooksResponseDataItemMetadata
-  FIELDS = {
-    id: "id",
-    endpoint: "endpoint",
-    events: "events",
-    status: "status",
-    created_at: "created_at",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# API model for ListWebhooksResponseDataItem.
-# Required object value serialized in the `data[]` wire field.
-class ListWebhooksResponseDataItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListWebhooksResponseDataItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListWebhooksResponseDataItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListWebhooksResponseDataItemMetadata::DECODERS
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  # @return [String] The ID of the webhook.
-  attr_reader :id
-  # @return [String] The URL where webhook events are sent.
-  attr_reader :endpoint
-  # @return [Array_of_String] Array of event types subscribed to.
-  attr_reader :events
-  # @return [String] The status of the webhook.
-  attr_reader :status
-  # @return [String] Timestamp indicating when the webhook was created.
-  attr_reader :created_at
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the ListWebhookEventsResponseDataItemStatus SDK namespace.
+  module ListWebhookEventsResponseDataItemStatus
+    PENDING = 'pending'
+    ATTEMPTING = 'attempting'
+    SUCCESS = 'success'
+    FAILED = 'failed'
+    VALUES = %w[pending attempting success failed].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalListWebhooksResponseMetadata
-  FIELDS = {
-    object: "object",
-    has_more: "has_more",
-    data: "data",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    data: lambda do |value|
-      value&.map { |item| ::OctridevResend::ListWebhooksResponseDataItem.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for ListWebhooksResponse.
-# Typed representation of the `ListWebhooksResponse` API schema.
-class ListWebhooksResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListWebhooksResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListWebhooksResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListWebhooksResponseMetadata::DECODERS
-
-  # @return [String] Type of the response object.
-  attr_reader :object
-  # @return [Boolean] Indicates if there are more results available.
-  attr_reader :has_more
-  # @return [Array_of_ListWebhooksResponseDataItem] Array containing webhook information.
-  attr_reader :data
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalListWebhooksResponseDataItemMetadata
+    FIELDS = {
+      id: 'id',
+      endpoint: 'endpoint',
+      events: 'events',
+      status: 'status',
+      created_at: 'created_at'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ListWebhooksResponseDataItem.
+  # Required object value serialized in the `data[]` wire field.
+  class ListWebhooksResponseDataItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListWebhooksResponseDataItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListWebhooksResponseDataItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListWebhooksResponseDataItemMetadata::DECODERS
+
+    # @return [String] The ID of the webhook.
+    attr_reader :id
+    # @return [String] The URL where webhook events are sent.
+    attr_reader :endpoint
+    # @return [Array_of_String] Array of event types subscribed to.
+    attr_reader :events
+    # @return [String] The status of the webhook.
+    attr_reader :status
+    # @return [String] Timestamp indicating when the webhook was created.
+    attr_reader :created_at
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalReplayWebhookEventResponseMetadata
-  FIELDS = {
-    object: "object",
-    id: "id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ReplayWebhookEventResponse.
-# Typed representation of the `ReplayWebhookEventResponse` API schema.
-class ReplayWebhookEventResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalReplayWebhookEventResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalReplayWebhookEventResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalReplayWebhookEventResponseMetadata::DECODERS
-
-  # @return [String] The type of object.
-  attr_reader :object
-  # @return [String] The ID of the replayed webhook event.
-  attr_reader :id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalListWebhooksResponseMetadata
+    FIELDS = {
+      object: 'object',
+      has_more: 'has_more',
+      data: 'data'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      data: lambda do |value|
+        value&.map { |item| ::OctridevResend::ListWebhooksResponseDataItem.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ListWebhooksResponse.
+  # Typed representation of the `ListWebhooksResponse` API schema.
+  class ListWebhooksResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListWebhooksResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListWebhooksResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListWebhooksResponseMetadata::DECODERS
+
+    # @return [String] Type of the response object.
+    attr_reader :object
+    # @return [Boolean] Indicates if there are more results available.
+    attr_reader :has_more
+    # @return [Array_of_ListWebhooksResponseDataItem] Array containing webhook information.
+    attr_reader :data
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalRotateWebhookSigningSecretResponseMetadata
-  FIELDS = {
-    object: "object",
-    id: "id",
-    signing_secret: "signing_secret",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for RotateWebhookSigningSecretResponse.
-# Typed representation of the `RotateWebhookSigningSecretResponse` API schema.
-class RotateWebhookSigningSecretResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalRotateWebhookSigningSecretResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalRotateWebhookSigningSecretResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalRotateWebhookSigningSecretResponseMetadata::DECODERS
-
-  # @return [String] The type of object.
-  attr_reader :object
-  # @return [String] The ID of the webhook.
-  attr_reader :id
-  # @return [String] The new secret key used to verify webhook payloads.
-  attr_reader :signing_secret
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalReplayWebhookEventResponseMetadata
+    FIELDS = {
+      object: 'object',
+      id: 'id'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ReplayWebhookEventResponse.
+  # Typed representation of the `ReplayWebhookEventResponse` API schema.
+  class ReplayWebhookEventResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalReplayWebhookEventResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalReplayWebhookEventResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalReplayWebhookEventResponseMetadata::DECODERS
+
+    # @return [String] The type of object.
+    attr_reader :object
+    # @return [String] The ID of the replayed webhook event.
+    attr_reader :id
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalUpdateWebhookRequestMetadata
-  FIELDS = {
-    endpoint: "endpoint",
-    events: "events",
-    status: "status",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    status: lambda do |value|
-      ::OctridevResend::UpdateWebhookRequestStatus.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for UpdateWebhookRequest.
-# Typed representation of the `UpdateWebhookRequest` API schema.
-class UpdateWebhookRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalUpdateWebhookRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalUpdateWebhookRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalUpdateWebhookRequestMetadata::DECODERS
-
-  # @return [String] The URL where webhook events will be sent.
-  attr_reader :endpoint
-  # @return [Array_of_String] Array of event types to subscribe to.
-  attr_reader :events
-  # @return [UpdateWebhookRequestStatus] The status of the webhook.
-  attr_reader :status
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalRotateWebhookSigningSecretResponseMetadata
+    FIELDS = {
+      object: 'object',
+      id: 'id',
+      signing_secret: 'signing_secret'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for RotateWebhookSigningSecretResponse.
+  # Typed representation of the `RotateWebhookSigningSecretResponse` API schema.
+  class RotateWebhookSigningSecretResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalRotateWebhookSigningSecretResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalRotateWebhookSigningSecretResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalRotateWebhookSigningSecretResponseMetadata::DECODERS
+
+    # @return [String] The type of object.
+    attr_reader :object
+    # @return [String] The ID of the webhook.
+    attr_reader :id
+    # @return [String] The new secret key used to verify webhook payloads.
+    attr_reader :signing_secret
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalUpdateWebhookRequestMetadata
+    FIELDS = {
+      endpoint: 'endpoint',
+      events: 'events',
+      status: 'status'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      status: lambda do |value|
+        ::OctridevResend::UpdateWebhookRequestStatus.from_value(value)
+      end
+    }.freeze
   end
-end
 
-# Defines the UpdateWebhookRequestStatus SDK namespace.
-module UpdateWebhookRequestStatus
-  ENABLED = 'enabled'
-  DISABLED = 'disabled'
-  VALUES = ['enabled', 'disabled'].freeze
-  def self.from_value(value)
-    value
+  # API model for UpdateWebhookRequest.
+  # Typed representation of the `UpdateWebhookRequest` API schema.
+  class UpdateWebhookRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalUpdateWebhookRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalUpdateWebhookRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalUpdateWebhookRequestMetadata::DECODERS
+
+    # @return [String] The URL where webhook events will be sent.
+    attr_reader :endpoint
+    # @return [Array_of_String] Array of event types to subscribe to.
+    attr_reader :events
+    # @return [UpdateWebhookRequestStatus] The status of the webhook.
+    attr_reader :status
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
+
+  # Defines the UpdateWebhookRequestStatus SDK namespace.
+  module UpdateWebhookRequestStatus
+    ENABLED = 'enabled'
+    DISABLED = 'disabled'
+    VALUES = %w[enabled disabled].freeze
+    def self.from_value(value)
+      value
+    end
+  end
 end

@@ -40,7 +40,6 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('inbox_id', inbox_id)
 
         Validation.if_given(labels) { Validation.validate_items('labels', labels, max: 50) }
@@ -50,9 +49,9 @@ module OctridevResend
         SdkClient.request(
           'GET',
           [
-            "/inboxes/",
+            '/inboxes/',
             SdkClient.encode_path_segment(inbox_id),
-            "/threads"
+            '/threads'
           ].join,
           config: config,
           query: {
@@ -61,12 +60,12 @@ module OctridevResend
             'read' => QueryValue.new(read, style: 'form', explode: true),
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true),
+            'before' => QueryValue.new(before, style: 'form', explode: true)
           },
           return_type: ::OctridevResend::ListInboxThreadsResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_list_threads',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
     end

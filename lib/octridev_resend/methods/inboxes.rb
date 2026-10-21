@@ -35,25 +35,24 @@ module OctridevResend
         forwarding: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(name) { Validation.validate_length('name', name, max: 64) }
 
         Validation.if_given(from_name) { Validation.validate_length('from_name', from_name, max: 78) }
 
         SdkClient.request(
           'POST',
-          "/inboxes",
+          '/inboxes',
           config: config,
           body: {
             'email_address' => email_address,
             'name' => name,
             'from_name' => from_name,
-            'forwarding' => forwarding,
+            'forwarding' => forwarding
           },
           return_type: ::OctridevResend::CreateInboxResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_create',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -71,22 +70,21 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(limit) { Validation.validate_range('limit', limit, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          "/inboxes",
+          '/inboxes',
           config: config,
           query: {
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true),
+            'before' => QueryValue.new(before, style: 'form', explode: true)
           },
           return_type: ::OctridevResend::ListInboxesResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_list',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -100,18 +98,17 @@ module OctridevResend
         inbox_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/inboxes/",
+            '/inboxes/',
             SdkClient.encode_path_segment(inbox_id)
           ].join,
           config: config,
           return_type: ::OctridevResend::Inbox,
           decoder: :json,
           operation_id: 'inboxes_get',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -134,7 +131,6 @@ module OctridevResend
         from_name: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('inbox_id', inbox_id)
 
         Validation.if_given(name) { Validation.validate_length('name', name, min: 1, max: 64) }
@@ -144,18 +140,18 @@ module OctridevResend
         SdkClient.request(
           'PATCH',
           [
-            "/inboxes/",
+            '/inboxes/',
             SdkClient.encode_path_segment(inbox_id)
           ].join,
           config: config,
           body: {
             'name' => name,
-            'from_name' => from_name,
+            'from_name' => from_name
           },
           return_type: ::OctridevResend::UpdateInboxResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_update',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -169,20 +165,19 @@ module OctridevResend
         inbox_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('inbox_id', inbox_id)
 
         SdkClient.request(
           'DELETE',
           [
-            "/inboxes/",
+            '/inboxes/',
             SdkClient.encode_path_segment(inbox_id)
           ].join,
           config: config,
           return_type: ::OctridevResend::RemoveInboxResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_remove',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
     end

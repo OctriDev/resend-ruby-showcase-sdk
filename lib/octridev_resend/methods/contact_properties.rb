@@ -24,20 +24,19 @@ module OctridevResend
         fallback_value: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/contact-properties",
+          '/contact-properties',
           config: config,
           body: {
             'key' => key,
             'type' => type,
-            'fallback_value' => fallback_value,
+            'fallback_value' => fallback_value
           },
           return_type: ::OctridevResend::CreateContactPropertyResponseSuccess,
           decoder: :json,
           operation_id: 'contact_properties_create',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -53,22 +52,21 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(limit) { Validation.validate_range('limit', limit, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          "/contact-properties",
+          '/contact-properties',
           config: config,
           query: {
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true),
+            'before' => QueryValue.new(before, style: 'form', explode: true)
           },
           return_type: ::OctridevResend::ListContactPropertiesResponseSuccess,
           decoder: :json,
           operation_id: 'contact_properties_list',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -80,18 +78,17 @@ module OctridevResend
         id:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/contact-properties/",
+            '/contact-properties/',
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           return_type: ::OctridevResend::GetContactPropertyResponseSuccess,
           decoder: :json,
           operation_id: 'contact_properties_get',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -107,21 +104,20 @@ module OctridevResend
         fallback_value: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'PATCH',
           [
-            "/contact-properties/",
+            '/contact-properties/',
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           body: {
-            'fallback_value' => fallback_value,
+            'fallback_value' => fallback_value
           },
           return_type: ::OctridevResend::UpdateContactPropertyResponseSuccess,
           decoder: :json,
           operation_id: 'contact_properties_update',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -133,18 +129,17 @@ module OctridevResend
         id:,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/contact-properties/",
+            '/contact-properties/',
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           return_type: ::OctridevResend::RemoveContactPropertyResponseSuccess,
           decoder: :json,
           operation_id: 'contact_properties_remove',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
     end

@@ -19,21 +19,20 @@ module OctridevResend
         inbox_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('inbox_id', inbox_id)
 
         SdkClient.request(
           'GET',
           [
-            "/inboxes/",
+            '/inboxes/',
             SdkClient.encode_path_segment(inbox_id),
-            "/labels"
+            '/labels'
           ].join,
           config: config,
           return_type: ::OctridevResend::ListInboxLabelsResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_list_labels',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -55,7 +54,6 @@ module OctridevResend
         color: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('inbox_id', inbox_id)
 
         Validation.validate_length('name', name, min: 1, max: 64)
@@ -65,19 +63,19 @@ module OctridevResend
         SdkClient.request(
           'POST',
           [
-            "/inboxes/",
+            '/inboxes/',
             SdkClient.encode_path_segment(inbox_id),
-            "/labels"
+            '/labels'
           ].join,
           config: config,
           body: {
             'name' => name,
-            'color' => color,
+            'color' => color
           },
           return_type: ::OctridevResend::CreateInboxLabelResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_create_label',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -100,7 +98,6 @@ module OctridevResend
         color: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('inbox_id', inbox_id)
 
         Validation.validate_uuid('label_id', label_id)
@@ -112,20 +109,20 @@ module OctridevResend
         SdkClient.request(
           'PATCH',
           [
-            "/inboxes/",
+            '/inboxes/',
             SdkClient.encode_path_segment(inbox_id),
-            "/labels/",
+            '/labels/',
             SdkClient.encode_path_segment(label_id)
           ].join,
           config: config,
           body: {
             'name' => name,
-            'color' => color,
+            'color' => color
           },
           return_type: ::OctridevResend::UpdateInboxLabelResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_update_label',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -141,7 +138,6 @@ module OctridevResend
         label_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('inbox_id', inbox_id)
 
         Validation.validate_uuid('label_id', label_id)
@@ -149,16 +145,16 @@ module OctridevResend
         SdkClient.request(
           'DELETE',
           [
-            "/inboxes/",
+            '/inboxes/',
             SdkClient.encode_path_segment(inbox_id),
-            "/labels/",
+            '/labels/',
             SdkClient.encode_path_segment(label_id)
           ].join,
           config: config,
           return_type: ::OctridevResend::RemoveInboxLabelResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_remove_label',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
     end

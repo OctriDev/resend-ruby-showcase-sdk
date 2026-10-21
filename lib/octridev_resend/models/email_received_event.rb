@@ -5,140 +5,140 @@
 
 # email_received_event domain models
 module OctridevResend
-# Internal model hydration metadata.
-class SdkInternalEmailReceivedEventMetadata
-  FIELDS = {
-    type: "type",
-    created_at: "created_at",
-    data: "data",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-    created_at
-    data
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevResend::EmailReceivedEventType.from_value(value)
-    end,
-    data: lambda do |value|
-      ::OctridevResend::EmailReceivedEventData.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for EmailReceivedEvent.
-# Typed representation of the `EmailReceivedEvent` API schema.
-class EmailReceivedEvent
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalEmailReceivedEventMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalEmailReceivedEventMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalEmailReceivedEventMetadata::DECODERS
-
-  # @return [EmailReceivedEventType] The event type.
-  attr_reader :type
-  # @return [String] Timestamp when the event was emitted.
-  attr_reader :created_at
-  # @return [EmailReceivedEventData] Required object value serialized in the `data` wire field.
-  attr_reader :data
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalEmailReceivedEventMetadata
+    FIELDS = {
+      type: 'type',
+      created_at: 'created_at',
+      data: 'data'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+      created_at
+      data
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevResend::EmailReceivedEventType.from_value(value)
+      end,
+      data: lambda do |value|
+        ::OctridevResend::EmailReceivedEventData.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for EmailReceivedEvent.
+  # Typed representation of the `EmailReceivedEvent` API schema.
+  class EmailReceivedEvent
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalEmailReceivedEventMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalEmailReceivedEventMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalEmailReceivedEventMetadata::DECODERS
+
+    # @return [EmailReceivedEventType] The event type.
+    attr_reader :type
+    # @return [String] Timestamp when the event was emitted.
+    attr_reader :created_at
+    # @return [EmailReceivedEventData] Required object value serialized in the `data` wire field.
+    attr_reader :data
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # Defines the EmailReceivedEventType SDK namespace.
+  module EmailReceivedEventType
+    EMAIL_RECEIVED = 'email.received'
+    VALUES = ['email.received'].freeze
+    def self.from_value(value)
+      return value if VALUES.include?(value)
 
-# Defines the EmailReceivedEventType SDK namespace.
-module EmailReceivedEventType
-  EMAIL_RECEIVED = 'email.received'
-  VALUES = ['email.received'].freeze
-  def self.from_value(value)
-    return value if VALUES.include?(value)
-
-    raise SdkValidationError.new('EmailReceivedEventType', 'enum', "Unknown EmailReceivedEventType: #{value}")
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalEmailReceivedEventDataMetadata
-  FIELDS = {
-    email_id: "email_id",
-    created_at: "created_at",
-    from: "from",
-    to: "to",
-    subject: "subject",
-    message_id: "message_id",
-    bcc: "bcc",
-    cc: "cc",
-    received_for: "received_for",
-    attachments: "attachments",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    email_id
-    created_at
-    from
-    to
-    subject
-    message_id
-    bcc
-    cc
-    attachments
-  ].freeze
-  DECODERS = {
-    attachments: lambda do |value|
-      value&.map { |item| ::OctridevResend::WebhookEventAttachment.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for EmailReceivedEventData.
-# Typed representation of the `EmailReceivedEventData` API schema.
-class EmailReceivedEventData
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalEmailReceivedEventDataMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalEmailReceivedEventDataMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalEmailReceivedEventDataMetadata::DECODERS
-
-  # @return [String] Unique identifier for the email.
-  attr_reader :email_id
-  # @return [String] Timestamp when the email was received.
-  attr_reader :created_at
-  # @return [String] Sender email address.
-  attr_reader :from
-  # @return [Array_of_String] Array of recipient email addresses.
-  attr_reader :to
-  # @return [String] Email subject line.
-  attr_reader :subject
-  # @return [String] The unique message ID from the email headers.
-  attr_reader :message_id
-  # @return [Array_of_String] BCC recipients.
-  attr_reader :bcc
-  # @return [Array_of_String] CC recipients.
-  attr_reader :cc
-  # @return [Array_of_String] The recipient addresses the email was forwarded for, taken from the `for` clause of the message's `Received` headers.
-  attr_reader :received_for
-  # @return [Array_of_WebhookEventAttachment] Array of attachment metadata.
-  attr_reader :attachments
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+      raise SdkValidationError.new('EmailReceivedEventType', 'enum', "Unknown EmailReceivedEventType: #{value}")
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalEmailReceivedEventDataMetadata
+    FIELDS = {
+      email_id: 'email_id',
+      created_at: 'created_at',
+      from: 'from',
+      to: 'to',
+      subject: 'subject',
+      message_id: 'message_id',
+      bcc: 'bcc',
+      cc: 'cc',
+      received_for: 'received_for',
+      attachments: 'attachments'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      email_id
+      created_at
+      from
+      to
+      subject
+      message_id
+      bcc
+      cc
+      attachments
+    ].freeze
+    DECODERS = {
+      attachments: lambda do |value|
+        value&.map { |item| ::OctridevResend::WebhookEventAttachment.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for EmailReceivedEventData.
+  # Typed representation of the `EmailReceivedEventData` API schema.
+  class EmailReceivedEventData
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalEmailReceivedEventDataMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalEmailReceivedEventDataMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalEmailReceivedEventDataMetadata::DECODERS
+
+    # @return [String] Unique identifier for the email.
+    attr_reader :email_id
+    # @return [String] Timestamp when the email was received.
+    attr_reader :created_at
+    # @return [String] Sender email address.
+    attr_reader :from
+    # @return [Array_of_String] Array of recipient email addresses.
+    attr_reader :to
+    # @return [String] Email subject line.
+    attr_reader :subject
+    # @return [String] The unique message ID from the email headers.
+    attr_reader :message_id
+    # @return [Array_of_String] BCC recipients.
+    attr_reader :bcc
+    # @return [Array_of_String] CC recipients.
+    attr_reader :cc
+    # @return [Array_of_String] The recipient addresses the email was forwarded for, taken from the `for` clause of the message's `Received` headers.
+    attr_reader :received_for
+    # @return [Array_of_WebhookEventAttachment] Array of attachment metadata.
+    attr_reader :attachments
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end
