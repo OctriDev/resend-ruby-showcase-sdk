@@ -21,6 +21,7 @@ module OctridevResend
         thread_id:,
         request_options: nil
       )
+
         Validation.validate_uuid('inbox_id', inbox_id)
 
         Validation.validate_uuid('thread_id', thread_id)
@@ -28,16 +29,16 @@ module OctridevResend
         SdkClient.request(
           'DELETE',
           [
-            '/inboxes/',
+            "/inboxes/",
             SdkClient.encode_path_segment(inbox_id),
-            '/threads/',
+            "/threads/",
             SdkClient.encode_path_segment(thread_id)
           ].join,
           config: config,
           return_type: ::OctridevResend::RemoveInboxThreadResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_remove_thread',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
     end

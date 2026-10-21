@@ -70,6 +70,7 @@ module OctridevResend
         headers: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('inbox_id', inbox_id)
 
         Validation.validate_uuid('thread_id', thread_id)
@@ -85,13 +86,13 @@ module OctridevResend
         SdkClient.request(
           'POST',
           [
-            '/inboxes/',
+            "/inboxes/",
             SdkClient.encode_path_segment(inbox_id),
-            '/threads/',
+            "/threads/",
             SdkClient.encode_path_segment(thread_id),
-            '/emails/',
+            "/emails/",
             SdkClient.encode_path_segment(email_id),
-            '/forward'
+            "/forward"
           ].join,
           config: config,
           body: {
@@ -102,15 +103,15 @@ module OctridevResend
             'text' => text,
             'subject' => subject,
             'attachments' => attachments,
-            'headers' => headers
+            'headers' => headers,
           },
           return_type: ::OctridevResend::ForwardInboxThreadEmailResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_forward_thread_email',
           extra_headers: SdkClient.serialize_headers({
-                                                       'Idempotency-Key' => SdkClient.header_value(idempotency_key)
-                                                     }),
-          request_options: request_options
+            'Idempotency-Key' => SdkClient.header_value(idempotency_key),
+          }),
+          request_options: request_options,
         ).data
       end
     end

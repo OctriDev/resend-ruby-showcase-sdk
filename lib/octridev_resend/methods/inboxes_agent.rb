@@ -19,20 +19,21 @@ module OctridevResend
         inbox_id:,
         request_options: nil
       )
+
         Validation.validate_uuid('inbox_id', inbox_id)
 
         SdkClient.request(
           'GET',
           [
-            '/inboxes/',
+            "/inboxes/",
             SdkClient.encode_path_segment(inbox_id),
-            '/agent'
+            "/agent"
           ].join,
           config: config,
           return_type: ::OctridevResend::InboxAgent,
           decoder: :json,
           operation_id: 'inboxes_get_agent',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -58,6 +59,7 @@ module OctridevResend
         enabled_actions: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('inbox_id', inbox_id)
 
         Validation.if_given(instructions) do
@@ -67,20 +69,20 @@ module OctridevResend
         SdkClient.request(
           'PATCH',
           [
-            '/inboxes/',
+            "/inboxes/",
             SdkClient.encode_path_segment(inbox_id),
-            '/agent'
+            "/agent"
           ].join,
           config: config,
           body: {
             'instructions' => instructions,
             'tone' => tone,
-            'enabled_actions' => enabled_actions
+            'enabled_actions' => enabled_actions,
           },
           return_type: ::OctridevResend::UpdateInboxAgentResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_update_agent',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
     end

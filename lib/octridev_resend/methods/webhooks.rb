@@ -19,20 +19,21 @@ module OctridevResend
         events:,
         request_options: nil
       )
+
         Validation.validate_items('events', events, min: 1)
 
         SdkClient.request(
           'POST',
-          '/webhooks',
+          "/webhooks",
           config: config,
           body: {
             'endpoint' => endpoint,
-            'events' => events
+            'events' => events,
           },
           return_type: ::OctridevResend::CreateWebhookResponse,
           decoder: :json,
           operation_id: 'webhooks_create',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -50,23 +51,24 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(after) { Validation.validate_uuid('after', after) }
 
         Validation.if_given(before) { Validation.validate_uuid('before', before) }
 
         SdkClient.request(
           'GET',
-          '/webhooks',
+          "/webhooks",
           config: config,
           query: {
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true)
+            'before' => QueryValue.new(before, style: 'form', explode: true),
           },
           return_type: ::OctridevResend::ListWebhooksResponse,
           decoder: :json,
           operation_id: 'webhooks_list',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -78,19 +80,20 @@ module OctridevResend
         webhook_id:,
         request_options: nil
       )
+
         Validation.validate_uuid('webhook_id', webhook_id)
 
         SdkClient.request(
           'GET',
           [
-            '/webhooks/',
+            "/webhooks/",
             SdkClient.encode_path_segment(webhook_id)
           ].join,
           config: config,
           return_type: ::OctridevResend::GetWebhookResponse,
           decoder: :json,
           operation_id: 'webhooks_get',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -108,6 +111,7 @@ module OctridevResend
         status: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('webhook_id', webhook_id)
 
         Validation.if_given(events) { Validation.validate_items('events', events, min: 1) }
@@ -115,19 +119,19 @@ module OctridevResend
         SdkClient.request(
           'PATCH',
           [
-            '/webhooks/',
+            "/webhooks/",
             SdkClient.encode_path_segment(webhook_id)
           ].join,
           config: config,
           body: {
             'endpoint' => endpoint,
             'events' => events,
-            'status' => status
+            'status' => status,
           },
           return_type: ::OctridevResend::UpdateWebhookResponse,
           decoder: :json,
           operation_id: 'webhooks_update',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -139,19 +143,20 @@ module OctridevResend
         webhook_id:,
         request_options: nil
       )
+
         Validation.validate_uuid('webhook_id', webhook_id)
 
         SdkClient.request(
           'DELETE',
           [
-            '/webhooks/',
+            "/webhooks/",
             SdkClient.encode_path_segment(webhook_id)
           ].join,
           config: config,
           return_type: ::OctridevResend::DeleteWebhookResponse,
           decoder: :json,
           operation_id: 'webhooks_remove',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -165,20 +170,21 @@ module OctridevResend
         webhook_id:,
         request_options: nil
       )
+
         Validation.validate_uuid('webhook_id', webhook_id)
 
         SdkClient.request(
           'POST',
           [
-            '/webhooks/',
+            "/webhooks/",
             SdkClient.encode_path_segment(webhook_id),
-            '/signing-secret/rotate'
+            "/signing-secret/rotate"
           ].join,
           config: config,
           return_type: ::OctridevResend::RotateWebhookSigningSecretResponse,
           decoder: :json,
           operation_id: 'webhooks_rotate_signing_secret',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -194,6 +200,7 @@ module OctridevResend
         after: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('webhook_id', webhook_id)
 
         Validation.if_given(limit) { Validation.validate_range('limit', limit, min: 1, max: 100) }
@@ -201,19 +208,19 @@ module OctridevResend
         SdkClient.request(
           'GET',
           [
-            '/webhooks/',
+            "/webhooks/",
             SdkClient.encode_path_segment(webhook_id),
-            '/events'
+            "/events"
           ].join,
           config: config,
           query: {
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
-            'after' => QueryValue.new(after, style: 'form', explode: true)
+            'after' => QueryValue.new(after, style: 'form', explode: true),
           },
           return_type: ::OctridevResend::ListWebhookEventsResponse,
           decoder: :json,
           operation_id: 'webhooks_list_events',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -227,21 +234,22 @@ module OctridevResend
         event_id:,
         request_options: nil
       )
+
         Validation.validate_uuid('webhook_id', webhook_id)
 
         SdkClient.request(
           'GET',
           [
-            '/webhooks/',
+            "/webhooks/",
             SdkClient.encode_path_segment(webhook_id),
-            '/events/',
+            "/events/",
             SdkClient.encode_path_segment(event_id)
           ].join,
           config: config,
           return_type: ::OctridevResend::GetWebhookEventResponse,
           decoder: :json,
           operation_id: 'webhooks_get_event',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -257,22 +265,23 @@ module OctridevResend
         event_id:,
         request_options: nil
       )
+
         Validation.validate_uuid('webhook_id', webhook_id)
 
         SdkClient.request(
           'POST',
           [
-            '/webhooks/',
+            "/webhooks/",
             SdkClient.encode_path_segment(webhook_id),
-            '/events/',
+            "/events/",
             SdkClient.encode_path_segment(event_id),
-            '/replay'
+            "/replay"
           ].join,
           config: config,
           return_type: ::OctridevResend::ReplayWebhookEventResponse,
           decoder: :json,
           operation_id: 'webhooks_replay_event',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -290,6 +299,7 @@ module OctridevResend
         after: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('webhook_id', webhook_id)
 
         Validation.if_given(limit) { Validation.validate_range('limit', limit, min: 1, max: 100) }
@@ -297,21 +307,21 @@ module OctridevResend
         SdkClient.request(
           'GET',
           [
-            '/webhooks/',
+            "/webhooks/",
             SdkClient.encode_path_segment(webhook_id),
-            '/events/',
+            "/events/",
             SdkClient.encode_path_segment(event_id),
-            '/attempts'
+            "/attempts"
           ].join,
           config: config,
           query: {
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
-            'after' => QueryValue.new(after, style: 'form', explode: true)
+            'after' => QueryValue.new(after, style: 'form', explode: true),
           },
           return_type: ::OctridevResend::ListWebhookEventAttemptsResponse,
           decoder: :json,
           operation_id: 'webhooks_list_event_attempts',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
     end

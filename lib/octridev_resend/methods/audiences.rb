@@ -21,17 +21,18 @@ module OctridevResend
         name:,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/audiences',
+          "/audiences",
           config: config,
           body: {
-            'name' => name
+            'name' => name,
           },
           return_type: ::OctridevResend::CreateAudienceResponseSuccess,
           decoder: :json,
           operation_id: 'audiences_create',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -44,14 +45,15 @@ module OctridevResend
         config:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/audiences',
+          "/audiences",
           config: config,
           return_type: ::OctridevResend::ListAudiencesResponseSuccess,
           decoder: :json,
           operation_id: 'audiences_list',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -67,17 +69,18 @@ module OctridevResend
         id:,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/audiences/',
+            "/audiences/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           return_type: ::OctridevResend::RemoveAudienceResponseSuccess,
           decoder: :json,
           operation_id: 'audiences_remove',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -93,17 +96,18 @@ module OctridevResend
         id:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/audiences/',
+            "/audiences/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           return_type: ::OctridevResend::GetAudienceResponseSuccess,
           decoder: :json,
           operation_id: 'audiences_get',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
     end

@@ -5,391 +5,401 @@
 
 # inboxes_update domain models
 module OctridevResend
-  # Internal model hydration metadata.
-  class SdkInternalUpdateInboxAgentOptionsMetadata
-    FIELDS = {
-      instructions: 'instructions',
-      tone: 'tone',
-      enabled_actions: 'enabled_actions'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      tone: lambda do |value|
-        ::OctridevResend::UpdateInboxAgentOptionsTone.from_value(value)
-      end,
-      enabled_actions: lambda do |value|
-        value&.map { |item| ::OctridevResend::UpdateInboxAgentOptionsEnabledActionsItem.from_value(item) }
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalUpdateInboxAgentOptionsMetadata
+  FIELDS = {
+    instructions: "instructions",
+    tone: "tone",
+    enabled_actions: "enabled_actions",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    tone: lambda do |value|
+      ::OctridevResend::UpdateInboxAgentOptionsTone.from_value(value)
+    end,
+    enabled_actions: lambda do |value|
+      value&.map { |item| ::OctridevResend::UpdateInboxAgentOptionsEnabledActionsItem.from_value(item) }
+    end,
+  }.freeze
+end
+
+# API model for UpdateInboxAgentOptions.
+# At least one of `instructions`, `tone`, or `enabled_actions` must be provided. Omitted fields keep their current value.
+class UpdateInboxAgentOptions
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalUpdateInboxAgentOptionsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalUpdateInboxAgentOptionsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalUpdateInboxAgentOptionsMetadata::DECODERS
+
+  # @return [String] Instructions the agent follows when it handles the threads of the inbox. Max 4000 characters. Leading and trailing whitespace is trimmed, and the trimmed value must not be empty. Send null to clear the instructions.
+  attr_reader :instructions
+  # @return [UpdateInboxAgentOptionsTone] The tone the agent writes in. Send null to clear the tone.
+  attr_reader :tone
+  # @return [Array_of_UpdateInboxAgentOptionsEnabledActionsItem] The actions the agent can take. Replaces the whole set. Duplicates are removed. Send an empty array to disable all actions.
+  attr_reader :enabled_actions
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for UpdateInboxAgentOptions.
-  # At least one of `instructions`, `tone`, or `enabled_actions` must be provided. Omitted fields keep their current value.
-  class UpdateInboxAgentOptions
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalUpdateInboxAgentOptionsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalUpdateInboxAgentOptionsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalUpdateInboxAgentOptionsMetadata::DECODERS
-
-    # @return [String] Instructions the agent follows when it handles the threads of the inbox. Max 4000 characters. Leading and trailing whitespace is trimmed, and the trimmed value must not be empty. Send null to clear the instructions.
-    attr_reader :instructions
-    # @return [UpdateInboxAgentOptionsTone] The tone the agent writes in. Send null to clear the tone.
-    attr_reader :tone
-    # @return [Array_of_UpdateInboxAgentOptionsEnabledActionsItem] The actions the agent can take. Replaces the whole set. Duplicates are removed. Send an empty array to disable all actions.
-    attr_reader :enabled_actions
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the UpdateInboxAgentOptionsEnabledActionsItem SDK namespace.
-  module UpdateInboxAgentOptionsEnabledActionsItem
-    DRAFT_REPLY = 'draft_reply'
-    FORWARD_THREAD = 'forward_thread'
-    ADD_LABELS = 'add_labels'
-    ASSIGN_THREAD = 'assign_thread'
-    MARK_AS_SPAM = 'mark_as_spam'
-    ARCHIVE_THREAD = 'archive_thread'
-    DELETE_THREAD = 'delete_thread'
-    VALUES = %w[
-      draft_reply forward_thread add_labels assign_thread mark_as_spam archive_thread
-      delete_thread
-    ].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the UpdateInboxAgentOptionsEnabledActionsItem SDK namespace.
+module UpdateInboxAgentOptionsEnabledActionsItem
+  DRAFT_REPLY = 'draft_reply'
+  FORWARD_THREAD = 'forward_thread'
+  ADD_LABELS = 'add_labels'
+  ASSIGN_THREAD = 'assign_thread'
+  MARK_AS_SPAM = 'mark_as_spam'
+  ARCHIVE_THREAD = 'archive_thread'
+  DELETE_THREAD = 'delete_thread'
+  VALUES = [
+    'draft_reply', 'forward_thread', 'add_labels', 'assign_thread', 'mark_as_spam', 'archive_thread',
+    'delete_thread'
+  ].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Defines the UpdateInboxAgentOptionsTone SDK namespace.
+module UpdateInboxAgentOptionsTone
+  CONCISE_PROFESSIONAL = 'concise_professional'
+  CONCISE_CASUAL = 'concise_casual'
+  EXPANDED_PROFESSIONAL = 'expanded_professional'
+  EXPANDED_CASUAL = 'expanded_casual'
+  VALUES = [
+    'concise_professional', 'concise_casual', 'expanded_professional', 'expanded_casual'
+  ].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalUpdateInboxAgentResponseSuccessMetadata
+  FIELDS = {
+    object: "object",
+    id: "id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    object
+    id
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for UpdateInboxAgentResponseSuccess.
+# Typed representation of the `UpdateInboxAgentResponseSuccess` API schema.
+class UpdateInboxAgentResponseSuccess
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalUpdateInboxAgentResponseSuccessMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalUpdateInboxAgentResponseSuccessMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalUpdateInboxAgentResponseSuccessMetadata::DECODERS
+
+  # @return [String] The object type. Always `inbox_agent`.
+  attr_reader :object
+  # @return [String] The ID of the inbox agent.
+  attr_reader :id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the UpdateInboxAgentOptionsTone SDK namespace.
-  module UpdateInboxAgentOptionsTone
-    CONCISE_PROFESSIONAL = 'concise_professional'
-    CONCISE_CASUAL = 'concise_casual'
-    EXPANDED_PROFESSIONAL = 'expanded_professional'
-    EXPANDED_CASUAL = 'expanded_casual'
-    VALUES = %w[
-      concise_professional concise_casual expanded_professional expanded_casual
-    ].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalUpdateInboxAgentResponseSuccessMetadata
-    FIELDS = {
-      object: 'object',
-      id: 'id'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      object
-      id
-    ].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalUpdateInboxDraftOptionsMetadata
+  FIELDS = {
+    to: "to",
+    cc: "cc",
+    bcc: "bcc",
+    subject: "subject",
+    html: "html",
+    text: "text",
+    attachments: "attachments",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    attachments: lambda do |value|
+      value&.map { |item| ::OctridevResend::InboxDraftAttachmentInput.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for UpdateInboxDraftOptions.
+# Send at least one of `to`, `cc`, `bcc`, `subject`, `text`, `html` or `attachments`. Omitted fields are left unchanged. Setting `text` or `html` replaces the whole body, so the body part you omit becomes `null`. The merged draft must contain at least one non-empty field, and its combined recipients cannot exceed 50.
+class UpdateInboxDraftOptions
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalUpdateInboxDraftOptionsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalUpdateInboxDraftOptionsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalUpdateInboxDraftOptionsMetadata::DECODERS
+
+  # @return [Object] The recipients. For multiple addresses, send an array of strings. Each value can include a friendly name. Pass `null` to clear. Each address is `email@example.com` or `Name <email@example.com>`. An address that is not valid returns a 422.
+  attr_reader :to
+  # @return [Object] The CC recipients. Pass `null` or `[]` to clear. Each address is `email@example.com` or `Name <email@example.com>`. An address that is not valid returns a 422.
+  attr_reader :cc
+  # @return [Object] The BCC recipients. Pass `null` or `[]` to clear. Each address is `email@example.com` or `Name <email@example.com>`. An address that is not valid returns a 422.
+  attr_reader :bcc
+  # @return [String] The subject. Max 2000 characters. Cannot be only whitespace or contain a line break. Pass `null` to clear.
+  attr_reader :subject
+  # @return [String] The HTML body. Pass `null` to clear.
+  attr_reader :html
+  # @return [String] The plain text body. Pass `null` to clear.
+  attr_reader :text
+  # @return [Array_of_InboxDraftAttachmentInput] Files to store on the draft. Each one needs `content`, `filename` and `content_type`. A `path` without `content` returns a 422, and when both are sent, `path` is ignored. A `content_id` returns a 422. The files on a draft can total at most 25 MB. An empty file or a blocked file type returns a 422. Sending the field replaces every attachment on the draft. Send `[]` to remove them all. `null` also removes them all.
+  attr_reader :attachments
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for UpdateInboxAgentResponseSuccess.
-  # Typed representation of the `UpdateInboxAgentResponseSuccess` API schema.
-  class UpdateInboxAgentResponseSuccess
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalUpdateInboxAgentResponseSuccessMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalUpdateInboxAgentResponseSuccessMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalUpdateInboxAgentResponseSuccessMetadata::DECODERS
-
-    # @return [String] The object type. Always `inbox_agent`.
-    attr_reader :object
-    # @return [String] The ID of the inbox agent.
-    attr_reader :id
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalUpdateInboxDraftOptionsMetadata
-    FIELDS = {
-      to: 'to',
-      cc: 'cc',
-      bcc: 'bcc',
-      subject: 'subject',
-      html: 'html',
-      text: 'text',
-      attachments: 'attachments'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      attachments: lambda do |value|
-        value&.map { |item| ::OctridevResend::InboxDraftAttachmentInput.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalUpdateInboxLabelOptionsMetadata
+  FIELDS = {
+    name: "name",
+    color: "color",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for UpdateInboxLabelOptions.
+# Typed representation of the `UpdateInboxLabelOptions` API schema.
+class UpdateInboxLabelOptions
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalUpdateInboxLabelOptionsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalUpdateInboxLabelOptionsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalUpdateInboxLabelOptionsMetadata::DECODERS
+
+  # @return [String] A new name for the label. Max 64 characters. Leading and trailing whitespace is trimmed. Must not match another label on the inbox, compared without case.
+  attr_reader :name
+  # @return [String] A new color for the label, as a `#RRGGBB` hex color. It is stored in uppercase.
+  attr_reader :color
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for UpdateInboxDraftOptions.
-  # Send at least one of `to`, `cc`, `bcc`, `subject`, `text`, `html` or `attachments`. Omitted fields are left unchanged. Setting `text` or `html` replaces the whole body, so the body part you omit becomes `null`. The merged draft must contain at least one non-empty field, and its combined recipients cannot exceed 50.
-  class UpdateInboxDraftOptions
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalUpdateInboxDraftOptionsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalUpdateInboxDraftOptionsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalUpdateInboxDraftOptionsMetadata::DECODERS
-
-    # @return [Object] The recipients. For multiple addresses, send an array of strings. Each value can include a friendly name. Pass `null` to clear. Each address is `email@example.com` or `Name <email@example.com>`. An address that is not valid returns a 422.
-    attr_reader :to
-    # @return [Object] The CC recipients. Pass `null` or `[]` to clear. Each address is `email@example.com` or `Name <email@example.com>`. An address that is not valid returns a 422.
-    attr_reader :cc
-    # @return [Object] The BCC recipients. Pass `null` or `[]` to clear. Each address is `email@example.com` or `Name <email@example.com>`. An address that is not valid returns a 422.
-    attr_reader :bcc
-    # @return [String] The subject. Max 2000 characters. Cannot be only whitespace or contain a line break. Pass `null` to clear.
-    attr_reader :subject
-    # @return [String] The HTML body. Pass `null` to clear.
-    attr_reader :html
-    # @return [String] The plain text body. Pass `null` to clear.
-    attr_reader :text
-    # @return [Array_of_InboxDraftAttachmentInput] Files to store on the draft. Each one needs `content`, `filename` and `content_type`. A `path` without `content` returns a 422, and when both are sent, `path` is ignored. A `content_id` returns a 422. The files on a draft can total at most 25 MB. An empty file or a blocked file type returns a 422. Sending the field replaces every attachment on the draft. Send `[]` to remove them all. `null` also removes them all.
-    attr_reader :attachments
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalUpdateInboxLabelOptionsMetadata
-    FIELDS = {
-      name: 'name',
-      color: 'color'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalUpdateInboxLabelResponseSuccessMetadata
+  FIELDS = {
+    object: "object",
+    id: "id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    object
+    id
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for UpdateInboxLabelResponseSuccess.
+# Typed representation of the `UpdateInboxLabelResponseSuccess` API schema.
+class UpdateInboxLabelResponseSuccess
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalUpdateInboxLabelResponseSuccessMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalUpdateInboxLabelResponseSuccessMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalUpdateInboxLabelResponseSuccessMetadata::DECODERS
+
+  # @return [String] Type of the response object.
+  attr_reader :object
+  # @return [String] The ID of the updated label.
+  attr_reader :id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for UpdateInboxLabelOptions.
-  # Typed representation of the `UpdateInboxLabelOptions` API schema.
-  class UpdateInboxLabelOptions
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalUpdateInboxLabelOptionsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalUpdateInboxLabelOptionsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalUpdateInboxLabelOptionsMetadata::DECODERS
-
-    # @return [String] A new name for the label. Max 64 characters. Leading and trailing whitespace is trimmed. Must not match another label on the inbox, compared without case.
-    attr_reader :name
-    # @return [String] A new color for the label, as a `#RRGGBB` hex color. It is stored in uppercase.
-    attr_reader :color
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalUpdateInboxLabelResponseSuccessMetadata
-    FIELDS = {
-      object: 'object',
-      id: 'id'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      object
-      id
-    ].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalUpdateInboxOptionsMetadata
+  FIELDS = {
+    name: "name",
+    from_name: "from_name",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for UpdateInboxOptions.
+# Provide at least one of `name` or `from_name`.
+class UpdateInboxOptions
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalUpdateInboxOptionsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalUpdateInboxOptionsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalUpdateInboxOptionsMetadata::DECODERS
+
+  # @return [String] New internal name for the inbox. Recipients do not see it. Between 1 and 64 characters after trimming.
+  attr_reader :name
+  # @return [String] The name recipients see when mail is sent from this inbox. A plain name, not a `Name <email>` address. Max 78 characters. It cannot contain a colon, `<`, `>`, line breaks, or other control characters. An email address inside the name must be on a domain the team has verified for sending. An empty string removes it.
+  attr_reader :from_name
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for UpdateInboxLabelResponseSuccess.
-  # Typed representation of the `UpdateInboxLabelResponseSuccess` API schema.
-  class UpdateInboxLabelResponseSuccess
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalUpdateInboxLabelResponseSuccessMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalUpdateInboxLabelResponseSuccessMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalUpdateInboxLabelResponseSuccessMetadata::DECODERS
-
-    # @return [String] Type of the response object.
-    attr_reader :object
-    # @return [String] The ID of the updated label.
-    attr_reader :id
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalUpdateInboxOptionsMetadata
-    FIELDS = {
-      name: 'name',
-      from_name: 'from_name'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalUpdateInboxResponseSuccessMetadata
+  FIELDS = {
+    object: "object",
+    id: "id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    object
+    id
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for UpdateInboxResponseSuccess.
+# Typed representation of the `UpdateInboxResponseSuccess` API schema.
+class UpdateInboxResponseSuccess
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalUpdateInboxResponseSuccessMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalUpdateInboxResponseSuccessMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalUpdateInboxResponseSuccessMetadata::DECODERS
+
+  # @return [String] The object type.
+  attr_reader :object
+  # @return [String] The ID of the inbox.
+  attr_reader :id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for UpdateInboxOptions.
-  # Provide at least one of `name` or `from_name`.
-  class UpdateInboxOptions
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalUpdateInboxOptionsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalUpdateInboxOptionsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalUpdateInboxOptionsMetadata::DECODERS
-
-    # @return [String] New internal name for the inbox. Recipients do not see it. Between 1 and 64 characters after trimming.
-    attr_reader :name
-    # @return [String] The name recipients see when mail is sent from this inbox. A plain name, not a `Name <email>` address. Max 78 characters. It cannot contain a colon, `<`, `>`, line breaks, or other control characters. An email address inside the name must be on a domain the team has verified for sending. An empty string removes it.
-    attr_reader :from_name
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalUpdateInboxResponseSuccessMetadata
-    FIELDS = {
-      object: 'object',
-      id: 'id'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      object
-      id
-    ].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalUpdateInboxThreadOptionsMetadata
+  FIELDS = {
+    read: "read",
+    folder: "folder",
+    add_label_ids: "add_label_ids",
+    remove_label_ids: "remove_label_ids",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    folder: lambda do |value|
+      ::OctridevResend::UpdateInboxThreadOptionsFolder.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for UpdateInboxThreadOptions.
+# At least one of `read`, `folder`, `add_label_ids`, or `remove_label_ids` is required. A label ID cannot be both added and removed in the same request.
+class UpdateInboxThreadOptions
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalUpdateInboxThreadOptionsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalUpdateInboxThreadOptionsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalUpdateInboxThreadOptionsMetadata::DECODERS
+
+  # @return [Boolean] Marks every email in the thread read or unread.
+  attr_reader :read
+  # @return [UpdateInboxThreadOptionsFolder] Moves the thread to this folder. `sent` is assigned automatically and cannot be set.
+  attr_reader :folder
+  # @return [Array_of_String] Label IDs to apply to the thread. Between 1 and 10 IDs. A label ID that does not exist in the inbox returns a 404.
+  attr_reader :add_label_ids
+  # @return [Array_of_String] Label IDs to remove from the thread. Between 1 and 10 IDs. The labels themselves are kept. A label ID that does not exist in the inbox returns a 404.
+  attr_reader :remove_label_ids
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for UpdateInboxResponseSuccess.
-  # Typed representation of the `UpdateInboxResponseSuccess` API schema.
-  class UpdateInboxResponseSuccess
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalUpdateInboxResponseSuccessMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalUpdateInboxResponseSuccessMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalUpdateInboxResponseSuccessMetadata::DECODERS
-
-    # @return [String] The object type.
-    attr_reader :object
-    # @return [String] The ID of the inbox.
-    attr_reader :id
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalUpdateInboxThreadOptionsMetadata
-    FIELDS = {
-      read: 'read',
-      folder: 'folder',
-      add_label_ids: 'add_label_ids',
-      remove_label_ids: 'remove_label_ids'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      folder: lambda do |value|
-        ::OctridevResend::UpdateInboxThreadOptionsFolder.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 
-  # API model for UpdateInboxThreadOptions.
-  # At least one of `read`, `folder`, `add_label_ids`, or `remove_label_ids` is required. A label ID cannot be both added and removed in the same request.
-  class UpdateInboxThreadOptions
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalUpdateInboxThreadOptionsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalUpdateInboxThreadOptionsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalUpdateInboxThreadOptionsMetadata::DECODERS
-
-    # @return [Boolean] Marks every email in the thread read or unread.
-    attr_reader :read
-    # @return [UpdateInboxThreadOptionsFolder] Moves the thread to this folder. `sent` is assigned automatically and cannot be set.
-    attr_reader :folder
-    # @return [Array_of_String] Label IDs to apply to the thread. Between 1 and 10 IDs. A label ID that does not exist in the inbox returns a 404.
-    attr_reader :add_label_ids
-    # @return [Array_of_String] Label IDs to remove from the thread. Between 1 and 10 IDs. The labels themselves are kept. A label ID that does not exist in the inbox returns a 404.
-    attr_reader :remove_label_ids
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+# Defines the UpdateInboxThreadOptionsFolder SDK namespace.
+module UpdateInboxThreadOptionsFolder
+  INBOX = 'inbox'
+  ARCHIVE = 'archive'
+  SPAM = 'spam'
+  TRASH = 'trash'
+  VALUES = ['inbox', 'archive', 'spam', 'trash'].freeze
+  def self.from_value(value)
+    value
   end
-
-  # Defines the UpdateInboxThreadOptionsFolder SDK namespace.
-  module UpdateInboxThreadOptionsFolder
-    INBOX = 'inbox'
-    ARCHIVE = 'archive'
-    SPAM = 'spam'
-    TRASH = 'trash'
-    VALUES = %w[inbox archive spam trash].freeze
-    def self.from_value(value)
-      value
-    end
-  end
+end
 end

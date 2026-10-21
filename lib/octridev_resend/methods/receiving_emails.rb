@@ -23,23 +23,24 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(after) { Validation.validate_uuid('after', after) }
 
         Validation.if_given(before) { Validation.validate_uuid('before', before) }
 
         SdkClient.request(
           'GET',
-          '/emails/receiving',
+          "/emails/receiving",
           config: config,
           query: {
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true)
+            'before' => QueryValue.new(before, style: 'form', explode: true),
           },
           return_type: ::OctridevResend::ListReceivedEmailsResponse,
           decoder: :json,
           operation_id: 'list',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -51,19 +52,20 @@ module OctridevResend
         email_id:,
         request_options: nil
       )
+
         Validation.validate_uuid('email_id', email_id)
 
         SdkClient.request(
           'GET',
           [
-            '/emails/receiving/',
+            "/emails/receiving/",
             SdkClient.encode_path_segment(email_id)
           ].join,
           config: config,
           return_type: ::OctridevResend::GetReceivedEmailResponse,
           decoder: :json,
           operation_id: 'get',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -83,6 +85,7 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('email_id', email_id)
 
         Validation.if_given(after) { Validation.validate_uuid('after', after) }
@@ -92,20 +95,20 @@ module OctridevResend
         SdkClient.request(
           'GET',
           [
-            '/emails/receiving/',
+            "/emails/receiving/",
             SdkClient.encode_path_segment(email_id),
-            '/attachments'
+            "/attachments"
           ].join,
           config: config,
           query: {
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true)
+            'before' => QueryValue.new(before, style: 'form', explode: true),
           },
           return_type: ::OctridevResend::ListAttachmentsResponse,
           decoder: :json,
           operation_id: 'list_attachments',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -113,7 +116,13 @@ module OctridevResend
       #
       # @param email_id [String] The ID of the received email.
       # @param attachment_id [String] The ID of the attachment.
-      singleton_class.define_method(:get_attachment) do |config:, email_id:, attachment_id:, request_options: nil|
+      singleton_class.define_method(:get_attachment) do |
+        config:,
+        email_id:,
+        attachment_id:,
+        request_options: nil
+      |
+
         Validation.validate_uuid('email_id', email_id)
 
         Validation.validate_uuid('attachment_id', attachment_id)
@@ -121,16 +130,16 @@ module OctridevResend
         SdkClient.request(
           'GET',
           [
-            '/emails/receiving/',
+            "/emails/receiving/",
             SdkClient.encode_path_segment(email_id),
-            '/attachments/',
+            "/attachments/",
             SdkClient.encode_path_segment(attachment_id)
           ].join,
           config: config,
           return_type: ::OctridevResend::RetrievedAttachment,
           decoder: :json,
           operation_id: 'get_attachment',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
     end

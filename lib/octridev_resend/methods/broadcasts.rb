@@ -14,7 +14,7 @@ module OctridevResend
         PERMANENT = 'permanent'
         TRANSIENT = 'transient'
         UNDETERMINED = 'undetermined'
-        VALUES = %w[permanent transient undetermined].freeze
+        VALUES = ['permanent', 'transient', 'undetermined'].freeze
         def self.from_value(value)
           value
         end
@@ -30,9 +30,9 @@ module OctridevResend
         COMPLAINED = 'complained'
         UNSUBSCRIBED = 'unsubscribed'
         SUPPRESSED = 'suppressed'
-        VALUES = %w[
-          sent delivered opened clicked bounced complained unsubscribed
-          suppressed
+        VALUES = [
+          'sent', 'delivered', 'opened', 'clicked', 'bounced', 'complained', 'unsubscribed',
+          'suppressed'
         ].freeze
         def self.from_value(value)
           value
@@ -74,9 +74,10 @@ module OctridevResend
         scheduled_at: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/broadcasts',
+          "/broadcasts",
           config: config,
           body: {
             'segment_id' => segment_id,
@@ -90,12 +91,12 @@ module OctridevResend
             'text' => text,
             'topic_id' => topic_id,
             'send' => send,
-            'scheduled_at' => scheduled_at
+            'scheduled_at' => scheduled_at,
           },
           return_type: ::OctridevResend::CreateBroadcastResponseSuccess,
           decoder: :json,
           operation_id: 'broadcasts_create',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -111,21 +112,22 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(limit) { Validation.validate_range('limit', limit, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          '/broadcasts',
+          "/broadcasts",
           config: config,
           query: {
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true)
+            'before' => QueryValue.new(before, style: 'form', explode: true),
           },
           return_type: ::OctridevResend::ListBroadcastsResponseSuccess,
           decoder: :json,
           operation_id: 'broadcasts_list',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -137,17 +139,18 @@ module OctridevResend
         id:,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/broadcasts/',
+            "/broadcasts/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           return_type: ::OctridevResend::RemoveBroadcastResponseSuccess,
           decoder: :json,
           operation_id: 'broadcasts_remove',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -159,17 +162,18 @@ module OctridevResend
         id:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/broadcasts/',
+            "/broadcasts/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           return_type: ::OctridevResend::GetBroadcastResponseSuccess,
           decoder: :json,
           operation_id: 'broadcasts_get',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -204,10 +208,11 @@ module OctridevResend
         topic_id: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'PATCH',
           [
-            '/broadcasts/',
+            "/broadcasts/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -221,12 +226,12 @@ module OctridevResend
             'preview_text' => preview_text,
             'html' => html,
             'text' => text,
-            'topic_id' => topic_id
+            'topic_id' => topic_id,
           },
           return_type: ::OctridevResend::UpdateBroadcastResponseSuccess,
           decoder: :json,
           operation_id: 'broadcasts_update',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -241,21 +246,22 @@ module OctridevResend
         scheduled_at: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
           [
-            '/broadcasts/',
+            "/broadcasts/",
             SdkClient.encode_path_segment(id),
-            '/send'
+            "/send"
           ].join,
           config: config,
           body: {
-            'scheduled_at' => scheduled_at
+            'scheduled_at' => scheduled_at,
           },
           return_type: ::OctridevResend::SendBroadcastResponseSuccess,
           decoder: :json,
           operation_id: 'broadcasts_send',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -269,20 +275,21 @@ module OctridevResend
         id:,
         request_options: nil
       )
+
         Validation.validate_uuid('id', id)
 
         SdkClient.request(
           'POST',
           [
-            '/broadcasts/',
+            "/broadcasts/",
             SdkClient.encode_path_segment(id),
-            '/cancel'
+            "/cancel"
           ].join,
           config: config,
           return_type: ::OctridevResend::CancelBroadcastResponseSuccess,
           decoder: :json,
           operation_id: 'broadcasts_cancel',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -294,20 +301,21 @@ module OctridevResend
         id:,
         request_options: nil
       )
+
         Validation.validate_uuid('id', id)
 
         SdkClient.request(
           'POST',
           [
-            '/broadcasts/',
+            "/broadcasts/",
             SdkClient.encode_path_segment(id),
-            '/duplicate'
+            "/duplicate"
           ].join,
           config: config,
           return_type: ::OctridevResend::DuplicateBroadcastResponseSuccess,
           decoder: :json,
           operation_id: 'broadcasts_duplicate',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -335,6 +343,7 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('id', id)
 
         Validation.if_given(limit) { Validation.validate_range('limit', limit, min: 1, max: 100) }
@@ -342,9 +351,9 @@ module OctridevResend
         SdkClient.request(
           'GET',
           [
-            '/broadcasts/',
+            "/broadcasts/",
             SdkClient.encode_path_segment(id),
-            '/recipients'
+            "/recipients"
           ].join,
           config: config,
           query: {
@@ -353,12 +362,12 @@ module OctridevResend
             'bounce_type' => QueryValue.new(bounce_type, style: 'form', explode: true),
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true)
+            'before' => QueryValue.new(before, style: 'form', explode: true),
           },
           return_type: ::OctridevResend::ListBroadcastRecipientsResponseSuccess,
           decoder: :json,
           operation_id: 'list_recipients',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -376,6 +385,7 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('id', id)
 
         Validation.if_given(limit) { Validation.validate_range('limit', limit, min: 1, max: 100) }
@@ -383,20 +393,20 @@ module OctridevResend
         SdkClient.request(
           'GET',
           [
-            '/broadcasts/',
+            "/broadcasts/",
             SdkClient.encode_path_segment(id),
-            '/clicked-links'
+            "/clicked-links"
           ].join,
           config: config,
           query: {
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true)
+            'before' => QueryValue.new(before, style: 'form', explode: true),
           },
           return_type: ::OctridevResend::ListBroadcastClickedLinksResponseSuccess,
           decoder: :json,
           operation_id: 'broadcasts_list_clicked_links',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
     end

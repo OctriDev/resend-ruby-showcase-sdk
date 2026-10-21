@@ -5,444 +5,448 @@
 
 # inboxes_inbox domain models
 module OctridevResend
-  # Internal model hydration metadata.
-  class SdkInternalInboxThreadEmailMetadata
-    FIELDS = {
-      id: 'id',
-      direction: 'direction',
-      from: 'from',
-      to: 'to',
-      cc: 'cc',
-      bcc: 'bcc',
-      reply_to: 'reply_to',
-      subject: 'subject',
-      message_id: 'message_id',
-      html: 'html',
-      text: 'text',
-      attachments: 'attachments',
-      read: 'read',
-      received_at: 'received_at'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      id
-      direction
-      from
-      to
-      cc
-      bcc
-      reply_to
-      subject
-      message_id
-      html
-      text
-      attachments
-      read
-      received_at
-    ].freeze
-    DECODERS = {
-      direction: lambda do |value|
-        ::OctridevResend::InboxThreadEmailDirection.from_value(value)
-      end,
-      attachments: lambda do |value|
-        value&.map { |item| ::OctridevResend::InboxThreadEmailAttachment.from_hash(item) }
-      end
-    }.freeze
-    NULLABLE_FIELDS = %i[
-      subject
-      message_id
-      html
-      text
-    ].freeze
+# Internal model hydration metadata.
+class SdkInternalInboxThreadEmailMetadata
+  FIELDS = {
+    id: "id",
+    direction: "direction",
+    from: "from",
+    to: "to",
+    cc: "cc",
+    bcc: "bcc",
+    reply_to: "reply_to",
+    subject: "subject",
+    message_id: "message_id",
+    html: "html",
+    text: "text",
+    attachments: "attachments",
+    read: "read",
+    received_at: "received_at",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    id
+    direction
+    from
+    to
+    cc
+    bcc
+    reply_to
+    subject
+    message_id
+    html
+    text
+    attachments
+    read
+    received_at
+  ].freeze
+  DECODERS = {
+    direction: lambda do |value|
+      ::OctridevResend::InboxThreadEmailDirection.from_value(value)
+    end,
+    attachments: lambda do |value|
+      value&.map { |item| ::OctridevResend::InboxThreadEmailAttachment.from_hash(item) }
+    end,
+  }.freeze
+  NULLABLE_FIELDS = %i[
+    subject
+    message_id
+    html
+    text
+  ].freeze
+end
+
+# API model for InboxThreadEmail.
+# Typed representation of the `InboxThreadEmail` API schema.
+class InboxThreadEmail
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalInboxThreadEmailMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalInboxThreadEmailMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalInboxThreadEmailMetadata::DECODERS
+
+  # @return [String] The ID of the message.
+  attr_reader :id
+  # @return [InboxThreadEmailDirection] Whether the inbox received the message (`inbound`) or sent it (`outbound`). A message the inbox sent to itself is `inbound`, so a reply to it goes to its sender.
+  attr_reader :direction
+  # @return [String] Sender email address. Includes the display name when the sender has one, in the format "Name <sender@domain.com>".
+  attr_reader :from
+  # @return [Array_of_String] The recipients of the message. For a received message, these are the addresses it was delivered to, not the full `To` header.
+  attr_reader :to
+  # @return [Array_of_String] The CC recipients of the message.
+  attr_reader :cc
+  # @return [Array_of_String] The BCC recipients of the message. Always empty for a received message.
+  attr_reader :bcc
+  # @return [Array_of_String] The Reply-To addresses of the message.
+  attr_reader :reply_to
+  # @return [String] The subject of the message.
+  attr_reader :subject
+  # @return [String] The Message-ID header of the message.
+  attr_reader :message_id
+  # @return [String] The HTML body.
+  attr_reader :html
+  # @return [String] The plain-text body.
+  attr_reader :text
+  # @return [Array_of_InboxThreadEmailAttachment] The attachments of the message.
+  attr_reader :attachments
+  # @return [Boolean] Whether the message has been read.
+  attr_reader :read
+  # @return [String] Timestamp when the inbox received the message, or when the inbox sent it.
+  attr_reader :received_at
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for InboxThreadEmail.
-  # Typed representation of the `InboxThreadEmail` API schema.
-  class InboxThreadEmail
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalInboxThreadEmailMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalInboxThreadEmailMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalInboxThreadEmailMetadata::DECODERS
-
-    # @return [String] The ID of the message.
-    attr_reader :id
-    # @return [InboxThreadEmailDirection] Whether the inbox received the message (`inbound`) or sent it (`outbound`). A message the inbox sent to itself is `inbound`, so a reply to it goes to its sender.
-    attr_reader :direction
-    # @return [String] Sender email address. Includes the display name when the sender has one, in the format "Name <sender@domain.com>".
-    attr_reader :from
-    # @return [Array_of_String] The recipients of the message. For a received message, these are the addresses it was delivered to, not the full `To` header.
-    attr_reader :to
-    # @return [Array_of_String] The CC recipients of the message.
-    attr_reader :cc
-    # @return [Array_of_String] The BCC recipients of the message. Always empty for a received message.
-    attr_reader :bcc
-    # @return [Array_of_String] The Reply-To addresses of the message.
-    attr_reader :reply_to
-    # @return [String] The subject of the message.
-    attr_reader :subject
-    # @return [String] The Message-ID header of the message.
-    attr_reader :message_id
-    # @return [String] The HTML body.
-    attr_reader :html
-    # @return [String] The plain-text body.
-    attr_reader :text
-    # @return [Array_of_InboxThreadEmailAttachment] The attachments of the message.
-    attr_reader :attachments
-    # @return [Boolean] Whether the message has been read.
-    attr_reader :read
-    # @return [String] Timestamp when the inbox received the message, or when the inbox sent it.
-    attr_reader :received_at
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalInboxThreadEmailMetadata::NULLABLE_FIELDS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalInboxThreadEmailMetadata::NULLABLE_FIELDS)
   end
 
-  # Defines the InboxThreadEmailDirection SDK namespace.
-  module InboxThreadEmailDirection
-    INBOUND = 'inbound'
-    OUTBOUND = 'outbound'
-    VALUES = %w[inbound outbound].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the InboxThreadEmailDirection SDK namespace.
+module InboxThreadEmailDirection
+  INBOUND = 'inbound'
+  OUTBOUND = 'outbound'
+  VALUES = ['inbound', 'outbound'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalInboxThreadEmailAttachmentMetadata
+  FIELDS = {
+    id: "id",
+    filename: "filename",
+    size: "size",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    id
+    filename
+    size
+  ].freeze
+  DECODERS = {
+  }.freeze
+  NULLABLE_FIELDS = %i[
+    filename
+    size
+  ].freeze
+end
+
+# API model for InboxThreadEmailAttachment.
+# Typed representation of the `InboxThreadEmailAttachment` API schema.
+class InboxThreadEmailAttachment
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalInboxThreadEmailAttachmentMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalInboxThreadEmailAttachmentMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalInboxThreadEmailAttachmentMetadata::DECODERS
+
+  # @return [String] The ID of the attachment.
+  attr_reader :id
+  # @return [String] The filename of the attachment.
+  attr_reader :filename
+  # @return [Integer] The size of the attachment in bytes.
+  attr_reader :size
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalInboxThreadEmailAttachmentMetadata
-    FIELDS = {
-      id: 'id',
-      filename: 'filename',
-      size: 'size'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      id
-      filename
-      size
-    ].freeze
-    DECODERS = {}.freeze
-    NULLABLE_FIELDS = %i[
-      filename
-      size
-    ].freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalInboxThreadEmailAttachmentMetadata::NULLABLE_FIELDS)
   end
 
-  # API model for InboxThreadEmailAttachment.
-  # Typed representation of the `InboxThreadEmailAttachment` API schema.
-  class InboxThreadEmailAttachment
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalInboxThreadEmailAttachmentMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalInboxThreadEmailAttachmentMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalInboxThreadEmailAttachmentMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] The ID of the attachment.
-    attr_reader :id
-    # @return [String] The filename of the attachment.
-    attr_reader :filename
-    # @return [Integer] The size of the attachment in bytes.
-    attr_reader :size
+# Internal model hydration metadata.
+class SdkInternalInboxThreadLabelMetadata
+  FIELDS = {
+    id: "id",
+    name: "name",
+    color: "color",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    id
+    name
+    color
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for InboxThreadLabel.
+# Typed representation of the `InboxThreadLabel` API schema.
+class InboxThreadLabel
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalInboxThreadLabelMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalInboxThreadLabelMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalInboxThreadLabelMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalInboxThreadEmailAttachmentMetadata::NULLABLE_FIELDS)
-    end
+  # @return [String] The ID of the label.
+  attr_reader :id
+  # @return [String] The name of the label.
+  attr_reader :name
+  # @return [String] The color of the label, as a `#RRGGBB` hex color in uppercase.
+  attr_reader :color
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalInboxThreadLabelMetadata
-    FIELDS = {
-      id: 'id',
-      name: 'name',
-      color: 'color'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      id
-      name
-      color
-    ].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for InboxThreadLabel.
-  # Typed representation of the `InboxThreadLabel` API schema.
-  class InboxThreadLabel
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalInboxThreadLabelMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalInboxThreadLabelMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalInboxThreadLabelMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] The ID of the label.
-    attr_reader :id
-    # @return [String] The name of the label.
-    attr_reader :name
-    # @return [String] The color of the label, as a `#RRGGBB` hex color in uppercase.
-    attr_reader :color
+# Internal model hydration metadata.
+class SdkInternalInboxThreadSearchResultVariant1HighlightsMetadata
+  FIELDS = {
+    subject: "subject",
+    body: "body",
+    from: "from",
+    to: "to",
+    cc: "cc",
+    bcc: "bcc",
+    attachments: "attachments",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for InboxThreadSearchResultVariant1Highlights.
+# Where `query` matched the email in `matched_email_id`, as text fragments with each match wrapped in `**`. Only keys with a match are present. An empty object when there is no `query`.
+class InboxThreadSearchResultVariant1Highlights
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalInboxThreadSearchResultVariant1HighlightsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalInboxThreadSearchResultVariant1HighlightsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalInboxThreadSearchResultVariant1HighlightsMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [Array_of_String] Optional array value serialized in the `subject` wire field.
+  attr_reader :subject
+  # @return [Array_of_String] Optional array value serialized in the `body` wire field.
+  attr_reader :body
+  # @return [Array_of_String] Optional array value serialized in the `from` wire field.
+  attr_reader :from
+  # @return [Array_of_String] Optional array value serialized in the `to` wire field.
+  attr_reader :to
+  # @return [Array_of_String] Optional array value serialized in the `cc` wire field.
+  attr_reader :cc
+  # @return [Array_of_String] Optional array value serialized in the `bcc` wire field.
+  attr_reader :bcc
+  # @return [Array_of_String] Optional array value serialized in the `attachments` wire field.
+  attr_reader :attachments
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalInboxThreadSearchResultVariant1HighlightsMetadata
-    FIELDS = {
-      subject: 'subject',
-      body: 'body',
-      from: 'from',
-      to: 'to',
-      cc: 'cc',
-      bcc: 'bcc',
-      attachments: 'attachments'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for InboxThreadSearchResultVariant1Highlights.
-  # Where `query` matched the email in `matched_email_id`, as text fragments with each match wrapped in `**`. Only keys with a match are present. An empty object when there is no `query`.
-  class InboxThreadSearchResultVariant1Highlights
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalInboxThreadSearchResultVariant1HighlightsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalInboxThreadSearchResultVariant1HighlightsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalInboxThreadSearchResultVariant1HighlightsMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [Array_of_String] Optional array value serialized in the `subject` wire field.
-    attr_reader :subject
-    # @return [Array_of_String] Optional array value serialized in the `body` wire field.
-    attr_reader :body
-    # @return [Array_of_String] Optional array value serialized in the `from` wire field.
-    attr_reader :from
-    # @return [Array_of_String] Optional array value serialized in the `to` wire field.
-    attr_reader :to
-    # @return [Array_of_String] Optional array value serialized in the `cc` wire field.
-    attr_reader :cc
-    # @return [Array_of_String] Optional array value serialized in the `bcc` wire field.
-    attr_reader :bcc
-    # @return [Array_of_String] Optional array value serialized in the `attachments` wire field.
-    attr_reader :attachments
+# Internal model hydration metadata.
+class SdkInternalInboxThreadSearchResultMetadata
+  FIELDS = {
+    id: "id",
+    subject: "subject",
+    from: "from",
+    to: "to",
+    cc: "cc",
+    bcc: "bcc",
+    labels: "labels",
+    email_count: "email_count",
+    has_attachment: "has_attachment",
+    has_draft: "has_draft",
+    read: "read",
+    received_at: "received_at",
+    folder: "folder",
+    matched_email_id: "matched_email_id",
+    highlights: "highlights",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    id
+    subject
+    from
+    to
+    cc
+    bcc
+    labels
+    email_count
+    has_attachment
+    has_draft
+    read
+    received_at
+    folder
+    matched_email_id
+    highlights
+  ].freeze
+  DECODERS = {
+    labels: lambda do |value|
+      value&.map { |item| ::OctridevResend::InboxThreadLabel.from_hash(item) }
+    end,
+    folder: lambda do |value|
+      ::OctridevResend::InboxThreadFolder.from_value(value)
+    end,
+    highlights: lambda do |value|
+      ::OctridevResend::InboxThreadSearchResultVariant1Highlights.from_hash(value)
+    end,
+  }.freeze
+  NULLABLE_FIELDS = %i[
+    subject
+    from
+    matched_email_id
+  ].freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for InboxThreadSearchResult.
+# Typed representation of the `InboxThreadSearchResult` API schema.
+class InboxThreadSearchResult
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalInboxThreadSearchResultMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalInboxThreadSearchResultMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalInboxThreadSearchResultMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] The ID of the thread.
+  attr_reader :id
+  # @return [String] The subject of the thread.
+  attr_reader :subject
+  # @return [String] The sender email address. Can include the display name.
+  attr_reader :from
+  # @return [Array_of_String] The recipients of the most recent email. For a received email, these are the addresses it was delivered to, not the full `To` header.
+  attr_reader :to
+  # @return [Array_of_String] The CC recipients of the most recent email.
+  attr_reader :cc
+  # @return [Array_of_String] The BCC recipients of the most recent email. Always empty for a received email.
+  attr_reader :bcc
+  # @return [Array_of_InboxThreadLabel] The labels attached to the thread.
+  attr_reader :labels
+  # @return [Integer] The number of emails in the thread.
+  attr_reader :email_count
+  # @return [Boolean] Whether the most recent email in the thread has an attachment.
+  attr_reader :has_attachment
+  # @return [Boolean] Whether the thread has an unsent draft.
+  attr_reader :has_draft
+  # @return [Boolean] True only when every email in the thread is read.
+  attr_reader :read
+  # @return [String] Timestamp when the thread was last active.
+  attr_reader :received_at
+  # @return [InboxThreadFolder] The folder the thread is in. Every thread is in exactly one folder. `inbox` holds threads with at least one received email. `archive` and `spam` hold threads moved there. `trash` holds threads scheduled for deletion in 30 days. `sent` holds threads whose emails are all outbound, and is assigned automatically.
+  attr_reader :folder
+  # @return [String] Identifies the email in the thread that matched the search. When `query` has words or phrases, it is the most relevant match. Otherwise, it is the newest. The get, reply and forward thread email endpoints accept it as `email_id`, but it is not equal to the `id` those endpoints return. Null when the search index returns no matched email for the thread.
+  attr_reader :matched_email_id
+  # @return [InboxThreadSearchResultVariant1Highlights] Where `query` matched the email in `matched_email_id`, as text fragments with each match wrapped in `**`. Only keys with a match are present. An empty object when there is no `query`.
+  attr_reader :highlights
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalInboxThreadSearchResultMetadata
-    FIELDS = {
-      id: 'id',
-      subject: 'subject',
-      from: 'from',
-      to: 'to',
-      cc: 'cc',
-      bcc: 'bcc',
-      labels: 'labels',
-      email_count: 'email_count',
-      has_attachment: 'has_attachment',
-      has_draft: 'has_draft',
-      read: 'read',
-      received_at: 'received_at',
-      folder: 'folder',
-      matched_email_id: 'matched_email_id',
-      highlights: 'highlights'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      id
-      subject
-      from
-      to
-      cc
-      bcc
-      labels
-      email_count
-      has_attachment
-      has_draft
-      read
-      received_at
-      folder
-      matched_email_id
-      highlights
-    ].freeze
-    DECODERS = {
-      labels: lambda do |value|
-        value&.map { |item| ::OctridevResend::InboxThreadLabel.from_hash(item) }
-      end,
-      folder: lambda do |value|
-        ::OctridevResend::InboxThreadFolder.from_value(value)
-      end,
-      highlights: lambda do |value|
-        ::OctridevResend::InboxThreadSearchResultVariant1Highlights.from_hash(value)
-      end
-    }.freeze
-    NULLABLE_FIELDS = %i[
-      subject
-      from
-      matched_email_id
-    ].freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalInboxThreadSearchResultMetadata::NULLABLE_FIELDS)
   end
 
-  # API model for InboxThreadSearchResult.
-  # Typed representation of the `InboxThreadSearchResult` API schema.
-  class InboxThreadSearchResult
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalInboxThreadSearchResultMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalInboxThreadSearchResultMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalInboxThreadSearchResultMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] The ID of the thread.
-    attr_reader :id
-    # @return [String] The subject of the thread.
-    attr_reader :subject
-    # @return [String] The sender email address. Can include the display name.
-    attr_reader :from
-    # @return [Array_of_String] The recipients of the most recent email. For a received email, these are the addresses it was delivered to, not the full `To` header.
-    attr_reader :to
-    # @return [Array_of_String] The CC recipients of the most recent email.
-    attr_reader :cc
-    # @return [Array_of_String] The BCC recipients of the most recent email. Always empty for a received email.
-    attr_reader :bcc
-    # @return [Array_of_InboxThreadLabel] The labels attached to the thread.
-    attr_reader :labels
-    # @return [Integer] The number of emails in the thread.
-    attr_reader :email_count
-    # @return [Boolean] Whether the most recent email in the thread has an attachment.
-    attr_reader :has_attachment
-    # @return [Boolean] Whether the thread has an unsent draft.
-    attr_reader :has_draft
-    # @return [Boolean] True only when every email in the thread is read.
-    attr_reader :read
-    # @return [String] Timestamp when the thread was last active.
-    attr_reader :received_at
-    # @return [InboxThreadFolder] The folder the thread is in. Every thread is in exactly one folder. `inbox` holds threads with at least one received email. `archive` and `spam` hold threads moved there. `trash` holds threads scheduled for deletion in 30 days. `sent` holds threads whose emails are all outbound, and is assigned automatically.
-    attr_reader :folder
-    # @return [String] Identifies the email in the thread that matched the search. When `query` has words or phrases, it is the most relevant match. Otherwise, it is the newest. The get, reply and forward thread email endpoints accept it as `email_id`, but it is not equal to the `id` those endpoints return. Null when the search index returns no matched email for the thread.
-    attr_reader :matched_email_id
-    # @return [InboxThreadSearchResultVariant1Highlights] Where `query` matched the email in `matched_email_id`, as text fragments with each match wrapped in `**`. Only keys with a match are present. An empty object when there is no `query`.
-    attr_reader :highlights
+# Internal model hydration metadata.
+class SdkInternalInboxThreadSummaryMetadata
+  FIELDS = {
+    object: "object",
+    id: "id",
+    subject: "subject",
+    folder: "folder",
+    labels: "labels",
+    read: "read",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    object
+    id
+    subject
+    folder
+    labels
+    read
+  ].freeze
+  DECODERS = {
+    folder: lambda do |value|
+      ::OctridevResend::InboxThreadSummaryFolder.from_value(value)
+    end,
+    labels: lambda do |value|
+      value&.map { |item| ::OctridevResend::InboxThreadLabel.from_hash(item) }
+    end,
+  }.freeze
+  NULLABLE_FIELDS = %i[
+    subject
+  ].freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for InboxThreadSummary.
+# The summary of a single thread.
+class InboxThreadSummary
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalInboxThreadSummaryMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalInboxThreadSummaryMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalInboxThreadSummaryMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalInboxThreadSearchResultMetadata::NULLABLE_FIELDS)
-    end
+  # @return [String] The object type.
+  attr_reader :object
+  # @return [String] The ID of the thread.
+  attr_reader :id
+  # @return [String] The subject of the thread.
+  attr_reader :subject
+  # @return [InboxThreadSummaryFolder] The folder the thread is in.
+  attr_reader :folder
+  # @return [Array_of_InboxThreadLabel] The labels attached to the thread.
+  attr_reader :labels
+  # @return [Boolean] True only when every email in the thread is read.
+  attr_reader :read
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalInboxThreadSummaryMetadata
-    FIELDS = {
-      object: 'object',
-      id: 'id',
-      subject: 'subject',
-      folder: 'folder',
-      labels: 'labels',
-      read: 'read'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      object
-      id
-      subject
-      folder
-      labels
-      read
-    ].freeze
-    DECODERS = {
-      folder: lambda do |value|
-        ::OctridevResend::InboxThreadSummaryFolder.from_value(value)
-      end,
-      labels: lambda do |value|
-        value&.map { |item| ::OctridevResend::InboxThreadLabel.from_hash(item) }
-      end
-    }.freeze
-    NULLABLE_FIELDS = %i[
-      subject
-    ].freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalInboxThreadSummaryMetadata::NULLABLE_FIELDS)
   end
 
-  # API model for InboxThreadSummary.
-  # The summary of a single thread.
-  class InboxThreadSummary
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalInboxThreadSummaryMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalInboxThreadSummaryMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalInboxThreadSummaryMetadata::DECODERS
-
-    # @return [String] The object type.
-    attr_reader :object
-    # @return [String] The ID of the thread.
-    attr_reader :id
-    # @return [String] The subject of the thread.
-    attr_reader :subject
-    # @return [InboxThreadSummaryFolder] The folder the thread is in.
-    attr_reader :folder
-    # @return [Array_of_InboxThreadLabel] The labels attached to the thread.
-    attr_reader :labels
-    # @return [Boolean] True only when every email in the thread is read.
-    attr_reader :read
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalInboxThreadSummaryMetadata::NULLABLE_FIELDS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 
-  # Defines the InboxThreadSummaryFolder SDK namespace.
-  module InboxThreadSummaryFolder
-    INBOX = 'inbox'
-    ARCHIVE = 'archive'
-    SPAM = 'spam'
-    SENT = 'sent'
-    TRASH = 'trash'
-    VALUES = %w[inbox archive spam sent trash].freeze
-    def self.from_value(value)
-      value
-    end
+# Defines the InboxThreadSummaryFolder SDK namespace.
+module InboxThreadSummaryFolder
+  INBOX = 'inbox'
+  ARCHIVE = 'archive'
+  SPAM = 'spam'
+  SENT = 'sent'
+  TRASH = 'trash'
+  VALUES = ['inbox', 'archive', 'spam', 'sent', 'trash'].freeze
+  def self.from_value(value)
+    value
   end
+end
 end

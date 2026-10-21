@@ -16,14 +16,15 @@ module OctridevResend
         config:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/usage',
+          "/usage",
           config: config,
           return_type: ::OctridevResend::GetUsageResponseSuccess,
           decoder: :json,
           operation_id: 'usage_get',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
     end

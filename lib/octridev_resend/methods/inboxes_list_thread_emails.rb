@@ -27,6 +27,7 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('inbox_id', inbox_id)
 
         Validation.validate_uuid('thread_id', thread_id)
@@ -36,22 +37,22 @@ module OctridevResend
         SdkClient.request(
           'GET',
           [
-            '/inboxes/',
+            "/inboxes/",
             SdkClient.encode_path_segment(inbox_id),
-            '/threads/',
+            "/threads/",
             SdkClient.encode_path_segment(thread_id),
-            '/emails'
+            "/emails"
           ].join,
           config: config,
           query: {
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true)
+            'before' => QueryValue.new(before, style: 'form', explode: true),
           },
           return_type: ::OctridevResend::ListInboxThreadEmailsResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_list_thread_emails',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
     end

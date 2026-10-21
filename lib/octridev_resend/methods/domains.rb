@@ -40,9 +40,10 @@ module OctridevResend
         tracking_subdomain: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/domains',
+          "/domains",
           config: config,
           body: {
             'name' => name,
@@ -52,12 +53,12 @@ module OctridevResend
             'click_tracking' => click_tracking,
             'tls' => tls,
             'capabilities' => capabilities,
-            'tracking_subdomain' => tracking_subdomain
+            'tracking_subdomain' => tracking_subdomain,
           },
           return_type: ::OctridevResend::CreateDomainResponse,
           decoder: :json,
           operation_id: 'domains_create',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -73,21 +74,22 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(limit) { Validation.validate_range('limit', limit, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          '/domains',
+          "/domains",
           config: config,
           query: {
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true)
+            'before' => QueryValue.new(before, style: 'form', explode: true),
           },
           return_type: ::OctridevResend::ListDomainsResponse,
           decoder: :json,
           operation_id: 'domains_list',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -99,17 +101,18 @@ module OctridevResend
         domain_id:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/domains/',
+            "/domains/",
             SdkClient.encode_path_segment(domain_id)
           ].join,
           config: config,
           return_type: ::OctridevResend::Domain,
           decoder: :json,
           operation_id: 'domains_get',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -134,10 +137,11 @@ module OctridevResend
         tracking_subdomain: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'PATCH',
           [
-            '/domains/',
+            "/domains/",
             SdkClient.encode_path_segment(domain_id)
           ].join,
           config: config,
@@ -146,12 +150,12 @@ module OctridevResend
             'click_tracking' => click_tracking,
             'tls' => tls,
             'capabilities' => capabilities,
-            'tracking_subdomain' => tracking_subdomain
+            'tracking_subdomain' => tracking_subdomain,
           },
           return_type: ::OctridevResend::UpdateDomainResponseSuccess,
           decoder: :json,
           operation_id: 'domains_update',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -163,17 +167,18 @@ module OctridevResend
         domain_id:,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/domains/',
+            "/domains/",
             SdkClient.encode_path_segment(domain_id)
           ].join,
           config: config,
           return_type: ::OctridevResend::DeleteDomainResponse,
           decoder: :json,
           operation_id: 'domains_remove',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -187,18 +192,19 @@ module OctridevResend
         domain_id:,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
           [
-            '/domains/',
+            "/domains/",
             SdkClient.encode_path_segment(domain_id),
-            '/verify'
+            "/verify"
           ].join,
           config: config,
           return_type: ::OctridevResend::VerifyDomainResponse,
           decoder: :json,
           operation_id: 'domains_verify',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -226,9 +232,10 @@ module OctridevResend
         tracking_subdomain: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/domains/claim',
+          "/domains/claim",
           config: config,
           body: {
             'name' => name,
@@ -236,12 +243,12 @@ module OctridevResend
             'custom_return_path' => custom_return_path,
             'open_tracking' => open_tracking,
             'click_tracking' => click_tracking,
-            'tracking_subdomain' => tracking_subdomain
+            'tracking_subdomain' => tracking_subdomain,
           },
           return_type: ::OctridevResend::DomainClaim,
           decoder: :json,
           operation_id: 'domains_create_claim',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -256,18 +263,19 @@ module OctridevResend
         domain_id:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/domains/',
+            "/domains/",
             SdkClient.encode_path_segment(domain_id),
-            '/claim'
+            "/claim"
           ].join,
           config: config,
           return_type: ::OctridevResend::DomainClaim,
           decoder: :json,
           operation_id: 'domains_get_claim',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
 
@@ -282,18 +290,19 @@ module OctridevResend
         domain_id:,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
           [
-            '/domains/',
+            "/domains/",
             SdkClient.encode_path_segment(domain_id),
-            '/claim/verify'
+            "/claim/verify"
           ].join,
           config: config,
           return_type: ::OctridevResend::DomainClaim,
           decoder: :json,
           operation_id: 'domains_verify_claim',
-          request_options: request_options
+          request_options: request_options,
         ).data
       end
     end
