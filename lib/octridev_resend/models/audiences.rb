@@ -5,253 +5,243 @@
 
 # audiences domain models
 module OctridevResend
-# Internal model hydration metadata.
-class SdkInternalCreateAudienceOptionsMetadata
-  FIELDS = {
-    name: "name",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    name
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for CreateAudienceOptions.
-# Typed representation of the `CreateAudienceOptions` API schema.
-class CreateAudienceOptions
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCreateAudienceOptionsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCreateAudienceOptionsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCreateAudienceOptionsMetadata::DECODERS
-
-  # @return [String] The name of the audience you want to create.
-  attr_reader :name
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalCreateAudienceOptionsMetadata
+    FIELDS = {
+      name: 'name'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      name
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for CreateAudienceOptions.
+  # Typed representation of the `CreateAudienceOptions` API schema.
+  class CreateAudienceOptions
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCreateAudienceOptionsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCreateAudienceOptionsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCreateAudienceOptionsMetadata::DECODERS
+
+    # @return [String] The name of the audience you want to create.
+    attr_reader :name
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalCreateAudienceResponseSuccessMetadata
-  FIELDS = {
-    id: "id",
-    object: "object",
-    name: "name",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for CreateAudienceResponseSuccess.
-# Typed representation of the `CreateAudienceResponseSuccess` API schema.
-class CreateAudienceResponseSuccess
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCreateAudienceResponseSuccessMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCreateAudienceResponseSuccessMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCreateAudienceResponseSuccessMetadata::DECODERS
-
-  # @return [String] The ID of the audience.
-  attr_reader :id
-  # @return [String] The object of the audience.
-  attr_reader :object
-  # @return [String] The name of the audience.
-  attr_reader :name
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalCreateAudienceResponseSuccessMetadata
+    FIELDS = {
+      id: 'id',
+      object: 'object',
+      name: 'name'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for CreateAudienceResponseSuccess.
+  # Typed representation of the `CreateAudienceResponseSuccess` API schema.
+  class CreateAudienceResponseSuccess
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCreateAudienceResponseSuccessMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCreateAudienceResponseSuccessMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCreateAudienceResponseSuccessMetadata::DECODERS
+
+    # @return [String] The ID of the audience.
+    attr_reader :id
+    # @return [String] The object of the audience.
+    attr_reader :object
+    # @return [String] The name of the audience.
+    attr_reader :name
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalGetAudienceResponseSuccessMetadata
-  FIELDS = {
-    id: "id",
-    object: "object",
-    name: "name",
-    created_at: "created_at",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for GetAudienceResponseSuccess.
-# Typed representation of the `GetAudienceResponseSuccess` API schema.
-class GetAudienceResponseSuccess
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalGetAudienceResponseSuccessMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalGetAudienceResponseSuccessMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalGetAudienceResponseSuccessMetadata::DECODERS
-
-  # @return [String] The ID of the audience.
-  attr_reader :id
-  # @return [String] The object of the audience.
-  attr_reader :object
-  # @return [String] The name of the audience.
-  attr_reader :name
-  # @return [String] The date that the object was created.
-  attr_reader :created_at
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalGetAudienceResponseSuccessMetadata
+    FIELDS = {
+      id: 'id',
+      object: 'object',
+      name: 'name',
+      created_at: 'created_at'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for GetAudienceResponseSuccess.
+  # Typed representation of the `GetAudienceResponseSuccess` API schema.
+  class GetAudienceResponseSuccess
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalGetAudienceResponseSuccessMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalGetAudienceResponseSuccessMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalGetAudienceResponseSuccessMetadata::DECODERS
+
+    # @return [String] The ID of the audience.
+    attr_reader :id
+    # @return [String] The object of the audience.
+    attr_reader :object
+    # @return [String] The name of the audience.
+    attr_reader :name
+    # @return [String] The date that the object was created.
+    attr_reader :created_at
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalListAudiencesResponseSuccessDataItemMetadata
-  FIELDS = {
-    id: "id",
-    name: "name",
-    created_at: "created_at",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ListAudiencesResponseSuccessDataItem.
-# Required object value serialized in the `data[]` wire field.
-class ListAudiencesResponseSuccessDataItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListAudiencesResponseSuccessDataItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListAudiencesResponseSuccessDataItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListAudiencesResponseSuccessDataItemMetadata::DECODERS
-
-  # @return [String] Unique identifier for the audience.
-  attr_reader :id
-  # @return [String] Name of the audience.
-  attr_reader :name
-  # @return [String] Timestamp indicating when the audience was created.
-  attr_reader :created_at
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalListAudiencesResponseSuccessDataItemMetadata
+    FIELDS = {
+      id: 'id',
+      name: 'name',
+      created_at: 'created_at'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ListAudiencesResponseSuccessDataItem.
+  # Required object value serialized in the `data[]` wire field.
+  class ListAudiencesResponseSuccessDataItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListAudiencesResponseSuccessDataItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListAudiencesResponseSuccessDataItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListAudiencesResponseSuccessDataItemMetadata::DECODERS
+
+    # @return [String] Unique identifier for the audience.
+    attr_reader :id
+    # @return [String] Name of the audience.
+    attr_reader :name
+    # @return [String] Timestamp indicating when the audience was created.
+    attr_reader :created_at
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalListAudiencesResponseSuccessMetadata
-  FIELDS = {
-    object: "object",
-    data: "data",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    data: lambda do |value|
-      value&.map { |item| ::OctridevResend::ListAudiencesResponseSuccessDataItem.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for ListAudiencesResponseSuccess.
-# Typed representation of the `ListAudiencesResponseSuccess` API schema.
-class ListAudiencesResponseSuccess
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListAudiencesResponseSuccessMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListAudiencesResponseSuccessMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListAudiencesResponseSuccessMetadata::DECODERS
-
-  # @return [String] Type of the response object.
-  attr_reader :object
-  # @return [Array_of_ListAudiencesResponseSuccessDataItem] Array containing audience information.
-  attr_reader :data
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalListAudiencesResponseSuccessMetadata
+    FIELDS = {
+      object: 'object',
+      data: 'data'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      data: lambda do |value|
+        value&.map { |item| ::OctridevResend::ListAudiencesResponseSuccessDataItem.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ListAudiencesResponseSuccess.
+  # Typed representation of the `ListAudiencesResponseSuccess` API schema.
+  class ListAudiencesResponseSuccess
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListAudiencesResponseSuccessMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListAudiencesResponseSuccessMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListAudiencesResponseSuccessMetadata::DECODERS
+
+    # @return [String] Type of the response object.
+    attr_reader :object
+    # @return [Array_of_ListAudiencesResponseSuccessDataItem] Array containing audience information.
+    attr_reader :data
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalRemoveAudienceResponseSuccessMetadata
-  FIELDS = {
-    id: "id",
-    object: "object",
-    deleted: "deleted",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for RemoveAudienceResponseSuccess.
-# Typed representation of the `RemoveAudienceResponseSuccess` API schema.
-class RemoveAudienceResponseSuccess
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalRemoveAudienceResponseSuccessMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalRemoveAudienceResponseSuccessMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalRemoveAudienceResponseSuccessMetadata::DECODERS
-
-  # @return [String] The ID of the audience.
-  attr_reader :id
-  # @return [String] The object of the audience.
-  attr_reader :object
-  # @return [Boolean] The deleted attribute indicates that the corresponding audience has been deleted.
-  attr_reader :deleted
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalRemoveAudienceResponseSuccessMetadata
+    FIELDS = {
+      id: 'id',
+      object: 'object',
+      deleted: 'deleted'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for RemoveAudienceResponseSuccess.
+  # Typed representation of the `RemoveAudienceResponseSuccess` API schema.
+  class RemoveAudienceResponseSuccess
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalRemoveAudienceResponseSuccessMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalRemoveAudienceResponseSuccessMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalRemoveAudienceResponseSuccessMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+    # @return [String] The ID of the audience.
+    attr_reader :id
+    # @return [String] The object of the audience.
+    attr_reader :object
+    # @return [Boolean] The deleted attribute indicates that the corresponding audience has been deleted.
+    attr_reader :deleted
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

@@ -5,195 +5,192 @@
 
 # inboxes_remove domain models
 module OctridevResend
-# Internal model hydration metadata.
-class SdkInternalRemoveInboxDraftResponseSuccessMetadata
-  FIELDS = {
-    object: "object",
-    id: "id",
-    deleted: "deleted",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    object
-    id
-    deleted
-  ].freeze
-  DECODERS = {
-    deleted: lambda do |value|
-      ::OctridevResend::RemoveInboxDraftResponseSuccessDeleted.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for RemoveInboxDraftResponseSuccess.
-# Typed representation of the `RemoveInboxDraftResponseSuccess` API schema.
-class RemoveInboxDraftResponseSuccess
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalRemoveInboxDraftResponseSuccessMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalRemoveInboxDraftResponseSuccessMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalRemoveInboxDraftResponseSuccessMetadata::DECODERS
-
-  # @return [String] The object type.
-  attr_reader :object
-  # @return [String] The ID of the draft.
-  attr_reader :id
-  # @return [RemoveInboxDraftResponseSuccessDeleted] Indicates whether the draft was successfully deleted.
-  attr_reader :deleted
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalRemoveInboxDraftResponseSuccessMetadata
+    FIELDS = {
+      object: 'object',
+      id: 'id',
+      deleted: 'deleted'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      object
+      id
+      deleted
+    ].freeze
+    DECODERS = {
+      deleted: lambda do |value|
+        ::OctridevResend::RemoveInboxDraftResponseSuccessDeleted.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for RemoveInboxDraftResponseSuccess.
+  # Typed representation of the `RemoveInboxDraftResponseSuccess` API schema.
+  class RemoveInboxDraftResponseSuccess
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalRemoveInboxDraftResponseSuccessMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalRemoveInboxDraftResponseSuccessMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalRemoveInboxDraftResponseSuccessMetadata::DECODERS
+
+    # @return [String] The object type.
+    attr_reader :object
+    # @return [String] The ID of the draft.
+    attr_reader :id
+    # @return [RemoveInboxDraftResponseSuccessDeleted] Indicates whether the draft was successfully deleted.
+    attr_reader :deleted
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the RemoveInboxDraftResponseSuccessDeleted SDK namespace.
-module RemoveInboxDraftResponseSuccessDeleted
-  TRUE = true
-  VALUES = [true].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalRemoveInboxLabelResponseSuccessMetadata
-  FIELDS = {
-    object: "object",
-    id: "id",
-    deleted: "deleted",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    object
-    id
-    deleted
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for RemoveInboxLabelResponseSuccess.
-# Typed representation of the `RemoveInboxLabelResponseSuccess` API schema.
-class RemoveInboxLabelResponseSuccess
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalRemoveInboxLabelResponseSuccessMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalRemoveInboxLabelResponseSuccessMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalRemoveInboxLabelResponseSuccessMetadata::DECODERS
-
-  # @return [String] Type of the response object.
-  attr_reader :object
-  # @return [String] The ID of the removed label.
-  attr_reader :id
-  # @return [Boolean] Indicates whether the label was deleted.
-  attr_reader :deleted
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the RemoveInboxDraftResponseSuccessDeleted SDK namespace.
+  module RemoveInboxDraftResponseSuccessDeleted
+    TRUE = true
+    VALUES = [true].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalRemoveInboxLabelResponseSuccessMetadata
+    FIELDS = {
+      object: 'object',
+      id: 'id',
+      deleted: 'deleted'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      object
+      id
+      deleted
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for RemoveInboxLabelResponseSuccess.
+  # Typed representation of the `RemoveInboxLabelResponseSuccess` API schema.
+  class RemoveInboxLabelResponseSuccess
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalRemoveInboxLabelResponseSuccessMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalRemoveInboxLabelResponseSuccessMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalRemoveInboxLabelResponseSuccessMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalRemoveInboxResponseSuccessMetadata
-  FIELDS = {
-    object: "object",
-    id: "id",
-    deleted: "deleted",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    object
-    id
-    deleted
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    # @return [String] Type of the response object.
+    attr_reader :object
+    # @return [String] The ID of the removed label.
+    attr_reader :id
+    # @return [Boolean] Indicates whether the label was deleted.
+    attr_reader :deleted
 
-# API model for RemoveInboxResponseSuccess.
-# Typed representation of the `RemoveInboxResponseSuccess` API schema.
-class RemoveInboxResponseSuccess
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalRemoveInboxResponseSuccessMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalRemoveInboxResponseSuccessMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalRemoveInboxResponseSuccessMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] The object type.
-  attr_reader :object
-  # @return [String] The ID of the inbox.
-  attr_reader :id
-  # @return [Boolean] Indicates whether the inbox was successfully deleted.
-  attr_reader :deleted
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalRemoveInboxResponseSuccessMetadata
+    FIELDS = {
+      object: 'object',
+      id: 'id',
+      deleted: 'deleted'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      object
+      id
+      deleted
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for RemoveInboxResponseSuccess.
+  # Typed representation of the `RemoveInboxResponseSuccess` API schema.
+  class RemoveInboxResponseSuccess
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalRemoveInboxResponseSuccessMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalRemoveInboxResponseSuccessMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalRemoveInboxResponseSuccessMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalRemoveInboxThreadResponseSuccessMetadata
-  FIELDS = {
-    object: "object",
-    id: "id",
-    deleted: "deleted",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    object
-    id
-    deleted
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    # @return [String] The object type.
+    attr_reader :object
+    # @return [String] The ID of the inbox.
+    attr_reader :id
+    # @return [Boolean] Indicates whether the inbox was successfully deleted.
+    attr_reader :deleted
 
-# API model for RemoveInboxThreadResponseSuccess.
-# Typed representation of the `RemoveInboxThreadResponseSuccess` API schema.
-class RemoveInboxThreadResponseSuccess
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalRemoveInboxThreadResponseSuccessMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalRemoveInboxThreadResponseSuccessMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalRemoveInboxThreadResponseSuccessMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] The object type.
-  attr_reader :object
-  # @return [String] The ID of the thread.
-  attr_reader :id
-  # @return [Boolean] True when this call moved the thread to `trash`. False when the thread was already there.
-  attr_reader :deleted
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalRemoveInboxThreadResponseSuccessMetadata
+    FIELDS = {
+      object: 'object',
+      id: 'id',
+      deleted: 'deleted'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      object
+      id
+      deleted
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for RemoveInboxThreadResponseSuccess.
+  # Typed representation of the `RemoveInboxThreadResponseSuccess` API schema.
+  class RemoveInboxThreadResponseSuccess
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalRemoveInboxThreadResponseSuccessMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalRemoveInboxThreadResponseSuccessMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalRemoveInboxThreadResponseSuccessMetadata::DECODERS
+
+    # @return [String] The object type.
+    attr_reader :object
+    # @return [String] The ID of the thread.
+    attr_reader :id
+    # @return [Boolean] True when this call moved the thread to `trash`. False when the thread was already there.
+    attr_reader :deleted
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

@@ -21,22 +21,21 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(limit) { Validation.validate_range('limit', limit, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          "/oauth/grants",
+          '/oauth/grants',
           config: config,
           query: {
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true),
+            'before' => QueryValue.new(before, style: 'form', explode: true)
           },
           return_type: ::OctridevResend::ListOAuthGrantsResponse,
           decoder: :json,
           operation_id: 'list_grants',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
 
@@ -48,18 +47,17 @@ module OctridevResend
         oauth_grant_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/oauth/grants/",
+            '/oauth/grants/',
             SdkClient.encode_path_segment(oauth_grant_id)
           ].join,
           config: config,
           return_type: ::OctridevResend::RevokeOAuthGrantResponse,
           decoder: :json,
           operation_id: 'revoke_oauth_grant',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
     end

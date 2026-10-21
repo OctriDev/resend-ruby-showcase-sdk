@@ -75,7 +75,6 @@ module OctridevResend
         before: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('inbox_id', inbox_id)
 
         Validation.if_given(query) { Validation.validate_length('query', query, max: 256) }
@@ -95,9 +94,9 @@ module OctridevResend
         SdkClient.request(
           'GET',
           [
-            "/inboxes/",
+            '/inboxes/',
             SdkClient.encode_path_segment(inbox_id),
-            "/threads/search"
+            '/threads/search'
           ].join,
           config: config,
           query: {
@@ -114,12 +113,12 @@ module OctridevResend
             'read' => QueryValue.new(read, style: 'form', explode: true),
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
             'after' => QueryValue.new(after, style: 'form', explode: true),
-            'before' => QueryValue.new(before, style: 'form', explode: true),
+            'before' => QueryValue.new(before, style: 'form', explode: true)
           },
           return_type: ::OctridevResend::SearchInboxThreadsResponseSuccess,
           decoder: :json,
           operation_id: 'inboxes_search_threads',
-          request_options: request_options,
+          request_options: request_options
         ).data
       end
     end

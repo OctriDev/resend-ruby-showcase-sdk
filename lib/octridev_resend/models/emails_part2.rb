@@ -5,28 +5,28 @@
 
 # emails domain models (part 2)
 module OctridevResend
-# API model for UpdateEmailOptions.
-# Typed representation of the `UpdateEmailOptions` API schema.
-class UpdateEmailOptions
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalUpdateEmailOptionsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalUpdateEmailOptionsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalUpdateEmailOptionsMetadata::DECODERS
+  # API model for UpdateEmailOptions.
+  # Typed representation of the `UpdateEmailOptions` API schema.
+  class UpdateEmailOptions
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalUpdateEmailOptionsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalUpdateEmailOptionsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalUpdateEmailOptionsMetadata::DECODERS
 
-  # @return [String] Schedule email to be sent later. The date should be in ISO 8601 format.
-  attr_reader :scheduled_at
+    # @return [String] Schedule email to be sent later. The date should be in ISO 8601 format.
+    attr_reader :scheduled_at
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
 end
