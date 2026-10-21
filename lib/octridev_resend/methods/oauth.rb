@@ -43,7 +43,7 @@ module OctridevResend
       # Revokes an OAuth grant, removing the authorization associated with it. Supply the grant's ID to identify which authorization to revoke. The response includes the revocation time and reason.
       #
       # @param oauth_grant_id [String] The OAuth grant ID.
-      def self.revoke_grant(
+      def self.revoke_oauth_grant(
         config:,
         oauth_grant_id:,
         request_options: nil
@@ -58,7 +58,7 @@ module OctridevResend
           config: config,
           return_type: ::OctridevResend::RevokeOAuthGrantResponse,
           decoder: :json,
-          operation_id: 'revoke_grant',
+          operation_id: 'revoke_oauth_grant',
           request_options: request_options,
         ).data
       end
