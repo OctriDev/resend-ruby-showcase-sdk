@@ -16,7 +16,7 @@ module OctridevResend
         SPAM = 'spam'
         SENT = 'sent'
         TRASH = 'trash'
-        VALUES = ['inbox', 'archive', 'spam', 'sent', 'trash'].freeze
+        VALUES = %w[inbox archive spam sent trash].freeze
         def self.from_value(value)
           value
         end
@@ -29,7 +29,7 @@ module OctridevResend
         SPAM = 'spam'
         SENT = 'sent'
         TRASH = 'trash'
-        VALUES = ['inbox', 'archive', 'spam', 'sent', 'trash'].freeze
+        VALUES = %w[inbox archive spam sent trash].freeze
         def self.from_value(value)
           value
         end

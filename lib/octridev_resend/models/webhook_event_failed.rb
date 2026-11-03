@@ -5,44 +5,43 @@
 
 # webhook_event_failed domain models
 module OctridevResend
-# Internal model hydration metadata.
-class SdkInternalWebhookEventFailedMetadata
-  FIELDS = {
-    reason: "reason",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    reason
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for WebhookEventFailed.
-# Typed representation of the `WebhookEventFailed` API schema.
-class WebhookEventFailed
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalWebhookEventFailedMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalWebhookEventFailedMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalWebhookEventFailedMetadata::DECODERS
-
-  # @return [String] Reason for the email failure (e.g., `reached_daily_quota`).
-  attr_reader :reason
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalWebhookEventFailedMetadata
+    FIELDS = {
+      reason: 'reason'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      reason
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for WebhookEventFailed.
+  # Typed representation of the `WebhookEventFailed` API schema.
+  class WebhookEventFailed
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalWebhookEventFailedMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalWebhookEventFailedMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalWebhookEventFailedMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
+    # @return [String] Reason for the email failure (e.g., `reached_daily_quota`).
+    attr_reader :reason
 
-  def to_json(*args)
-    to_h.to_json(*args)
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
-end
 end

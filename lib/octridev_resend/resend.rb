@@ -163,11 +163,7 @@ module OctridevResend
     end
 
     # Retrieves a single attachment for a sent email. Use `email_id` and `attachment_id` to identify the email and attachment; the response includes a signed download URL and its expiration time.
-    define_method(:get_attachment) do |
-      email_id:,
-      attachment_id:,
-      request_options: nil
-    |
+    define_method(:get_attachment) do |email_id:, attachment_id:, request_options: nil|
       ::OctridevResend::Methods::Emails.emails_get_attachment(
         config: @config,
         email_id: email_id,
@@ -177,18 +173,7 @@ module OctridevResend
     end
 
     # Retrieves account-level email metrics for a date range, optionally broken down by dimensions. Use `metrics` and `dimensions` to choose the returned measures and breakdowns, and use the ID filters to restrict the data.
-    define_method(:get_metrics) do |
-      start_date: NOT_GIVEN,
-      end_date: NOT_GIVEN,
-      timezone: NOT_GIVEN,
-      granularity: NOT_GIVEN,
-      metrics: NOT_GIVEN,
-      dimensions: NOT_GIVEN,
-      domain_id: NOT_GIVEN,
-      email_id: NOT_GIVEN,
-      broadcast_id: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_metrics) do |start_date: NOT_GIVEN, end_date: NOT_GIVEN, timezone: NOT_GIVEN, granularity: NOT_GIVEN, metrics: NOT_GIVEN, dimensions: NOT_GIVEN, domain_id: NOT_GIVEN, email_id: NOT_GIVEN, broadcast_id: NOT_GIVEN, request_options: nil|
       ::OctridevResend::Methods::Emails.get_metrics(
         config: @config,
         start_date: start_date,
@@ -203,7 +188,6 @@ module OctridevResend
         request_options: request_options
       )
     end
-
   end
 
   # Defines the ReceivingEmailsNamespace SDK type.
@@ -257,11 +241,7 @@ module OctridevResend
     end
 
     # Retrieves an attachment belonging to a received email. Use `email_id` to identify the email and `attachment_id` to select its attachment; the response includes a signed download URL and its expiration time.
-    define_method(:get_attachment) do |
-      email_id:,
-      attachment_id:,
-      request_options: nil
-    |
+    define_method(:get_attachment) do |email_id:, attachment_id:, request_options: nil|
       ::OctridevResend::Methods::ReceivingEmails.get_attachment(
         config: @config,
         email_id: email_id,
@@ -269,7 +249,6 @@ module OctridevResend
         request_options: request_options
       )
     end
-
   end
 
   # Defines the DomainsNamespace SDK type.
@@ -403,10 +382,7 @@ module OctridevResend
     # Retrieves the latest claim for the placeholder domain created by a domain claim. Use the claim status and TXT `record` details to track verification and prove ownership of the claimed domain.
     #
     # Retrieve the latest claim for the placeholder domain created by the claim.
-    define_method(:get_claim) do |
-      domain_id:,
-      request_options: nil
-    |
+    define_method(:get_claim) do |domain_id:, request_options: nil|
       ::OctridevResend::Methods::Domains.domains_get_claim(
         config: @config,
         domain_id: domain_id,
@@ -427,7 +403,6 @@ module OctridevResend
         request_options: request_options
       )
     end
-
   end
 
   # Defines the ApiKeysNamespace SDK type.
@@ -495,7 +470,6 @@ module OctridevResend
         request_options: request_options
       )
     end
-
   end
 
   # Defines the OauthNamespace SDK type.
@@ -533,7 +507,6 @@ module OctridevResend
         request_options: request_options
       )
     end
-
   end
 
   # Defines the TemplatesNamespace SDK type.
@@ -645,7 +618,6 @@ module OctridevResend
     )
       ::OctridevResend::Methods::Templates.templates_duplicate(config: @config, id: id, request_options: request_options)
     end
-
   end
 
   # Defines the AudiencesNamespace SDK type.
@@ -700,7 +672,6 @@ module OctridevResend
     )
       ::OctridevResend::Methods::Audiences.audiences_get(config: @config, id: id, request_options: request_options)
     end
-
   end
 
   # Defines the ContactsNamespace SDK type.
@@ -792,10 +763,7 @@ module OctridevResend
     end
 
     # Retrieves a contact import by its identifier. Use the import record to review its status, timestamps, and processing counts.
-    define_method(:get_import) do |
-      id:,
-      request_options: nil
-    |
+    define_method(:get_import) do |id:, request_options: nil|
       ::OctridevResend::Methods::Contacts.contacts_get_import(config: @config, id: id, request_options: request_options)
     end
 
@@ -914,7 +882,6 @@ module OctridevResend
         request_options: request_options
       )
     end
-
   end
 
   # Defines the BroadcastsNamespace SDK type.
@@ -1098,7 +1065,6 @@ module OctridevResend
         request_options: request_options
       )
     end
-
   end
 
   # Defines the WebhooksNamespace SDK type.
@@ -1212,11 +1178,7 @@ module OctridevResend
     end
 
     # Retrieves a specific event associated with a webhook. Use the event details to inspect its delivery status, payload, and any scheduled next delivery attempt.
-    define_method(:get_event) do |
-      webhook_id:,
-      event_id:,
-      request_options: nil
-    |
+    define_method(:get_event) do |webhook_id:, event_id:, request_options: nil|
       ::OctridevResend::Methods::V35f83988.webhooks_get_event(
         config: @config,
         webhook_id: webhook_id,
@@ -1258,7 +1220,6 @@ module OctridevResend
         request_options: request_options
       )
     end
-
   end
 
   # Defines the SegmentsNamespace SDK type.
@@ -1348,7 +1309,6 @@ module OctridevResend
         request_options: request_options
       )
     end
-
   end
 
   # Defines the TopicsNamespace SDK type.
@@ -1426,7 +1386,6 @@ module OctridevResend
     )
       ::OctridevResend::Methods::Topics.topics_remove(config: @config, id: id, request_options: request_options)
     end
-
   end
 
   # Defines the ContactPropertiesNamespace SDK type.
@@ -1506,7 +1465,6 @@ module OctridevResend
         request_options: request_options
       )
     end
-
   end
 
   # Defines the LogsNamespace SDK type.
@@ -1540,7 +1498,6 @@ module OctridevResend
     )
       ::OctridevResend::Methods::Logs.logs_get(config: @config, log_id: log_id, request_options: request_options)
     end
-
   end
 
   # Defines the AutomationsNamespace SDK type.
@@ -1676,11 +1633,7 @@ module OctridevResend
     end
 
     # Retrieves a single run for a specific automation. Use the run details to inspect its status, timestamps, and step executions, which are returned in workflow graph order.
-    define_method(:get_run) do |
-      automation_id:,
-      run_id:,
-      request_options: nil
-    |
+    define_method(:get_run) do |automation_id:, run_id:, request_options: nil|
       ::OctridevResend::Methods::Automations.automations_get_run(
         config: @config,
         automation_id: automation_id,
@@ -1688,7 +1641,6 @@ module OctridevResend
         request_options: request_options
       )
     end
-
   end
 
   # Defines the EventsNamespace SDK type.
@@ -1780,7 +1732,6 @@ module OctridevResend
         request_options: request_options
       )
     end
-
   end
 
   # Defines the SuppressionsNamespace SDK type.
@@ -1870,7 +1821,6 @@ module OctridevResend
         request_options: request_options
       )
     end
-
   end
 
   # Defines the UsageNamespace SDK type.
@@ -1887,7 +1837,6 @@ module OctridevResend
     def get(request_options: nil)
       ::OctridevResend::Methods::Usage.usage_get(config: @config, request_options: request_options)
     end
-
   end
 
   # Defines the InboxesNamespace SDK type.
@@ -1975,10 +1924,7 @@ module OctridevResend
     # Retrieves the agent settings for an inbox. An inbox without a configured agent has null `instructions` and `tone` values and an empty `enabled_actions` array.
     #
     # Returns the agent settings of the inbox. An inbox without a configured agent returns empty settings: `instructions` and `tone` are null and `enabled_actions` is an empty array.
-    define_method(:get_agent) do |
-      inbox_id:,
-      request_options: nil
-    |
+    define_method(:get_agent) do |inbox_id:, request_options: nil|
       ::OctridevResend::Methods::Inboxes.inboxes_get_agent(
         config: @config,
         inbox_id: inbox_id,
@@ -2145,11 +2091,7 @@ module OctridevResend
     # Retrieves the summary of a single inbox thread. Use the list thread emails endpoint to retrieve the messages that make up the thread.
     #
     # Returns the thread summary. The emails in the thread are listed with the list thread emails endpoint.
-    define_method(:get_thread) do |
-      inbox_id:,
-      thread_id:,
-      request_options: nil
-    |
+    define_method(:get_thread) do |inbox_id:, thread_id:, request_options: nil|
       ::OctridevResend::Methods::Inboxes.inboxes_get_thread(
         config: @config,
         inbox_id: inbox_id,
@@ -2221,12 +2163,7 @@ module OctridevResend
     end
 
     # Retrieves a specific email from an inbox thread. Use the inbox, thread, and email identifiers to select the message whose details you need.
-    define_method(:get_thread_email) do |
-      inbox_id:,
-      thread_id:,
-      email_id:,
-      request_options: nil
-    |
+    define_method(:get_thread_email) do |inbox_id:, thread_id:, email_id:, request_options: nil|
       ::OctridevResend::Methods::Inboxes.inboxes_get_thread_email(
         config: @config,
         inbox_id: inbox_id,
@@ -2363,11 +2300,7 @@ module OctridevResend
     end
 
     # Retrieves a specific draft from an inbox. Use the inbox and draft identifiers to inspect its recipients, content, thread association, timestamps, and stored attachments.
-    define_method(:get_draft) do |
-      inbox_id:,
-      draft_id:,
-      request_options: nil
-    |
+    define_method(:get_draft) do |inbox_id:, draft_id:, request_options: nil|
       ::OctridevResend::Methods::Inboxes.inboxes_get_draft(
         config: @config,
         inbox_id: inbox_id,
@@ -2441,7 +2374,6 @@ module OctridevResend
         request_options: request_options
       )
     end
-
   end
 
   # Defines the Resend SDK type.
@@ -2469,7 +2401,7 @@ module OctridevResend
       events: EventsNamespace,
       suppressions: SuppressionsNamespace,
       usage: UsageNamespace,
-      inboxes: InboxesNamespace,
+      inboxes: InboxesNamespace
     }.freeze
     private_constant :SUB_NAMESPACES
 
@@ -2498,6 +2430,5 @@ module OctridevResend
       end
       logging
     end
-
   end
 end

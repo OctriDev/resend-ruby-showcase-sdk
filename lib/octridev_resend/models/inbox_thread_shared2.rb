@@ -5,40 +5,40 @@
 
 # inbox_thread domain models
 module OctridevResend
-# API model for InboxThreadUnassignedEventData.
-# The data of an `inbox.thread.unassigned` event.
-class InboxThreadUnassignedEventData
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalInboxThreadUnassignedEventDataMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalInboxThreadUnassignedEventDataMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalInboxThreadUnassignedEventDataMetadata::DECODERS
+  # API model for InboxThreadUnassignedEventData.
+  # The data of an `inbox.thread.unassigned` event.
+  class InboxThreadUnassignedEventData
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalInboxThreadUnassignedEventDataMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalInboxThreadUnassignedEventDataMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalInboxThreadUnassignedEventDataMetadata::DECODERS
 
-  # @return [String] The email of the member the thread was assigned to.
-  attr_reader :previous_assignee_email
-  # @return [InboxEventSource] What made the change.
-  attr_reader :source
-  # @return [String] The ID of the inbox.
-  attr_reader :inbox_id
-  # @return [String] The ID of the thread.
-  attr_reader :thread_id
-  # @return [InboxThreadSummary] The thread as it is when the webhook is sent. Absent when the thread no longer exists.
-  attr_reader :thread
+    # @return [String] The email of the member the thread was assigned to.
+    attr_reader :previous_assignee_email
+    # @return [InboxEventSource] What made the change.
+    attr_reader :source
+    # @return [String] The ID of the inbox.
+    attr_reader :inbox_id
+    # @return [String] The ID of the thread.
+    attr_reader :thread_id
+    # @return [InboxThreadSummary] The thread as it is when the webhook is sent. Absent when the thread no longer exists.
+    attr_reader :thread
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalInboxThreadUnassignedEventDataMetadata::NULLABLE_FIELDS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalInboxThreadUnassignedEventDataMetadata::NULLABLE_FIELDS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
 end

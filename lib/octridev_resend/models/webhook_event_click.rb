@@ -5,56 +5,55 @@
 
 # webhook_event_click domain models
 module OctridevResend
-# Internal model hydration metadata.
-class SdkInternalWebhookEventClickMetadata
-  FIELDS = {
-    ip_address: "ipAddress",
-    link: "link",
-    timestamp: "timestamp",
-    user_agent: "userAgent",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    ip_address
-    link
-    timestamp
-    user_agent
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for WebhookEventClick.
-# Typed representation of the `WebhookEventClick` API schema.
-class WebhookEventClick
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalWebhookEventClickMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalWebhookEventClickMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalWebhookEventClickMetadata::DECODERS
-
-  # @return [String] IP address of the user who clicked the link.
-  attr_reader :ip_address
-  # @return [String] The URL that was clicked.
-  attr_reader :link
-  # @return [String] Timestamp when the click occurred.
-  attr_reader :timestamp
-  # @return [String] User agent string of the browser that clicked the link.
-  attr_reader :user_agent
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalWebhookEventClickMetadata
+    FIELDS = {
+      ip_address: 'ipAddress',
+      link: 'link',
+      timestamp: 'timestamp',
+      user_agent: 'userAgent'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      ip_address
+      link
+      timestamp
+      user_agent
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for WebhookEventClick.
+  # Typed representation of the `WebhookEventClick` API schema.
+  class WebhookEventClick
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalWebhookEventClickMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalWebhookEventClickMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalWebhookEventClickMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
+    # @return [String] IP address of the user who clicked the link.
+    attr_reader :ip_address
+    # @return [String] The URL that was clicked.
+    attr_reader :link
+    # @return [String] Timestamp when the click occurred.
+    attr_reader :timestamp
+    # @return [String] User agent string of the browser that clicked the link.
+    attr_reader :user_agent
 
-  def to_json(*args)
-    to_h.to_json(*args)
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
-end
 end

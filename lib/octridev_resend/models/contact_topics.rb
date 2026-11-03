@@ -5,175 +5,175 @@
 
 # contact_topics domain models
 module OctridevResend
-# Internal model hydration metadata.
-class SdkInternalContactTopicsEventDataTopicsItemMetadata
-  FIELDS = {
-    id: "id",
-    subscription: "subscription",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    id
-    subscription
-  ].freeze
-  DECODERS = {
-    subscription: lambda do |value|
-      ::OctridevResend::ContactTopicsEventDataTopicsItemSubscription.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for ContactTopicsEventDataTopicsItem.
-# Required object value serialized in the `topics[]` wire field.
-class ContactTopicsEventDataTopicsItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalContactTopicsEventDataTopicsItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalContactTopicsEventDataTopicsItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalContactTopicsEventDataTopicsItemMetadata::DECODERS
-
-  # @return [String] Unique identifier for the topic.
-  attr_reader :id
-  # @return [ContactTopicsEventDataTopicsItemSubscription] The new subscription status for this topic.
-  attr_reader :subscription
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalContactTopicsEventDataTopicsItemMetadata
+    FIELDS = {
+      id: 'id',
+      subscription: 'subscription'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      id
+      subscription
+    ].freeze
+    DECODERS = {
+      subscription: lambda do |value|
+        ::OctridevResend::ContactTopicsEventDataTopicsItemSubscription.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ContactTopicsEventDataTopicsItem.
+  # Required object value serialized in the `topics[]` wire field.
+  class ContactTopicsEventDataTopicsItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalContactTopicsEventDataTopicsItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalContactTopicsEventDataTopicsItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalContactTopicsEventDataTopicsItemMetadata::DECODERS
+
+    # @return [String] Unique identifier for the topic.
+    attr_reader :id
+    # @return [ContactTopicsEventDataTopicsItemSubscription] The new subscription status for this topic.
+    attr_reader :subscription
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalContactTopicsEventDataMetadata
+    FIELDS = {
+      email: 'email',
+      topics: 'topics'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      email
+      topics
+    ].freeze
+    DECODERS = {
+      topics: lambda do |value|
+        value&.map { |item| ::OctridevResend::ContactTopicsEventDataTopicsItem.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
+  # API model for ContactTopicsEventData.
+  # Typed representation of the `ContactTopicsEventData` API schema.
+  class ContactTopicsEventData
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalContactTopicsEventDataMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalContactTopicsEventDataMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalContactTopicsEventDataMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalContactTopicsEventDataMetadata
-  FIELDS = {
-    email: "email",
-    topics: "topics",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    email
-    topics
-  ].freeze
-  DECODERS = {
-    topics: lambda do |value|
-      value&.map { |item| ::OctridevResend::ContactTopicsEventDataTopicsItem.from_hash(item) }
-    end,
-  }.freeze
-end
+    # @return [String] Contact's email address.
+    attr_reader :email
+    # @return [Array_of_ContactTopicsEventDataTopicsItem] Topics whose subscription changed in this update.
+    attr_reader :topics
 
-# API model for ContactTopicsEventData.
-# Typed representation of the `ContactTopicsEventData` API schema.
-class ContactTopicsEventData
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalContactTopicsEventDataMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalContactTopicsEventDataMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalContactTopicsEventDataMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] Contact's email address.
-  attr_reader :email
-  # @return [Array_of_ContactTopicsEventDataTopicsItem] Topics whose subscription changed in this update.
-  attr_reader :topics
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the ContactTopicsEventDataTopicsItemSubscription SDK namespace.
+  module ContactTopicsEventDataTopicsItemSubscription
+    OPT_IN = 'opt_in'
+    OPT_OUT = 'opt_out'
+    VALUES = %w[opt_in opt_out].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalContactTopicsUpdatedEventMetadata
+    FIELDS = {
+      type: 'type',
+      created_at: 'created_at',
+      data: 'data'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+      created_at
+      data
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevResend::ContactTopicsUpdatedEventType.from_value(value)
+      end,
+      data: lambda do |value|
+        ::OctridevResend::ContactTopicsEventData.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
+  # API model for ContactTopicsUpdatedEvent.
+  # Typed representation of the `ContactTopicsUpdatedEvent` API schema.
+  class ContactTopicsUpdatedEvent
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalContactTopicsUpdatedEventMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalContactTopicsUpdatedEventMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalContactTopicsUpdatedEventMetadata::DECODERS
 
-# Defines the ContactTopicsEventDataTopicsItemSubscription SDK namespace.
-module ContactTopicsEventDataTopicsItemSubscription
-  OPT_IN = 'opt_in'
-  OPT_OUT = 'opt_out'
-  VALUES = ['opt_in', 'opt_out'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [ContactTopicsUpdatedEventType] The event type.
+    attr_reader :type
+    # @return [String] Timestamp when the event was emitted.
+    attr_reader :created_at
+    # @return [ContactTopicsEventData] Required object value serialized in the `data` wire field.
+    attr_reader :data
 
-# Internal model hydration metadata.
-class SdkInternalContactTopicsUpdatedEventMetadata
-  FIELDS = {
-    type: "type",
-    created_at: "created_at",
-    data: "data",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-    created_at
-    data
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevResend::ContactTopicsUpdatedEventType.from_value(value)
-    end,
-    data: lambda do |value|
-      ::OctridevResend::ContactTopicsEventData.from_hash(value)
-    end,
-  }.freeze
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# API model for ContactTopicsUpdatedEvent.
-# Typed representation of the `ContactTopicsUpdatedEvent` API schema.
-class ContactTopicsUpdatedEvent
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalContactTopicsUpdatedEventMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalContactTopicsUpdatedEventMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalContactTopicsUpdatedEventMetadata::DECODERS
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  # @return [ContactTopicsUpdatedEventType] The event type.
-  attr_reader :type
-  # @return [String] Timestamp when the event was emitted.
-  attr_reader :created_at
-  # @return [ContactTopicsEventData] Required object value serialized in the `data` wire field.
-  attr_reader :data
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # Defines the ContactTopicsUpdatedEventType SDK namespace.
+  module ContactTopicsUpdatedEventType
+    CONTACT_TOPICS_UPDATED = 'contact.topics.updated'
+    VALUES = ['contact.topics.updated'].freeze
+    def self.from_value(value)
+      return value if VALUES.include?(value)
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+      raise SdkValidationError.new('ContactTopicsUpdatedEventType', 'enum', "Unknown ContactTopicsUpdatedEventType: #{value}")
+    end
   end
-
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Defines the ContactTopicsUpdatedEventType SDK namespace.
-module ContactTopicsUpdatedEventType
-  CONTACT_TOPICS_UPDATED = 'contact.topics.updated'
-  VALUES = ['contact.topics.updated'].freeze
-  def self.from_value(value)
-    return value if VALUES.include?(value)
-
-    raise SdkValidationError.new('ContactTopicsUpdatedEventType', 'enum', "Unknown ContactTopicsUpdatedEventType: #{value}")
-  end
-end
 end

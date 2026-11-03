@@ -5,205 +5,202 @@
 
 # logs domain models
 module OctridevResend
-# Internal model hydration metadata.
-class SdkInternalListLogsResponseMetadata
-  FIELDS = {
-    object: "object",
-    has_more: "has_more",
-    data: "data",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    data: lambda do |value|
-      value&.map { |item| ::OctridevResend::LogSummary.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for ListLogsResponse.
-# Typed representation of the `ListLogsResponse` API schema.
-class ListLogsResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListLogsResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListLogsResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListLogsResponseMetadata::DECODERS
-
-  # @return [String] Type of the response object.
-  attr_reader :object
-  # @return [Boolean] Indicates if there are more results available.
-  attr_reader :has_more
-  # @return [Array_of_LogSummary] Array containing log information.
-  attr_reader :data
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalListLogsResponseMetadata
+    FIELDS = {
+      object: 'object',
+      has_more: 'has_more',
+      data: 'data'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      data: lambda do |value|
+        value&.map { |item| ::OctridevResend::LogSummary.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ListLogsResponse.
+  # Typed representation of the `ListLogsResponse` API schema.
+  class ListLogsResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListLogsResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListLogsResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListLogsResponseMetadata::DECODERS
+
+    # @return [String] Type of the response object.
+    attr_reader :object
+    # @return [Boolean] Indicates if there are more results available.
+    attr_reader :has_more
+    # @return [Array_of_LogSummary] Array containing log information.
+    attr_reader :data
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalLogMetadata
+    FIELDS = {
+      object: 'object',
+      id: 'id',
+      created_at: 'created_at',
+      endpoint: 'endpoint',
+      method: 'method',
+      response_status: 'response_status',
+      user_agent: 'user_agent',
+      request_body: 'request_body',
+      response_body: 'response_body'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      method: lambda do |value|
+        ::OctridevResend::LogMethod.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
+  # API model for Log.
+  # Typed representation of the `Log` API schema.
+  class Log
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalLogMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalLogMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalLogMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalLogMetadata
-  FIELDS = {
-    object: "object",
-    id: "id",
-    created_at: "created_at",
-    endpoint: "endpoint",
-    method: "method",
-    response_status: "response_status",
-    user_agent: "user_agent",
-    request_body: "request_body",
-    response_body: "response_body",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    method: lambda do |value|
-      ::OctridevResend::LogMethod.from_value(value)
-    end,
-  }.freeze
-end
+    # @return [String] Type of the response object.
+    attr_reader :object
+    # @return [String] The log ID.
+    attr_reader :id
+    # @return [String] The date the log was created.
+    attr_reader :created_at
+    # @return [String] The API endpoint that was called.
+    attr_reader :endpoint
+    # @return [LogMethod] The HTTP method used.
+    attr_reader :method
+    # @return [Integer] The HTTP status code of the response.
+    attr_reader :response_status
+    # @return [String] The user agent of the request.
+    attr_reader :user_agent
+    # @return [Hash] The request body sent to the API.
+    attr_reader :request_body
+    # @return [Hash] The response body returned by the API.
+    attr_reader :response_body
 
-# API model for Log.
-# Typed representation of the `Log` API schema.
-class Log
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalLogMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalLogMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalLogMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] Type of the response object.
-  attr_reader :object
-  # @return [String] The log ID.
-  attr_reader :id
-  # @return [String] The date the log was created.
-  attr_reader :created_at
-  # @return [String] The API endpoint that was called.
-  attr_reader :endpoint
-  # @return [LogMethod] The HTTP method used.
-  attr_reader :method
-  # @return [Integer] The HTTP status code of the response.
-  attr_reader :response_status
-  # @return [String] The user agent of the request.
-  attr_reader :user_agent
-  # @return [Hash] The request body sent to the API.
-  attr_reader :request_body
-  # @return [Hash] The response body returned by the API.
-  attr_reader :response_body
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the LogMethod SDK namespace.
+  module LogMethod
+    GET = 'GET'
+    POST = 'POST'
+    PUT = 'PUT'
+    DELETE = 'DELETE'
+    PATCH = 'PATCH'
+    OPTIONS = 'OPTIONS'
+    VALUES = %w[GET POST PUT DELETE PATCH OPTIONS].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalLogSummaryMetadata
+    FIELDS = {
+      id: 'id',
+      created_at: 'created_at',
+      endpoint: 'endpoint',
+      method: 'method',
+      response_status: 'response_status',
+      user_agent: 'user_agent'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      method: lambda do |value|
+        ::OctridevResend::LogSummaryMethod.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
+  # API model for LogSummary.
+  # Typed representation of the `LogSummary` API schema.
+  class LogSummary
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalLogSummaryMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalLogSummaryMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalLogSummaryMetadata::DECODERS
 
-# Defines the LogMethod SDK namespace.
-module LogMethod
-  GET = 'GET'
-  POST = 'POST'
-  PUT = 'PUT'
-  DELETE = 'DELETE'
-  PATCH = 'PATCH'
-  OPTIONS = 'OPTIONS'
-  VALUES = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [String] The log ID.
+    attr_reader :id
+    # @return [String] The date the log was created.
+    attr_reader :created_at
+    # @return [String] The API endpoint that was called.
+    attr_reader :endpoint
+    # @return [LogSummaryMethod] The HTTP method used.
+    attr_reader :method
+    # @return [Integer] The HTTP status code of the response.
+    attr_reader :response_status
+    # @return [String] The user agent of the request.
+    attr_reader :user_agent
 
-# Internal model hydration metadata.
-class SdkInternalLogSummaryMetadata
-  FIELDS = {
-    id: "id",
-    created_at: "created_at",
-    endpoint: "endpoint",
-    method: "method",
-    response_status: "response_status",
-    user_agent: "user_agent",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    method: lambda do |value|
-      ::OctridevResend::LogSummaryMethod.from_value(value)
-    end,
-  }.freeze
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# API model for LogSummary.
-# Typed representation of the `LogSummary` API schema.
-class LogSummary
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalLogSummaryMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalLogSummaryMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalLogSummaryMetadata::DECODERS
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  # @return [String] The log ID.
-  attr_reader :id
-  # @return [String] The date the log was created.
-  attr_reader :created_at
-  # @return [String] The API endpoint that was called.
-  attr_reader :endpoint
-  # @return [LogSummaryMethod] The HTTP method used.
-  attr_reader :method
-  # @return [Integer] The HTTP status code of the response.
-  attr_reader :response_status
-  # @return [String] The user agent of the request.
-  attr_reader :user_agent
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the LogSummaryMethod SDK namespace.
+  module LogSummaryMethod
+    GET = 'GET'
+    POST = 'POST'
+    PUT = 'PUT'
+    DELETE = 'DELETE'
+    PATCH = 'PATCH'
+    OPTIONS = 'OPTIONS'
+    VALUES = %w[GET POST PUT DELETE PATCH OPTIONS].freeze
+    def self.from_value(value)
+      value
+    end
   end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Defines the LogSummaryMethod SDK namespace.
-module LogSummaryMethod
-  GET = 'GET'
-  POST = 'POST'
-  PUT = 'PUT'
-  DELETE = 'DELETE'
-  PATCH = 'PATCH'
-  OPTIONS = 'OPTIONS'
-  VALUES = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'].freeze
-  def self.from_value(value)
-    value
-  end
-end
 end
